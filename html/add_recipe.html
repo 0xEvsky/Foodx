@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe - Recipe Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1><a href="index.html">Recipe Finder</a></h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- Conditional links based on login status/role -->
+                <!-- Example: Assumes admin is logged in -->
+                <li><a href="add_recipe.html">Add Recipe</a></li>
+                <li><a href="#">Logout</a></li> 
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="add-recipe-form" class="form-container">
+            <h2 class="text-center">Add New Recipe</h2>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="recipe_name">Recipe Name:</label>
+                    <input type="text" id="recipe_name" name="recipe_name" required>
+                </div>
+                 <div class="form-group">
+                    <label for="course">Course:</label>
+                    <select id="course" name="course" required>
+                        <option value="" disabled selected>Select course</option>
+                        <option value="appetizers">Appetizers</option>
+                        <option value="main course">Main Course</option>
+                        <option value="dessert">Dessert</option>
+                    </select>
+                </div>
+                <div class="form-group" id="ingredients-group">
+                    <label>Ingredients:</label>
+                    <!-- Simple implementation: add inputs dynamically with JS later -->
+                    <!-- For now, maybe one set of inputs or a textarea -->
+                     <div class="ingredient-item">
+                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" required style="margin-bottom: 5px;">
+                         <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" required>
+                     </div>
+                     <!-- Add button (JS needed) -->
+                     <!-- <button type="button" id="add-ingredient-btn">+ Add Ingredient</button> -->
+                     <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">(For multiple ingredients, backend logic will handle multiple inputs with the same name, or use JavaScript to add more fields dynamically)</p>
+                </div>
+                 <div class="form-group">
+                    <label for="description">Description / Instructions:</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-block">Add Recipe</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="text-center">
+        <p>&copy; 2024 Recipe Finder. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Potential JS for adding ingredients dynamically -->
+    <!-- <script src="js/add_recipe.js"></script> -->
+</body>
+</html> 

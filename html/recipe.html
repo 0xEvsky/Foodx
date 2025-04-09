@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details - Recipe Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1><a href="index.html">Recipe Finder</a></h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- Dynamic links based on login status -->
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                 <!-- Add conditional Admin/User links here later -->
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <article class="recipe-details">
+            <img src="https://source.unsplash.com/800x400/?recipe,cooking" alt="Recipe Image Placeholder" class="recipe-image-large">
+            <h2>Sample Recipe Title</h2>
+            <p><strong>Course:</strong> Main Course</p>
+
+            <section class="recipe-ingredients">
+                <h3>Ingredients</h3>
+                <ul>
+                    <li>Ingredient 1 (Quantity 1)</li>
+                    <li>Ingredient 2 (Quantity 2)</li>
+                    <li>Ingredient 3 (Quantity 3)</li>
+                    <!-- List all ingredients -->
+                </ul>
+            </section>
+
+            <section class="recipe-instructions">
+                <h3>Instructions / Description</h3>
+                <p>
+                    Detailed step-by-step instructions or a description of the recipe goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+            </section>
+
+            <section class="recipe-actions">
+                 <!-- These buttons would be shown conditionally based on user role/login status -->
+                 <!-- User Action -->
+                 <button class="btn">Add to Favorites</button>
+                 <!-- Admin Actions -->
+                 <a href="edit_recipe.html" class="btn">Edit Recipe</a>
+                 <button class="btn btn-danger">Delete Recipe</button>
+            </section>
+        </article>
+    </main>
+
+    <footer class="text-center">
+        <p>&copy; 2024 Recipe Finder. All Rights Reserved.</p>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorites - Recipe Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1><a href="index.html">Recipe Finder</a></h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- Conditional links based on login status/role -->
+                <!-- Example: Assumes user is logged in -->
+                <li><a href="favorites.html">My Favorites</a></li>
+                <li><a href="#">Logout</a></li> 
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2 class="text-center">My Favorite Recipes</h2>
+        <section id="favorite-recipe-list">
+            <!-- Use the same recipe-card structure as index.html -->
+            <!-- List dynamically populated favorite recipes here -->
+             <article class="recipe-card">
+                <img src="https://source.unsplash.com/600x400/?recipe,favorite" alt="Favorite Recipe Image">
+                <h3><a href="recipe.html">Favorite Recipe Title 1</a></h3>
+                <p>Course: Main Course</p>
+                <p>Short description...</p>
+                <a href="recipe.html" class="btn">View Recipe</a>
+                <!-- Add a 'Remove from Favorites' button maybe? -->
+                <button class="btn btn-danger" style="margin-top: 5px;">Remove Favorite</button>
+            </article>
+             <article class="recipe-card">
+                <img src="https://source.unsplash.com/600x400/?food,loved" alt="Favorite Recipe Image">
+                <h3><a href="recipe.html">Favorite Recipe Title 2</a></h3>
+                <p>Course: Dessert</p>
+                <p>Another description...</p>
+                <a href="recipe.html" class="btn">View Recipe</a>
+                <button class="btn btn-danger" style="margin-top: 5px;">Remove Favorite</button>
+            </article>
+            <!-- If no favorites: -->
+            <!-- <p class="text-center">You haven't added any favorites yet.</p> -->
+        </section>
+    </main>
+
+    <footer class="text-center">
+        <p>&copy; 2024 Recipe Finder. All Rights Reserved.</p>
+    </footer>
+</body>
+</html> 

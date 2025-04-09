@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe - Recipe Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1><a href="index.html">Recipe Finder</a></h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- Conditional links based on login status/role -->
+                <!-- Example: Assumes admin is logged in -->
+                <li><a href="add_recipe.html">Add Recipe</a></li>
+                <li><a href="#">Logout</a></li> 
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="edit-recipe-form" class="form-container">
+            <h2 class="text-center">Edit Recipe</h2>
+            <!-- Add hidden input for recipe ID if needed for backend -->
+            <!-- <input type="hidden" name="recipe_id" value="RECIPE_ID_HERE"> -->
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="recipe_name">Recipe Name:</label>
+                    <input type="text" id="recipe_name" name="recipe_name" value="Sample Recipe Title" required>
+                </div>
+                 <div class="form-group">
+                    <label for="course">Course:</label>
+                    <select id="course" name="course" required>
+                        <option value="appetizers">Appetizers</option>
+                        <!-- Pre-select the correct course based on recipe data -->
+                        <option value="main course" selected>Main Course</option>
+                        <option value="dessert">Dessert</option>
+                    </select>
+                </div>
+                <div class="form-group" id="ingredients-group">
+                    <label>Ingredients:</label>
+                    <!-- Populate dynamically based on recipe -->
+                     <div class="ingredient-item">
+                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="Ingredient 1" required style="margin-bottom: 5px;">
+                         <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" value="Quantity 1" required>
+                     </div>
+                     <div class="ingredient-item" style="margin-top: 10px;">
+                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="Ingredient 2" required style="margin-bottom: 5px;">
+                         <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" value="Quantity 2" required>
+                     </div>
+                     <!-- Add button (JS needed) -->
+                     <!-- <button type="button" id="add-ingredient-btn">+ Add Ingredient</button> -->
+                     <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">(Adjust or add/remove ingredients as needed)</p>
+                </div>
+                 <div class="form-group">
+                    <label for="description">Description / Instructions:</label>
+                    <textarea id="description" name="description" required>Existing detailed step-by-step instructions...</textarea>
+                </div>
+                <button type="submit" class="btn btn-block">Update Recipe</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="text-center">
+        <p>&copy; 2024 Recipe Finder. All Rights Reserved.</p>
+    </footer>
+</body>
+</html> 

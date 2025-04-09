@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodX - All Recipes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="hero-section hero-section-small"> {/* Using a smaller hero for subpages might be good */}
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">FoodX</a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li> {/* Updated link */}
+                    <li><a href="index.html#about">About</a></li> {/* Assuming About/Contact are sections on index.html */}
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Explore Our Recipes</h1>
+            <p>Find inspiration for your next meal.</p>
+        </div>
+    </header>
+
+    <section class="search-section">
+        <form action="#" method="GET" id="search-form">
+            <input type="search" id="search-input" name="search" placeholder="Search for a recipe...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </section>
+
+    <main>
+        <section id="all-recipes" class="recipe-listing">
+            <div class="container">
+                <h2 class="text-center section-title">All Recipes</h2>
+                <div id="recipe-list" class="trending-grid"> {/* Reusing the grid style */}
+                    {/* Recipe Cards Go Here - Copied examples from original index.html */}
+                    <article class="recipe-card-trending">
+                        <img src="https://source.unsplash.com/600x800/?noodle,soup,shrimp" alt="Shrimp Noodle Soup">
+                        <div class="recipe-info">
+                             <h3>Shrimp Noodle Soup</h3>
+                             <p>A vibrant bowl of Vietnamese Shrimp Noodle Soup...</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="recipe-card-trending small-card">
+                         <img src="https://source.unsplash.com/400x400/?rice,bowl,healthy" alt="Healthy Rice Bowl">
+                         <div class="recipe-info">
+                             <h3>Healthy Rice</h3>
+                             <p>Rice With Zucchini, Soft Boiled Egg, and Parsley...</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                     <article class="recipe-card-trending small-card">
+                         <img src="https://source.unsplash.com/400x400/?burger,food" alt="Burger">
+                         <div class="recipe-info">
+                            <h3>Burger</h3>
+                             <p>A juicy patty nestled in a toasted bun...</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                     <article class="recipe-card-trending">
+                        <img src="https://source.unsplash.com/600x800/?pasta,italian" alt="Classic Pasta Dish">
+                        <div class="recipe-info">
+                             <h3>Classic Pasta Dish</h3>
+                             <p>A simple yet elegant pasta with fresh tomatoes and basil.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="recipe-card-trending small-card">
+                         <img src="https://source.unsplash.com/400x400/?salad,healthy" alt="Fresh Summer Salad">
+                         <div class="recipe-info">
+                             <h3>Summer Salad</h3>
+                             <p>A light and refreshing salad perfect for warm days.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                     <article class="recipe-card-trending small-card">
+                         <img src="https://source.unsplash.com/400x400/?cake,dessert" alt="Chocolate Cake">
+                         <div class="recipe-info">
+                            <h3>Chocolate Cake</h3>
+                             <p>Decadent and rich chocolate cake for dessert lovers.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                     <article class="recipe-card-trending">
+                        <img src="https://source.unsplash.com/600x800/?pizza" alt="Homemade Pizza">
+                        <div class="recipe-info">
+                             <h3>Homemade Pizza</h3>
+                             <p>Classic homemade pizza with your favorite toppings.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="recipe-card-trending small-card">
+                         <img src="https://source.unsplash.com/400x400/?tacos" alt="Street Tacos">
+                         <div class="recipe-info">
+                             <h3>Street Tacos</h3>
+                             <p>Authentic street tacos with seasoned meat and fresh salsa.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                     <article class="recipe-card-trending small-card">
+                         <img src="https://source.unsplash.com/400x400/?smoothie" alt="Berry Smoothie">
+                         <div class="recipe-info">
+                            <h3>Berry Smoothie</h3>
+                             <p>A refreshing and healthy berry smoothie to start your day.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="logo">FoodX</a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+             <div class="footer-links">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+             <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
