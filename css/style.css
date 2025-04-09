@@ -1,0 +1,725 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Default font */
+    line-height: 1.6;
+    color: #444; /* Slightly adjusted default text color */
+    background-color: #fff; /* Default background white */
+}
+
+.container {
+    width: 90%; /* Wider container */
+    max-width: 1200px; /* Max width */
+    margin: auto;
+    padding: 40px 0; /* Default vertical padding for sections */
+}
+
+.container-flex {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Space between flex items */
+    padding: 60px 0;
+}
+
+h1, h2, h3, h4 {
+    color: #333;
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2.8rem; /* Example size */
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.alt-bg {
+     background: linear-gradient(to bottom, #fffaf0, #fef5e7); /* Creamy gradient */
+}
+
+.section-title {
+    margin-bottom: 0.5rem;
+    font-family: 'Merriweather', serif;
+    color: #4f4a41;
+}
+
+.section-subtitle {
+    margin-bottom: 2.5rem;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* --- Hero Section & Navigation --- */
+.hero-section {
+    height: 70vh; /* Adjust height as needed */
+    min-height: 500px;
+    background: url('https://source.unsplash.com/1600x900/?food,vegetables,healthy') no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Stack nav and content */
+    color: #fff;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: 1;
+}
+
+.main-nav {
+    position: absolute; /* Position nav over the image */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001; /* Above overlay */
+    padding: 1rem 0;
+    background: transparent; /* Transparent background */
+    transition: background-color 0.3s ease;
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-nav .logo {
+    font-family: 'Merriweather', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.main-nav ul {
+    display: flex;
+}
+
+.main-nav ul li {
+    margin-left: 1.5rem;
+}
+
+.main-nav ul li a {
+    color: #fff;
+    padding: 0.5rem;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.main-nav ul li a:hover {
+    color: #f39c12; /* Orange hover */
+}
+
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #f39c12;
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after {
+    width: 100%;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Above overlay */
+    text-align: center;
+    margin: auto; /* Center vertically and horizontally */
+    padding: 2rem;
+}
+
+.hero-content h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #eee;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* --- Search Section --- */
+.search-section {
+    padding: 3rem 0;
+    background: linear-gradient(to bottom, #fff, #fffaf0); /* Slight gradient */
+    display: flex;
+    justify-content: center;
+}
+
+#search-form {
+    display: flex;
+    width: 70%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 50px; /* Pill shape */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+#search-input {
+    flex-grow: 1;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+#search-form button {
+    border: none;
+    background-color: #e67e22; /* Orange button */
+    color: #fff;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+#search-form button:hover {
+    background-color: #d35400; /* Darker orange */
+}
+
+/* --- Feature Sections --- */
+.feature-section .feature-text,
+.feature-section .feature-image {
+    flex-basis: 48%; /* Slightly less than 50% for gap */
+}
+
+/* Reverse order for alternating sections */
+.feature-section:nth-child(odd) .feature-image {
+     order: 1; 
+}
+.feature-section:nth-child(odd) .feature-text {
+     order: 2; 
+}
+
+.feature-section .feature-text h2 {
+    font-family: 'Merriweather', serif;
+    margin-bottom: 1rem;
+    color: #4f4a41;
+}
+
+.feature-section .feature-text p {
+    color: #666;
+    font-size: 1.05rem;
+}
+
+.feature-section .feature-image img {
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* --- Trending Recipes --- */
+.trending-recipes {
+    padding: 60px 0;
+}
+
+.trending-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* Reusing/Adapting Recipe Card Styles */
+.recipe-card-trending {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column; /* Stack image and info */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card-trending:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Specific adjustments for the layout in the image */
+.trending-grid {
+    grid-template-columns: 2fr 1fr; /* Example: larger first column */
+    grid-template-rows: auto auto; /* Define rows */
+    gap: 1.5rem;
+}
+
+.recipe-card-trending:nth-child(1) {
+    grid-row: 1 / 3; /* Span two rows */
+    grid-column: 1 / 2;
+}
+
+.recipe-card-trending:nth-child(2) {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+}
+
+.recipe-card-trending:nth-child(3) {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.recipe-card-trending img {
+    width: 100%;
+    height: 300px; /* Default height */
+    object-fit: cover;
+}
+
+.recipe-card-trending:nth-child(1) img {
+     height: 500px; /* Taller image for the large card */
+}
+
+.recipe-card-trending.small-card img {
+    height: 200px; /* Shorter images for small cards */
+}
+
+.recipe-card-trending .recipe-info {
+    padding: 1.5rem;
+}
+
+.recipe-card-trending h3 {
+    font-family: 'Merriweather', serif;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    color: #4f4a41;
+}
+
+.recipe-card-trending p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.recipe-link {
+    color: #e67e22;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.recipe-link i {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.recipe-link:hover {
+    color: #d35400;
+}
+
+.recipe-link:hover i {
+    transform: translateX(3px);
+}
+
+/* --- What is New Section --- */
+.what-is-new {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.new-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.feature-item {
+    text-align: center;
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: #e67e22; /* Orange icon color */
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.feature-item h3 {
+    font-family: 'Merriweather', serif;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #4f4a41;
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* --- Footer --- */
+.main-footer {
+    background-color: #f8f8f8; /* Light grey background */
+    color: #555;
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+    margin-top: 3rem; /* Space above footer */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.footer-about .logo {
+    font-family: 'Merriweather', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #444;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-about p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.social-links a {
+    color: #777;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #e67e22; /* Orange hover */
+}
+
+.footer-links h4 {
+    font-family: 'Roboto', sans-serif; /* Sans-serif for footer topic */
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #444;
+    font-size: 1rem;
+}
+
+.footer-links ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.footer-links ul li a:hover {
+    color: #e67e22;
+}
+
+.footer-bottom {
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* --- Utility Classes (Keep or adapt from previous) --- */
+.text-center {
+    text-align: center;
+}
+
+/* Remove or adapt old .btn styles if they conflict */
+/* .btn { ... } */
+/* .btn:hover { ... } */
+
+/* Remove or adapt old Recipe List styles */
+/* #recipe-list { ... } */
+/* .recipe-card { ... } */
+
+/* Remove old form styling if they are defined above */
+/* .form-container { ... } */
+/* .form-group { ... } */
+
+/* Remove old recipe details styles if page is redesigned */
+/* .recipe-details { ... } */
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .container-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    .feature-section:nth-child(odd) .feature-image,
+    .feature-section:nth-child(odd) .feature-text {
+        order: 0; /* Reset order */
+    }
+    .feature-section .feature-image {
+        margin-bottom: 1.5rem;
+    }
+
+     .trending-grid {
+        grid-template-columns: 1fr; /* Stack trending recipes */
+    }
+    .recipe-card-trending:nth-child(1),
+    .recipe-card-trending:nth-child(2),
+    .recipe-card-trending:nth-child(3) {
+        grid-row: auto;
+        grid-column: auto;
+    }
+     .recipe-card-trending img,
+     .recipe-card-trending:nth-child(1) img,
+     .recipe-card-trending.small-card img {
+        height: 250px; /* Consistent height on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: 60vh;
+        min-height: 400px;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    .main-nav .logo {
+        font-size: 1.5rem;
+    }
+    .main-nav ul {
+        /* Consider a mobile menu toggle here */
+        display: none; /* Hide links for now, needs JS toggle */
+    }
+     #search-form {
+        width: 90%;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack footer columns */
+        text-align: center;
+    }
+    .footer-about .social-links {
+        justify-content: center;
+        display: flex; /* Center social links */
+    }
+    .footer-about .social-links a:last-child {
+        margin-right: 0;
+    }
+} 
+
+/* Remove old Auth Page Styles if they are defined above */
+/* Ensure Auth page styles don't conflict if they were added below originally */
+/* --- Auth Page Styling (Login/Signup) --- */
+
+.auth-page {
+    /* Override default body padding and background */
+    padding-top: 0;
+    background: linear-gradient(to bottom right, #f9a825, #e67e22); /* Orange gradient */
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+    color: #4f4a41; /* Dark brown text color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.auth-container {
+    /* Overrides default .container width/padding */
+    width: 90%;
+    max-width: 900px; /* Max width for the two-column layout */
+    margin: auto;
+    padding: 0; /* Remove padding from default container */
+    overflow: visible; /* Allow box shadow to show */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+}
+
+/* Specific layout for signup page (two columns) */
+.signup-layout {
+    justify-content: space-between;
+}
+
+.auth-welcome-text {
+    flex-basis: 45%; /* Adjust width as needed */
+    color: #4f4a41; /* Dark brown text */
+    text-align: left;
+    padding-right: 2rem; /* Space between text and form */
+}
+
+.auth-welcome-text h1 {
+    font-family: 'Merriweather', serif; /* Apply Merriweather font */
+    font-size: 3.5rem; 
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.auth-welcome-text p {
+    font-size: 1.1rem;
+}
+
+/* Shared form container styling for auth pages */
+.auth-form-container {
+    background: #fffaf0; /* Creamy background */
+    padding: 2.5rem 2rem;
+    border-radius: 20px; /* More rounded corners */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+    flex-grow: 1; /* Allow form to take remaining space if needed */
+}
+
+/* Login container specific adjustments (centered) */
+.login-container {
+     max-width: 400px; /* Limit width of login form */
+     margin: auto; /* Center the login form */
+}
+
+/* Signup container specific adjustments */
+.signup-container {
+    flex-basis: 45%; /* Adjust width as needed */
+}
+
+.auth-form-container h2 {
+    font-family: 'Merriweather', serif;
+    text-align: left; /* Align form headers left */
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #4f4a41; /* Dark brown heading */
+}
+
+/* Overrides general form styling for auth pages */
+.auth-page .form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    color: #6b665d; /* Slightly lighter brown for labels */
+    font-weight: 500;
+}
+
+.auth-page .form-group input[type="text"],
+.auth-page .form-group input[type="email"],
+.auth-page .form-group input[type="password"] {
+    background: #fff; /* White input background */
+    border: 1px solid #e0dccc; /* Lighter border */
+    border-radius: 10px; /* Rounded inputs */
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    color: #4f4a41;
+}
+
+.auth-page .form-group input::placeholder {
+    color: #b0ab9f; /* Placeholder color */
+}
+
+/* Specific Button Styling for Auth Pages */
+.auth-page .btn {
+    border-radius: 10px; /* Rounded buttons */
+    padding: 0.9rem 1.5rem;
+    font-weight: 500;
+    text-transform: none; /* No uppercase */
+    font-size: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.auth-page .btn-primary {
+    background-color: #e67e22; /* Primary orange */
+    color: #fff;
+    border: none;
+}
+
+.auth-page .btn-primary:hover {
+    background-color: #d35400; /* Darker orange on hover */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Login page specific: 'Don't have an account?' */
+.auth-switch {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    display: flex; /* Align items inline */
+    align-items: center;
+    justify-content: center; 
+    gap: 0.5rem; /* Space between text and button */
+}
+
+.auth-switch span {
+    color: #6b665d;
+}
+
+.auth-page .btn-secondary {
+    background-color: #f39c12; /* Secondary orange/yellow */
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem; /* Smaller padding for secondary button */
+    font-size: 0.9rem;
+}
+
+.auth-page .btn-secondary:hover {
+    background-color: #e67e22; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .signup-layout {
+        flex-direction: column; /* Stack elements vertically */
+        text-align: center;
+    }
+
+    .auth-welcome-text {
+        padding-right: 0;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .auth-welcome-text h1 {
+        font-size: 2.8rem;
+    }
+
+    .auth-form-container {
+        width: 100%;
+        max-width: 450px; /* Limit form width on small screens */
+        margin: 0 auto; /* Center form */
+        padding: 2rem 1.5rem;
+    }
+
+    .login-container {
+         padding: 2rem 1.5rem;
+    }
+} 
