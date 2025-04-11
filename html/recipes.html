@@ -18,104 +18,169 @@
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="favorites.html">My Favorites</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                    <li><a href="settings.html">Settings</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="profile.html">My Profile</a></li>
                     <li><a href="login.html">Login</a></li>
                 </ul>
             </div>
         </nav>
         <div class="hero-content">
             <h1>Explore Our Recipes</h1>
-            <p>Find inspiration for your next meal.</p>
+            <p>Discover delicious meals for every occasion</p>
         </div>
     </header>
 
-    <section class="search-section">
-        <form action="#" method="GET" id="search-form">
-            <input type="search" id="search-input" name="search" placeholder="Search for a recipe...">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
-    </section>
+    <div class="search-and-filter-section">
+        <div class="container">
+            <form action="#" method="GET" id="search-form" class="enhanced-search">
+                <div class="search-input-group">
+                    <input type="search" id="search-input" name="search" placeholder="Search for a recipe...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <select name="category" id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="desserts">Desserts</option>
+                        <option value="snacks">Snacks</option>
+                    </select>
+                    <select name="cuisine" id="cuisine-filter">
+                        <option value="">All Cuisines</option>
+                        <option value="italian">Italian</option>
+                        <option value="asian">Asian</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="mediterranean">Mediterranean</option>
+                        <option value="indian">Indian</option>
+                    </select>
+                    <select name="diet" id="diet-filter">
+                        <option value="">All Diets</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="gluten-free">Gluten-Free</option>
+                        <option value="keto">Keto</option>
+                    </select>
+                    <select name="sort" id="sort-options">
+                        <option value="popular">Most Popular</option>
+                        <option value="recent">Recently Added</option>
+                        <option value="quick">Quick & Easy</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <main>
+        <section id="featured-categories" class="recipe-categories">
+            <div class="container">
+                <h2 class="section-title">Popular Categories</h2>
+                <div class="category-grid">
+                    <a href="#" class="category-card">
+                        <div class="category-icon"><i class="fas fa-egg"></i></div>
+                        <h3>Breakfast</h3>
+                        <span class="recipe-count">42 Recipes</span>
+                    </a>
+                    <a href="#" class="category-card">
+                        <div class="category-icon"><i class="fas fa-hamburger"></i></div>
+                        <h3>Lunch</h3>
+                        <span class="recipe-count">56 Recipes</span>
+                    </a>
+                    <a href="#" class="category-card">
+                        <div class="category-icon"><i class="fas fa-utensils"></i></div>
+                        <h3>Dinner</h3>
+                        <span class="recipe-count">78 Recipes</span>
+                    </a>
+                    <a href="#" class="category-card">
+                        <div class="category-icon"><i class="fas fa-cookie"></i></div>
+                        <h3>Desserts</h3>
+                        <span class="recipe-count">35 Recipes</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <section id="all-recipes" class="recipe-listing">
             <div class="container">
-                <h2 class="text-center section-title">All Recipes</h2>
-                <div id="recipe-list" class="trending-grid"> {/* Reusing the grid style */}
-                    {/* Recipe Cards Go Here - Copied examples from original index.html */}
-                    <article class="recipe-card-trending">
-                        <img src="https://source.unsplash.com/600x800/?noodle,soup,shrimp" alt="Shrimp Noodle Soup">
-                        <div class="recipe-info">
-                             <h3>Shrimp Noodle Soup</h3>
-                             <p>A vibrant bowl of Vietnamese Shrimp Noodle Soup...</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                <div class="section-header">
+                    <h2 class="section-title">All Recipes</h2>
+                    <p class="results-count">Showing 24 of 234 recipes</p>
+                </div>
+                <div class="recipe-grid">
+                    <!-- Recipe Card 1 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://source.unsplash.com/600x400/?noodle,soup,shrimp" alt="Shrimp Noodle Soup">
+                            <div class="recipe-badges">
+                                <span class="badge-new">New</span>
+                                <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-user-friends"></i> 4 servings</span>
+                            </div>
+                            <h3>Shrimp Noodle Soup</h3>
+                            <p>A vibrant bowl of Vietnamese-style noodle soup with fresh shrimp and herbs.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Asian</span>
+                                <span class="tag">Seafood</span>
+                            </div>
+                            <div class="recipe-footer">
+                                <div class="recipe-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8 (124)</span>
+                                </div>
+                                <a href="recipe.html" class="view-recipe">View Recipe <i class="fas fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </article>
-                    <article class="recipe-card-trending small-card">
-                         <img src="https://source.unsplash.com/400x400/?rice,bowl,healthy" alt="Healthy Rice Bowl">
-                         <div class="recipe-info">
-                             <h3>Healthy Rice</h3>
-                             <p>Rice With Zucchini, Soft Boiled Egg, and Parsley...</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
-                     <article class="recipe-card-trending small-card">
-                         <img src="https://source.unsplash.com/400x400/?burger,food" alt="Burger">
-                         <div class="recipe-info">
-                            <h3>Burger</h3>
-                             <p>A juicy patty nestled in a toasted bun...</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
-                     <article class="recipe-card-trending">
-                        <img src="https://source.unsplash.com/600x800/?pasta,italian" alt="Classic Pasta Dish">
-                        <div class="recipe-info">
-                             <h3>Classic Pasta Dish</h3>
-                             <p>A simple yet elegant pasta with fresh tomatoes and basil.</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+
+                    <!-- Recipe Card 2 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://source.unsplash.com/600x400/?rice,bowl,healthy" alt="Healthy Rice Bowl">
+                            <div class="recipe-badges">
+                                <span class="badge-trending">Trending</span>
+                                <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-clock"></i> 20 min</span>
+                                <span><i class="fas fa-user-friends"></i> 2 servings</span>
+                            </div>
+                            <h3>Healthy Rice Bowl</h3>
+                            <p>Brown rice bowl with roasted vegetables, soft-boiled egg, and tahini dressing.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Vegetarian</span>
+                                <span class="tag">Healthy</span>
+                            </div>
+                            <div class="recipe-footer">
+                                <div class="recipe-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.6 (98)</span>
+                                </div>
+                                <a href="recipe.html" class="view-recipe">View Recipe <i class="fas fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </article>
-                    <article class="recipe-card-trending small-card">
-                         <img src="https://source.unsplash.com/400x400/?salad,healthy" alt="Fresh Summer Salad">
-                         <div class="recipe-info">
-                             <h3>Summer Salad</h3>
-                             <p>A light and refreshing salad perfect for warm days.</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
-                     <article class="recipe-card-trending small-card">
-                         <img src="https://source.unsplash.com/400x400/?cake,dessert" alt="Chocolate Cake">
-                         <div class="recipe-info">
-                            <h3>Chocolate Cake</h3>
-                             <p>Decadent and rich chocolate cake for dessert lovers.</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
-                     <article class="recipe-card-trending">
-                        <img src="https://source.unsplash.com/600x800/?pizza" alt="Homemade Pizza">
-                        <div class="recipe-info">
-                             <h3>Homemade Pizza</h3>
-                             <p>Classic homemade pizza with your favorite toppings.</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-                    <article class="recipe-card-trending small-card">
-                         <img src="https://source.unsplash.com/400x400/?tacos" alt="Street Tacos">
-                         <div class="recipe-info">
-                             <h3>Street Tacos</h3>
-                             <p>Authentic street tacos with seasoned meat and fresh salsa.</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
-                     <article class="recipe-card-trending small-card">
-                         <img src="https://source.unsplash.com/400x400/?smoothie" alt="Berry Smoothie">
-                         <div class="recipe-info">
-                            <h3>Berry Smoothie</h3>
-                             <p>A refreshing and healthy berry smoothie to start your day.</p>
-                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
+
+                    <!-- Additional recipe cards would follow the same pattern -->
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <span class="pagination-dots">...</span>
+                    <button class="pagination-btn">12</button>
+                    <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
@@ -134,32 +199,32 @@
                 </div>
             </div>
             <div class="footer-links">
-                <h4>Topic</h4>
+                <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Topic</h4>
+                <h4>Support</h4>
                 <ul>
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Use</a></li>
                 </ul>
             </div>
-             <div class="footer-links">
-                <h4>Topic</h4>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
                 <ul>
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom text-center">
-             <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
         </div>
     </footer>
 </body>

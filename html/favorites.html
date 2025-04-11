@@ -3,52 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Favorites - Recipe Finder</title>
+    <title>FoodX - My Favorites</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <h1><a href="index.html">Recipe Finder</a></h1>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <!-- Conditional links based on login status/role -->
-                <!-- Example: Assumes user is logged in -->
-                <li><a href="favorites.html">My Favorites</a></li>
-                <li><a href="#">Logout</a></li> 
-            </ul>
+    <header class="hero-section hero-section-small">
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">FoodX</a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="favorites.html">My Favorites</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="profile.html">My Profile</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>My Favorite Recipes</h1>
+            <p>Your personal collection of saved recipes</p>
         </div>
-    </nav>
+    </header>
 
-    <main class="container">
-        <h2 class="text-center">My Favorite Recipes</h2>
-        <section id="favorite-recipe-list">
-            <!-- Use the same recipe-card structure as index.html -->
-            <!-- List dynamically populated favorite recipes here -->
-             <article class="recipe-card">
-                <img src="https://source.unsplash.com/600x400/?recipe,favorite" alt="Favorite Recipe Image">
-                <h3><a href="recipe.html">Favorite Recipe Title 1</a></h3>
-                <p>Course: Main Course</p>
-                <p>Short description...</p>
-                <a href="recipe.html" class="btn">View Recipe</a>
-                <!-- Add a 'Remove from Favorites' button maybe? -->
-                <button class="btn btn-danger" style="margin-top: 5px;">Remove Favorite</button>
-            </article>
-             <article class="recipe-card">
-                <img src="https://source.unsplash.com/600x400/?food,loved" alt="Favorite Recipe Image">
-                <h3><a href="recipe.html">Favorite Recipe Title 2</a></h3>
-                <p>Course: Dessert</p>
-                <p>Another description...</p>
-                <a href="recipe.html" class="btn">View Recipe</a>
-                <button class="btn btn-danger" style="margin-top: 5px;">Remove Favorite</button>
-            </article>
-            <!-- If no favorites: -->
-            <!-- <p class="text-center">You haven't added any favorites yet.</p> -->
+    <div class="search-and-filter-section">
+        <div class="container">
+            <form action="#" method="GET" id="search-form" class="enhanced-search">
+                <div class="search-input-group">
+                    <input type="search" id="search-input" name="search" placeholder="Search your favorites...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <select name="category" id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="desserts">Desserts</option>
+                        <option value="snacks">Snacks</option>
+                    </select>
+                    <select name="cuisine" id="cuisine-filter">
+                        <option value="">All Cuisines</option>
+                        <option value="italian">Italian</option>
+                        <option value="asian">Asian</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="mediterranean">Mediterranean</option>
+                        <option value="indian">Indian</option>
+                    </select>
+                    <select name="diet" id="diet-filter">
+                        <option value="">All Diets</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="gluten-free">Gluten-Free</option>
+                        <option value="keto">Keto</option>
+                    </select>
+                    <select name="sort" id="sort-options">
+                        <option value="recent">Recently Added</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="quick">Quick & Easy</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <section id="favorites-collection" class="recipe-listing">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">My Favorites</h2>
+                    <p class="results-count">12 saved recipes</p>
+                </div>
+                <div class="recipe-grid">
+                    <!-- Recipe Card 1 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://source.unsplash.com/600x400/?pasta,italian" alt="Homemade Pasta">
+                            <div class="recipe-badges">
+                                <span class="badge-trending">Trending</span>
+                                <button class="favorite-btn active"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-clock"></i> 45 min</span>
+                                <span><i class="fas fa-user-friends"></i> 4 servings</span>
+                            </div>
+                            <h3>Homemade Pasta</h3>
+                            <p>Classic Italian pasta made from scratch with fresh ingredients.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Italian</span>
+                                <span class="tag">Pasta</span>
+                            </div>
+                            <div class="recipe-footer">
+                                <div class="recipe-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.9 (156)</span>
+                                </div>
+                                <a href="recipe.html" class="view-recipe">View Recipe <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 2 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://source.unsplash.com/600x400/?salad,healthy" alt="Mediterranean Salad">
+                            <div class="recipe-badges">
+                                <button class="favorite-btn active"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-clock"></i> 15 min</span>
+                                <span><i class="fas fa-user-friends"></i> 2 servings</span>
+                            </div>
+                            <h3>Mediterranean Salad</h3>
+                            <p>Fresh and healthy Mediterranean salad with feta cheese and olives.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Mediterranean</span>
+                                <span class="tag">Healthy</span>
+                            </div>
+                            <div class="recipe-footer">
+                                <div class="recipe-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.7 (89)</span>
+                                </div>
+                                <a href="recipe.html" class="view-recipe">View Recipe <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 3 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://source.unsplash.com/600x400/?chocolate,cake" alt="Chocolate Cake">
+                            <div class="recipe-badges">
+                                <button class="favorite-btn active"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-clock"></i> 60 min</span>
+                                <span><i class="fas fa-user-friends"></i> 8 servings</span>
+                            </div>
+                            <h3>Chocolate Cake</h3>
+                            <p>Rich and moist chocolate cake with dark chocolate ganache.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Dessert</span>
+                                <span class="tag">Baking</span>
+                            </div>
+                            <div class="recipe-footer">
+                                <div class="recipe-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8 (203)</span>
+                                </div>
+                                <a href="recipe.html" class="view-recipe">View Recipe <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer class="text-center">
-        <p>&copy; 2024 Recipe Finder. All Rights Reserved.</p>
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="logo">FoodX</a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+        </div>
     </footer>
 </body>
 </html> 

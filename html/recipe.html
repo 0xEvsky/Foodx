@@ -3,59 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Details - Recipe Finder</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Recipe Details - FoodX</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <h1><a href="index.html">Recipe Finder</a></h1>
+    <nav class="main-nav" style="background-color: rgba(0,0,0,0.7);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">FoodX</a>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <!-- Dynamic links based on login status -->
+                <li><a href="recipes.html">Recipes</a></li>
+                <li><a href="favorites.html">My Favorites</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="profile.html">My Profile</a></li>
                 <li><a href="login.html">Login</a></li>
-                <li><a href="signup.html">Sign Up</a></li>
-                 <!-- Add conditional Admin/User links here later -->
+                <li><a href="#">Logout</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container" style="padding-top: 80px;">
         <article class="recipe-details">
-            <img src="https://source.unsplash.com/800x400/?recipe,cooking" alt="Recipe Image Placeholder" class="recipe-image-large">
-            <h2>Sample Recipe Title</h2>
-            <p><strong>Course:</strong> Main Course</p>
+            <!-- Recipe Header Section -->
+            <div class="recipe-header">
+                <img src="https://source.unsplash.com/1200x600/?recipe,cooking" alt="Recipe Image" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Delicious Sample Recipe</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 20 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 30 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 4</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: Italian</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Vegetarian</span>
+                        <span class="tag">Healthy</span>
+                        <span class="tag">Main Course</span>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Recipe Overview Section -->
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>A delightful and nutritious meal that combines fresh ingredients with classic cooking techniques. Perfect for both casual dinners and special occasions. This recipe has been crafted to provide a balance of flavors while keeping preparation simple and straightforward.</p>
+            </section>
+
+            <!-- Ingredients Section -->
             <section class="recipe-ingredients">
-                <h3>Ingredients</h3>
-                <ul>
-                    <li>Ingredient 1 (Quantity 1)</li>
-                    <li>Ingredient 2 (Quantity 2)</li>
-                    <li>Ingredient 3 (Quantity 3)</li>
-                    <!-- List all ingredients -->
-                </ul>
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Main Ingredients</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">2 cups</span>
+                                <span class="ingredient-name">Fresh Ingredient 1</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">3 tbsp</span>
+                                <span class="ingredient-name">Fresh Ingredient 2</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 cup</span>
+                                <span class="ingredient-name">Fresh Ingredient 3</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Seasonings</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">1 tsp</span>
+                                <span class="ingredient-name">Salt</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/2 tsp</span>
+                                <span class="ingredient-name">Black Pepper</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">2 cloves</span>
+                                <span class="ingredient-name">Garlic, minced</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </section>
 
+            <!-- Instructions Section -->
             <section class="recipe-instructions">
-                <h3>Instructions / Description</h3>
-                <p>
-                    Detailed step-by-step instructions or a description of the recipe goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h3>Preparation</h3>
+                            <p>Begin by gathering all your ingredients and ensuring they're properly measured. Wash and chop all vegetables as needed.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h3>Cooking Base</h3>
+                            <p>Heat your pan over medium heat. Add oil and wait until it's properly heated. Add your base ingredients and cook until fragrant.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h3>Main Cooking</h3>
+                            <p>Add the remaining ingredients in the specified order. Simmer and stir occasionally until properly cooked.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <h3>Finishing</h3>
+                            <p>Season to taste with salt and pepper. Garnish with fresh herbs if desired. Serve hot and enjoy!</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
+            <!-- Tips Section -->
+            <section class="recipe-tips">
+                <h2>Chef's Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Storage</h3>
+                        <p>Store in an airtight container in the refrigerator for up to 3 days.</p>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-sync-alt"></i>
+                        <h3>Substitutions</h3>
+                        <p>Can substitute with similar ingredients based on availability.</p>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h3>Important Note</h3>
+                        <p>Ensure all ingredients are fresh for the best results.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
             <section class="recipe-actions">
-                 <!-- These buttons would be shown conditionally based on user role/login status -->
-                 <!-- User Action -->
-                 <button class="btn">Add to Favorites</button>
-                 <!-- Admin Actions -->
-                 <a href="edit_recipe.html" class="btn">Edit Recipe</a>
-                 <button class="btn btn-danger">Delete Recipe</button>
+                <button class="btn btn-primary"><i class="fas fa-heart"></i> Add to Favorites</button>
+                <button class="btn btn-secondary"><i class="fas fa-print"></i> Print Recipe</button>
+                <button class="btn btn-secondary"><i class="fas fa-share-alt"></i> Share Recipe</button>
+                <!-- Admin Actions -->
+                <a href="edit_recipe.html" class="btn btn-secondary"><i class="fas fa-edit"></i> Edit Recipe</a>
+                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Recipe</button>
+            </section>
+
+            <!-- Reviews Section -->
+            <section class="recipe-reviews">
+                <h2>Reviews</h2>
+                <div class="review-stats">
+                    <div class="rating-average">
+                        <span class="rating-number">4.5</span>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-count">(24 reviews)</span>
+                    </div>
+                </div>
             </section>
         </article>
     </main>
 
-    <footer class="text-center">
-        <p>&copy; 2024 Recipe Finder. All Rights Reserved.</p>
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="logo">FoodX</a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+        </div>
     </footer>
 </body>
 </html> 
