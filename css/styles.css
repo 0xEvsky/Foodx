@@ -5,11 +5,27 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #ff6b6b;
+    --primary-dark: #e95f5f;
+    --secondary-color: #4ecdc4;
+    --accent-color: #ffe66d;
+    --text-color: #2d3436;
+    --text-light: #636e72;
+    --background-light: #f9f9f9;
+    --background-alt: #f0f2f5;
+    --white: #ffffff;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 body {
     font-family: 'Roboto', sans-serif; /* Default font */
     line-height: 1.6;
-    color: #444; /* Slightly adjusted default text color */
-    background-color: #fff; /* Default background white */
+    color: var(--text-color);
+    background-color: var(--background-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -68,12 +84,12 @@ img {
 .section-title {
     margin-bottom: 0.5rem;
     font-family: 'Merriweather', serif;
-    color: #4f4a41;
+    color: var(--text-color);
 }
 
 .section-subtitle {
     margin-bottom: 2.5rem;
-    color: #666;
+    color: var(--text-light);
     font-size: 1.1rem;
 }
 
@@ -81,7 +97,7 @@ img {
 .hero-section {
     height: 70vh; /* Adjust height as needed */
     min-height: 500px;
-    background: url('https://source.unsplash.com/1600x900/?food,vegetables,healthy') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/1600x900/?food,cooking') no-repeat center center/cover;
     position: relative;
     display: flex;
     flex-direction: column; /* Stack nav and content */
@@ -103,7 +119,8 @@ img {
     width: 100%;
     z-index: 1001; /* Above overlay */
     padding: 1rem 0;
-    background: transparent; /* Transparent background */
+    background-color: var(--white);
+    box-shadow: var(--shadow);
     transition: background-color 0.3s ease;
 }
 
@@ -120,7 +137,7 @@ img {
     font-family: 'Merriweather', serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--primary-color);
 }
 
 .main-nav ul {
@@ -132,7 +149,7 @@ img {
 }
 
 .main-nav ul li a {
-    color: #fff;
+    color: var(--text-color);
     padding: 0.5rem;
     font-weight: 500;
     position: relative;
@@ -140,7 +157,7 @@ img {
 }
 
 .main-nav ul li a:hover {
-    color: #f39c12; /* Orange hover */
+    color: var(--primary-color);
 }
 
 .main-nav ul li a::after {
@@ -151,7 +168,7 @@ img {
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background-color: #f39c12;
+    background-color: var(--primary-color);
     transition: width 0.3s ease;
 }
 
@@ -232,8 +249,8 @@ img {
 
 #search-form button {
     border: none;
-    background-color: #e67e22; /* Orange button */
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--white);
     padding: 0 1.5rem;
     cursor: pointer;
     font-size: 1.1rem;
@@ -241,7 +258,7 @@ img {
 }
 
 #search-form button:hover {
-    background-color: #d35400; /* Darker orange */
+    background-color: var(--primary-dark);
 }
 
 /* --- Feature Sections --- */
@@ -411,72 +428,141 @@ img {
 
 /* --- Footer --- */
 .main-footer {
-    background-color: #f8f8f8; /* Light grey background */
-    color: #555;
-    padding-top: 4rem;
-    padding-bottom: 1rem;
-    margin-top: 3rem; /* Space above footer */
+    background-color: var(--white);
+    color: var(--text-color);
+    padding: 60px 0 20px;
+    border-top: 1px solid var(--background-alt);
+    margin-top: auto;
+    width: 100%;
+    position: relative;
+    bottom: 0;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-about {
+    max-width: 350px;
 }
 
 .footer-about .logo {
     font-family: 'Merriweather', serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #444;
+    color: var(--primary-color);
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
 }
 
 .footer-about p {
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
 }
 
 .social-links a {
-    color: #777;
-    font-size: 1.2rem;
-    margin-right: 1rem;
-    transition: color 0.3s ease;
+    color: var(--text-light);
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--background-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .social-links a:hover {
-    color: #e67e22; /* Orange hover */
+    color: var(--primary-color);
+    background-color: var(--background-alt);
+    transform: translateY(-2px);
 }
 
 .footer-links h4 {
-    font-family: 'Roboto', sans-serif; /* Sans-serif for footer topic */
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #444;
-    font-size: 1rem;
+    font-family: 'Merriweather', serif;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
 }
 
 .footer-links ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .footer-links ul li a {
-    color: #666;
+    color: var(--text-light);
     font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .footer-links ul li a:hover {
-    color: #e67e22;
+    color: var(--primary-color);
+    transform: translateX(3px);
 }
 
 .footer-bottom {
-    padding-top: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 2rem 0;
+    text-align: center;
+    border-top: 1px solid var(--background-alt);
+    margin-top: 40px;
+    color: var(--text-light);
     font-size: 0.9rem;
-    color: #888;
+}
+
+/* Footer Responsive Adjustments */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .footer-about {
+        grid-column: 1 / -1;
+        max-width: none;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-links {
+        margin-top: 1rem;
+    }
+
+    .footer-links ul li a {
+        display: inline-block;
+        padding: 0.5rem;
+    }
+
+    .main-footer {
+        padding: 40px 0 20px;
+    }
 }
 
 /* Phone Support Link */
@@ -574,9 +660,9 @@ img {
 .auth-page {
     /* Override default body padding and background */
     padding-top: 0;
-    background: linear-gradient(to bottom right, #f9a825, #e67e22); /* Orange gradient */
+    background: linear-gradient(135deg, #FF9F1C 0%, #FFBF69 100%);
     font-family: 'Roboto', sans-serif; /* Apply Roboto font */
-    color: #4f4a41; /* Dark brown text color */
+    color: #2D2D2D; /* Dark brown text color */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -586,12 +672,13 @@ img {
 .auth-container {
     /* Overrides default .container width/padding */
     width: 90%;
-    max-width: 900px; /* Max width for the two-column layout */
+    max-width: 1200px; /* Max width for the two-column layout */
     margin: auto;
     padding: 0; /* Remove padding from default container */
     overflow: visible; /* Allow box shadow to show */
     display: flex; /* Use flexbox for layout */
     align-items: center; /* Center items vertically */
+    gap: 4rem;
 }
 
 /* Specific layout for signup page (two columns) */
@@ -600,30 +687,31 @@ img {
 }
 
 .auth-welcome-text {
-    flex-basis: 45%; /* Adjust width as needed */
-    color: #4f4a41; /* Dark brown text */
+    flex: 1;
+    color: #2D2D2D; /* Dark brown text */
     text-align: left;
     padding-right: 2rem; /* Space between text and form */
 }
 
 .auth-welcome-text h1 {
     font-family: 'Merriweather', serif; /* Apply Merriweather font */
-    font-size: 3.5rem; 
-    line-height: 1.2;
+    font-size: 4rem; 
+    font-weight: 700;
     margin-bottom: 1rem;
+    line-height: 1.2;
 }
 
 .auth-welcome-text p {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
 }
 
 /* Shared form container styling for auth pages */
 .auth-form-container {
-    background: #fffaf0; /* Creamy background */
-    padding: 2.5rem 2rem;
-    border-radius: 20px; /* More rounded corners */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
-    flex-grow: 1; /* Allow form to take remaining space if needed */
+    flex: 1;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 /* Login container specific adjustments (centered) */
@@ -640,56 +728,57 @@ img {
 .auth-form-container h2 {
     font-family: 'Merriweather', serif;
     text-align: left; /* Align form headers left */
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: #4f4a41; /* Dark brown heading */
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2D2D2D; /* Dark brown heading */
 }
 
 /* Overrides general form styling for auth pages */
 .auth-page .form-group label {
     display: block;
     margin-bottom: 0.3rem;
-    font-size: 0.9rem;
-    color: #6b665d; /* Slightly lighter brown for labels */
+    font-size: 1rem;
     font-weight: 500;
+    color: #2D2D2D; /* Slightly lighter brown for labels */
 }
 
 .auth-page .form-group input[type="text"],
 .auth-page .form-group input[type="email"],
 .auth-page .form-group input[type="password"] {
-    background: #fff; /* White input background */
-    border: 1px solid #e0dccc; /* Lighter border */
-    border-radius: 10px; /* Rounded inputs */
-    padding: 0.8rem 1rem;
+    background: #FFF5E6; /* White input background */
+    border: 1px solid #E5E5E5; /* Lighter border */
+    border-radius: 8px; /* Rounded inputs */
+    padding: 0.75rem;
     font-size: 1rem;
-    color: #4f4a41;
+    color: #2D2D2D;
 }
 
 .auth-page .form-group input::placeholder {
-    color: #b0ab9f; /* Placeholder color */
+    color: #888; /* Placeholder color */
 }
 
 /* Specific Button Styling for Auth Pages */
 .auth-page .btn {
-    border-radius: 10px; /* Rounded buttons */
-    padding: 0.9rem 1.5rem;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px; /* Rounded buttons */
     font-weight: 500;
     text-transform: none; /* No uppercase */
     font-size: 1rem;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.2s, transform 0.2s;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     margin-top: 10px;
 }
 
 .auth-page .btn-primary {
-    background-color: #e67e22; 
-    color: #fff;
+    background-color: #FF9F1C; 
+    color: white;
     border: none;
 }
 
 .auth-page .btn-primary:hover {
-    background-color: #d35400; 
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    background-color: #FF8F00; 
+    transform: translateY(-1px);
 }
 
 /* Login page specific: 'Don't have an account?' */
@@ -704,20 +793,19 @@ img {
 }
 
 .auth-switch span {
-    color: #6b665d;
+    color: #2D2D2D;
 }
 
 .auth-page .btn-secondary {
-    background-color: #f39c12; /* Secondary orange/yellow */
-    color: #fff;
-    border: none;
+    background-color: transparent;
+    color: #FF9F1C;
+    border: 2px solid #FF9F1C;
     padding: 0.6rem 1.2rem; /* Smaller padding for secondary button */
     font-size: 0.9rem;
 }
 
 .auth-page .btn-secondary:hover {
-    background-color: #e67e22; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background-color: rgba(255, 159, 28, 0.1);
 }
 
 /* Responsive adjustments for smaller screens */
@@ -734,7 +822,7 @@ img {
     }
 
     .auth-welcome-text h1 {
-        font-size: 2.8rem;
+        font-size: 3rem;
     }
 
     .auth-form-container {
@@ -1062,11 +1150,11 @@ img {
 }
 
 .tag {
-    background: #f8f9fa;
+    background-color: var(--accent-color);
     padding: 0.4rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
-    color: #666;
+    color: var(--text-color);
     border: 1px solid #eee;
 }
 
@@ -1219,23 +1307,23 @@ img {
 }
 
 .btn-primary {
-    background-color: #f39c12;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white);
     border: none;
 }
 
 .btn-primary:hover {
-    background-color: #e67e22;
+    background-color: var(--primary-dark);
 }
 
 .btn-secondary {
-    background-color: #f8f9fa;
-    color: #666;
-    border: 1px solid #ddd;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
 }
 
 .btn-secondary:hover {
-    background-color: #e9ecef;
+    background-color: #45b8b0;
 }
 
 /* Reviews Section */
@@ -1421,10 +1509,10 @@ img {
 
 /* Enhanced Recipe Card */
 .recipe-card {
-    background-color: white;
+    background-color: var(--white);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     transition: transform 0.3s ease;
 }
 
@@ -1457,8 +1545,8 @@ img {
 }
 
 .badge-new, .badge-trending {
-    background-color: var(--color-primary);
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -1466,7 +1554,7 @@ img {
 }
 
 .badge-trending {
-    background-color: var(--color-accent);
+    background-color: var(--accent-color);
 }
 
 .favorite-btn {
@@ -1483,7 +1571,7 @@ img {
 }
 
 .favorite-btn:hover {
-    background-color: var(--color-primary-light);
+    background-color: var(--primary-color);
     transform: scale(1.1);
 }
 
@@ -1525,8 +1613,8 @@ img {
 }
 
 .tag {
-    background-color: var(--color-light);
-    color: var(--color-text);
+    background-color: var(--accent-color);
+    color: var(--text-color);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -1562,7 +1650,7 @@ img {
 }
 
 .view-recipe:hover {
-    color: var(--color-primary-dark);
+    color: var(--primary-dark);
 }
 
 /* Pagination */
@@ -1584,14 +1672,14 @@ img {
 }
 
 .pagination-btn.active {
-    background-color: var(--color-primary);
-    color: white;
-    border-color: var(--color-primary);
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
 }
 
 .pagination-btn:hover:not(:disabled) {
     background-color: var(--color-light);
-    border-color: var(--color-primary);
+    border-color: var(--primary-color);
 }
 
 .pagination-btn:disabled {
@@ -1606,8 +1694,8 @@ img {
 
 /* Favorites Page Specific Styles */
 .favorite-btn.active {
-    background-color: var(--color-primary);
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white);
 }
 
 .favorite-btn.active i {
@@ -1615,7 +1703,7 @@ img {
 }
 
 .favorite-btn.active:hover {
-    background-color: var(--color-primary-dark);
+    background-color: var(--primary-dark);
     transform: scale(1.1);
 }
 
@@ -1653,13 +1741,17 @@ img {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background-color: var(--color-primary);
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white);
     border-radius: 6px;
     text-decoration: none;
     transition: background-color 0.3s ease;
 }
 
 .empty-favorites .btn:hover {
-    background-color: var(--color-primary-dark);
+    background-color: var(--primary-dark);
+}
+
+main {
+    flex: 1;
 }
