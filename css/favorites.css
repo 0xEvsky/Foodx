@@ -2,8 +2,8 @@
 
 /* Hero Section Styles for Favorites Page */
 .hero-section-small {
-    padding: 0 0 40px; /* Remove top padding */
-    background: linear-gradient(to right, #b25f28, #c67942); /* Brown/orange gradient */
+    padding: 0 0 40px;
+    background: linear-gradient(to right, #b25f28, #c67942);
     text-align: center;
     position: relative;
 }
@@ -19,7 +19,7 @@
     color: var(--white);
     max-width: 800px;
     margin: 0 auto;
-    padding: 160px 15px 0; /* Significantly Increased top padding */
+    padding: 160px 15px 0;
 }
 
 .hero-section-small h1 {
@@ -47,7 +47,7 @@
 
 /* Favorites Page Specific Styles */
 :root {
-    --primary-dark: #E66900; /* Updated to match common.css */
+    --primary-dark: #E66900;
 }
 
 .favorite-btn.active {
@@ -68,25 +68,25 @@
 .empty-favorites {
     text-align: center;
     padding: 4rem 0;
-    background-color: var(--background-light); /* Fixed variable name */
+    background-color: var(--background-light);
     border-radius: 12px;
     margin: 2rem 0;
 }
 
 .empty-favorites i {
     font-size: 4rem;
-    color: var(--text-light); /* Fixed variable name */
+    color: var(--text-light);
     margin-bottom: 1.5rem;
 }
 
 .empty-favorites h3 {
-    color: var(--text-color); /* Fixed variable name */
+    color: var(--text-color);
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
 
 .empty-favorites p {
-    color: var(--text-light); /* Fixed variable name */
+    color: var(--text-light);
     margin-bottom: 2rem;
     max-width: 500px;
     margin-left: auto;
@@ -130,7 +130,7 @@
 .search-and-filter-section {
     background-color: var(--background-alt);
     padding: 2rem 0;
-    margin-top: -1px; /* Fix potential gap */
+    margin-top: -1px;
     margin-bottom: 2rem;
     border-bottom: 1px solid var(--border-color);
 }
@@ -143,7 +143,7 @@
     gap: 1rem;
 }
 
-.search-input-group { /* Updated to match HTML class */
+.search-input-group {
     flex: 1;
     min-width: 300px;
     display: flex;
@@ -199,7 +199,7 @@
 }
 
 /* Favorites grid */
-.recipe-grid { /* Updated to match HTML class */
+.recipe-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
@@ -214,7 +214,7 @@
     margin-top: 3rem;
 }
 
-.pagination-btn { /* Updated to match HTML class */
+.pagination-btn {
     padding: 0.5rem 0.8rem;
     border: 1px solid var(--border-color);
     background-color: var(--white);
@@ -251,19 +251,17 @@
     }
     
     .search-input-group {
-        width: 100%;
+        min-width: auto;
     }
     
     .filter-options {
-        width: 100%;
-        justify-content: space-between;
-        gap: 0.5rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
     }
     
     .filter-options select {
-        flex: 1;
-        font-size: 0.85rem;
-        padding: 0.6rem 0.75rem;
+        min-width: auto;
     }
     
     .recipe-grid {
@@ -272,12 +270,11 @@
     }
     
     .pagination {
-        gap: 0.25rem;
+        flex-wrap: wrap;
     }
     
     .pagination-btn {
-        padding: 0.5rem 0.7rem;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -287,36 +284,40 @@
     }
     
     .filter-options {
-        flex-direction: column;
-        gap: 0.75rem;
+        grid-template-columns: 1fr;
     }
     
     .filter-options select {
-        width: 100%;
+        font-size: 0.85rem;
     }
     
     .search-input-group {
-        border-radius: 8px;
+        box-shadow: none;
     }
     
     .pagination {
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 0.25rem;
+    }
+    
+    .pagination-btn {
+        padding: 0.4rem 0.6rem;
     }
 }
 
 /* Recipe Cards Styling */
 .recipe-card {
-    border-radius: 8px;
-    overflow: hidden;
     background-color: var(--white);
-    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .recipe-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
 .recipe-image {
@@ -329,7 +330,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
 }
 
 .recipe-card:hover .recipe-image img {
@@ -340,11 +341,12 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #ccc;
     border: none;
-    border-radius: 50%;
     width: 36px;
     height: 36px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -354,14 +356,13 @@
 }
 
 .favorite-btn i {
-    color: #ccc;
-    font-size: 1rem;
-    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    line-height: 1;
 }
 
 .favorite-btn:hover {
-    transform: scale(1.1);
     background-color: white;
+    transform: scale(1.1);
 }
 
 .favorite-btn.active {
@@ -377,17 +378,17 @@
     top: 10px;
     left: 10px;
     display: flex;
-    gap: 8px;
-    z-index: 5;
+    gap: 0.5rem;
 }
 
 .badge-trending {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
     font-size: 0.75rem;
     font-weight: 600;
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-radius: 50px;
 }
 
 /* Fix for section contents */

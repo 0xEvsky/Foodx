@@ -1,6 +1,4 @@
-/* CSS rules for add_recipe.html */
 
-/* Styles moved from inline */
 #ingredients-group .ingredient-item input[name="ingredient_name[]"] {
     margin-bottom: 5px;
 }
@@ -10,5 +8,3 @@
     color: #666;
     margin-top: 5px;
 }
-
-/* Add any other specific styles for add_recipe.html below */

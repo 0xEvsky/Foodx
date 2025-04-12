@@ -1,6 +1,4 @@
-/* CSS rules for recipe.html */
 
-/* Styles moved from inline */
 .main-nav {
     /* Note: This might override the default nav style. Consider making it more specific if needed, e.g., body.recipe-page .main-nav */
     background-color: rgba(0,0,0,0.7);

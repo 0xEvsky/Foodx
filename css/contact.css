@@ -1,11 +1,8 @@
-/* CSS rules for contact.html */
 
-/* Override nav styles for contact page */
 .main-nav .logo img {
-    filter: none; /* Remove the white filter */
+    filter: none;
 }
 
-/* Base styles to match the rest of the site */
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f8f9fa;
@@ -13,7 +10,6 @@ body {
     min-height: 100vh;
 }
 
-/* Override problematic nav styles */
 .main-nav {
     position: absolute;
     background-color: transparent;
@@ -42,7 +38,6 @@ main.container {
     margin-bottom: 2.5rem;
 }
 
-/* --- Contact Page Styles --- */
 .contact-section,
 .faq-section,
 .support-section {

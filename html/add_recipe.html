@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Recipe - FoodX</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/common.css"> <!-- Common styles -->
-    <link rel="stylesheet" href="../css/add_recipe.css"> <!-- Page-specific styles -->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/add_recipe.css">
 </head>
 <body>
     <nav class="main-nav">
@@ -25,7 +23,6 @@
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
                 <li><a href="login.html">Login</a></li>
-                 <!-- Consider adding 'Add Recipe' link here dynamically if user is logged in/has perms -->
             </ul>
         </div>
     </nav>
@@ -49,14 +46,10 @@
                 </div>
                 <div class="form-group" id="ingredients-group">
                     <label>Ingredients:</label>
-                    <!-- Simple implementation: add inputs dynamically with JS later -->
-                    <!-- For now, maybe one set of inputs or a textarea -->
                      <div class="ingredient-item">
                          <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" required>
                          <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" required>
                      </div>
-                     <!-- Add button (JS needed) -->
-                     <!-- <button type="button" id="add-ingredient-btn">+ Add Ingredient</button> -->
                      <p>(For multiple ingredients, backend logic will handle multiple inputs with the same name, or use JavaScript to add more fields dynamically)</p>
                 </div>
                  <div class="form-group">
@@ -109,8 +102,5 @@
             <p>&copy; 2024 FoodX. All Rights Reserved.</p>
         </div>
     </footer>
-
-    <!-- Potential JS for adding ingredients dynamically -->
-    <!-- <script src="js/add_recipe.js"></script> -->
 </body>
 </html>
