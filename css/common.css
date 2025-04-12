@@ -157,7 +157,7 @@ img {
 }
 
 .main-nav .logo img {
-    height: 200px; /* Increased size again */
+    height: 120px; /* Set base logo height to large size */
     display: block;
     filter: brightness(0) invert(1); /* Attempt to make the logo white */
 }

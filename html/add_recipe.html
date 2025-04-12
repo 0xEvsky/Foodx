@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Recipe - FoodX</title>
-    <link rel="stylesheet" href="../css/styles.css"> <!-- Keep general styles -->
-    <link rel="stylesheet" href="../css/add_recipe.css"> <!-- Add specific styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css"> <!-- Common styles -->
+    <link rel="stylesheet" href="../css/add_recipe.css"> <!-- Page-specific styles -->
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <h1><a href="index.html">FoodX</a></h1>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                 <img src="../images/foodx_logo.png" alt="FoodX Logo">
+            </a>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <!-- Conditional links based on login status/role -->
-                <!-- Example: Assumes admin is logged in -->
-                <li><a href="add_recipe.html">Add Recipe</a></li>
-                <li><a href="#">Logout</a></li> 
+                <li><a href="recipes.html">Recipes</a></li>
+                <li><a href="favorites.html">My Favorites</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
+                <li><a href="login.html">Login</a></li>
+                 <!-- Consider adding 'Add Recipe' link here dynamically if user is logged in/has perms -->
             </ul>
         </div>
     </nav>
@@ -59,8 +68,46 @@
         </section>
     </main>
 
-    <footer class="text-center">
-        <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="logo">FOODX</a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <!-- Potential JS for adding ingredients dynamically -->

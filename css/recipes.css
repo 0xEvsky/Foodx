@@ -36,7 +36,7 @@
     color: var(--white);
     max-width: 800px;
     margin: 0 auto;
-    padding: 40px 15px 0; /* Add top padding to content */
+    padding: 160px 15px 0; /* Significantly Increased top padding */
 }
 
 .hero-section-small h1 {

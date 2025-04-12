@@ -1,5 +1,16 @@
 /* CSS rules for profile.html */
 
+/* Override nav styles for profile page */
+.main-nav {
+    position: absolute;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.main-nav .logo img {
+    filter: none; /* Remove the white filter */
+}
+
 /* Styles moved from inline */
 * {
     margin: 0;
@@ -17,7 +28,7 @@ body {
 main .container {
     max-width: 800px;
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 100px;
 }
 
 .profile-container {
