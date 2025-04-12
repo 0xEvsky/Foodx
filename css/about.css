@@ -1,0 +1,134 @@
+/* --- About Page Styling --- */
+.hero-section-small {
+    padding: 0 0 40px; /* Remove top padding */
+    background: linear-gradient(to right, #b25f28, #c67942); /* Brown/orange gradient */
+    text-align: center;
+    position: relative;
+}
+
+/* Remove the before pseudo-element that was adding the overlay */
+.hero-section-small::before {
+    display: none;
+}
+
+/* Navigation Adjustments */
+.hero-section-small .main-nav {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 1.2rem 0;
+}
+
+.hero-section-small .main-nav .logo {
+    color: var(--white);
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+.hero-section-small .main-nav ul li a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-section-small .main-nav ul li a:hover,
+.hero-section-small .main-nav ul li a.active {
+    color: var(--white);
+}
+
+.hero-section-small .hero-content {
+    position: relative;
+    z-index: 2;
+    color: var(--white);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 15px 0; /* Add top padding to content */
+}
+
+.hero-section-small h1 {
+    font-size: 2.8rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.hero-section-small p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+.about-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-section h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 2rem;
+}
+
+.about-section h3 {
+    margin: 2rem 0 1rem;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.about-section ul {
+    list-style: disc;
+    margin: 1rem auto 2rem;
+    padding-left: 2rem;
+    text-align: left;
+    max-width: 600px;
+}
+
+.about-section ul li {
+    margin-bottom: 0.8rem;
+    color: var(--text-light);
+    font-size: 1.05rem;
+}
+
+.about-section strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.about-section .btn {
+    margin: 1rem auto 2rem;
+    display: inline-block;
+}
+
+.team-signature {
+    margin-top: 2rem;
+    font-style: italic;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .hero-section-small h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section-small p {
+        font-size: 1rem;
+    }
+    
+    .about-section {
+        padding: 2rem 1rem;
+    }
+    
+    .about-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .about-section h3 {
+        font-size: 1.3rem;
+    }
+}

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Recipe - FoodX</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Keep general styles -->
+    <link rel="stylesheet" href="../css/add_recipe.css"> <!-- Add specific styles -->
 </head>
 <body>
     <nav>
@@ -42,12 +43,12 @@
                     <!-- Simple implementation: add inputs dynamically with JS later -->
                     <!-- For now, maybe one set of inputs or a textarea -->
                      <div class="ingredient-item">
-                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" required style="margin-bottom: 5px;">
+                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" required>
                          <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" required>
                      </div>
                      <!-- Add button (JS needed) -->
                      <!-- <button type="button" id="add-ingredient-btn">+ Add Ingredient</button> -->
-                     <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">(For multiple ingredients, backend logic will handle multiple inputs with the same name, or use JavaScript to add more fields dynamically)</p>
+                     <p>(For multiple ingredients, backend logic will handle multiple inputs with the same name, or use JavaScript to add more fields dynamically)</p>
                 </div>
                  <div class="form-group">
                     <label for="description">Description / Instructions:</label>
@@ -65,4 +66,4 @@
     <!-- Potential JS for adding ingredients dynamically -->
     <!-- <script src="js/add_recipe.js"></script> -->
 </body>
-</html> 
+</html>

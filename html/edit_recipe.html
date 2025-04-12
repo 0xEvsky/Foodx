@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Recipe - FoodX</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Keep general styles -->
+    <link rel="stylesheet" href="../css/edit_recipe.css"> <!-- Add specific styles -->
 </head>
 <body>
     <nav>
@@ -43,16 +44,16 @@
                     <label>Ingredients:</label>
                     <!-- Populate dynamically based on recipe -->
                      <div class="ingredient-item">
-                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="Ingredient 1" required style="margin-bottom: 5px;">
+                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="Ingredient 1" required>
                          <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" value="Quantity 1" required>
                      </div>
-                     <div class="ingredient-item" style="margin-top: 10px;">
-                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="Ingredient 2" required style="margin-bottom: 5px;">
+                     <div class="ingredient-item">
+                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="Ingredient 2" required>
                          <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" value="Quantity 2" required>
                      </div>
                      <!-- Add button (JS needed) -->
                      <!-- <button type="button" id="add-ingredient-btn">+ Add Ingredient</button> -->
-                     <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">(Adjust or add/remove ingredients as needed)</p>
+                     <p>(Adjust or add/remove ingredients as needed)</p>
                 </div>
                  <div class="form-group">
                     <label for="description">Description / Instructions:</label>
@@ -67,4 +68,4 @@
         <p>&copy; 2024 FoodX. All Rights Reserved.</p>
     </footer>
 </body>
-</html> 
+</html>

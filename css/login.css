@@ -1,0 +1,177 @@
+/* CSS rules for login.html */
+
+/* --- Auth Page Styling (Login/Signup) --- */
+
+.auth-page {
+    /* Override default body padding and background */
+    padding-top: 0;
+    background: linear-gradient(135deg, #FF7700 0%, #FFF0E0 100%);
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+    color: var(--text-color); /* Dark brown text color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.auth-container {
+    /* Overrides default .container width/padding */
+    width: 90%;
+    max-width: 1200px; /* Max width for the two-column layout */
+    margin: auto;
+    padding: 0; /* Remove padding from default container */
+    overflow: visible; /* Allow box shadow to show */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    gap: 4rem;
+}
+
+/* Specific layout for signup page (two columns) */
+.signup-layout {
+    justify-content: space-between;
+}
+
+.auth-welcome-text {
+    flex: 1;
+    color: var(--text-color); /* Dark brown text */
+    text-align: left;
+    padding-right: 2rem; /* Space between text and form */
+}
+
+.auth-welcome-text h1 {
+    font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+    font-size: 3.5rem; 
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.auth-welcome-text p {
+    font-size: 1.25rem;
+    color: var(--text-color);
+}
+
+/* Shared form container styling for auth pages */
+.auth-form-container {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+/* Login container specific adjustments (centered) */
+.login-container {
+     max-width: 400px; /* Limit width of login form */
+     margin: auto; /* Center the login form */
+}
+
+/* Signup container specific adjustments */
+.signup-container {
+    flex-basis: 45%; /* Adjust width as needed */
+}
+
+.auth-form-container h2 {
+    font-family: 'Poppins', sans-serif;
+    text-align: left; /* Align form headers left */
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: var(--text-color); /* Dark brown heading */
+}
+
+/* Overrides general form styling for auth pages */
+.auth-page .form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color); /* Slightly lighter brown for labels */
+}
+
+.auth-page .form-group input[type="text"],
+.auth-page .form-group input[type="email"],
+.auth-page .form-group input[type="password"] {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.auth-page .form-group input::placeholder {
+    color: #888; /* Placeholder color */
+}
+
+/* Specific Button Styling for Auth Pages */
+.auth-page .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.auth-page .btn-primary {
+    background-color: #FF7700; 
+    color: white;
+    border: none;
+}
+
+.auth-page .btn-primary:hover {
+    background-color: #E66900; 
+    transform: translateY(-1px);
+}
+
+/* Login page specific: 'Don't have an account?' */
+.auth-switch {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    display: flex; /* Align items inline */
+    align-items: center;
+    justify-content: center; 
+    gap: 0.5rem; /* Space between text and button */
+}
+
+.auth-switch span {
+    color: var(--text-color);
+}
+
+.auth-page .btn-secondary {
+    background-color: transparent;
+    color: #FF7700;
+    border: 2px solid #FF7700;
+    padding: 0.6rem 1.2rem; /* Smaller padding for secondary button */
+    font-size: 0.9rem;
+}
+
+.auth-page .btn-secondary:hover {
+    background-color: rgba(255, 119, 0, 0.1);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .signup-layout {
+        flex-direction: column; /* Stack elements vertically */
+        text-align: center;
+    }
+
+    .auth-welcome-text {
+        padding-right: 0;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .auth-welcome-text h1 {
+        font-size: 2.8rem;
+    }
+
+    .auth-form-container {
+        width: 100%;
+        max-width: 450px; /* Limit form width on small screens */
+        margin: 0 auto; /* Center form */
+        padding: 2rem 1.5rem;
+    }
+
+    .login-container {
+         padding: 2rem 1.5rem;
+    }
+}

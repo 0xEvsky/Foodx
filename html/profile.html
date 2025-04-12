@@ -4,160 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile - FoodX</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #FF9F1C 0%, #FFBF69 100%);
-            padding: 20px;
-        }
-
-        .profile-container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-            width: 90%;
-            max-width: 550px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #FF9F1C, #FFBF69);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            color: #2D3436;
-            font-size: 2.2rem;
-            font-weight: 600;
-            position: relative;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: #FF9F1C;
-            border-radius: 2px;
-        }
-
-        .profile-button {
-            width: 100%;
-            padding: 1.2rem;
-            margin: 0.8rem 0;
-            border: none;
-            border-radius: 12px;
-            background-color: #f8f9fa;
-            color: #2D3436;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid #e9ecef;
-        }
-
-        .profile-button:hover {
-            background-color: #FF9F1C;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 159, 28, 0.2);
-        }
-
-        .profile-button i {
-            font-size: 1.2rem;
-            margin-right: 12px;
-        }
-
-        .button-content {
-            display: flex;
-            align-items: center;
-        }
-
-        .profile-button .arrow {
-            opacity: 0.5;
-        }
-
-        @media (max-width: 480px) {
-            .profile-container {
-                padding: 1.5rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .profile-button {
-                padding: 1rem;
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
-    <div class="profile-container">
-        <h1>My Profile</h1>
-        <button class="profile-button">
-            <div class="button-content">
-                <i class="fas fa-user"></i>
-                Profile
+    <header>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">FOODX</a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="favorites.html">My Favorites</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="profile.html" class="profile-icon active"><i class="fas fa-user"></i></a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
             </div>
-            <i class="fas fa-chevron-right arrow"></i>
-        </button>
-        <button class="profile-button">
-            <div class="button-content">
-                <i class="fas fa-clock"></i>
-                Meal planner reminders
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="name">Your Name:</label>
+                            <input type="text" id="name" name="name" value="John Doe">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Your Email:</label>
+                            <input type="email" id="email" name="email" value="johndoe@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Your Phone Number:</label>
+                            <input type="tel" id="phone" name="phone" value="(555) 123-4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Edit your Password:</label>
+                            <input type="password" id="password" name="password" value="••••••••">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-options">
+                    <a href="#" class="profile-option-card">
+                        <div class="option-content">
+                            <span>Dietary preferences</span>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="profile-option-card">
+                        <div class="option-content">
+                            <span>Allergy Alerts</span>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="profile-option-card">
+                        <div class="option-content">
+                            <span>Subscriptions</span>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="profile-option-card">
+                        <div class="option-content">
+                            <span>Payment</span>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <i class="fas fa-chevron-right arrow"></i>
-        </button>
-        <button class="profile-button">
-            <div class="button-content">
-                <i class="fas fa-exclamation-circle"></i>
-                Allergy Alerts
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="logo">FOODX</a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
             </div>
-            <i class="fas fa-chevron-right arrow"></i>
-        </button>
-        <button class="profile-button">
-            <div class="button-content">
-                <i class="fas fa-utensils"></i>
-                Dietary preferences
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
-            <i class="fas fa-chevron-right arrow"></i>
-        </button>
-        <button class="profile-button">
-            <div class="button-content">
-                <i class="fas fa-credit-card"></i>
-                Payment & Subscriptions
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
             </div>
-            <i class="fas fa-chevron-right arrow"></i>
-        </button>
-    </div>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

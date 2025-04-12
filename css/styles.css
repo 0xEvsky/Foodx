@@ -5,53 +5,60 @@
     box-sizing: border-box;
 }
 
+/* Minimalist Palette & Base Styles */
 :root {
-    --primary-color: #ff6b6b;
-    --primary-dark: #e95f5f;
-    --secondary-color: #4ecdc4;
-    --accent-color: #ffe66d;
-    --text-color: #2d3436;
-    --text-light: #636e72;
-    --background-light: #f9f9f9;
-    --background-alt: #f0f2f5;
+    --primary-color: #FF7700; /* New primary orange */
+    --primary-light: #FFF0E0; /* Lighter shade for backgrounds/hovers */
+    --text-color: #222222; /* Dark grey for text */
+    --text-light: #666666; /* Lighter grey for secondary text */
+    --border-color: #eeeeee; /* Light grey for borders */
+    --background-light: #ffffff; /* White background */
+    --background-alt: #f9f9f9; /* Very light grey for alternate sections */
     --white: #ffffff;
-    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer shadow */
 }
 
 body {
-    font-family: 'Roboto', sans-serif; /* Default font */
-    line-height: 1.6;
+    font-family: 'Inter', sans-serif; /* Clean sans-serif */
+    line-height: 1.7; /* More spacing */
     color: var(--text-color);
     background-color: var(--background-light);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    -webkit-font-smoothing: antialiased; /* Smoother fonts */
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
-    width: 90%; /* Wider container */
-    max-width: 1200px; /* Max width */
-    margin: auto;
-    padding: 40px 0; /* Default vertical padding for sections */
+    width: 90%;
+    max-width: 1140px; /* Slightly narrower max-width */
+    margin: 0 auto; /* Center container */
+    padding: 60px 15px; /* More vertical padding, some horizontal */
 }
 
 .container-flex {
     width: 90%;
-    max-width: 1200px;
-    margin: auto;
+    max-width: 1140px;
+    margin: 0 auto;
     display: flex;
-    align-items: center;
-    gap: 2rem; /* Space between flex items */
-    padding: 60px 0;
+    align-items: center; /* Align items vertically */
+    gap: 2.5rem; /* Increased gap */
+    padding: 80px 15px; /* More vertical padding */
 }
 
-h1, h2, h3, h4 {
-    color: #333;
+/* Simplified Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Modern heading font */
+    color: var(--text-color);
     line-height: 1.3;
+    font-weight: 600; /* Slightly bolder headings */
+    margin-bottom: 1rem; /* Default bottom margin */
 }
 
 h1 {
-    font-size: 2.8rem; /* Example size */
+    font-size: 2.5rem; /* Adjusted sizes for better hierarchy */
+    font-weight: 700;
 }
 
 h2 {
@@ -59,50 +66,62 @@ h2 {
 }
 
 h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.2rem;
 }
 
 a {
+    color: var(--primary-color); /* Links use primary color */
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--text-color); /* Darken link on hover */
 }
 
 ul {
     list-style: none;
+    padding-left: 0; /* Remove default padding */
 }
 
 img {
     max-width: 100%;
     height: auto;
     display: block;
+    border-radius: 4px; /* Subtle rounding for images */
 }
 
 .alt-bg {
-     background: linear-gradient(to bottom, #fffaf0, #fef5e7); /* Creamy gradient */
+     background-color: var(--background-alt); /* Use light grey variable */
 }
 
+/* Remove or Update Old Section Title Styles if no longer needed */
+/* Keep if needed, but consider simplifying */
 .section-title {
     margin-bottom: 0.5rem;
-    font-family: 'Merriweather', serif;
+    font-family: 'Poppins', sans-serif; /* Use new heading font */
     color: var(--text-color);
+    font-weight: 600;
+    font-size: 1.1rem; /* Example adjustment */
+    text-transform: uppercase; /* Example style */
+    letter-spacing: 0.5px;
 }
 
 .section-subtitle {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem; /* More space below subtitle */
     color: var(--text-light);
     font-size: 1.1rem;
+    max-width: 600px; /* Limit width for readability */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* --- Hero Section & Navigation --- */
-.hero-section {
-    height: 70vh; /* Adjust height as needed */
-    min-height: 500px;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/1600x900/?food,cooking') no-repeat center center/cover;
-    position: relative;
-    display: flex;
-    flex-direction: column; /* Stack nav and content */
-    color: #fff;
-}
+/* --- Feature Sections --- */
+.feature-section .feature-text,
 
 .hero-section::before {
     content: '';
@@ -113,152 +132,237 @@ img {
 }
 
 .main-nav {
-    position: absolute; /* Position nav over the image */
+    position: sticky; /* Make nav sticky */
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1001; /* Above overlay */
-    padding: 1rem 0;
+    z-index: 1000;
+    padding: 0.8rem 0; /* Adjust padding */
     background-color: var(--white);
-    box-shadow: var(--shadow);
-    transition: background-color 0.3s ease;
+    border-bottom: 1px solid var(--border-color); /* Use border instead of shadow for minimalism */
+    transition: padding 0.3s ease;
 }
+
+/* Optional: Add a subtle shadow on scroll */
+/* .main-nav.scrolled {
+    box-shadow: var(--shadow);
+    padding: 0.6rem 0;
+} */
 
 .nav-container {
     width: 90%;
-    max-width: 1200px;
-    margin: auto;
+    max-width: 1140px; /* Match container */
+    margin: 0 auto; /* Center container */
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .main-nav .logo {
-    font-family: 'Merriweather', serif;
-    font-size: 1.8rem;
+    font-family: 'Poppins', sans-serif; /* Use heading font */
+    font-size: 1.6rem; /* Adjusted size */
     font-weight: 700;
+    color: var(--text-color); /* Darker logo text */
+    text-transform: uppercase; /* Optional: Style */
+    letter-spacing: 1px;
+}
+
+.main-nav .logo span { /* Optional: Highlight part of the logo */
     color: var(--primary-color);
 }
 
 .main-nav ul {
     display: flex;
+    align-items: center; /* Align links vertically */
 }
 
 .main-nav ul li {
-    margin-left: 1.5rem;
+    margin-left: 2rem; /* Increased spacing */
+}
+
+.main-nav ul li:first-child {
+    margin-left: 0;
 }
 
 .main-nav ul li a {
-    color: var(--text-color);
-    padding: 0.5rem;
+    color: var(--text-light); /* Lighter color for links */
+    padding: 0.5rem 0.2rem; /* Adjust padding */
     font-weight: 500;
+    font-size: 0.95rem;
     position: relative;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
-.main-nav ul li a:hover {
+.main-nav ul li a:hover,
+.main-nav ul li a.active { /* Style for active page link */
     color: var(--primary-color);
 }
 
-.main-nav ul li a::after {
+/* Remove underline effect or simplify it */
+/* .main-nav ul li a::after {
     content: '';
     position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: -4px; 
+    left: 0;
     width: 0;
     height: 2px;
     background-color: var(--primary-color);
     transition: width 0.3s ease;
 }
 
-.main-nav ul li a:hover::after {
+.main-nav ul li a:hover::after,
+.main-nav ul li a.active::after {
     width: 100%;
+} */
+
+/* Consider adding a Login/Signup Button */
+.nav-cta-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-left: 2rem;
+    display: inline-block;
+}
+
+.nav-cta-button:hover {
+    background-color: var(--text-color); /* Darken on hover */
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+/* --- Simplified Hero Section --- */
+.hero-section {
+    background-color: var(--background-alt); /* Light grey background */
+    padding: 80px 0; /* Generous padding */
+    min-height: auto; /* Remove fixed height */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    text-align: center;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2; 
-    text-align: center;
-    margin: auto; 
-    padding: 2rem;
+    max-width: 700px; /* Control content width */
+    margin: 0 auto; /* Center horizontally */
+    padding: 0 15px; /* Horizontal padding */
+    position: relative; /* Keep if needed for other elements */
+    z-index: 2; /* Keep if needed */
 }
 
 .hero-content h1 {
-    font-family: 'Merriweather', serif;
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-family: 'Poppins', sans-serif; /* Ensure heading font */
+    font-size: 3rem; /* Slightly larger H1 */
+    font-weight: 700;
+    color: var(--primary-color); /* Use primary color for heading */
+    margin-bottom: 1rem; /* Space below heading */
+    text-shadow: none; /* Remove text shadow */
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
-    color: #eee;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    font-size: 1.15rem; /* Slightly larger paragraph */
+    color: var(--text-light); /* Use light text color */
+    max-width: 550px; /* Limit paragraph width */
+    margin: 0 auto 2rem auto; /* Center and add space below */
+    line-height: 1.8; /* Increase line height */
+    text-shadow: none; /* Remove text shadow */
 }
 
+/* Optional: Add a CTA button style if you add a button in HTML */
+.hero-cta-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+    text-transform: none; /* Ensure no accidental uppercase */
+}
+
+.hero-cta-button:hover {
+    background-color: var(--text-color); /* Darken on hover */
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Simplify or Remove Small Hero */
 .hero-section-small {
-    height: 40vh;
-    min-height: 300px;
-    background: url('https://source.unsplash.com/1600x900/?kitchen,food') no-repeat center center/cover;
+    background-color: var(--background-alt); /* Consistent background */
+    padding: 60px 0; /* Adjust padding */
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    /* Remove background image reference if any */
 }
 
+/* Reuse .hero-content styles, just override specifics */
 .hero-section-small .hero-content h1 {
-    font-size: 2.5rem;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 2.2rem; /* Smaller H1 for small hero */
+    color: var(--primary-color);
+    text-shadow: none;
+    margin-bottom: 0.8rem;
 }
-
 .hero-section-small .hero-content p {
-    font-size: 1.2rem;
-    color: #eee;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: 1.1rem;
+    color: var(--text-light);
+    text-shadow: none;
+    margin-bottom: 1.5rem;
 }
 
 .search-section {
-    padding: 3rem 0;
-    background: linear-gradient(to bottom, #fff, #fffaf0); /* Slight gradient */
+    padding: 40px 0; /* Reduced padding */
+    background-color: var(--background-light); /* Use standard background */
     display: flex;
     justify-content: center;
+    border-bottom: 1px solid var(--border-color);
 }
 
 #search-form {
     display: flex;
-    width: 70%;
-    max-width: 600px;
-    background-color: #fff;
-    border-radius: 50px; /* Pill shape */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 100%; /* Use more width */
+    max-width: 650px; /* Increase max width slightly */
+    background-color: var(--white);
+    border-radius: 8px; /* Less pronounced rounding */
+    border: 1px solid var(--border-color);
+    box-shadow: none; /* Remove shadow */
     overflow: hidden;
 }
 
 #search-input {
     flex-grow: 1;
     border: none;
-    padding: 1rem 1.5rem;
+    padding: 0.9rem 1.2rem; /* Adjust padding */
     font-size: 1rem;
     outline: none;
+    color: var(--text-color);
+    background-color: transparent;
+}
+
+#search-input::placeholder {
+    color: var(--text-light);
+    opacity: 0.8;
 }
 
 #search-form button {
     border: none;
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 0 1.5rem;
+    padding: 0 1.8rem; /* More horizontal padding */
     cursor: pointer;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
+    font-size: 1rem; /* Match input */
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    border-left: 1px solid var(--border-color); /* Subtle separator */
 }
 
 #search-form button:hover {
-    background-color: var(--primary-dark);
+    background-color: #e66900; /* Darker shade of primary */
 }
 
 /* --- Feature Sections --- */
@@ -291,104 +395,123 @@ img {
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* --- Trending Recipes --- */
-.trending-recipes {
+/* --- Trending Recipes / Recipe Grid --- */
+.trending-recipes, /* Apply common padding if needed */
+.recipe-listing {  /* Apply common padding if needed */
     padding: 60px 0;
 }
 
-.trending-grid {
+.trending-grid,
+.recipe-grid { /* Style both grids similarly */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: 2rem; /* Consistent gap */
+    /* Remove specific trending grid layout rules */
 }
 
-/* Reusing/Adapting Recipe Card Styles */
-.recipe-card-trending {
-    background: #fff;
-    border-radius: 10px;
+/* Unified Recipe Card Style */
+.recipe-card {
+    background-color: var(--white);
+    border-radius: 8px; /* Match other border radius */
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border: 1px solid var(--border-color);
     display: flex;
-    flex-direction: column; /* Stack image and info */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* Remove underline if card is a link */
+    height: 100%; /* Ensure cards in a row have same height */
 }
 
-.recipe-card-trending:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+.recipe-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06); /* Slightly stronger shadow on hover */
 }
 
-/* Specific adjustments for the layout in the image */
-.trending-grid {
-    grid-template-columns: 2fr 1fr; /* Example: larger first column */
-    grid-template-rows: auto auto; /* Define rows */
-    gap: 1.5rem;
-}
+/* Remove specific trending card styles like :nth-child(), .small-card */
+/* .recipe-card-trending { ... } */
+/* .recipe-card-trending:hover { ... } */
+/* .trending-grid { grid-template-columns: 2fr 1fr ... } */
+/* .recipe-card-trending:nth-child(1) { ... } */
+/* ... etc ... */
 
-.recipe-card-trending:nth-child(1) {
-    grid-row: 1 / 3; /* Span two rows */
-    grid-column: 1 / 2;
-}
-
-.recipe-card-trending:nth-child(2) {
-    grid-row: 1 / 2;
-    grid-column: 2 / 3;
-}
-
-.recipe-card-trending:nth-child(3) {
-    grid-row: 2 / 3;
-    grid-column: 2 / 3;
-}
-
-.recipe-card-trending img {
+.recipe-card .recipe-image {
     width: 100%;
-    height: 300px; /* Default height */
-    object-fit: cover;
+    height: 200px; /* Standard image height */
+    overflow: hidden;
+    position: relative; /* For potential badges/icons */
 }
 
-.recipe-card-trending:nth-child(1) img {
-     height: 500px; /* Taller image for the large card */
-}
-
-.recipe-card-trending.small-card img {
-    height: 200px; /* Shorter images for small cards */
-}
-
-.recipe-card-trending .recipe-info {
-    padding: 1.5rem;
-}
-
-.recipe-card-trending h3 {
-    font-family: 'Merriweather', serif;
-    margin-bottom: 0.5rem;
-    font-size: 1.3rem;
-    color: #4f4a41;
-}
-
-.recipe-card-trending p {
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 1rem;
-}
-
-.recipe-link {
-    color: #e67e22;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.recipe-link i {
-    margin-left: 5px;
+.recipe-card .recipe-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the area */
     transition: transform 0.3s ease;
+    border-radius: 0; /* Remove img radius if card has one */
 }
 
-.recipe-link:hover {
-    color: #d35400;
+.recipe-card:hover .recipe-image img {
+    transform: scale(1.05); /* Subtle zoom on hover */
 }
 
-.recipe-link:hover i {
-    transform: translateX(3px);
+.recipe-card .recipe-content { /* Renamed from recipe-info */
+    padding: 1rem 1.2rem; /* Adjust padding */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow content to fill space */
 }
+
+.recipe-card h3 {
+    font-family: 'Poppins', sans-serif; /* Heading font */
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem; /* Adjusted size */
+    color: var(--text-color);
+    line-height: 1.4;
+    /* Remove fixed height if any */
+}
+
+.recipe-card h3 a {
+    color: inherit; /* Make heading link inherit color */
+    text-decoration: none;
+}
+
+.recipe-card h3 a:hover {
+    color: var(--primary-color);
+}
+
+.recipe-card p { /* Style for short description */
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    flex-grow: 1; /* Push footer to bottom */
+}
+
+.recipe-card .recipe-meta { /* For things like time, difficulty */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: auto; /* Push to bottom */
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.recipe-card .recipe-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.recipe-card .recipe-meta i { /* Style for icons */
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+/* Remove old .recipe-link style */
+/* .recipe-link { ... } */
+/* .recipe-link i { ... } */
+/* .recipe-link:hover { ... } */
 
 /* --- What is New Section --- */
 .what-is-new {
@@ -428,118 +551,114 @@ img {
 
 /* --- Footer --- */
 .main-footer {
-    background-color: var(--white);
-    color: var(--text-color);
-    padding: 60px 0 20px;
-    border-top: 1px solid var(--background-alt);
-    margin-top: auto;
+    background-color: var(--background-alt); /* Light grey background */
+    color: var(--text-light); /* Use light text color as base */
+    padding: 50px 0 30px; /* Adjusted padding */
+    border-top: 1px solid var(--border-color); /* Use main border color */
+    margin-top: auto; /* Push to bottom */
     width: 100%;
-    position: relative;
-    bottom: 0;
+    /* Remove position relative/bottom if not needed */
+}
+
+.footer-container { /* Use a container for consistent width */
+    width: 90%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.footer-about {
-    max-width: 350px;
+    /* Simple 4 column layout on large screens */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; /* Adjust gap */
+    margin-bottom: 3rem; /* Space before bottom text */
+    /* Remove max-width/margin/padding here, handled by .footer-container */
 }
 
 .footer-about .logo {
-    font-family: 'Merriweather', serif;
-    font-size: 1.8rem;
+    font-family: 'Poppins', sans-serif; /* Match nav logo */
+    font-size: 1.5rem; /* Adjusted size */
     font-weight: 700;
-    color: var(--primary-color);
-    display: block;
+    color: var(--text-color); /* Darker text */
+    text-transform: uppercase; /* Match nav */
+    letter-spacing: 1px;
     margin-bottom: 1rem;
-    text-decoration: none;
-}
-
-.footer-about p {
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-links a {
-    color: var(--text-light);
-    font-size: 1.4rem;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--background-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.social-links a:hover {
-    color: var(--primary-color);
-    background-color: var(--background-alt);
-    transform: translateY(-2px);
-}
-
-.footer-links h4 {
-    font-family: 'Merriweather', serif;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
-    font-size: 1.1rem;
-}
-
-.footer-links ul li {
-    margin-bottom: 0.8rem;
-}
-
-.footer-links ul li a {
-    color: var(--text-light);
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
 }
 
+.footer-about .logo span { /* Optional highlight */
+    color: var(--primary-color);
+}
+
+.footer-about p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.8rem; /* Slightly reduced gap */
+}
+
+.social-links a {
+    color: var(--text-light);
+    font-size: 1.2rem; /* Slightly smaller icons */
+    transition: color 0.2s ease;
+    /* Remove background/border/size - simpler look */
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+    /* Remove background/transform changes */
+}
+
+.footer-links h4 {
+    font-family: 'Poppins', sans-serif; /* Heading font */
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color); /* Darker heading */
+    font-size: 1rem;
+}
+
+.footer-links ul li {
+    margin-bottom: 0.6rem; /* Adjust spacing */
+}
+
+.footer-links ul li a {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
 .footer-links ul li a:hover {
     color: var(--primary-color);
-    transform: translateX(3px);
+    /* Remove transform */
 }
 
 .footer-bottom {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 2rem 0;
+    /* Max-width/margin/padding handled by .footer-container */
     text-align: center;
-    border-top: 1px solid var(--background-alt);
-    margin-top: 40px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
-/* Footer Responsive Adjustments */
+/* Footer Responsive Adjustments (Simplified) */
 @media (max-width: 992px) {
     .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+        grid-template-columns: 1fr 1fr; /* 2 columns */
+        gap: 2.5rem;
     }
-
     .footer-about {
-        grid-column: 1 / -1;
-        max-width: none;
+        grid-column: 1 / -1; /* Span full width */
         text-align: center;
     }
-
     .social-links {
         justify-content: center;
     }
@@ -547,40 +666,19 @@ img {
 
 @media (max-width: 576px) {
     .footer-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* 1 column */
         text-align: center;
     }
-
     .footer-links {
-        margin-top: 1rem;
+        margin-top: 1.5rem;
     }
-
     .footer-links ul li a {
-        display: inline-block;
-        padding: 0.5rem;
-    }
-
-    .main-footer {
-        padding: 40px 0 20px;
+        padding: 0.3rem 0; /* Adjust touch target */
     }
 }
 
-/* Phone Support Link */
-.footer-links a[href^="tel:"] {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--color-primary);
-    transition: color 0.3s ease;
-}
-
-.footer-links a[href^="tel:"]:hover {
-    color: var(--color-primary-dark);
-}
-
-.footer-links a[href^="tel:"] i {
-    font-size: 1.1rem;
-}
+/* Remove or update specific Phone link styles if needed */
+/* .footer-links a[href^="tel:"] { ... } */
 
 /* --- Utility Classes (Keep or adapt from previous) --- */
 .text-center {
@@ -652,468 +750,6 @@ img {
         margin-right: 0;
     }
 } 
-
-/* Remove old Auth Page Styles if they are defined above */
-/* Ensure Auth page styles don't conflict if they were added below originally */
-/* --- Auth Page Styling (Login/Signup) --- */
-
-.auth-page {
-    /* Override default body padding and background */
-    padding-top: 0;
-    background: linear-gradient(135deg, #FF9F1C 0%, #FFBF69 100%);
-    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
-    color: #2D2D2D; /* Dark brown text color */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-}
-
-.auth-container {
-    /* Overrides default .container width/padding */
-    width: 90%;
-    max-width: 1200px; /* Max width for the two-column layout */
-    margin: auto;
-    padding: 0; /* Remove padding from default container */
-    overflow: visible; /* Allow box shadow to show */
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center items vertically */
-    gap: 4rem;
-}
-
-/* Specific layout for signup page (two columns) */
-.signup-layout {
-    justify-content: space-between;
-}
-
-.auth-welcome-text {
-    flex: 1;
-    color: #2D2D2D; /* Dark brown text */
-    text-align: left;
-    padding-right: 2rem; /* Space between text and form */
-}
-
-.auth-welcome-text h1 {
-    font-family: 'Merriweather', serif; /* Apply Merriweather font */
-    font-size: 4rem; 
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-.auth-welcome-text p {
-    font-size: 1.25rem;
-}
-
-/* Shared form container styling for auth pages */
-.auth-form-container {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 24px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-/* Login container specific adjustments (centered) */
-.login-container {
-     max-width: 400px; /* Limit width of login form */
-     margin: auto; /* Center the login form */
-}
-
-/* Signup container specific adjustments */
-.signup-container {
-    flex-basis: 45%; /* Adjust width as needed */
-}
-
-.auth-form-container h2 {
-    font-family: 'Merriweather', serif;
-    text-align: left; /* Align form headers left */
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #2D2D2D; /* Dark brown heading */
-}
-
-/* Overrides general form styling for auth pages */
-.auth-page .form-group label {
-    display: block;
-    margin-bottom: 0.3rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #2D2D2D; /* Slightly lighter brown for labels */
-}
-
-.auth-page .form-group input[type="text"],
-.auth-page .form-group input[type="email"],
-.auth-page .form-group input[type="password"] {
-    background: #FFF5E6; /* White input background */
-    border: 1px solid #E5E5E5; /* Lighter border */
-    border-radius: 8px; /* Rounded inputs */
-    padding: 0.75rem;
-    font-size: 1rem;
-    color: #2D2D2D;
-}
-
-.auth-page .form-group input::placeholder {
-    color: #888; /* Placeholder color */
-}
-
-/* Specific Button Styling for Auth Pages */
-.auth-page .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px; /* Rounded buttons */
-    font-weight: 500;
-    text-transform: none; /* No uppercase */
-    font-size: 1rem;
-    transition: background-color 0.2s, transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    margin-top: 10px;
-}
-
-.auth-page .btn-primary {
-    background-color: #FF9F1C; 
-    color: white;
-    border: none;
-}
-
-.auth-page .btn-primary:hover {
-    background-color: #FF8F00; 
-    transform: translateY(-1px);
-}
-
-/* Login page specific: 'Don't have an account?' */
-.auth-switch {
-    margin-top: 1.5rem;
-    text-align: center;
-    font-size: 0.9rem;
-    display: flex; /* Align items inline */
-    align-items: center;
-    justify-content: center; 
-    gap: 0.5rem; /* Space between text and button */
-}
-
-.auth-switch span {
-    color: #2D2D2D;
-}
-
-.auth-page .btn-secondary {
-    background-color: transparent;
-    color: #FF9F1C;
-    border: 2px solid #FF9F1C;
-    padding: 0.6rem 1.2rem; /* Smaller padding for secondary button */
-    font-size: 0.9rem;
-}
-
-.auth-page .btn-secondary:hover {
-    background-color: rgba(255, 159, 28, 0.1);
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .signup-layout {
-        flex-direction: column; /* Stack elements vertically */
-        text-align: center;
-    }
-
-    .auth-welcome-text {
-        padding-right: 0;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-
-    .auth-welcome-text h1 {
-        font-size: 3rem;
-    }
-
-    .auth-form-container {
-        width: 100%;
-        max-width: 450px; /* Limit form width on small screens */
-        margin: 0 auto; /* Center form */
-        padding: 2rem 1.5rem;
-    }
-
-    .login-container {
-         padding: 2rem 1.5rem;
-    }
-}
-
-/* --- About Page Styling --- */
-.about-section {
-    text-align: center;
-    padding: 3rem 1rem;
-}
-
-.about-section h1, .about-section h2, .about-section h3 {
-    margin-bottom: 1rem;
-    color: #4f4a41;
-}
-
-.about-section p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #666;
-    margin-bottom: 1.5rem;
-}
-
-.about-section ul {
-    list-style: disc;
-    margin: 1rem auto;
-    padding-left: 2rem;
-    text-align: left;
-}
-
-.about-section ul li {
-    margin-bottom: 0.5rem;
-    color: #444;
-}
-
-/* --- Recipe Details Page Specific Styles --- */
-.recipe-details {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    margin-top: 2rem; /* Add space below nav */
-    margin-bottom: 2rem;
-}
-
-.recipe-image-large {
-    width: 100%;
-    height: auto;
-    max-height: 450px; /* Limit image height */
-    object-fit: cover; /* Ensure image covers the area well */
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-}
-
-.recipe-details h2 {
-    font-family: 'Merriweather', serif;
-    font-size: 2.2rem;
-    color: #333;
-    margin-bottom: 0.5rem;
-}
-
-.recipe-details p strong {
-    font-weight: 500;
-    color: #555;
-}
-
-.recipe-details section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #eee;
-}
-
-.recipe-details h3 {
-    font-family: 'Merriweather', serif;
-    font-size: 1.5rem;
-    color: #4f4a41; /* Consistent section title color */
-    margin-bottom: 1rem;
-}
-
-.recipe-ingredients ul {
-    list-style: disc; /* Use standard bullets */
-    margin-left: 1.5rem; /* Indent list */
-    padding-left: 0.5rem;
-}
-
-.recipe-ingredients ul li {
-    margin-bottom: 0.5rem;
-    color: #555;
-}
-
-.recipe-instructions p {
-    line-height: 1.7;
-    color: #444;
-}
-
-.recipe-actions {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #eee;
-    display: flex;
-    gap: 1rem; /* Space between buttons */
-    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
-}
-
-/* Use existing btn styles, but ensure consistent spacing */
-.recipe-actions .btn {
-    padding: 0.8rem 1.5rem;
-    font-size: 0.95rem;
-}
-
-/* Style for the link-based button */
-.recipe-actions a.btn {
-    display: inline-block; /* Make link behave like a button visually */
-    text-align: center;
-}
-
-/* Danger button specific adjustments if needed */
-.recipe-actions .btn-danger {
-     background-color: #e74c3c; /* Example danger color */
-     border-color: #e74c3c;
-}
-
-.recipe-actions .btn-danger:hover {
-    background-color: #c0392b;
-    border-color: #c0392b;
-}
-
-/* --- Contact Page Styles --- */
-.contact-section,
-.faq-section,
-.support-section {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    margin-bottom: 2rem;
-}
-
-.contact-section h2,
-.faq-section h2,
-.support-section h2 {
-    font-family: 'Merriweather', serif;
-    color: #333;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-}
-
-/* Contact Form Styles */
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-form .form-group {
-    margin-bottom: 1.5rem;
-}
-
-.contact-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #555;
-    font-weight: 500;
-}
-
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    color: #333;
-    transition: border-color 0.3s ease;
-}
-
-.contact-form input:focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-    border-color: #f39c12;
-    outline: none;
-}
-
-.contact-form button {
-    width: 100%;
-    padding: 1rem;
-    background-color: #f39c12;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.contact-form button:hover {
-    background-color: #e67e22;
-}
-
-/* FAQ Section Styles */
-.faq-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-.faq-item {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 6px;
-    transition: transform 0.3s ease;
-}
-
-.faq-item:hover {
-    transform: translateY(-5px);
-}
-
-.faq-item h3 {
-    color: #333;
-    font-size: 1.2rem;
-    margin-bottom: 0.8rem;
-    font-weight: 600;
-}
-
-.faq-item p {
-    color: #666;
-    line-height: 1.6;
-}
-
-/* Support Section Styles */
-.support-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-.support-item {
-    text-align: center;
-    padding: 2rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.support-item:hover {
-    transform: translateY(-5px);
-}
-
-.support-item i {
-    font-size: 2.5rem;
-    color: #f39c12;
-    margin-bottom: 1rem;
-}
-
-.support-item h3 {
-    color: #333;
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
-}
-
-.support-item p {
-    color: #666;
-    margin-bottom: 0.5rem;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .faq-grid,
-    .support-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-form {
-        padding: 0 1rem;
-    }
-
-    .support-item {
-        padding: 1.5rem;
-    }
-}
 
 /* --- Enhanced Recipe Page Styles --- */
 .recipe-header {
@@ -1692,66 +1328,184 @@ img {
     padding: 0 0.5rem;
 }
 
-/* Favorites Page Specific Styles */
-.favorite-btn.active {
-    background-color: var(--primary-color);
-    color: var(--white);
-}
-
-.favorite-btn.active i {
-    color: white;
-}
-
-.favorite-btn.active:hover {
-    background-color: var(--primary-dark);
-    transform: scale(1.1);
-}
-
-/* Empty Favorites State */
-.empty-favorites {
-    text-align: center;
-    padding: 4rem 0;
-    background-color: var(--color-light);
-    border-radius: 12px;
-    margin: 2rem 0;
-}
-
-.empty-favorites i {
-    font-size: 4rem;
-    color: var(--color-text-light);
-    margin-bottom: 1.5rem;
-}
-
-.empty-favorites h3 {
-    color: var(--color-text);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.empty-favorites p {
-    color: var(--color-text-light);
-    margin-bottom: 2rem;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.empty-favorites .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--primary-color);
-    color: var(--white);
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.empty-favorites .btn:hover {
-    background-color: var(--primary-dark);
-}
-
 main {
     flex: 1;
+}
+
+/* === Buttons === */
+
+/* Base Button Style */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Center text/icon */
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem; /* Adjusted padding */
+    border-radius: 6px; /* Slightly rounded corners */
+    font-weight: 500;
+    font-size: 0.95rem; /* Slightly smaller font */
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    border: 1px solid transparent; /* Base border */
+    text-decoration: none; /* Ensure no underline */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* Subtle lift */
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #e66900; /* Darker primary */
+    border-color: #e66900;
+    color: var(--white);
+}
+
+/* Secondary Button (Outline Style) */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-light); /* Light primary background on hover */
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Optional: Tertiary/Link Button */
+.btn-link {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: transparent;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.btn-link:hover {
+    color: var(--text-color);
+    background-color: var(--background-alt); /* Subtle background */
+    transform: none; /* No lift for link buttons */
+}
+
+/* Adjustments for buttons inside specific contexts if needed */
+.recipe-actions .btn {
+    /* Keep existing flex properties if needed */
+    /* Adjust padding or size if necessary for this context */
+}
+
+.recipe-actions .btn i {
+    /* Keep icon style */
+    font-size: 1.1rem; /* Keep or adjust */
+}
+
+
+/* Remove old specific button styles if they conflict */
+/* e.g., remove old .recipe-actions .btn background/color */
+
+/* === Forms === */
+
+.form-group {
+    margin-bottom: 1.5rem; /* Space between form groups */
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="number"],
+textarea,
+select {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1rem; /* Standard padding */
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--white);
+    background-clip: padding-box;
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Match button radius */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none; /* Remove default mobile styling */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem var(--primary-light); /* Subtle focus ring */
+}
+
+textarea {
+    min-height: 120px; /* Default textarea height */
+    resize: vertical; /* Allow vertical resize */
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); /* Minimalist arrow */
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px 12px;
+    padding-right: 3rem; /* Space for arrow */
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-light);
+    opacity: 0.7;
+}
+
+/* Optional: Style for checkboxes/radio buttons */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.form-check input[type="checkbox"],
+.form-check input[type="radio"] {
+    width: auto;
+    margin-right: 0.5rem;
+    appearance: auto; /* Use default appearance for these */
+}
+
+.form-check label {
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+/* Error message styling */
+.error-message {
+    color: #dc3545; /* Standard error color */
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
 }
