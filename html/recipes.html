@@ -3,225 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoodX - All Recipes</title>
+    <title>FoodX - Recipes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/recipes.css">
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                 <img src="../images/foodx_logo.png" alt="FoodX Logo">
-             </a>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="recipes.html" class="active">Recipes</a></li>
-                <li><a href="favorites.html">My Favorites</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </div>
-    </nav>
-    <header class="hero-section hero-section-small">
-        <div class="hero-content">
-            <h1>Explore Our Recipes</h1>
-            <p>Discover delicious meals for every occasion</p>
-        </div>
-    </header>
+    <div class="container">
+        <header>
+            <div class="logo">FoodX</div>
+            <div class="nav-menu">
+                <a href="../html/index.html">Home</a>
+                <a href="../htmlrecipes.html" class="active">Recipes</a>
+                <a href="../html/about.html">About</a>
+                <a href="../html/contact.html">Contact</a>
+                <li><a href="../html/profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
+            </div>
+        </header>
 
-    <div class="search-and-filter-section">
-        <div class="container">
-            <form action="#" method="GET" id="search-form" class="enhanced-search">
-                <div class="search-input-group">
-                    <input type="search" id="search-input" name="search" placeholder="Search for a recipe...">
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </div>
-                <div class="filter-options">
-                    <select name="category" id="category-filter">
-                        <option value="">All Categories</option>
-                        <option value="breakfast">Breakfast</option>
-                        <option value="lunch">Lunch</option>
-                        <option value="dinner">Dinner</option>
-                        <option value="desserts">Desserts</option>
-                        <option value="snacks">Snacks</option>
-                    </select>
-                    <select name="cuisine" id="cuisine-filter">
-                        <option value="">All Cuisines</option>
-                        <option value="italian">Italian</option>
-                        <option value="asian">Asian</option>
-                        <option value="mexican">Mexican</option>
-                        <option value="mediterranean">Mediterranean</option>
-                        <option value="indian">Indian</option>
-                    </select>
-                    <select name="diet" id="diet-filter">
-                        <option value="">All Diets</option>
-                        <option value="vegetarian">Vegetarian</option>
-                        <option value="vegan">Vegan</option>
-                        <option value="gluten-free">Gluten-Free</option>
-                        <option value="keto">Keto</option>
-                    </select>
-                    <select name="sort" id="sort-options">
-                        <option value="popular">Most Popular</option>
-                        <option value="recent">Recently Added</option>
-                        <option value="quick">Quick & Easy</option>
-                        <option value="rating">Highest Rated</option>
-                    </select>
-                </div>
-            </form>
+        <div class="tab-nav">
+            <div class="tab active">All recipe</div>
+            <div class="tab">My favorite recipe</div>
+        </div>
+
+        <input type="text" class="search-bar" placeholder="Search for a recipe by name or category...">
+
+        <div class="recipe-grid">
+            <div class="recipe-card">
+                <img src="../images/WhatsApp Image 2025-04-12 at 14.07.31_1696a9db.jpg" alt="Cheese Cake" class="recipe-image">
+                <div class="recipe-title">Cheese Cake</div>
+                <div class="recipe-desc">Creamy dessert with a graham cracker crust.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/shishtawok.jpg " alt="Shish Tawook" class="recipe-image">
+                <div class="recipe-title">Shish Tawook</div>
+                <div class="recipe-desc">Grilled marinated chicken skewers.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/macarons.jpg" alt="Macarons" class="recipe-image">
+                <div class="recipe-title">Macarons</div>
+                <div class="recipe-desc">Sweet and colorful French sandwich cookies.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/salamon.jpg" alt="Salamon" class="recipe-image">
+                <div class="recipe-title">Salamon</div>
+                <div class="recipe-desc">Grilled salmon fillet with lemon and herbs.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/fried rice.jpg" alt="Fried Rice" class="recipe-image">
+                <div class="recipe-title">Fried Rice</div>
+                <div class="recipe-desc">Savory stir-fried rice with vegetables and meat.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/Chicken Wings.jpg" alt="Chicken Wings" class="recipe-image">
+                <div class="recipe-title">Chicken Wings</div>
+                <div class="recipe-desc">Crispy wings glazed with sauce.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/Chocolate Cake.jpg" alt="Chocolate Cake" class="recipe-image">
+                <div class="recipe-title">chocolate cake</div>
+                <div class="recipe-desc">Rich layered chocolate dessert.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/green salad.jpg" alt="Green Salad" class="recipe-image">
+                <div class="recipe-title">Green Salad</div>
+                <div class="recipe-desc">Fresh mix of greens, tomatoes, and veggies.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/noodle.jpg" alt="Ramen" class="recipe-image">
+                <div class="recipe-title">Ramen</div>
+                <div class="recipe-desc">Japanese noodle soup with broth and toppings.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/sezar salad.jpg" alt="Sezar Salad" class="recipe-image">
+                <div class="recipe-title">Sezar Salad</div>
+                <div class="recipe-desc">Classic Caesar salad with chicken and dressing.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/borrito.jpg" alt="Burrito" class="recipe-image">
+                <div class="recipe-title">Burrito</div>
+                <div class="recipe-desc">Tortilla wrapped around seasoned meat and veggies.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="../images/steak.jpg" alt="Steak" class="recipe-image">
+                <div class="recipe-title">Steak</div>
+                <div class="recipe-desc">Juicy grilled steak with vegetables and potatoes.</div>
+            </div>
         </div>
     </div>
 
-    <main>
-        <section id="featured-categories" class="recipe-categories">
-            <div class="container">
-                <h2 class="section-title">Popular Categories</h2>
-                <div class="category-grid">
-                    <a href="#" class="category-card">
-                        <div class="category-icon"><i class="fas fa-egg"></i></div>
-                        <h3>Breakfast</h3>
-                        <span class="recipe-count">42 Recipes</span>
-                    </a>
-                    <a href="#" class="category-card">
-                        <div class="category-icon"><i class="fas fa-hamburger"></i></div>
-                        <h3>Lunch</h3>
-                        <span class="recipe-count">56 Recipes</span>
-                    </a>
-                    <a href="#" class="category-card">
-                        <div class="category-icon"><i class="fas fa-utensils"></i></div>
-                        <h3>Dinner</h3>
-                        <span class="recipe-count">78 Recipes</span>
-                    </a>
-                    <a href="#" class="category-card">
-                        <div class="category-icon"><i class="fas fa-cookie"></i></div>
-                        <h3>Desserts</h3>
-                        <span class="recipe-count">35 Recipes</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="all-recipes" class="recipe-listing">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">All Recipes</h2>
-                    <p class="results-count">Showing 24 of 234 recipes</p>
-                </div>
-                <div class="recipe-grid">
-                    <article class="recipe-card">
-                        <div class="recipe-image">
-                            <img src="../images/Shrimp Noodle Soup.jpg" alt="Shrimp Noodle Soup">
-                            <div class="recipe-badges">
-                                <span class="badge-new">New</span>
-                                <button class="favorite-btn"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                        <div class="recipe-content">
-                            <div class="recipe-meta">
-                                <span><i class="fas fa-clock"></i> 30 min</span>
-                                <span><i class="fas fa-user-friends"></i> 4 servings</span>
-                            </div>
-                            <h3>Shrimp Noodle Soup</h3>
-                            <p>A vibrant bowl of Vietnamese-style noodle soup with fresh shrimp and herbs.</p>
-                            <div class="recipe-tags">
-                                <span class="tag">Asian</span>
-                                <span class="tag">Seafood</span>
-                            </div>
-                            <div class="recipe-footer">
-                                <div class="recipe-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.8 (124)</span>
-                                </div>
-                                <a href="recipe.html" class="view-recipe">View Recipe <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="recipe-card">
-                        <div class="recipe-image">
-                            <img src="../images/Healthy Rice.jpg" alt="Healthy Rice Bowl">
-                            <div class="recipe-badges">
-                                <span class="badge-trending">Trending</span>
-                                <button class="favorite-btn"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                        <div class="recipe-content">
-                            <div class="recipe-meta">
-                                <span><i class="fas fa-clock"></i> 20 min</span>
-                                <span><i class="fas fa-user-friends"></i> 2 servings</span>
-                            </div>
-                            <h3>Healthy Rice Bowl</h3>
-                            <p>Brown rice bowl with roasted vegetables, soft-boiled egg, and tahini dressing.</p>
-                            <div class="recipe-tags">
-                                <span class="tag">Vegetarian</span>
-                                <span class="tag">Healthy</span>
-                            </div>
-                            <div class="recipe-footer">
-                                <div class="recipe-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.6 (98)</span>
-                                </div>
-                                <a href="recipe.html" class="view-recipe">View Recipe <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
-
-                <div class="pagination">
-                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
-                    <button class="pagination-btn active">1</button>
-                    <button class="pagination-btn">2</button>
-                    <button class="pagination-btn">3</button>
-                    <span class="pagination-dots">...</span>
-                    <button class="pagination-btn">12</button>
-                    <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container footer-grid">
-            <div class="footer-about">
-                <a href="index.html" class="logo">FOODX</a>
-                <p>Discover, Cook, and Enjoy.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                FoodX
+                <div class="social-icons">
+                    <span class="social-icon">📘</span>
+                    <span class="social-icon">📱</span>
+                    <span class="social-icon">📺</span>
+                    <span class="social-icon">📷</span>
                 </div>
             </div>
             <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="recipes.html">Recipes</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+                <div class="footer-column">
+                    <h3>Topic</h3>
+                    <p>Page</p>
+                    <p>Page</p>
+                    <p>Page</p>
+                    <p>Page</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Topic</h3>
+                    <p>Page</p>
+                    <p>Page</p>
+                    <p>Page</p>
+                    <p>Page</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Topic</h3>
+                    <p>Page</p>
+                    <p>Page</p>
+                    <p>Page</p>
+                    <p>Page</p>
+                </div>
             </div>
-            <div class="footer-links">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Use</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Follow Us</h4>
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Pinterest</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom text-center">
-            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
         </div>
     </footer>
 </body>
