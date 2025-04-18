@@ -1,0 +1,201 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(120deg, #ffb77c 0%, #fff 100%);
+    min-height: 100vh;
+    margin: 0;
+}
+
+.admin-dashboard-bg {
+    min-height: 100vh;
+    padding: 0;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2.5vw 1.5rem 2.5vw;
+    background: transparent;
+}
+
+.admin-logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #111;
+    margin: 0;
+}
+
+.admin-dashboard-title {
+    font-size: 1.2rem;
+    color: #222;
+    font-weight: 400;
+}
+
+.admin-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2vw 2.5rem 2vw;
+}
+
+.admin-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    justify-content: center;
+}
+
+.admin-nav-card, .admin-stats-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    padding: 2rem 2.5rem 2rem 2.5rem;
+    min-width: 270px;
+    max-width: 340px;
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: #111;
+    text-align: center;
+}
+
+.admin-nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+    align-items: center;
+}
+
+.admin-nav-btn {
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.admin-nav-btn:hover {
+    background: #ffb77c;
+    color: #111;
+    transform: translateY(-2px) scale(1.03);
+}
+
+.admin-stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    font-size: 1.08rem;
+    color: #222;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.admin-activity-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    padding: 1.5rem 2.5rem 2.2rem 2.5rem;
+    margin-bottom: 2.2rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.admin-activity-list {
+    background: #eaeaea;
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    margin-top: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.admin-activity-item {
+    display: flex;
+    align-items: flex-start;
+    font-size: 1.05rem;
+    color: #222;
+    gap: 0.7rem;
+}
+
+.admin-activity-dot {
+    width: 10px;
+    height: 10px;
+    background: #2a7cff;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 0.35em;
+    margin-right: 0.5em;
+}
+
+.admin-add-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.admin-add-btn {
+    background: #ff914d;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    padding: 1.1rem 3.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.admin-add-btn:hover {
+    background: #ffb77c;
+    color: #111;
+    transform: translateY(-2px) scale(1.04);
+}
+
+@media (max-width: 900px) {
+    .admin-sections {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+    .admin-nav-card, .admin-stats-card {
+        max-width: 100%;
+        min-width: 0;
+        padding: 1.5rem 1.2rem;
+    }
+    .admin-activity-card {
+        padding: 1.2rem 1rem 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 1.2rem 1vw 1rem 1vw;
+    }
+    .admin-main {
+        padding: 0 1vw 1.5rem 1vw;
+    }
+    .admin-add-btn {
+        padding: 0.9rem 1.5rem;
+        font-size: 1.05rem;
+    }
+}
