@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/recipes.css">
+    <script src="../js/recipes.js" defer></script>
+    
 </head>
 <body>
     <nav class="main-nav">
@@ -34,10 +36,10 @@
 
     <div class="search-and-filter-section">
         <div class="container">
-            <form action="#" method="GET" id="search-form" class="enhanced-search">
+            <form id="search-form" class="enhanced-search">
                 <div class="search-input-group">
                     <input type="search" id="search-input" name="search" placeholder="Search for a recipe...">
-                    <button type="submit"><i class="fas fa-search"></i></button>
+                    <button id="search_submit_button"><i class="fas fa-search"></i></button>
                 </div>
                 <div class="filter-options">
                     <select name="category" id="category-filter">

@@ -1,4 +1,9 @@
 
+.hidden {
+    display: none;
+}
+
+
 .hero-section-small {
     padding: 0 0 40px;
     background: linear-gradient(to right, #b25f28, #c67942);
@@ -69,7 +74,7 @@
     flex: 1;
     min-width: 300px;
     display: flex;
-    border-radius: 50px;
+    border-radius: 5px;
     overflow: hidden;
     background-color: var(--white);
     box-shadow: var(--shadow);
