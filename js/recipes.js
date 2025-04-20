@@ -373,6 +373,7 @@ searchBarSubmitButton.addEventListener("click", () =>
   })
   
   
+  
 
 
   function renderRecipes(recipes) 
