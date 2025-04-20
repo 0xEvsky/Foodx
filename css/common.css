@@ -102,7 +102,7 @@ img {
 }
 
 .alt-bg {
-     background-color: var(--background-alt); /* Use light grey variable */
+    background-color: var(--background-alt); /* Use light grey variable */
 }
 
 /* Section Headers */
@@ -678,22 +678,22 @@ textarea::placeholder {
     margin-bottom: 3rem !important;
 }
 
-/* Profile Icon */
 .profile-icon {
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(228, 226, 226, 0.9);
     color: var(--text-color);
     text-align: center;
     line-height: 40px;
     transition: all 0.2s ease;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-top: 13px;
 }
 
 .profile-icon:hover {
-    background-color: var(--white);
+    background-color: rgba(228, 226, 226, 0.9);
     color: var(--primary-color);
     transform: scale(1.05);
 }
@@ -701,7 +701,7 @@ textarea::placeholder {
 .profile-icon i {
     font-size: 1.2rem;
     vertical-align: middle;
-    margin-top: -2px;
+    margin-top: -20px;
 }
 
 .profile-icon img {
@@ -709,4 +709,4 @@ textarea::placeholder {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-} 
+}
