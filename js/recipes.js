@@ -7,7 +7,11 @@ const recipes = [
     servings: 4,
     categories: ["lunch", "dinner"],
     cuisine: "asian",
-    diet: []
+    diet: [],
+    badge: "New",
+    rating: 4.8,
+    ratingCount: 124,
+    tags: ["Asian", "Seafood"]
   },
   {
     name: "Healthy Rice Bowl",
@@ -17,7 +21,11 @@ const recipes = [
     servings: 2,
     categories: ["lunch"],
     cuisine: "mediterranean",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "Trending",
+    rating: 4.5,
+    ratingCount: 98,
+    tags: ["Mediterranean", "Vegetarian"]
   },
   {
     name: "Cheese Cake",
@@ -27,7 +35,11 @@ const recipes = [
     servings: 8,
     categories: ["desserts"],
     cuisine: "mediterranean",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "Popular",
+    rating: 4.9,
+    ratingCount: 200,
+    tags: ["Dessert", "Cheesecake"]
   },
   {
     name: "Shish Tawook",
@@ -37,7 +49,11 @@ const recipes = [
     servings: 4,
     categories: ["dinner"],
     cuisine: "mediterranean",
-    diet: []
+    diet: [],
+    badge: "Trending",
+    rating: 4.7,
+    ratingCount: 150,
+    tags: ["Mediterranean", "Chicken"]
   },
   {
     name: "Macarons",
@@ -47,7 +63,11 @@ const recipes = [
     servings: 12,
     categories: ["desserts", "snacks"],
     cuisine: "mediterranean",
-    diet: ["gluten-free"]
+    diet: ["gluten-free"],
+    badge: "New",
+    rating: 4.6,
+    ratingCount: 80,
+    tags: ["Dessert", "French"]
   },
   {
     name: "Salamon",
@@ -57,7 +77,11 @@ const recipes = [
     servings: 2,
     categories: ["lunch", "dinner"],
     cuisine: "mediterranean",
-    diet: ["keto", "gluten-free"]
+    diet: ["keto", "gluten-free"],
+    badge: "Popular",
+    rating: 4.8,
+    ratingCount: 110,
+    tags: ["Seafood", "Healthy"]
   },
   {
     name: "Fried Rice",
@@ -67,7 +91,11 @@ const recipes = [
     servings: 3,
     categories: ["lunch", "dinner"],
     cuisine: "asian",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "",
+    rating: 4.3,
+    ratingCount: 90,
+    tags: ["Asian", "Vegetarian"]
   },
   {
     name: "Chicken Wings",
@@ -77,7 +105,11 @@ const recipes = [
     servings: 4,
     categories: ["snacks", "dinner"],
     cuisine: "mediterranean",
-    diet: []
+    diet: [],
+    badge: "Trending",
+    rating: 4.6,
+    ratingCount: 140,
+    tags: ["Snacks", "Chicken"]
   },
   {
     name: "Chocolate Cake",
@@ -87,7 +119,11 @@ const recipes = [
     servings: 8,
     categories: ["desserts"],
     cuisine: "mediterranean",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "",
+    rating: 4.9,
+    ratingCount: 220,
+    tags: ["Dessert", "Chocolate"]
   },
   {
     name: "Green Salad",
@@ -97,7 +133,11 @@ const recipes = [
     servings: 2,
     categories: ["lunch"],
     cuisine: "mediterranean",
-    diet: ["vegetarian", "gluten-free"]
+    diet: ["vegetarian", "gluten-free"],
+    badge: "",
+    rating: 4.4,
+    ratingCount: 60,
+    tags: ["Healthy", "Vegetarian"]
   },
   {
     name: "Ramen",
@@ -107,7 +147,11 @@ const recipes = [
     servings: 2,
     categories: ["dinner"],
     cuisine: "asian",
-    diet: []
+    diet: [],
+    badge: "New",
+    rating: 4.7,
+    ratingCount: 130,
+    tags: ["Asian", "Soup"]
   },
   {
     name: "Sezar Salad",
@@ -117,7 +161,11 @@ const recipes = [
     servings: 2,
     categories: ["lunch"],
     cuisine: "mediterranean",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "",
+    rating: 4.5,
+    ratingCount: 70,
+    tags: ["Salad", "Vegetarian"]
   },
   {
     name: "Burrito",
@@ -127,7 +175,11 @@ const recipes = [
     servings: 1,
     categories: ["lunch", "dinner"],
     cuisine: "mexican",
-    diet: []
+    diet: [],
+    badge: "",
+    rating: 4.6,
+    ratingCount: 100,
+    tags: ["Mexican", "Wrap"]
   },
   {
     name: "Steak",
@@ -137,7 +189,11 @@ const recipes = [
     servings: 2,
     categories: ["dinner"],
     cuisine: "mediterranean",
-    diet: ["keto"]
+    diet: ["keto"],
+    badge: "",
+    rating: 4.8,
+    ratingCount: 90,
+    tags: ["Beef", "Grilled"]
   },
   {
     name: "Red Sauce Pasta",
@@ -147,7 +203,11 @@ const recipes = [
     servings: 2,
     categories: ["lunch", "dinner"],
     cuisine: "italian",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "",
+    rating: 4.5,
+    ratingCount: 80,
+    tags: ["Italian", "Pasta"]
   },
   {
     name: "Fettuccine",
@@ -157,7 +217,11 @@ const recipes = [
     servings: 2,
     categories: ["dinner"],
     cuisine: "italian",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "",
+    rating: 4.7,
+    ratingCount: 110,
+    tags: ["Italian", "Pasta"]
   },
   {
     name: "Spaghetti",
@@ -167,7 +231,11 @@ const recipes = [
     servings: 3,
     categories: ["dinner"],
     cuisine: "italian",
-    diet: []
+    diet: [],
+    badge: "",
+    rating: 4.6,
+    ratingCount: 120,
+    tags: ["Italian", "Pasta"]
   },
   {
     name: "Shrimp Pasta",
@@ -177,7 +245,11 @@ const recipes = [
     servings: 2,
     categories: ["dinner"],
     cuisine: "italian",
-    diet: []
+    diet: [],
+    badge: "",
+    rating: 4.8,
+    ratingCount: 140,
+    tags: ["Seafood", "Pasta"]
   },
   {
     name: "Cherry Tomato Pasta",
@@ -187,7 +259,11 @@ const recipes = [
     servings: 2,
     categories: ["lunch", "dinner"],
     cuisine: "italian",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "",
+    rating: 4.5,
+    ratingCount: 70,
+    tags: ["Vegetarian", "Pasta"]
   },
   {
     name: "Truffle Parmesan Pasta",
@@ -197,7 +273,11 @@ const recipes = [
     servings: 2,
     categories: ["dinner"],
     cuisine: "italian",
-    diet: ["vegetarian"]
+    diet: ["vegetarian"],
+    badge: "",
+    rating: 4.7,
+    ratingCount: 90,
+    tags: ["Italian", "Truffle"]
   },
   {
     name: "Burger",
@@ -206,14 +286,17 @@ const recipes = [
     time: "30 min",
     servings: 1,
     categories: ["lunch", "dinner"],
-    cuisine: "american", 
-    diet: []
+    cuisine: "american",
+    diet: [],
+    badge: "",
+    rating: 4.6,
+    ratingCount: 150,
+    tags: ["American", "Fast Food"]
   }
 ];
   
 
   
-
 function searchAndFilter() 
 {
   const searchBarInput = document.getElementById("search-input")
@@ -228,19 +311,48 @@ function searchAndFilter()
   const dietFilter = dietFilterSelect.value.toLowerCase()
 
 
-  filterdOnSearch = recipes.filter(
+  filterdResults = recipes.filter(
     recipe => recipe.name.toLowerCase().includes(query)
   )
 
+
+
   if (categoryFilter !== "") {
-    filteredOnCategory = filterdOnSearch.filter(
-      recipe => (recipe.map(
+    filteredOnCategory = filterdResults.filter(
+      recipe => (recipe.categories.map(
         category => category.toLowerCase())).includes(categoryFilter)
+    )
+
+    filterdResults = filterdResults.filter(
+      recipe => filteredOnCategory.includes(recipe))
+  }
+
+  
+
+  if (cuisineFilter !== "") {
+    filteredOnCuisine = filterdResults.filter(
+      recipe => recipe.cuisine.toLowerCase().includes(cuisineFilter)
+    )
+
+    filterdResults = filterdResults.filter(
+      recipe => filteredOnCuisine.includes(recipe)
     )
   }
 
 
-  return filterdOnSearch
+  if (dietFilter !== "") {
+    filteredOnDiet = filterdResults.filter(
+      recipe => (recipe.categories.map(
+        category => category.toLowerCase())).includes(dietFilter)
+    )
+
+    filterdResults = filterdResults.filter(
+      recipe => filteredOnDiet.includes(recipe)
+    )
+  }
+
+
+  return filterdResults
   
 }
 
@@ -288,7 +400,7 @@ searchBarSubmitButton.addEventListener("click", () =>
               <h3>${recipe.name}</h3>
               <p>${recipe.description}</p>
               <div class="recipe-tags">
-                  ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+                  ${recipe.tags.map(tag => `<span class="tag">${tag} </span>`).join("")}
               </div>
               <div class="recipe-footer">
                   <div class="recipe-rating">
