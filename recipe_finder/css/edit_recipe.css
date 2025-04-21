@@ -1,0 +1,13 @@
+#ingredients-group .ingredient-item input[name="ingredient_name[]"] {
+    margin-bottom: 5px;
+}
+
+#ingredients-group .ingredient-item:nth-child(n+2) {
+    margin-top: 10px;
+}
+
+#ingredients-group p {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 5px;
+}

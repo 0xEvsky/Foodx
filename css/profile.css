@@ -69,6 +69,14 @@ h1::after {
     border-radius: 2px;
 }
 
+.par {
+    background-color: #fff; /* Optional: Add a background color for better visibility */
+    padding: 20px; /* Add padding for spacing */
+    border-radius: 8px; /* Optional: Round the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 5px solid #373737; /* Add border color */
+}
+
 .profile-button {
     width: 100%;
     padding: 1.2rem;
@@ -153,7 +161,7 @@ h1::after {
     width: 85px;
     height: 85px;
     background-color: #f8f8f8;
-    border: 2px solid #FF9F1C;
+    border: 2px solid rgb(157, 154, 154);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -164,7 +172,7 @@ h1::after {
 
 .profile-avatar i {
     font-size: 35px;
-    color: #FF9F1C;
+    color: #9d9a9a;
 }
 
 .profile-info h2 {
@@ -207,7 +215,6 @@ h1::after {
     border: 1px solid #FF9F1C;
 }
 
-/* Profile options grid */
 .profile-options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -239,22 +246,21 @@ h1::after {
     font-weight: 500;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .profile-header {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .profile-avatar {
         margin-right: 0;
         margin-bottom: 20px;
     }
-    
+
     .form-section {
         width: 100%;
     }
-    
+
     .profile-options {
         grid-template-columns: 1fr;
     }

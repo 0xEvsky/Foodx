@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FoodX - Discover Recipes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="../images/foodx_logo.png" alt="FoodX Logo">
+            </a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="recipes.html">Recipes</a></li>
+                <li><a href="favorites.html">My Favorites</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to FoodX</h1>
+            <p>Discover, Cook, and Enjoy Delicious Recipes from Around the World!</p>
+        </div>
+    </header>
+
+    <section class="search-section">
+        <form action="#" method="GET" id="search-form">
+            <input type="search" id="search-input" name="search" placeholder="Search for a recipe...">
+            <button type="submit"><i class="fas fa-search"></i></button> 
+        </form>
+    </section>
+
+    <main>
+        <section class="feature-section container-flex alt-bg">
+            <div class="feature-text">
+                <h2>Find Your Perfect Recipe</h2>
+                <p>Search by ingredients, cuisine, or meal type to find the best dish for any occasion.</p>
+            </div>
+            <div class="feature-image">
+                <img src="../images/Perfect_Recipe.png" alt="Person searching for recipes on a tablet">
+            </div>
+        </section>
+
+        <section class="feature-section container-flex">
+             <div class="feature-image">
+                <img src="../images/Cook_with_Confidence.png" alt="Person cooking in a kitchen">
+            </div>
+            <div class="feature-text">
+                <h2>Cook with Confidence</h2>
+                <p>Step-by-step instructions and expert tips to make cooking easy and fun.</p>
+            </div>
+        </section>
+
+        <section id="recipes" class="trending-recipes alt-bg">
+            <div class="container">
+                <h2 class="text-center section-title">Explore Our Recipes</h2>
+                <p class="text-center section-subtitle">Find inspiration for your next meal.</p>
+                <div id="recipe-list" class="trending-grid">
+                    <article class="recipe-card-trending">
+                        <img src="../images/Shrimp Noodle Soup.jpg" alt="Shrimp Noodle Soup">
+                        <div class="recipe-info">
+                             <h3>Shrimp Noodle Soup</h3>
+                             <p>A vibrant bowl of Vietnamese Shrimp Noodle Soup...</p> 
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="recipe-card-trending small-card">
+                         <img src="../images/Healthy Rice.jpg" alt="Healthy Rice Bowl">
+                         <div class="recipe-info">
+                             <h3>Healthy Rice</h3>
+                             <p>Rice With Zucchini, Soft Boiled Egg, and Parsley...</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                     <article class="recipe-card-trending small-card">
+                         <img src="../images/Burger.jpg" alt="Burger">
+                         <div class="recipe-info">
+                            <h3>Burger</h3>
+                             <p>A juicy patty nestled in a toasted bun...</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                     <article class="recipe-card-trending">
+                        <img src="../images/Classic Pasta Dish.jpg" alt="Classic Pasta Dish">
+                        <div class="recipe-info">
+                             <h3>Classic Pasta Dish</h3>
+                             <p>A simple yet elegant pasta with fresh tomatoes and basil.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="recipe-card-trending small-card">
+                         <img src="../images/Summer Salad.jpg" alt="Fresh Summer Salad">
+                         <div class="recipe-info">
+                             <h3>Summer Salad</h3>
+                             <p>A light and refreshing salad perfect for warm days.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                     <article class="recipe-card-trending small-card">
+                         <img src="../images/Chocolate Cake.jpg" alt="Chocolate Cake">
+                         <div class="recipe-info">
+                            <h3>Chocolate Cake</h3>
+                             <p>Decadent and rich chocolate cake for dessert lovers.</p>
+                             <a href="recipe.html" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                         </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="what-is-new">
+            <div class="container">
+                <h2 class="text-center section-title">What is new</h2>
+                 <div class="new-features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-users"></i>
+                        <h3>FoodX Community</h3>
+                        <p>Join other food lovers—share your recipes, reviews, and kitchen experiences.</p>
+                    </div>
+                     <div class="feature-item">
+                        <i class="fas fa-book-open-reader"></i>
+                        <h3>Start Your Cooking Journey Today!</h3>
+                        <p>Sign up now and unlock a world of delicious possibilities.</p>
+                    </div>
+                     <div class="feature-item">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Healthy & Nutritious Choices</h3>
+                        <p>Explore recipes that are not just tasty but also good for your health.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Seasonal & Festive Recipes</h3>
+                        <p>Celebrate every occasion with the perfect dish.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section container">
+            <h2 class="text-center section-title">About FoodX</h2>
+            <p class="text-center section-subtitle">Learn more about our passion for food.</p>
+            <div class="about-content">
+                <p>FoodX is your ultimate destination for discovering, cooking, and sharing delicious recipes from all corners of the globe. Whether you're a seasoned chef or just starting your culinary journey, we provide the tools, inspiration, and community support you need to create amazing meals.</p>
+                <p>Our mission is to make cooking accessible and enjoyable for everyone. We believe that food brings people together, and we're excited to be a part of your kitchen adventures.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="logo">FOODX</a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
