@@ -1,17 +1,17 @@
-/* --- About Page Styling --- */
+body{
+    background: linear-gradient(135deg, #fa9000 0%, #FFF0E0 100%);
+}
+
 .hero-section-small {
     padding: 0 0 40px; /* Remove top padding */
-    background: linear-gradient(to right, #b25f28, #c67942); /* Brown/orange gradient */
     text-align: center;
     position: relative;
 }
 
-/* Remove the before pseudo-element that was adding the overlay */
 .hero-section-small::before {
     display: none;
 }
 
-/* Navigation Adjustments */
 .hero-section-small .main-nav {
     background-color: transparent;
     border-bottom: none;
@@ -101,6 +101,7 @@
 }
 
 .about-section .btn {
+    position: static;
     margin: 1rem auto 2rem;
     display: inline-block;
 }
@@ -115,19 +116,19 @@
     .hero-section-small h1 {
         font-size: 2rem;
     }
-    
+
     .hero-section-small p {
         font-size: 1rem;
     }
-    
+
     .about-section {
         padding: 2rem 1rem;
     }
-    
+
     .about-section h2 {
         font-size: 1.8rem;
     }
-    
+
     .about-section h3 {
         font-size: 1.3rem;
     }
