@@ -132,7 +132,7 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 0.5rem 0; /* Reduced padding */
+    padding: 1.5rem 0;
     background-color: transparent;
     border-bottom: none;
     transition: background-color 0.3s ease;
@@ -157,7 +157,7 @@ img {
 }
 
 .main-nav .logo img {
-    height: 80px; /* Adjusted logo height */
+    height: 120px; /* Set base logo height to large size */
     display: block;
     filter: brightness(0) invert(1); /* Attempt to make the logo white */
 }
@@ -182,7 +182,7 @@ img {
 .main-nav ul li a {
     color: var(--white);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    padding: 0.3rem 0.2rem; /* Reduced padding */
+    padding: 0.5rem 0.2rem;
     font-weight: 500;
     font-size: 0.95rem;
     position: relative;
