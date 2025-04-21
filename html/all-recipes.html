@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Recipes - FoodX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/recipe.css">
+    <style>
+        /* General Body & Font */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 960px; /* Slightly wider for better recipe layout */
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.8em;
+            color: #2d2d2d;
+        }
+        .page-title {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .page-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* Add padding to main content to prevent overlap with fixed/sticky main nav */
+        main.container {
+            padding-top: 100px; /* Increased padding */
+        }
+
+        /* Recipe Navigation (Sticky) */
+        .recipe-navigation {
+            position: sticky;
+            top: 80px; /* Adjusted top position */
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            z-index: 10;
+        }
+        .recipe-navigation h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            color: #e91e63;
+        }
+        .recipe-navigation ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .recipe-navigation li a {
+            display: block;
+            padding: 10px 18px;
+            background: #e0e0e0;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .recipe-navigation li a:hover {
+            background: #e91e63;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Individual Recipe Card Styling */
+        .recipe-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            margin-bottom: 60px;
+            padding: 30px; /* Add padding inside the card */
+            display: none; /* Hide all recipes by default - controlled by JS */
+        }
+        .recipe-card:last-child {
+            border-bottom: none;
+        }
+
+        /* Recipe Header Enhancements */
+        .recipe-header {
+            display: flex;
+            flex-direction: column; /* Stack image above text */
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .recipe-image-large {
+            width: 100%;
+            max-height: 450px; /* Limit image height */
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .recipe-title-section .section-title {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            color: #e91e63; /* Highlight title */
+        }
+        .recipe-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px; /* Row and column gap */
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .recipe-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .recipe-meta i {
+            color: #e91e63;
+        }
+        .recipe-tags .tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .recipe-tags .tag:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Section Styling */
+        .recipe-overview, .recipe-ingredients, .recipe-instructions, .recipe-tips, .recipe-actions, .recipe-reviews {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #eee; /* Dashed separator */
+        }
+        .recipe-card > section:last-of-type {
+             border-bottom: none;
+             margin-bottom: 0;
+             padding-bottom: 0;
+        }
+        .recipe-overview h2, .recipe-ingredients h2, .recipe-instructions h2, .recipe-tips h2, .recipe-reviews h2 {
+            font-size: 1.6em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e91e63;
+            display: inline-block;
+        }
+        .recipe-overview p {
+            color: #444;
+            line-height: 1.7;
+        }
+
+        /* Ingredients Styling */
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .ingredient-group {
+            background: #fdfdfd;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+        .ingredient-group h3 {
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #e91e63;
+        }
+        .ingredient-group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .ingredient-group li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dotted #eee;
+            font-size: 0.95em;
+        }
+        .ingredient-group li:last-child {
+            border-bottom: none;
+        }
+        .ingredient-amount {
+            font-weight: 500;
+            color: #333;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .ingredient-name {
+            color: #555;
+            text-align: right;
+        }
+
+        /* Instructions Styling */
+        .instructions-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .instruction-step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #e91e63;
+        }
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background-color: #e91e63;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        .step-content h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .step-content p {
+            margin: 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Tips Styling */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .tip-item {
+            background: #fff8fA;
+            border: 1px solid #ffe0e9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .tip-item i {
+            font-size: 1.8em;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+        .tip-item h3 {
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #c2185b;
+        }
+        .tip-item p {
+            font-size: 0.9em;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Actions & Reviews Styling */
+        .recipe-actions {
+             display: flex;
+             gap: 15px;
+             flex-wrap: wrap;
+        }
+        .recipe-actions .btn {
+            padding: 10px 20px;
+            border-radius: 20px; /* Pill shape */
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .recipe-actions .btn i {
+            font-size: 0.9em;
+        }
+        .review-stats {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block; /* Fit content */
+        }
+        .rating-average {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .rating-number {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #e91e63;
+        }
+        .stars i {
+            color: #f5c518; /* Gold color for stars */
+            font-size: 1.1em;
+        }
+        .rating-count {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Jump to Top Button */
+        .jump-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e91e63;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .jump-to-top:hover {
+            background: #c2185b;
+            transform: translateY(-3px);
+        }
+
+        /* Single Recipe View Navigation */
+        #single-recipe-view {
+            margin-bottom: 30px; /* Add space below buttons */
+        }
+        .recipe-navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .recipe-navigation-buttons button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .recipe-navigation-buttons button:hover {
+            background: #c2185b;
+        }
+        .recipe-navigation-buttons button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .back-to-all {
+            display: inline-flex; /* Align icon better */
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Section -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="../images/foodx_logo.png" alt="FoodX Logo">
+            </a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="recipes.html">Recipes</a></li>
+                <li><a href="favorites.html">My Favorites</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        <!-- REMOVED: h1.page-title and p.page-description -->
+        
+        <!-- Recipe Navigation -->
+        <div class="recipe-navigation" id="recipe-navigation">
+            <h2>Jump to Recipe:</h2>
+            <ul>
+                <li><a href="#cheesecake" data-recipe="cheesecake">Cheesecake</a></li>
+                <li><a href="#shish-tawook" data-recipe="shish-tawook">Shish Tawook</a></li>
+                <li><a href="#macarons" data-recipe="macarons">Macarons</a></li>
+                <li><a href="#burrito" data-recipe="burrito">Burrito</a></li>
+                <li><a href="#grilled-salmon" data-recipe="grilled-salmon">Grilled Salmon</a></li>
+                <li><a href="#fried-rice" data-recipe="fried-rice">Fried Rice</a></li>
+                <li><a href="#chicken-wings" data-recipe="chicken-wings">Chicken Wings</a></li>
+                <li><a href="#chocolate-cake" data-recipe="chocolate-cake">Chocolate Cake</a></li>
+                <li><a href="#green-salad" data-recipe="green-salad">Green Salad</a></li>
+                <li><a href="#ramen" data-recipe="ramen">Ramen</a></li>
+                <li><a href="#caesar-salad" data-recipe="caesar-salad">Caesar Salad</a></li>
+                <li><a href="#steak" data-recipe="steak">Steak</a></li>
+            </ul>
+        </div>
+        
+        <div id="single-recipe-view" style="display: none;">
+            <a href="#" class="back-to-all" id="back-to-all"><i class="fas fa-arrow-left"></i> Back to all recipes</a>
+            
+            <div class="recipe-navigation-buttons">
+                <button id="prev-recipe" disabled><i class="fas fa-arrow-left"></i> Previous Recipe</button>
+                <button id="next-recipe">Next Recipe <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Cheesecake Recipe -->
+        <article id="cheesecake" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/WhatsApp Image 2025-04-12 at 14.07.31_1696a9db.jpg" alt="Classic Cheesecake" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Classic Cheesecake</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 30 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 55 mins</span>
+                        <span><i class="fas fa-hourglass-half"></i> Cooling Time: 4+ hours</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 12</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: Dessert</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Dessert</span>
+                        <span class="tag">Baking</span>
+                        <span class="tag">Cream Cheese</span>
+                        <span class="tag">Special Occasion</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>A rich and creamy classic cheesecake with a graham cracker crust. This indulgent dessert is perfect for special occasions or when you're craving something truly decadent. The smooth, velvety texture and balanced sweetness will make this a crowd favorite!</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Crust</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">1 1/2 cups</span>
+                                <span class="ingredient-name">Graham cracker crumbs (about 10 crackers)</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">5 tbsp</span>
+                                <span class="ingredient-name">Unsalted butter, melted</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/4 cup</span>
+                                <span class="ingredient-name">Granulated sugar</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/4 tsp</span>
+                                <span class="ingredient-name">Salt</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Filling</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">32 oz (4 blocks)</span>
+                                <span class="ingredient-name">Cream cheese, room temperature</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 1/2 cups</span>
+                                <span class="ingredient-name">Granulated sugar</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/2 cup</span>
+                                <span class="ingredient-name">Sour cream, room temperature</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">2 tsp</span>
+                                <span class="ingredient-name">Vanilla extract</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">4</span>
+                                <span class="ingredient-name">Large eggs, room temperature</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h3>Prepare Pan & Oven</h3>
+                            <p>Preheat oven to 325°F (165°C). Wrap the outside of a 9-inch springform pan with a double layer of heavy-duty aluminum foil.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h3>Make Crust</h3>
+                            <p>In a medium bowl, combine graham cracker crumbs, melted butter, sugar, and salt. Press the mixture firmly into the bottom and about 1 inch up the sides of the prepared springform pan. Bake for 10 minutes, then remove and cool.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h3>Make Filling</h3>
+                            <p>Beat cream cheese until smooth, add sugar and beat well. Add sour cream and vanilla, then eggs one at a time, beating just until incorporated.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Shish Tawook Recipe -->
+        <article id="shish-tawook" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/shishtawok.jpg" alt="Shish Tawook" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Shish Tawook</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 20 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 15 mins</span>
+                        <span><i class="fas fa-hourglass-half"></i> Marinating Time: 3+ hours</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 4</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: Lebanese</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Middle Eastern</span>
+                        <span class="tag">Grilled</span>
+                        <span class="tag">Chicken</span>
+                        <span class="tag">Skewers</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>Shish Tawook is a popular Middle Eastern dish of marinated chicken skewers, grilled to perfection. The marinade, featuring lemon, yogurt, and garlic, creates incredibly tender and flavorful chicken. These skewers are perfect served with rice, salad, or wrapped in pita bread with garlic sauce.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Marinade</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">1/2 cup</span>
+                                <span class="ingredient-name">Plain yogurt</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/4 cup</span>
+                                <span class="ingredient-name">Lemon juice</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/4 cup</span>
+                                <span class="ingredient-name">Olive oil</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">4 cloves</span>
+                                <span class="ingredient-name">Garlic, minced</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">2 tbsp</span>
+                                <span class="ingredient-name">Tomato paste</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 tbsp</span>
+                                <span class="ingredient-name">Paprika</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 tsp</span>
+                                <span class="ingredient-name">Ground cumin</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 tsp</span>
+                                <span class="ingredient-name">Ground coriander</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 tsp</span>
+                                <span class="ingredient-name">Dried oregano</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/2 tsp</span>
+                                <span class="ingredient-name">Ground cinnamon</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/2 tsp</span>
+                                <span class="ingredient-name">Ground black pepper</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 tsp</span>
+                                <span class="ingredient-name">Salt</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>For Skewers</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">2 lbs</span>
+                                <span class="ingredient-name">Boneless, skinless chicken breast, cut into 1.5-inch cubes</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1</span>
+                                <span class="ingredient-name">Large red onion, cut into 1-inch pieces</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">2</span>
+                                <span class="ingredient-name">Bell peppers (red and green), cut into 1-inch pieces</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">8-10</span>
+                                <span class="ingredient-name">Wooden or metal skewers (if using wooden, soak in water for 30 minutes before grilling)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Macarons Recipe -->
+        <article id="macarons" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/macarons.jpg" alt="French Macarons" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Classic French Macarons</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 1 hour</span>
+                        <span><i class="fas fa-hourglass-half"></i> Resting Time: 30-60 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 15-18 mins</span>
+                        <span><i class="fas fa-utensils"></i> Yield: 20-24 macarons</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: French</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Dessert</span>
+                        <span class="tag">Baking</span>
+                        <span class="tag">Gluten-Free</span>
+                        <span class="tag">Challenging</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>Master the art of French macarons with this detailed recipe. These delicate almond meringue cookies are sandwiched with a luscious filling (buttercream shown), known for their smooth shells, ruffled 'feet', and chewy texture. While they require precision, the stunning results are incredibly rewarding.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Macaron Shells</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">1 cup (100g)</span>
+                                <span class="ingredient-name">Almond flour, finely ground</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">3/4 cup (100g)</span>
+                                <span class="ingredient-name">Powdered sugar</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">2</span>
+                                <span class="ingredient-name">Large egg whites (about 70g), room temperature</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/4 tsp</span>
+                                <span class="ingredient-name">Cream of tartar</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/4 cup (50g)</span>
+                                <span class="ingredient-name">Granulated sugar</span>
+                            </li>
+                             <li>
+                                <span class="ingredient-amount">Optional</span>
+                                <span class="ingredient-name">Gel food coloring</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Buttercream Filling (Example)</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">1/2 cup (113g)</span>
+                                <span class="ingredient-name">Unsalted butter, softened</span>
+                            </li>
+                             <li>
+                                <span class="ingredient-amount">1 1/2 cups (180g)</span>
+                                <span class="ingredient-name">Powdered sugar, sifted</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 tsp</span>
+                                <span class="ingredient-name">Vanilla extract</span>
+                            </li>
+                             <li>
+                                <span class="ingredient-amount">1-2 tbsp</span>
+                                <span class="ingredient-name">Milk or cream</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h3>Prepare Dry Ingredients</h3>
+                            <p>Sift almond flour and powdered sugar together into a large bowl 2-3 times to remove lumps and aerate. Discard any large almond pieces.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h3>Whip Egg Whites</h3>
+                            <p>In a separate, very clean bowl, beat egg whites until foamy. Add cream of tartar. Continue beating, gradually adding granulated sugar until stiff, glossy peaks form.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h3>Fold and Pipe</h3>
+                            <p>Fold dry ingredients into egg whites until batter flows like lava. Pipe 1.5-inch circles onto baking sheets and tap to release air bubbles.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <h3>Rest and Bake</h3>
+                            <p>Let shells rest 30-60 minutes until a skin forms. Bake at 300°F for 15-18 minutes. Cool completely before filling.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Burrito Recipe -->
+        <article id="burrito" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/borrito.jpg" alt="Beef and Bean Burrito" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Beef and Bean Burrito</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 15 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 20 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 6</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: Mexican</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Mexican</span>
+                        <span class="tag">Dinner</span>
+                        <span class="tag">Beef</span>
+                        <span class="tag">Comfort Food</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>These hearty beef and bean burritos feature seasoned ground beef, refried beans, and Mexican-style rice wrapped in a warm flour tortilla with melted cheese. Customize with your favorite toppings for a satisfying meal that's perfect for lunch or dinner.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Burrito Filling</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">1 lb</span>
+                                <span class="ingredient-name">Ground beef</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1</span>
+                                <span class="ingredient-name">Medium onion, diced</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">3 cloves</span>
+                                <span class="ingredient-name">Garlic, minced</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1</span>
+                                <span class="ingredient-name">Bell pepper, diced</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">2 tbsp</span>
+                                <span class="ingredient-name">Taco seasoning</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 can (15 oz)</span>
+                                <span class="ingredient-name">Refried beans</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1 cup</span>
+                                <span class="ingredient-name">Cooked rice</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Assembly</h3>
+                        <ul>
+                            <li>
+                                <span class="ingredient-amount">6</span>
+                                <span class="ingredient-name">Large flour tortillas (burrito size)</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">2 cups</span>
+                                <span class="ingredient-name">Shredded cheddar or Mexican blend cheese</span>
+                            </li>
+                            <li>
+                                <span class="ingredient-amount">1/2 cup</span>
+                                <span class="ingredient-name">Sour cream</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h3>Prepare the Filling</h3>
+                            <p>Brown ground beef with onion and bell pepper. Add garlic, taco seasoning, and water. Simmer until thickened.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h3>Warm Components</h3>
+                            <p>Heat refried beans and warm tortillas according to package directions.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h3>Assemble</h3>
+                            <p>Layer beans, beef mixture, rice, cheese, and sour cream on each tortilla. Fold sides in, then roll up tightly.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <h3>Serve or Toast</h3>
+                            <p>Serve immediately or toast in a skillet until crispy. Add toppings as desired.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Grilled Salmon Recipe -->
+        <article id="grilled-salmon" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/salamon.jpg" alt="Grilled Salmon" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Simple Grilled Salmon</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 10 mins</span>
+                        <span><i class="fas fa-hourglass-half"></i> Marinating Time: 15 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 8-12 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 4</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: International</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Healthy</span>
+                        <span class="tag">Seafood</span>
+                        <span class="tag">Quick</span>
+                        <span class="tag">Dinner</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>This simple grilled salmon recipe is perfect for a quick, healthy, and delicious weeknight meal. The salmon is marinated briefly in a flavorful blend of lemon, garlic, and herbs, then grilled to perfection.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Salmon & Marinade</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">4</span> <span class="ingredient-name">Salmon fillets (6 oz each)</span></li>
+                            <li><span class="ingredient-amount">2 tbsp</span> <span class="ingredient-name">Olive oil</span></li>
+                            <li><span class="ingredient-amount">2 tbsp</span> <span class="ingredient-name">Fresh lemon juice</span></li>
+                            <li><span class="ingredient-amount">2 cloves</span> <span class="ingredient-name">Garlic, minced</span></li>
+                            <li><span class="ingredient-amount">1 tsp</span> <span class="ingredient-name">Dried dill</span></li>
+                             <li><span class="ingredient-amount">1/2 tsp</span> <span class="ingredient-name">Salt</span></li>
+                              <li><span class="ingredient-amount">1/4 tsp</span> <span class="ingredient-name">Black pepper</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h3>Marinate Salmon</h3>
+                            <p>Whisk marinade ingredients. Pour over salmon and marinate for 15 minutes.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h3>Grill Salmon</h3>
+                            <p>Preheat grill to medium-high. Grill salmon for 4-6 minutes per side, until cooked through.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h3>Rest and Serve</h3>
+                            <p>Rest salmon for a few minutes before serving. Garnish if desired.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Fried Rice Recipe -->
+        <article id="fried-rice" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/fried rice.jpg" alt="Classic Fried Rice" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Classic Fried Rice</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 15 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 15 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 4</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: Asian</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Quick</span>
+                        <span class="tag">Easy</span>
+                        <span class="tag">Weeknight</span>
+                        <span class="tag">Rice</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>A quick and easy classic fried rice recipe that's perfect for using up leftover rice. This versatile dish can be customized with your favorite protein and vegetables.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Main Ingredients</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">3 tbsp</span> <span class="ingredient-name">Vegetable oil, divided</span></li>
+                            <li><span class="ingredient-amount">2</span> <span class="ingredient-name">Large eggs, beaten</span></li>
+                            <li><span class="ingredient-amount">1 cup</span> <span class="ingredient-name">Cooked protein (chicken, shrimp, etc.)</span></li>
+                            <li><span class="ingredient-amount">1 cup</span> <span class="ingredient-name">Mixed vegetables</span></li>
+                            <li><span class="ingredient-amount">2 cloves</span> <span class="ingredient-name">Garlic, minced</span></li>
+                            <li><span class="ingredient-amount">3 cups</span> <span class="ingredient-name">Cooked, cold rice</span></li>
+                             <li><span class="ingredient-amount">2</span> <span class="ingredient-name">Green onions, sliced</span></li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Sauce/Seasonings</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">3 tbsp</span> <span class="ingredient-name">Soy sauce</span></li>
+                            <li><span class="ingredient-amount">1 tsp</span> <span class="ingredient-name">Sesame oil</span></li>
+                             <li><span class="ingredient-amount">Pinch</span> <span class="ingredient-name">White pepper</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h3>Scramble Eggs</h3>
+                            <p>Scramble eggs in 1 tbsp oil, remove, and set aside.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h3>Cook Protein & Veggies</h3>
+                            <p>Stir-fry protein and veggies in 1 tbsp oil. Add garlic.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h3>Fry Rice</h3>
+                            <p>Push mixture aside, add 1 tbsp oil, fry rice until heated.</p>
+                        </div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <h3>Combine & Season</h3>
+                            <p>Combine all ingredients, add sauces, egg, and green onions. Stir-fry and serve.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Chicken Wings Recipe -->
+        <article id="chicken-wings" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/Chicken Wings.jpg" alt="Chicken Wings" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Crispy Baked Chicken Wings</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 10 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 45-50 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 4-6</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: American</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Chicken</span>
+                        <span class="tag">Appetizer</span>
+                        <span class="tag">Baked</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>Achieve perfectly crispy baked chicken wings using baking powder for super crispy skin, ready for your favorite sauce.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Wings & Coating</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">3 lbs</span> <span class="ingredient-name">Chicken wings, split</span></li>
+                            <li><span class="ingredient-amount">1 tbsp</span> <span class="ingredient-name">Baking powder</span></li>
+                            <li><span class="ingredient-amount">1 tsp</span> <span class="ingredient-name">Salt</span></li>
+                            <li><span class="ingredient-amount">1/2 tsp</span> <span class="ingredient-name">Black pepper</span></li>
+                            <li><span class="ingredient-amount">1/2 tsp</span> <span class="ingredient-name">Garlic powder</span></li>
+                         </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span> <div class="step-content"><h3>Dry & Coat Wings</h3> <p>Pat wings dry. Toss with baking powder, salt, pepper, garlic powder.</p></div>
+                    </div>
+                     <div class="instruction-step">
+                        <span class="step-number">2</span> <div class="step-content"><h3>Arrange & Bake</h3> <p>Place on wire rack over baking sheet. Bake at 250°F for 25 mins, then 425°F for 20-25 mins until crispy.</p></div>
+                    </div>
+                     <div class="instruction-step">
+                        <span class="step-number">3</span> <div class="step-content"><h3>Sauce & Serve</h3> <p>Rest wings 5 mins. Toss with desired sauce (optional) and serve.</p></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Chocolate Cake Recipe -->
+        <article id="chocolate-cake" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/Chocolate Cake.jpg" alt="Chocolate Cake" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Simple Chocolate Cake</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 20 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 35-40 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 10</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: Dessert</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Chocolate</span>
+                        <span class="tag">Cake</span>
+                        <span class="tag">Dessert</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>A straightforward recipe for a moist, delicious chocolate cake, perfect for any occasion.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                     <div class="ingredient-group">
+                        <h3>Cake</h3>
+                         <ul>
+                            <li><span class="ingredient-amount">1 1/2 cups</span> <span class="ingredient-name">All-purpose flour</span></li>
+                            <li><span class="ingredient-amount">1 cup</span> <span class="ingredient-name">Sugar</span></li>
+                            <li><span class="ingredient-amount">1/3 cup</span> <span class="ingredient-name">Cocoa powder</span></li>
+                            <li><span class="ingredient-amount">1 tsp</span> <span class="ingredient-name">Baking soda</span></li>
+                            <li><span class="ingredient-amount">1/2 tsp</span> <span class="ingredient-name">Salt</span></li>
+                            <li><span class="ingredient-amount">1 cup</span> <span class="ingredient-name">Water</span></li>
+                            <li><span class="ingredient-amount">1/2 cup</span> <span class="ingredient-name">Vegetable oil</span></li>
+                            <li><span class="ingredient-amount">1 tsp</span> <span class="ingredient-name">Vanilla extract</span></li>
+                            <li><span class="ingredient-amount">1 tsp</span> <span class="ingredient-name">White vinegar</span></li>
+                        </ul>
+                     </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span> <div class="step-content"><h3>Prep & Mix Dry</h3> <p>Preheat oven to 350°F. Grease pan. Whisk dry ingredients.</p></div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span> <div class="step-content"><h3>Mix Wet & Combine</h3> <p>Combine wet ingredients. Pour into dry and whisk until just combined.</p></div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span> <div class="step-content"><h3>Bake & Cool</h3> <p>Pour into pan. Bake 35-40 mins. Cool completely before frosting.</p></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Green Salad Recipe -->
+        <article id="green-salad" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/green salad.jpg" alt="Green Salad" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Green Salad</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 15 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 0 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 4</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: International</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Vegetarian</span>
+                        <span class="tag">Healthy</span>
+                        <span class="tag">Side Dish</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>A refreshing green salad with mixed greens, tomatoes, cucumber, avocado, red onion, and feta, tossed in a simple lemon vinaigrette.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Salad Base</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">4 cups</span> <span class="ingredient-name">Mixed greens</span></li>
+                            <li><span class="ingredient-amount">1 cup</span> <span class="ingredient-name">Cherry tomatoes, halved</span></li>
+                            <li><span class="ingredient-amount">1</span> <span class="ingredient-name">Cucumber, sliced</span></li>
+                            <li><span class="ingredient-amount">1</span> <span class="ingredient-name">Avocado, diced</span></li>
+                            <li><span class="ingredient-amount">1/2</span> <span class="ingredient-name">Red onion, sliced</span></li>
+                            <li><span class="ingredient-amount">1/4 cup</span> <span class="ingredient-name">Feta cheese</span></li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Dressing</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">3 tbsp</span> <span class="ingredient-name">Olive oil</span></li>
+                            <li><span class="ingredient-amount">1 tbsp</span> <span class="ingredient-name">Lemon juice</span></li>
+                            <li><span class="ingredient-amount">1 tsp</span> <span class="ingredient-name">Dijon mustard</span></li>
+                            <li><span class="ingredient-amount">1/2 tsp</span> <span class="ingredient-name">Honey</span></li>
+                            <li><span class="ingredient-amount">To taste</span> <span class="ingredient-name">Salt & pepper</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span> <div class="step-content"><h3>Prep Veggies & Dressing</h3> <p>Wash and chop vegetables. Whisk dressing ingredients.</p></div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span> <div class="step-content"><h3>Assemble & Serve</h3> <p>Combine salad ingredients in a large bowl. Drizzle with dressing, toss, add feta, and serve.</p></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Ramen Recipe -->
+        <article id="ramen" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/noodle.jpg" alt="Ramen" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Homemade Ramen</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 30 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 3 hours</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 4</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: Japanese</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Japanese</span>
+                        <span class="tag">Soup</span>
+                        <span class="tag">Comfort Food</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>Homemade ramen with rich pork broth, tender pork belly, fresh noodles, and traditional toppings.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Broth</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">2 lbs</span> <span class="ingredient-name">Pork bones</span></li>
+                            <li><span class="ingredient-amount">2 lbs</span> <span class="ingredient-name">Chicken parts</span></li>
+                            <li><span class="ingredient-amount">Aromatics</span> <span class="ingredient-name">(Onion, Carrot, Garlic, Ginger)</span></li>
+                            <li><span class="ingredient-amount">Seasonings</span> <span class="ingredient-name">(Soy Sauce, Mirin)</span></li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Toppings</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">1 lb</span> <span class="ingredient-name">Fresh ramen noodles</span></li>
+                            <li><span class="ingredient-amount">½ lb</span> <span class="ingredient-name">Pork belly, sliced</span></li>
+                            <li><span class="ingredient-amount">4</span> <span class="ingredient-name">Soft-boiled eggs</span></li>
+                            <li><span class="ingredient-amount">Garnishes</span> <span class="ingredient-name">(Green Onions, Nori, Bean Sprouts)</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span> <div class="step-content"><h3>Make Broth</h3> <p>Roast bones, chicken, and aromatics. Simmer in water for 2-3 hours. Strain.</p></div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span> <div class="step-content"><h3>Prep Toppings</h3> <p>Cook pork belly until tender. Cook soft-boiled eggs. Prepare garnishes.</p></div>
+                    </div>
+                     <div class="instruction-step">
+                        <span class="step-number">3</span> <div class="step-content"><h3>Assemble</h3> <p>Cook noodles. Divide into bowls, ladle broth, add toppings, and serve.</p></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Caesar Salad Recipe -->
+        <article id="caesar-salad" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/sezar salad.jpg" alt="Caesar Salad" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Classic Caesar Salad</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 20 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 10 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 4</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: Italian-American</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Salad</span>
+                        <span class="tag">Quick</span>
+                        <span class="tag">Lunch</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>Classic Caesar salad with crisp romaine, homemade croutons, and a rich, creamy garlic-anchovy dressing.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Salad Base</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">2 heads</span> <span class="ingredient-name">Romaine lettuce</span></li>
+                            <li><span class="ingredient-amount">1/2 cup</span> <span class="ingredient-name">Parmesan cheese, grated</span></li>
+                            <li><span class="ingredient-amount">2 cups</span> <span class="ingredient-name">Croutons</span></li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Caesar Dressing</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">1</span> <span class="ingredient-name">Egg yolk</span></li>
+                            <li><span class="ingredient-amount">2</span> <span class="ingredient-name">Anchovy fillets, minced</span></li>
+                            <li><span class="ingredient-amount">2 cloves</span> <span class="ingredient-name">Garlic, minced</span></li>
+                            <li><span class="ingredient-amount">1 tsp</span> <span class="ingredient-name">Dijon mustard</span></li>
+                            <li><span class="ingredient-amount">1 tbsp</span> <span class="ingredient-name">Lemon juice</span></li>
+                            <li><span class="ingredient-amount">1/2 tsp</span> <span class="ingredient-name">Worcestershire sauce</span></li>
+                            <li><span class="ingredient-amount">1/3 cup</span> <span class="ingredient-name">Olive oil</span></li>
+                            <li><span class="ingredient-amount">1/4 cup</span> <span class="ingredient-name">Parmesan cheese, grated</span></li>
+                            <li><span class="ingredient-amount">To taste</span> <span class="ingredient-name">Pepper</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span> <div class="step-content"><h3>Make Croutons (Optional)</h3> <p>Toss bread cubes with oil and seasonings. Bake at 375°F until crisp.</p></div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span> <div class="step-content"><h3>Make Dressing</h3> <p>Whisk egg yolk, anchovy, garlic, mustard, lemon juice, Worcestershire. Slowly whisk in oil. Stir in Parmesan and pepper.</p></div>
+                    </div>
+                     <div class="instruction-step">
+                        <span class="step-number">3</span> <div class="step-content"><h3>Assemble</h3> <p>Tear romaine. Toss with dressing, croutons, and extra Parmesan. Serve.</p></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Steak Recipe -->
+        <article id="steak" class="recipe-card">
+            <div class="recipe-header">
+                <img src="../images/steak.jpg" alt="Pan-Seared Steak" class="recipe-image-large">
+                <div class="recipe-title-section">
+                    <h1 class="section-title">Perfect Pan-Seared Steak</h1>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> Prep Time: 30 mins</span>
+                        <span><i class="fas fa-fire"></i> Cook Time: 10 mins</span>
+                        <span><i class="fas fa-utensils"></i> Servings: 2</span>
+                        <span><i class="fas fa-globe"></i> Cuisine: American</span>
+                    </div>
+                    <div class="recipe-tags">
+                        <span class="tag">Dinner</span>
+                        <span class="tag">Beef</span>
+                        <span class="tag">Quick</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recipe-overview">
+                <h2>Overview</h2>
+                <p>Foolproof pan-searing method for a steak with a beautiful crust and juicy interior, cooked to your preferred doneness.</p>
+            </section>
+
+            <section class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient-group">
+                        <h3>Main Ingredients</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">2</span> <span class="ingredient-name">Ribeye or NY strip steaks (1½-inch thick)</span></li>
+                            <li><span class="ingredient-amount">2 tbsp</span> <span class="ingredient-name">Oil</span></li>
+                            <li><span class="ingredient-amount">3 tbsp</span> <span class="ingredient-name">Butter</span></li>
+                            <li><span class="ingredient-amount">3 cloves</span> <span class="ingredient-name">Garlic, crushed</span></li>
+                            <li><span class="ingredient-amount">2 sprigs</span> <span class="ingredient-name">Rosemary</span></li>
+                            <li><span class="ingredient-amount">2 sprigs</span> <span class="ingredient-name">Thyme</span></li>
+                        </ul>
+                    </div>
+                    <div class="ingredient-group">
+                        <h3>Seasoning</h3>
+                        <ul>
+                            <li><span class="ingredient-amount">1 tbsp</span> <span class="ingredient-name">Kosher salt</span></li>
+                            <li><span class="ingredient-amount">2 tsp</span> <span class="ingredient-name">Black pepper</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <div class="instructions-list">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span> <div class="step-content"><h3>Prep & Season Steak</h3> <p>Bring steak to room temp. Pat dry. Season generously with salt and pepper.</p></div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span> <div class="step-content"><h3>Sear Steak</h3> <p>Heat oil in hot cast-iron pan. Sear steaks 3-4 mins per side.</p></div>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span> <div class="step-content"><h3>Baste & Cook</h3> <p>Reduce heat. Add butter, garlic, herbs. Baste steak 1-2 mins. Cook to desired temp (130-135°F for medium-rare).</p></div>
+                    </div>
+                     <div class="instruction-step">
+                        <span class="step-number">4</span> <div class="step-content"><h3>Rest & Serve</h3> <p>Rest steak 5-10 mins. Slice against the grain and serve.</p></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- More recipes would be added here -->
+        
+        <a href="#" class="jump-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="logo">
+                    <img src="../images/foodx_logo.png" alt="FoodX Logo">
+                </a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Array of all recipe IDs in order
+        const recipeIds = [
+            'cheesecake',
+            'shish-tawook',
+            'macarons',
+            'burrito',
+            'grilled-salmon',
+            'fried-rice',
+            'chicken-wings',
+            'chocolate-cake',
+            'green-salad',
+            'ramen',
+            'caesar-salad',
+            'steak'
+        ];
+        
+        // Get recipe cards and navigation elements
+        const recipeCards = document.querySelectorAll('.recipe-card');
+        const recipeNavigation = document.getElementById('recipe-navigation');
+        const singleRecipeView = document.getElementById('single-recipe-view');
+        const prevButton = document.getElementById('prev-recipe');
+        const nextButton = document.getElementById('next-recipe');
+        const backToAllButton = document.getElementById('back-to-all');
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href').substring(1);
+                if (targetId) {
+                    showRecipe(targetId);
+                }
+            });
+        });
+        
+        // Show specific recipe and hide others
+        function showRecipe(recipeId) {
+            // Hide all recipes
+            recipeCards.forEach(card => {
+                card.style.display = 'none';
+            });
+            
+            // Show selected recipe
+            const selectedRecipe = document.getElementById(recipeId);
+            if (selectedRecipe) {
+                selectedRecipe.style.display = 'block';
+                
+                // Hide recipe navigation and show single recipe view
+                recipeNavigation.style.display = 'none';
+                singleRecipeView.style.display = 'block';
+                
+                // Update page title
+                const recipeTitleElement = selectedRecipe.querySelector('.recipe-title-section .section-title');
+                const recipeTitle = recipeTitleElement ? recipeTitleElement.textContent.trim() : 'Recipe Detail';
+                document.title = recipeTitle + ' - FoodX';
+                
+                // Update URL
+                window.history.pushState({recipeId}, recipeTitle + ' - FoodX', `#${recipeId}`);
+                
+                // Update navigation buttons
+                updateNavigationButtons(recipeId);
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            } else {
+                // If recipe not found, show navigation
+                showAllRecipes();
+            }
+        }
+        
+        // Show all recipes navigation view
+        function showAllRecipes() {
+            // Hide all recipe cards when showing navigation
+            recipeCards.forEach(card => {
+                card.style.display = 'none';
+            });
+            
+            // Show recipe navigation and hide single recipe view
+            recipeNavigation.style.display = 'block';
+            singleRecipeView.style.display = 'none';
+            
+            // Update page title for navigation view
+            document.title = 'All Recipes - FoodX';
+            
+            // Update URL (remove hash)
+            window.history.pushState({}, 'All Recipes - FoodX', window.location.pathname + window.location.search);
+        }
+        
+        // Update navigation buttons based on current recipe
+        function updateNavigationButtons(recipeId) {
+            const currentIndex = recipeIds.indexOf(recipeId);
+            
+            // Update previous button
+            if (currentIndex > 0) {
+                prevButton.disabled = false;
+                prevButton.onclick = () => showRecipe(recipeIds[currentIndex - 1]);
+            } else {
+                prevButton.disabled = true;
+            }
+            
+            // Update next button
+            if (currentIndex < recipeIds.length - 1) {
+                nextButton.disabled = false;
+                nextButton.onclick = () => showRecipe(recipeIds[currentIndex + 1]);
+            } else {
+                nextButton.disabled = true;
+            }
+        }
+        
+        // Handle back to all recipes button
+        backToAllButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            showAllRecipes();
+        });
+        
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.recipeId) {
+                showRecipe(event.state.recipeId);
+            } else {
+                // Show all recipes by default (navigation view)
+                showAllRecipes();
+            }
+        });
+        
+        // Handle initial page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if URL has a hash
+            if (window.location.hash) {
+                const recipeId = window.location.hash.substring(1);
+                showRecipe(recipeId);
+            } else {
+                // Show all recipes by default (navigation view)
+                showAllRecipes();
+            }
+        });
+    </script>
+</body>
+</html> 
