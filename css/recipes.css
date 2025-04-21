@@ -94,27 +94,45 @@ header {
     gap: 25px;
 }
 
+/* Add styles for the recipe link */
+.recipe-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
+    display: block; /* Make the link a block element */
+    transition: transform 0.2s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.recipe-link:hover {
+    transform: scale(1.03); /* Slightly scale up on hover */
+}
+
 .recipe-card {
     margin-bottom: 20px;
+    background-color: #fff; /* Add a white background to the card */
+    border-radius: 10px; /* Match image border radius */
+    overflow: hidden; /* Ensure image doesn't overflow rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
+    padding-bottom: 15px; /* Add some padding at the bottom */
 }
 
 .recipe-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    /* Removed border-radius from here as it's now on recipe-card */
+    /* Removed margin-bottom from here */
 }
 
 .recipe-title {
     font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin: 10px 15px 5px; /* Adjusted margins */
 }
 
 .recipe-desc {
     color: #666;
     font-size: 0.9rem;
+    margin: 0 15px; /* Adjusted margins */
 }
 
 /* Footer */
