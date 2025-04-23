@@ -7,21 +7,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/recipes.css">
+    <link rel="stylesheet" href="../css/common.css">
+
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="logo">FoodX</div>
-            <div class="nav-menu">
-                <a href="../html/index.html">Home</a>
-                <a href="../htmlrecipes.html" class="active">Recipes</a>
-                <a href="../html/about.html">About</a>
-                <a href="../html/contact.html">Contact</a>
-                <li><a href="../html/profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
-            </div>
+            <nav class="main-nav">
+                <div class="nav-container">
+                    <a href="index.html" class="logo">
+                        <img src="../images/foodx_logo.png" alt="FoodX Logo">
+                    </a>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="recipes.html">Recipes</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+            </nav>
         </header>
 
-        <div class="tab-nav">
+        <div class="tab-nav" style="margin-top: 70px;" >
             <div class="tab" onclick="window.location.href='recipes.html'">All recipe</div>
             <div class="tab active" onclick="window.location.href='favorites.html'">My favorite recipe</div>
         </div>

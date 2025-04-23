@@ -2,7 +2,7 @@ body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #ffcc99 0%, #ffb366 100%);
+    background: linear-gradient(135deg, #fa9000 0%, #FFF0E0 100%);
     min-height: 100vh;
     color: #000;
 }
@@ -32,7 +32,7 @@ header {
     align-items: center;
 }
 
-.nav-menu a {
+.nav-menu a {   
     margin-left: 25px;
     text-decoration: none;
     color: #000;

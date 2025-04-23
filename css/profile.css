@@ -5,7 +5,9 @@
 }
 
 .main-nav .logo img {
-    filter: none;
+    color: var(--white);
+    font-size: 1.8rem;
+    letter-spacing: 1px;
 }
 
 * {
@@ -16,7 +18,7 @@
 }
 
 body {
-    background-color: #f8f9fa;
+    background: linear-gradient(135deg, #fa9000 0%, #FFF0E0 100%);
     color: #333;
     min-height: 100vh;
 }

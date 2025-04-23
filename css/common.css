@@ -151,7 +151,7 @@ img {
     font-family: 'Poppins', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--text-color);
+    color: black ;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -159,6 +159,7 @@ img {
 .main-nav .logo img {
     height: 120px; /* Set base logo height to large size */
     display: block;
+    color: black;
     filter: brightness(0) invert(1); /* Attempt to make the logo white */
 }
 
