@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Allergy Popup</title>
+  <link rel="stylesheet" href="../css/allergy_popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <div class="allergy-grid">
+      <button class="allergy-btn selected" type="button">Sesame</button>
+      <button class="allergy-btn" type="button">Gluten</button>
+      <button class="allergy-btn" type="button">Soy</button>
+      <button class="allergy-btn" type="button">Tree Nut</button>
+      <button class="allergy-btn" type="button">Fish</button>
+      <button class="allergy-btn selected" type="button">Fruit</button>
+      <button class="allergy-btn" type="button">Shellfish</button>
+      <button class="allergy-btn" type="button">Egg</button>
+      <button class="allergy-btn" type="button">Wheat</button>
+    </div>
+    <button class="add-btn" type="button">add</button>
+  </div>
+  <script>
+    // Toggle selected class on click
+    document.querySelectorAll('.allergy-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('selected');
+      });
+    });
+  </script>
+</body>
+</html>
