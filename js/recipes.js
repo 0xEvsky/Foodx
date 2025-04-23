@@ -151,7 +151,7 @@ const recipes = [
   },
   {
     name: "Ramen",
-    image: "Ramen.jpg",
+    image: "noodle.jpg",
     description: "Japanese noodle soup with pork broth and toppings.",
     time: "45 min",
     servings: 2,
@@ -337,7 +337,7 @@ function search()
   if (!(query === "")) {
 
     filterdResults = recipes.filter(
-      recipe => recipe.name.toLowerCase().includes(query)
+      recipe => recipe.name.toLowerCase().includes(query) || recipe.ingredients.includes(query)
     )
   
     renderRecipes(filterdResults)
