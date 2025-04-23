@@ -11,7 +11,8 @@ const recipes = [
     badge: "New",
     rating: 4.8,
     ratingCount: 124,
-    tags: ["Asian", "Seafood"]
+    tags: ["Asian", "Seafood"],
+    ingredients: ["broth", "soy sauce", "sesame oil", "ginger", "garlic", "noodles", "shrimp", "mushrooms", "bok choy", "green onions"]
   },
   {
     name: "Healthy Rice Bowl",
@@ -25,7 +26,8 @@ const recipes = [
     badge: "Trending",
     rating: 4.5,
     ratingCount: 98,
-    tags: ["Mediterranean", "Vegetarian"]
+    tags: ["Mediterranean", "Vegetarian"],
+    ingredients: ["rice", "chickpeas", "spinach", "avocado", "tomatoes", "cucumber", "carrots", "tahini"]
   },
   {
     name: "Cheese Cake",
@@ -39,11 +41,12 @@ const recipes = [
     badge: "Popular",
     rating: 4.9,
     ratingCount: 200,
-    tags: ["Dessert", "Cheesecake"]
+    tags: ["Dessert", "Cheesecake"],
+    ingredients: ["graham crackers", "butter", "sugar", "cream cheese", "sour cream", "vanilla", "eggs"]
   },
   {
     name: "Shish Tawook",
-    image: "Shish Tawook.jpg",
+    image: "shishtawok.jpg",
     description: "Grilled marinated chicken skewers served with garlic sauce.",
     time: "40 min",
     servings: 4,
@@ -53,7 +56,8 @@ const recipes = [
     badge: "Trending",
     rating: 4.7,
     ratingCount: 150,
-    tags: ["Mediterranean", "Chicken"]
+    tags: ["Mediterranean", "Chicken"],
+    ingredients: ["yogurt", "lemon", "olive oil", "garlic", "tomato paste", "paprika", "cumin", "coriander", "chicken", "onion", "bell peppers"]
   },
   {
     name: "Macarons",
@@ -67,10 +71,11 @@ const recipes = [
     badge: "New",
     rating: 4.6,
     ratingCount: 80,
-    tags: ["Dessert", "French"]
+    tags: ["Dessert", "French"],
+    ingredients: ["almond flour", "powdered sugar", "egg whites", "cream of tartar", "butter", "vanilla"]
   },
   {
-    name: "Salamon",
+    name: "Salmon",
     image: "Salamon.jpg",
     description: "Oven-baked salmon fillet with lemon and herbs.",
     time: "25 min",
@@ -81,7 +86,8 @@ const recipes = [
     badge: "Popular",
     rating: 4.8,
     ratingCount: 110,
-    tags: ["Seafood", "Healthy"]
+    tags: ["Seafood", "Healthy"],
+    ingredients: ["salmon", "lemon", "garlic", "dill", "olive oil"]
   },
   {
     name: "Fried Rice",
@@ -95,7 +101,8 @@ const recipes = [
     badge: "",
     rating: 4.3,
     ratingCount: 90,
-    tags: ["Asian", "Vegetarian"]
+    tags: ["Asian", "Vegetarian"],
+    ingredients: ["rice", "eggs", "soy sauce", "garlic", "vegetables"]
   },
   {
     name: "Chicken Wings",
@@ -109,7 +116,8 @@ const recipes = [
     badge: "Trending",
     rating: 4.6,
     ratingCount: 140,
-    tags: ["Snacks", "Chicken"]
+    tags: ["Snacks", "Chicken"],
+    ingredients: ["chicken wings", "baking powder", "garlic powder", "salt", "pepper"]
   },
   {
     name: "Chocolate Cake",
@@ -123,7 +131,8 @@ const recipes = [
     badge: "",
     rating: 4.9,
     ratingCount: 220,
-    tags: ["Dessert", "Chocolate"]
+    tags: ["Dessert", "Chocolate"],
+    ingredients: ["flour", "sugar", "cocoa powder", "baking soda", "vanilla", "vinegar"]
   },
   {
     name: "Green Salad",
@@ -137,7 +146,8 @@ const recipes = [
     badge: "",
     rating: 4.4,
     ratingCount: 60,
-    tags: ["Healthy", "Vegetarian"]
+    tags: ["Healthy", "Vegetarian"],
+    ingredients: ["lettuce", "tomatoes", "cucumber", "avocado", "onion", "feta cheese"]
   },
   {
     name: "Ramen",
@@ -151,10 +161,11 @@ const recipes = [
     badge: "New",
     rating: 4.7,
     ratingCount: 130,
-    tags: ["Asian", "Soup"]
+    tags: ["Asian", "Soup"],
+    ingredients: ["pork bones", "chicken", "noodles", "soy sauce", "garlic", "ginger"]
   },
   {
-    name: "Sezar Salad",
+    name: "Caesar Salad",
     image: "Sezar Salad.jpg",
     description: "Classic Caesar salad with romaine, croutons, and parmesan.",
     time: "15 min",
@@ -165,7 +176,8 @@ const recipes = [
     badge: "",
     rating: 4.5,
     ratingCount: 70,
-    tags: ["Salad", "Vegetarian"]
+    tags: ["Salad", "Vegetarian"],
+    ingredients: ["romaine", "parmesan", "croutons", "anchovies", "garlic", "mustard"]
   },
   {
     name: "Burrito",
@@ -179,7 +191,8 @@ const recipes = [
     badge: "",
     rating: 4.6,
     ratingCount: 100,
-    tags: ["Mexican", "Wrap"]
+    tags: ["Mexican", "Wrap"],
+    ingredients: ["beef", "beans", "rice", "tortillas", "cheese"]
   },
   {
     name: "Steak",
@@ -193,7 +206,8 @@ const recipes = [
     badge: "",
     rating: 4.8,
     ratingCount: 90,
-    tags: ["Beef", "Grilled"]
+    tags: ["Beef", "Grilled"],
+    ingredients: ["steak", "garlic", "rosemary", "thyme", "butter"]
   },
   {
     name: "Red Sauce Pasta",
@@ -207,7 +221,8 @@ const recipes = [
     badge: "",
     rating: 4.5,
     ratingCount: 80,
-    tags: ["Italian", "Pasta"]
+    tags: ["Italian", "Pasta"],
+    ingredients: ["pasta", "tomatoes", "garlic", "basil"]
   },
   {
     name: "Fettuccine",
@@ -221,7 +236,8 @@ const recipes = [
     badge: "",
     rating: 4.7,
     ratingCount: 110,
-    tags: ["Italian", "Pasta"]
+    tags: ["Italian", "Pasta"],
+    ingredients: ["pasta", "cream", "parmesan", "butter"]
   },
   {
     name: "Spaghetti",
@@ -235,7 +251,8 @@ const recipes = [
     badge: "",
     rating: 4.6,
     ratingCount: 120,
-    tags: ["Italian", "Pasta"]
+    tags: ["Italian", "Pasta"],
+    ingredients: ["pasta", "marinara sauce", "meatballs"]
   },
   {
     name: "Shrimp Pasta",
@@ -249,7 +266,8 @@ const recipes = [
     badge: "",
     rating: 4.8,
     ratingCount: 140,
-    tags: ["Seafood", "Pasta"]
+    tags: ["Seafood", "Pasta"],
+    ingredients: ["shrimp", "pasta", "garlic", "butter"]
   },
   {
     name: "Cherry Tomato Pasta",
@@ -263,7 +281,8 @@ const recipes = [
     badge: "",
     rating: 4.5,
     ratingCount: 70,
-    tags: ["Vegetarian", "Pasta"]
+    tags: ["Vegetarian", "Pasta"],
+    ingredients: ["pasta", "cherry tomatoes", "basil"]
   },
   {
     name: "Truffle Parmesan Pasta",
@@ -277,7 +296,8 @@ const recipes = [
     badge: "",
     rating: 4.7,
     ratingCount: 90,
-    tags: ["Italian", "Truffle"]
+    tags: ["Italian", "Truffle"],
+    ingredients: ["pasta", "truffle", "parmesan", "mushrooms"]
   },
   {
     name: "Burger",
@@ -291,129 +311,80 @@ const recipes = [
     badge: "",
     rating: 4.6,
     ratingCount: 150,
-    tags: ["American", "Fast Food"]
+    tags: ["American", "Fast Food"],
+    ingredients: ["beef", "cheese", "lettuce", "tomato"]
   }
 ];
-  
 
-  
-function searchAndFilter() 
+
+window.print = () => {}
+
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    search() ;
+  }
+})
+
+
+
+function search() 
 {
-  const searchBarInput = document.getElementById("search-input")
-  const categoryFilterSelect = document.getElementById("category-filter")
-  const cuisineFilterSelect = document.getElementById("cuisine-filter")
-  const dietFilterSelect = document.getElementById("diet-filter")
-  
-
+  const searchBarInput = document.getElementById("recipes-search-input")
   const query = searchBarInput.value.toLowerCase()
-  const categoryFilter = categoryFilterSelect.value.toLowerCase()
-  const cuisineFilter = cuisineFilterSelect.value.toLowerCase()
-  const dietFilter = dietFilterSelect.value.toLowerCase()
 
+  if (!(query === "")) {
 
-  filterdResults = recipes.filter(
-    recipe => recipe.name.toLowerCase().includes(query)
-  )
-
-
-
-  if (categoryFilter !== "") {
-    filteredOnCategory = filterdResults.filter(
-      recipe => (recipe.categories.map(
-        category => category.toLowerCase())).includes(categoryFilter)
+    filterdResults = recipes.filter(
+      recipe => recipe.name.toLowerCase().includes(query)
     )
-
-    filterdResults = filterdResults.filter(
-      recipe => filteredOnCategory.includes(recipe))
-  }
-
   
-
-  if (cuisineFilter !== "") {
-    filteredOnCuisine = filterdResults.filter(
-      recipe => recipe.cuisine.toLowerCase().includes(cuisineFilter)
-    )
-
-    filterdResults = filterdResults.filter(
-      recipe => filteredOnCuisine.includes(recipe)
-    )
-  }
-
-
-  if (dietFilter !== "") {
-    filteredOnDiet = filterdResults.filter(
-      recipe => (recipe.categories.map(
-        category => category.toLowerCase())).includes(dietFilter)
-    )
-
-    filterdResults = filterdResults.filter(
-      recipe => filteredOnDiet.includes(recipe)
-    )
-  }
-
-
-  return filterdResults
-  
+    renderRecipes(filterdResults)
+  } 
 }
 
 
 
-const searchBarSubmitButton = document.getElementById("search_submit_button")
 
-searchBarSubmitButton.addEventListener("click", () => 
-  {
-    event.preventDefault();
+function renderRecipes(recipes) 
+{
+  const recipesCardsGrid = document.querySelector(".recipe-grid")
+  recipesCardsGrid.innerHTML = generateRecipesGrid(recipes)
+}
+
+function generateRecipesGrid(recipes) {
+  return recipes.map(recipe => {
+    const anchorHref = `all-recipes.html#${recipe.name.toLowerCase().replace(/\s+/g, "-")}`;
+    return `
+      <a href="${anchorHref}" class="recipe-link">
+        <div class="recipe-card">
+          <img src="../images/${recipe.image}" alt="${recipe.name}" class="recipe-image">
+          <div class="recipe-title">${recipe.name}</div>
+          <div class="recipe-desc">${recipe.description}</div>
+        </div>
+      </a>
+    `;
+  }).join("");
+}
+
+
+
+// const searchBarSubmitButton = document.getElementById("search_submit_button")
+
+// searchBarSubmitButton.addEventListener("click", () => 
+//   {
+//     event.preventDefault();
     
-    const filteredResults = searchAndFilter()
+//     const filteredResults = searchAndFilter()
     
-    renderRecipes(filteredResults);
+//     renderRecipes(filteredResults);
     
-    const featuredCategoriesSection = document.getElementById("featured-categories")
-    featuredCategoriesSection.classList.add("hidden");
-  })
+//     const featuredCategoriesSection = document.getElementById("featured-categories")
+//     featuredCategoriesSection.classList.add("hidden");
+//   })
   
   
   
 
 
-  function renderRecipes(recipes) 
-  {
-      const recipesCardsGrid = document.querySelector(".recipe-grid")
-      recipesCardsGrid.innerHTML = ""
-  
-      recipes.forEach(recipe => {
-          const article = document.createElement("article")
-          article.classList.add("recipe-card");
-  
-          article.innerHTML = `
-              <div class="recipe-image">
-                  <img src="../images/${recipe.image}" alt="${recipe.name}">
-                  <div class="recipe-badges">
-                      <span class="badge-${recipe.badge.toLowerCase()}">${recipe.badge}</span>
-                      <button class="favorite-btn"><i class="far fa-heart"></i></button>
-                  </div>
-          </div>
-          <div class="recipe-content">
-              <div class="recipe-meta">
-                  <span><i class="fas fa-clock"></i> ${recipe.time}</span>
-                  <span><i class="fas fa-user-friends"></i> ${recipe.servings}</span>
-              </div>
-              <h3>${recipe.name}</h3>
-              <p>${recipe.description}</p>
-              <div class="recipe-tags">
-                  ${recipe.tags.map(tag => `<span class="tag">${tag} </span>`).join("")}
-              </div>
-              <div class="recipe-footer">
-                  <div class="recipe-rating">
-                      <i class="fas fa-star"></i>
-                      <span>${recipe.rating}</span>
-              </div>
-              <a href="recipe.html" class="view-recipe">View Recipe <i class="fas fa-arrow-right"></i></a>
-              </div>
-          </div>
-          `;
-  
-  
-          recipesCardsGrid.appendChild(article)
-      });
-  }
