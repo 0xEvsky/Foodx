@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/recipes.css">
     <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/favorites.js" defer></script>
 
 </head>
 <body>
@@ -35,7 +36,7 @@
             <div class="tab active" onclick="window.location.href='favorites.html'">My favorite recipe</div>
         </div>
 
-        <input type="text" class="search-bar" placeholder="Search for a recipe by name or category...">
+        <input type="text" class="search-bar" id="recipes-search-input" placeholder="Search for a recipe by name or category...">
 
         <div class="recipe-grid">
             <div class="recipe-card">

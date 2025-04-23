@@ -317,8 +317,8 @@ const recipes = [
 ];
 
 
-window.print = () => {}
 
+window.print = () => {}
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
@@ -345,13 +345,12 @@ function search()
 }
 
 
-
-
 function renderRecipes(recipes) 
 {
   const recipesCardsGrid = document.querySelector(".recipe-grid")
   recipesCardsGrid.innerHTML = generateRecipesGrid(recipes)
 }
+
 
 function generateRecipesGrid(recipes) {
   return recipes.map(recipe => {
@@ -367,24 +366,3 @@ function generateRecipesGrid(recipes) {
     `;
   }).join("");
 }
-
-
-
-// const searchBarSubmitButton = document.getElementById("search_submit_button")
-
-// searchBarSubmitButton.addEventListener("click", () => 
-//   {
-//     event.preventDefault();
-    
-//     const filteredResults = searchAndFilter()
-    
-//     renderRecipes(filteredResults);
-    
-//     const featuredCategoriesSection = document.getElementById("featured-categories")
-//     featuredCategoriesSection.classList.add("hidden");
-//   })
-  
-  
-  
-
-
