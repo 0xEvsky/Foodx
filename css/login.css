@@ -1,6 +1,23 @@
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
 }
 
 /* --- Auth Page Styling (Login/Signup) --- */
@@ -15,7 +32,12 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    animation: fadeIn 0.5s ease-in-out; /* Apply fade-in animation */
+    animation: slideInFromRight 0.6s ease-out; /* Apply slide-in animation */
+    overflow-x: hidden; /* Prevent horizontal scrollbars during animation */
+}
+
+.auth-page.slide-out {
+    animation: slideOutToLeft 0.6s ease-in forwards; /* Apply slide-out animation */
 }
 
 .auth-container {

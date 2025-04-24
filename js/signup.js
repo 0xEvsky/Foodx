@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminSignupCheckbox = document.getElementById('admin_signup');
     const adminPasscodeGroup = document.getElementById('admin_passcode_group');
     const adminPasscode = document.getElementById('admin_passcode');
+    const loginLink = document.querySelector('.auth-switch a'); // Get the login link
 
     // Show/hide admin passcode field based on checkbox
     adminSignupCheckbox.addEventListener('change', () => {
@@ -63,9 +64,24 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('isAdmin', isAdminSignup); // Store admin status in session storage
         
         alert('Account created successfully!');
-        window.location.href = 'index.html';
+        // Apply slide-out before redirecting
+        document.body.classList.add('slide-out');
+        setTimeout(() => {
+             window.location.href = 'index.html'; // Redirect after animation
+        }, 600); // Match animation duration
     });
     
+    // Handle slide-out for login link
+    if (loginLink) {
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent immediate navigation
+            const targetUrl = loginLink.href;
+            document.body.classList.add('slide-out');
+            setTimeout(() => {
+                window.location.href = targetUrl; // Navigate after animation
+            }, 600); // Match animation duration
+        });
+    }
 
     function getExistingUsers() {
         const users = localStorage.getItem('users');

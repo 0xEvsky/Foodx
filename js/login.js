@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.querySelector('form');
+    const signupLink = document.querySelector('.auth-switch a');
     
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -22,10 +23,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionStorage.setItem('userName', user.name);
             }
             
-            // Redirect to index page
-            window.location.href = 'index.html';
+            // Apply slide-out before redirecting
+            document.body.classList.add('slide-out');
+            setTimeout(() => {
+                window.location.href = 'index.html'; // Redirect after animation
+            }, 600); // Match animation duration
         } else {
             alert('Invalid email or password. Please try again.');
         }
     });
+
+    // Handle slide-out for signup link
+    if (signupLink) {
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent immediate navigation
+            const targetUrl = signupLink.href;
+            document.body.classList.add('slide-out');
+            setTimeout(() => {
+                window.location.href = targetUrl; // Navigate after animation
+            }, 600); // Match animation duration
+        });
+    }
 });
