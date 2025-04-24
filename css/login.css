@@ -1,3 +1,7 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
 /* --- Auth Page Styling (Login/Signup) --- */
 
@@ -11,6 +15,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    animation: fadeIn 0.5s ease-in-out; /* Apply fade-in animation */
 }
 
 .auth-container {
