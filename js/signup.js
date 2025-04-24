@@ -1,6 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.querySelector('form');
-    
+    const adminSignupCheckbox = document.getElementById('admin_signup');
+    const adminPasscodeGroup = document.getElementById('admin_passcode_group');
+    const adminPasscode = document.getElementById('admin_passcode');
+
+    // Show/hide admin passcode field based on checkbox
+    adminSignupCheckbox.addEventListener('change', () => {
+        adminPasscodeGroup.style.display = adminSignupCheckbox.checked ? 'block' : 'none';
+        if (adminSignupCheckbox.checked) {
+            adminPasscode.required = true; // Make passcode required only if checkbox is checked
+        } else {
+            adminPasscode.required = false;
+            adminPasscode.value = ''; // Clear passcode if checkbox is unchecked
+        }
+    });
+
     signupForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
@@ -8,11 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm_password').value;
+        const isAdminSignup = adminSignupCheckbox.checked;
+        const enteredPasscode = adminPasscode.value;
+        const adminRequiredPasscode = "Admin2025#"; // Define the required admin passcode
         
         
         if (password !== confirmPassword) {
             alert('Passwords do not match!');
             return;
+        }
+        
+        // Admin signup validation
+        if (isAdminSignup) {
+            if (enteredPasscode !== adminRequiredPasscode) {
+                alert('Incorrect Admin Passcode!');
+                return;
+            }
         }
         
         
@@ -25,8 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         
-        existingUsers.push({ name, email, password });
+        const newUser = { name, email, password, isAdmin: isAdminSignup };
         
+        existingUsers.push(newUser);
         
         localStorage.setItem('users', JSON.stringify(existingUsers));
         
@@ -34,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('loggedIn', 'true');
         sessionStorage.setItem('userEmail', email);
         sessionStorage.setItem('userName', name);
+        sessionStorage.setItem('isAdmin', isAdminSignup); // Store admin status in session storage
         
         alert('Account created successfully!');
         window.location.href = 'index.html';

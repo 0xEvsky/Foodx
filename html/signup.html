@@ -33,6 +33,14 @@
                     <label for="confirm_password">Confirm Password</label>
                     <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
                 </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" id="admin_signup" name="admin_signup" class="form-check-input">
+                    <label for="admin_signup" class="form-check-label">Sign up as Admin?</label>
+                </div>
+                <div class="form-group" id="admin_passcode_group" style="display: none;">
+                    <label for="admin_passcode">Admin Passcode</label>
+                    <input type="password" id="admin_passcode" name="admin_passcode" placeholder="Enter admin passcode">
+                </div>
                 <button type="submit" class="btn btn-block btn-primary">Create Account</button>
                 <div class="auth-switch">
                     <a href="login.html" class="btn btn-block btn-secondary">Already have an account?</a>
