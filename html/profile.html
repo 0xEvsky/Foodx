@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <script src="../js/profile.js"></script>
+    <!-- Move the script to the bottom of the page for better performance -->
 </head>
 <body>
 <nav class="main-nav">
@@ -63,7 +65,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="profile-option-card">
+                <a href="#" class="profile-option-card" onclick="allergyPopup()">
                     <div class="option-content">
                         <span>Allergy Alerts</span>
                     </div>
@@ -72,6 +74,112 @@
         </div>
     </div>
 </main>
+
+<!-- Include the modal structure from allergy_popup.html -->
+<!-- Replace the modal section with this updated version -->
+<div id="allergyModal" class="modal" style="display: none;">
+    <div class="popup-container">
+        <div class="allergy-grid">
+            <button class="allergy-btn" type="button">Sesame</button>
+            <button class="allergy-btn" type="button">Gluten</button>
+            <button class="allergy-btn" type="button">Soy</button>
+            <button class="allergy-btn" type="button">Tree Nut</button>
+            <button class="allergy-btn" type="button">Fish</button>
+            <button class="allergy-btn" type="button">Fruit</button>
+            <button class="allergy-btn" type="button">Shellfish</button>
+            <button class="allergy-btn" type="button">Egg</button>
+            <button class="allergy-btn" type="button">Wheat</button>
+        </div>
+        <button class="add-btn" type="button">Add</button>
+    </div>
+</div>
+
+<!-- Update the style section with scoped styles -->
+<!-- Update the style section with improved centering -->
+<style>
+    /* Modal Background */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        z-index: 1000; /* Ensure it's above other content */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        overflow: auto; /* Allow scrolling if needed */
+    }
+    
+    /* Popup container styles */
+    .modal .popup-container {
+        margin: auto; /* Center in all directions */
+        max-width: 600px;
+        width: 90%;
+        background: #fff;
+        border-radius: 28px;
+        box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+        padding: 32px 24px 40px 24px;
+        border: 3px solid #ff9100;
+        position: relative;
+        transform: translateY(0); /* Reset any transforms */
+    }
+    
+    /* Allergy grid styles */
+    .modal .allergy-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px 24px;
+        margin-bottom: 40px;
+    }
+    
+    /* Allergy button styles */
+    .modal .allergy-btn {
+        background: #ededed;
+        border: none;
+        border-radius: 24px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #222;
+        padding: 28px 0;
+        cursor: pointer;
+        transition: box-shadow 0.3s, background 0.3s;
+        outline: none;
+        box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+        position: relative;
+    }
+    
+    .modal .allergy-btn.selected {
+        background: #fff;
+        color: #222;
+        z-index: 1;
+        box-shadow: inset 0 0 0 2px #ff9100;
+    }
+    
+    /* Add button styles */
+    .modal .add-btn {
+        width: 100%;
+        background: #ff9100;
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 24px;
+        padding: 24px 0;
+        margin-top: 24px;
+        cursor: pointer;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+    }
+    
+    .modal .add-btn:hover {
+        background: #ffab40;
+    }
+</style>
+
 
 <footer class="main-footer">
     <div class="container footer-grid">
@@ -114,6 +222,6 @@
         <p>&copy; 2024 FoodX. All Rights Reserved.</p>
     </div>
 </footer>
-<script src="../js/profile.js"></script>
+<!-- Add this script right before the closing body tag and remove the other script tags -->
 </body>
 </html>
