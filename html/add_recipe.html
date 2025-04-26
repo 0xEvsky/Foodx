@@ -8,6 +8,114 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/add_recipe.css">
+    <style>
+        /* Additional styles for the enhanced form */
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-col {
+            flex: 1;
+        }
+        
+        .ingredient-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .ingredient-row .form-control {
+            flex: 3;
+        }
+        
+        .ingredient-row .quantity-control {
+            flex: 1;
+        }
+        
+        .ingredient-row .unit-control {
+            flex: 1;
+        }
+        
+        .ingredient-row .img-upload {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .add-more-btn {
+            background-color: #f8f9fa;
+            border: 1px dashed #ddd;
+            color: #666;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .add-more-btn i {
+            margin-right: 5px;
+        }
+        
+        .img-preview {
+            width: 100%;
+            height: 200px;
+            border: 1px dashed #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+        
+        .img-preview i {
+            font-size: 48px;
+            color: #ddd;
+        }
+        
+        .img-upload-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .section-divider {
+            margin: 30px 0;
+            border-top: 1px solid #eee;
+            position: relative;
+        }
+        
+        .section-divider span {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: white;
+            padding: 0 10px;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .nutrition-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .nutrition-row .form-control {
+            flex: 1;
+        }
+        
+        .tag-input {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <nav class="main-nav">
@@ -26,35 +134,255 @@
         </div>
     </nav>
 
+    <header class="hero-section hero-section-small" style="margin-bottom: -50px;">
+        <div class="hero-content">
+            <h1>Add New Recipe</h1>
+        </div>
+    </header>
+
     <main class="container">
         <section id="add-recipe-form" class="form-container">
-            <h2 class="text-center">Add New Recipe</h2>
-            <form action="#" method="POST">
+            <h2 class="text-center">Recipe Details</h2>
+            <form action="#" method="POST" enctype="multipart/form-data">
+                <!-- Basic Recipe Information -->
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="recipe-name">Recipe Name:</label>
+                            <input type="text" id="recipe-name" name="recipe-name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select id="category" name="category" class="form-control" required>
+                                <option value="">Select a category</option>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="appetizer">Appetizer</option>
+                                <option value="dessert">Dessert</option>
+                                <option value="snack">Snack</option>
+                                <option value="beverage">Beverage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cuisine">Cuisine:</label>
+                            <select id="cuisine" name="cuisine" class="form-control">
+                                <option value="">Select a cuisine</option>
+                                <option value="american">American</option>
+                                <option value="italian">Italian</option>
+                                <option value="mexican">Mexican</option>
+                                <option value="asian">Asian</option>
+                                <option value="mediterranean">Mediterranean</option>
+                                <option value="indian">Indian</option>
+                                <option value="french">French</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="prep-time">Prep Time (mins):</label>
+                                    <input type="number" id="prep-time" name="prep-time" class="form-control" min="0">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="cook-time">Cook Time (mins):</label>
+                                    <input type="number" id="cook-time" name="cook-time" class="form-control" min="0">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="servings">Servings:</label>
+                            <input type="number" id="servings" name="servings" class="form-control" min="1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="difficulty">Difficulty Level:</label>
+                            <select id="difficulty" name="difficulty" class="form-control">
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="recipe-image">Recipe Image:</label>
+                            <div class="img-preview">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <input type="file" id="recipe-image" name="recipe-image" class="img-upload-btn" accept="image/*">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="short-description">Short Description:</label>
+                            <textarea id="short-description" name="short-description" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ingredients Section -->
+                <div class="section-divider">
+                    <span>Ingredients</span>
+                </div>
+                
+                <div id="ingredients-container">
+                    <!-- First ingredient row (template) -->
+                    <div class="ingredient-row">
+                        <div class="quantity-control">
+                            <label for="ingredient-quantity-1">Quantity:</label>
+                            <input type="text" id="ingredient-quantity-1" name="ingredient-quantity[]" class="form-control" placeholder="e.g. 2">
+                        </div>
+                        
+                        <div class="unit-control">
+                            <label for="ingredient-unit-1">Unit:</label>
+                            <select id="ingredient-unit-1" name="ingredient-unit[]" class="form-control">
+                                <option value="">Select</option>
+                                <option value="cup">cup</option>
+                                <option value="tbsp">tbsp</option>
+                                <option value="tsp">tsp</option>
+                                <option value="oz">oz</option>
+                                <option value="g">g</option>
+                                <option value="kg">kg</option>
+                                <option value="lb">lb</option>
+                                <option value="ml">ml</option>
+                                <option value="l">l</option>
+                                <option value="piece">piece</option>
+                                <option value="slice">slice</option>
+                                <option value="pinch">pinch</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-control">
+                            <label for="ingredient-name-1">Ingredient:</label>
+                            <input type="text" id="ingredient-name-1" name="ingredient-name[]" class="form-control" placeholder="e.g. Flour">
+                        </div>
+                        
+                        <div class="img-upload">
+                            <label for="ingredient-image-1">Image:</label>
+                            <input type="file" id="ingredient-image-1" name="ingredient-image[]" class="form-control" accept="image/*">
+                        </div>
+                    </div>
+                    
+                    <!-- Second ingredient row -->
+                    <div class="ingredient-row">
+                        <div class="quantity-control">
+                            <label for="ingredient-quantity-2">Quantity:</label>
+                            <input type="text" id="ingredient-quantity-2" name="ingredient-quantity[]" class="form-control" placeholder="e.g. 1">
+                        </div>
+                        
+                        <div class="unit-control">
+                            <label for="ingredient-unit-2">Unit:</label>
+                            <select id="ingredient-unit-2" name="ingredient-unit[]" class="form-control">
+                                <option value="">Select</option>
+                                <option value="cup">cup</option>
+                                <option value="tbsp">tbsp</option>
+                                <option value="tsp">tsp</option>
+                                <option value="oz">oz</option>
+                                <option value="g">g</option>
+                                <option value="kg">kg</option>
+                                <option value="lb">lb</option>
+                                <option value="ml">ml</option>
+                                <option value="l">l</option>
+                                <option value="piece">piece</option>
+                                <option value="slice">slice</option>
+                                <option value="pinch">pinch</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-control">
+                            <label for="ingredient-name-2">Ingredient:</label>
+                            <input type="text" id="ingredient-name-2" name="ingredient-name[]" class="form-control" placeholder="e.g. Sugar">
+                        </div>
+                        
+                        <div class="img-upload">
+                            <label for="ingredient-image-2">Image:</label>
+                            <input type="file" id="ingredient-image-2" name="ingredient-image[]" class="form-control" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" class="add-more-btn" id="add-ingredient-btn">
+                    <i class="fas fa-plus"></i> Add More Ingredients
+                </button>
+                
+                <!-- Instructions Section -->
+                <div class="section-divider">
+                    <span>Instructions</span>
+                </div>
+                
                 <div class="form-group">
-                    <label for="recipe_name">Recipe Name:</label>
-                    <input type="text" id="recipe_name" name="recipe_name" required>
+                    <label for="instructions">Cooking Instructions:</label>
+                    <textarea id="instructions" name="instructions" class="form-control" rows="8" placeholder="Enter step-by-step instructions..."></textarea>
+                    <small class="form-text text-muted">Tip: Number your steps for clarity (e.g., 1. Preheat oven...)</small>
                 </div>
-                 <div class="form-group">
-                    <label for="course">Course:</label>
-                    <select id="course" name="course" required>
-                        <option value="" disabled selected>Select course</option>
-                        <option value="appetizers">Appetizers</option>
-                        <option value="main course">Main Course</option>
-                        <option value="dessert">Dessert</option>
-                    </select>
+                
+                <!-- Additional Information -->
+                <div class="section-divider">
+                    <span>Additional Information</span>
                 </div>
-                <div class="form-group" id="ingredients-group">
-                    <label>Ingredients:</label>
-                     <div class="ingredient-item">
-                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" required>
-                         <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" required>
-                     </div>
-                     <p>(For multiple ingredients, backend logic will handle multiple inputs with the same name, or use JavaScript to add more fields dynamically)</p>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="tips">Tips & Notes:</label>
+                            <textarea id="tips" name="tips" class="form-control" rows="4" placeholder="Any helpful tips or notes about this recipe..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="tags">Tags (comma separated):</label>
+                            <input type="text" id="tags" name="tags" class="form-control tag-input" placeholder="e.g. healthy, quick, vegan">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="allergens">Allergens:</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="allergens[]" value="gluten"> Gluten</label>
+                                <label><input type="checkbox" name="allergens[]" value="dairy"> Dairy</label>
+                                <label><input type="checkbox" name="allergens[]" value="nuts"> Nuts</label>
+                                <label><input type="checkbox" name="allergens[]" value="eggs"> Eggs</label>
+                                <label><input type="checkbox" name="allergens[]" value="soy"> Soy</label>
+                                <label><input type="checkbox" name="allergens[]" value="seafood"> Seafood</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                 <div class="form-group">
-                    <label for="description">Description / Instructions:</label>
-                    <textarea id="description" name="description" required></textarea>
+                
+                <!-- Nutrition Information -->
+                <div class="section-divider">
+                    <span>Nutrition Information (per serving)</span>
                 </div>
+                
+                <div class="nutrition-row">
+                    <div class="form-control">
+                        <label for="calories">Calories:</label>
+                        <input type="number" id="calories" name="calories" class="form-control" placeholder="kcal">
+                    </div>
+                    
+                    <div class="form-control">
+                        <label for="protein">Protein:</label>
+                        <input type="number" id="protein" name="protein" class="form-control" placeholder="g">
+                    </div>
+                    
+                    <div class="form-control">
+                        <label for="carbs">Carbs:</label>
+                        <input type="number" id="carbs" name="carbs" class="form-control" placeholder="g">
+                    </div>
+                    
+                    <div class="form-control">
+                        <label for="fat">Fat:</label>
+                        <input type="number" id="fat" name="fat" class="form-control" placeholder="g">
+                    </div>
+                </div>
+                
                 <button type="submit" class="btn btn-block">Add Recipe</button>
             </form>
         </section>
@@ -85,20 +413,20 @@
                 <ul>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Terms of Service</a></li>
                 </ul>
             </div>
-            <div class="footer-links">
-                <h4>Follow Us</h4>
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Pinterest</a></li>
-                </ul>
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Subscribe for new recipes and updates.</p>
+                <form action="#" method="POST">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
             </div>
         </div>
-        <div class="footer-bottom text-center">
-            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
+        <div class="copyright">
+            <p>&copy; 2023 FoodX. All rights reserved.</p>
         </div>
     </footer>
 </body>

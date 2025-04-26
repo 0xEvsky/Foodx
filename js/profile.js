@@ -1,35 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Set up allergy button event listeners
-    const allergyButtons = document.querySelectorAll('.allergy-btn');
-    console.log("Found allergy buttons:", allergyButtons.length);
     
-    allergyButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            console.log("Allergy button clicked:", this.textContent);
-            this.classList.toggle('selected');
-        });
-    });
+    // WE ARE NOT USING THIS POP FOR NOW
+    // const allergyButtons = document.querySelectorAll('.allergy-btn');
+    // console.log("Found allergy buttons:", allergyButtons.length);
     
-    // Set up modal close functionality
-    const modal = document.getElementById('allergyModal');
-    if (modal) {
-        // Close when clicking outside the modal content
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
+    // allergyButtons.forEach(btn => {
+    //     btn.addEventListener('click', function() {
+    //         console.log("Allergy button clicked:", this.textContent);
+    //         this.classList.toggle('selected');
+    //     });
+    // });
+    
+    // // Set up modal close functionality
+    // const modal = document.getElementById('allergyModal');
+    // if (modal) {
+    //     // Close when clicking outside the modal content
+    //     window.addEventListener('click', (event) => {
+    //         if (event.target === modal) {
+    //             modal.style.display = 'none';
+    //         }
+    //     });
         
-        // Close when clicking the add button
-        const addBtn = modal.querySelector('.add-btn');
-        if (addBtn) {
-            addBtn.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-        }
-    }
+    //     // Close when clicking the add button
+    //     const addBtn = modal.querySelector('.add-btn');
+    //     if (addBtn) {
+    //         addBtn.addEventListener('click', () => {
+    //             modal.style.display = 'none';
+    //         });
+    //     }
+    // }
+
     
-    // Rest of your DOMContentLoaded code from profile.js
     const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
     const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
     
@@ -52,11 +53,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Rest of your profile.js code
-function allergyPopup() {
-    console.log("Allergy Popup Triggered");
-    const modal = document.getElementById('allergyModal');
-    if (modal) {
-        modal.style.display = 'flex';
-    }
-}
+
+// WE DECIDED TO NOT USE THIS POP UP FOR NOW
+// function allergyPopup() {
+//     console.log("Allergy Popup Triggered");
+//     const modal = document.getElementById('allergyModal');
+//     if (modal) {
+//         modal.style.display = 'flex';
+//     }
+// }
