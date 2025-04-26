@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (user.name) {
                 sessionStorage.setItem('userName', user.name);
             }
+            // Store admin status in localStorage for persistence
+            localStorage.setItem('isAdmin', user.isAdmin);
             
             // Apply slide-out before redirecting
             document.body.classList.add('slide-out');

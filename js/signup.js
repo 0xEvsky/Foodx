@@ -57,11 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         localStorage.setItem('users', JSON.stringify(existingUsers));
         
-       
-        sessionStorage.setItem('loggedIn', 'true');
-        sessionStorage.setItem('userEmail', email);
+        // Set basic login status immediately for redirection purposes 
+        // Note: login.js now handles the persistent isLoggedIn and isAdmin in localStorage
+        localStorage.setItem('isLoggedIn', 'true'); // Set persistent login flag
+        localStorage.setItem('isAdmin', isAdminSignup); // Set persistent admin flag
+        sessionStorage.setItem('userEmail', email); // Session storage for email/name is fine
         sessionStorage.setItem('userName', name);
-        sessionStorage.setItem('isAdmin', isAdminSignup); // Store admin status in session storage
         
         alert('Account created successfully!');
         // Apply slide-out before redirecting
