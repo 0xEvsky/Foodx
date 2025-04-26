@@ -99,11 +99,11 @@ header {
     text-decoration: none; /* Remove underline */
     color: inherit; /* Inherit text color from parent */
     display: block; /* Make the link a block element */
-    transition: transform 0.2s ease-in-out; /* Smooth transition for hover effect */
+    /* transition: transform 0.2s ease-in-out; */ /* Removed from link */
 }
 
 .recipe-link:hover {
-    transform: scale(1.03); /* Slightly scale up on hover */
+    /* transform: scale(1.03); */ /* Removed from link */
 }
 
 .recipe-card {
@@ -114,6 +114,12 @@ header {
     overflow: hidden; /* Ensure image doesn't overflow rounded corners */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
     padding-bottom: 15px; /* Add some padding at the bottom */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition to card */
+}
+
+.recipe-card:hover { /* Add hover state for card */
+    transform: translateY(-5px) scale(1.02); /* Lift and slightly scale */
+    box-shadow: var(--shadow-lg, 0 8px 20px rgba(0,0,0,0.12)); /* Enhance shadow */
 }
 
 .recipe-image {

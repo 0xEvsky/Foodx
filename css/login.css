@@ -20,6 +20,10 @@
   }
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 /* --- Auth Page Styling (Login/Signup) --- */
 
 .auth-page {
@@ -32,7 +36,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    animation: slideInFromRight 0.6s ease-out; /* Apply slide-in animation */
+    /* animation: slideInFromRight 0.6s ease-out; */ /* Removed initial slide-in animation */
     overflow-x: hidden; /* Prevent horizontal scrollbars during animation */
 }
 
@@ -40,21 +44,47 @@
     animation: slideOutToLeft 0.6s ease-in forwards; /* Apply slide-out animation */
 }
 
-.auth-container {
-    /* Overrides default .container width/padding */
-    width: 90%;
-    max-width: 1200px; /* Max width for the two-column layout */
-    margin: auto;
-    padding: 0; /* Remove padding from default container */
-    overflow: visible; /* Allow box shadow to show */
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center items vertically */
-    gap: 4rem;
+/* New outer container for centering */
+.auth-outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 2rem;
 }
 
-/* Specific layout for signup page (two columns) */
-.signup-layout {
-    justify-content: space-between;
+/* Container for switching forms */
+.auth-container {
+    position: relative; /* Needed for absolute positioning of wrappers */
+    width: 90%;
+    max-width: 1000px; /* Adjust max width as needed */
+    display: flex; /* Use flex to align items */
+    perspective: 1000px; /* For potential flip animations */
+}
+
+.auth-form-wrapper {
+    position: absolute; /* Position wrappers on top of each other */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center; /* Vertically align text and form */
+    gap: 4rem; /* Gap between welcome text and form */
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    backface-visibility: hidden; /* For smoother transitions */
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
+/* Make the active form visible */
+.auth-container.show-login .login-form-wrapper,
+.auth-container.show-signup .signup-form-wrapper {
+    position: relative; /* Take up space when visible */
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
 }
 
 .auth-welcome-text {
@@ -77,24 +107,15 @@
     color: var(--text-color);
 }
 
-/* Shared form container styling for auth pages */
+/* Adjust form container flex basis */
 .auth-form-container {
-    flex: 1;
+    flex-basis: 50%; /* Adjust based on layout preference */
     background: rgba(255, 255, 255, 0.95);
     padding: 2.5rem;
     border-radius: 12px;
     box-shadow: var(--shadow);
-}
-
-/* Login container specific adjustments (centered) */
-.login-container {
-     max-width: 400px; /* Limit width of login form */
-     margin: auto; /* Center the login form */
-}
-
-/* Signup container specific adjustments */
-.signup-container {
-    flex-basis: 45%; /* Adjust width as needed */
+    /* Add transition for potential fade-in on load */
+    /* animation: fadeIn 0.5s ease-out; */
 }
 
 .auth-form-container h2 {
@@ -105,99 +126,223 @@
     color: var(--text-color); /* Dark brown heading */
 }
 
-/* Overrides general form styling for auth pages */
+/* Enhanced Input Styles */
+.auth-page .form-group {
+    margin-bottom: 1.2rem; /* Increase spacing */
+    position: relative; /* For error message positioning */
+}
+
 .auth-page .form-group label {
+    /* Keep existing label styles */
     display: block;
     margin-bottom: 0.3rem;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--text-color); /* Slightly lighter brown for labels */
+    color: var(--text-color);
 }
 
 .auth-page .form-group input[type="text"],
 .auth-page .form-group input[type="email"],
 .auth-page .form-group input[type="password"] {
+    /* Keep existing input styles */
     background: var(--white);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 0.75rem;
     font-size: 1rem;
     color: var(--text-color);
+    width: 100%; /* Ensure full width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth focus */
 }
 
-.auth-page .form-group input::placeholder {
-    color: #888; /* Placeholder color */
+.auth-page .form-group input:focus {
+    outline: none;
+    border-color: #FF7700; /* Highlight color on focus */
+    box-shadow: 0 0 0 3px rgba(255, 119, 0, 0.2); /* Subtle glow */
 }
 
-/* Specific Button Styling for Auth Pages */
-.auth-page .btn {
-    width: 100%;
-    margin-top: 10px;
+/* Input Error State */
+.auth-page .form-group input.input-error {
+    border-color: #e74c3c; /* Red border for error */
+}
+.auth-page .form-group input.input-error:focus {
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
 }
 
-.auth-page .btn-primary {
-    background-color: #FF7700; 
-    color: white;
-    border: none;
+/* Error Message Styling */
+.error-message {
+    color: #e74c3c; /* Red color for error text */
+    font-size: 0.8rem;
+    display: block; /* Show as block */
+    height: 0; /* Start hidden */
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease;
+    margin-top: 0.2rem;
 }
 
-.auth-page .btn-primary:hover {
-    background-color: #E66900; 
-    transform: translateY(-1px);
+.error-message.show {
+    height: auto; /* Adjust height to content */
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Login page specific: 'Don't have an account?' */
+.server-error-message {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, display 0s linear 0.3s; /* Delay display none */
+}
+
+.server-error-message.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Button Loading State */
+.btn .spinner {
+    display: inline-block;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    width: 1em; /* Size relative to font size */
+    height: 1em;
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+    margin-left: 0.5em;
+    display: none; /* Hidden by default */
+}
+
+.btn.loading .btn-text {
+    /* Optional: hide text or reduce opacity */
+     vertical-align: middle;
+}
+
+.btn.loading .spinner {
+    display: inline-block;
+}
+
+.btn.loading {
+    cursor: wait;
+    opacity: 0.8;
+}
+
+/* Auth Switch styling */
 .auth-switch {
     margin-top: 1.5rem;
     text-align: center;
     font-size: 0.9rem;
-    display: flex; /* Align items inline */
-    align-items: center;
-    justify-content: center; 
-    gap: 0.5rem; /* Space between text and button */
 }
 
 .auth-switch span {
     color: var(--text-color);
+    margin-right: 0.5rem;
 }
 
-.auth-page .btn-secondary {
-    background-color: transparent;
+/* Link-style button for switching */
+.btn-link {
+    background: none;
+    border: none;
     color: #FF7700;
-    border: 2px solid #FF7700;
-    padding: 0.6rem 1.2rem; /* Smaller padding for secondary button */
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
     font-size: 0.9rem;
+    text-decoration: underline;
+}
+.btn-link:hover {
+    color: #E66900;
 }
 
-.auth-page .btn-secondary:hover {
-    background-color: rgba(255, 119, 0, 0.1);
-}
-
-/* Responsive adjustments for smaller screens */
+/* Keep existing responsive styles (@media) but adjust selectors if needed */
 @media (max-width: 768px) {
-    .signup-layout {
-        flex-direction: column; /* Stack elements vertically */
-        text-align: center;
+    .auth-container {
+        flex-direction: column;
+        max-width: 450px; /* Limit width */
+    }
+    .auth-form-wrapper {
+        flex-direction: column; /* Stack welcome and form */
+        gap: 2rem;
+        position: relative; /* Need relative for static positioning on mobile */
+        opacity: 1; /* Ensure always visible on mobile (switching handled differently if needed) */
+        transform: scale(1);
+        width: 100%;
+         position: absolute; /* Still need absolute positioning */
+         pointer-events: none; /* Still need pointer events control */
+    }
+     /* Hide one form wrapper based on parent class for mobile */
+    .auth-container.show-login .signup-form-wrapper,
+    .auth-container.show-signup .login-form-wrapper {
+         opacity: 0; /* Use opacity to hide */
+         transform: scale(0.95);
+         pointer-events: none;
+    }
+     .auth-container.show-login .login-form-wrapper,
+    .auth-container.show-signup .signup-form-wrapper {
+         position: relative; /* Take up space */
+         opacity: 1; /* Make sure the active one is flex */
+         transform: scale(1);
+         pointer-events: auto;
+         display: flex; /* Ensure display is flex when active */
     }
 
     .auth-welcome-text {
         padding-right: 0;
-        margin-bottom: 2rem;
+        margin-bottom: 0; /* Remove bottom margin */
         text-align: center;
+        flex-basis: auto; /* Reset flex basis */
     }
-
-    .auth-welcome-text h1 {
-        font-size: 2.8rem;
-    }
-
     .auth-form-container {
+        flex-basis: auto; /* Reset flex basis */
         width: 100%;
-        max-width: 450px; /* Limit form width on small screens */
-        margin: 0 auto; /* Center form */
         padding: 2rem 1.5rem;
     }
+}
 
-    .login-container {
-         padding: 2rem 1.5rem;
-    }
+/* Checkbox specific styling */
+.form-group-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem; /* Adjust spacing */
+}
+.form-group-checkbox input[type="checkbox"] {
+     width: auto; /* Override default width */
+     height: 1em;
+     cursor: pointer;
+}
+.form-group-checkbox label {
+    margin-bottom: 0; /* Remove bottom margin */
+    font-weight: normal; /* Regular weight */
+    cursor: pointer;
+}
+
+/* Admin Code Container - Hidden by default */
+.admin-code-container {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, transform 0.4s ease-out;
+    /* Remove margin/padding when hidden */
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.admin-code-container.active {
+    max-height: 200px; /* Adjust as needed, should be larger than content */
+    opacity: 1;
+    transform: translateY(0);
+    /* Restore margin when active */
+    margin-bottom: 1.2rem; 
 }

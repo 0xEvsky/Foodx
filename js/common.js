@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Common.js: DOMContentLoaded fired.'); // DEBUG
     updateHeaderNav();
+    addSmoothScrolling();
 });
 
 function updateHeaderNav() {
@@ -132,4 +133,38 @@ function handleLogout(event) {
     
     // Redirect to login page
     window.location.href = 'login.html'; 
+}
+
+// --- Smooth Scrolling --- 
+function addSmoothScrolling() {
+    console.log('Common.js: Initializing smooth scroll.'); // DEBUG
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const hrefAttribute = this.getAttribute('href');
+            // Check if it links to an element on the *current* page
+            // Simple check: Does an element with this ID exist?
+            const targetElement = document.querySelector(hrefAttribute);
+            
+            if (targetElement) {
+                 console.log(`Common.js: Smooth scrolling to ${hrefAttribute}`); // DEBUG
+                e.preventDefault(); // Prevent default jump
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Optional: Update URL hash without jumping
+                // history.pushState(null, null, hrefAttribute);
+            } else {
+                 console.log(`Common.js: Target ${hrefAttribute} not found on this page, default behavior.`); // DEBUG
+                 // Allow default behavior if the target isn't on the current page
+            }
+        });
+    });
+}
+
+// Ensure smooth scroll initialization also happens if DOMContentLoaded already fired
+// (e.g., if script is loaded async without defer)
+if (document.readyState !== 'loading') {
+    addSmoothScrolling();
+} else {
+    document.addEventListener('DOMContentLoaded', addSmoothScrolling);
 } 

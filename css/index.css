@@ -1,3 +1,14 @@
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    /* Add a default state before animation */
+    opacity: 0; 
+    animation: fadeIn 0.8s ease-out 0.2s forwards; /* Apply animation to body after slight delay */
+}
+
 .hero-section {
     height: 90vh;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hero-background.png') no-repeat center center/cover;
@@ -191,8 +202,8 @@
 }
 
 .recipe-card-trending:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: var(--shadow-lg, 0 8px 25px rgba(0,0,0,0.15));
 }
 
 .recipe-card-trending img {
