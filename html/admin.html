@@ -6,6 +6,86 @@
     <title>FoodX Admin Dashboard</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <style>
+        /* Recipe Management Section Styles */
+        .recent-activity-2 {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .recent-activity-3 {
+            color: #333;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .recipe-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .recipe-item {
+            margin-bottom: 10px;
+        }
+        
+        .overlap-2 {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 15px;
+        }
+        
+        .div-wrapper {
+            flex-grow: 1;
+        }
+        
+        .overlap-group-2 {
+            padding: 5px 0;
+        }
+        
+        .text-wrapper-5 {
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .button-2, .button-3 {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .button-2 {
+            background-color: #4a90e2;
+            color: white;
+        }
+        
+        .button-2:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .button-3 {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .button-3:hover {
+            background-color: #c0392b;
+        }
+        
+        .text-wrapper-6, .text-wrapper-7 {
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
     <div class="admin-dashboard-bg">
@@ -34,6 +114,50 @@
                     <div class="admin-activity-item"><span class="admin-activity-dot"></span>User ChefMike left a review on Grilled Chicken Salad</div>
                 </div>
             </section>
+            
+            <!-- New Recipe Management Section -->
+            <section class="recent-activity-2">
+                <h3 class="recent-activity-3">Manage Recipes</h3>
+                <ul class="recipe-list">
+                    <li class="recipe-item">
+                        <div class="overlap-2">
+                            <div class="div-wrapper">
+                                <div class="overlap-group-2"><span class="text-wrapper-5">Spaghetti Carbonara</span></div>
+                            </div>
+                            <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
+                            <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
+                        </div>
+                    </li>
+                    <li class="recipe-item">
+                        <div class="overlap-2">
+                            <div class="div-wrapper">
+                                <div class="overlap-group-2"><span class="text-wrapper-5">Vegan Tacos</span></div>
+                            </div>
+                            <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
+                            <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
+                        </div>
+                    </li>
+                    <li class="recipe-item">
+                        <div class="overlap-2">
+                            <div class="div-wrapper">
+                                <div class="overlap-group-2"><span class="text-wrapper-5">Grilled Chicken Salad</span></div>
+                            </div>
+                            <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
+                            <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
+                        </div>
+                    </li>
+                    <li class="recipe-item">
+                        <div class="overlap-2">
+                            <div class="div-wrapper">
+                                <div class="overlap-group-2"><span class="text-wrapper-5">Classic Pasta Dish</span></div>
+                            </div>
+                            <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
+                            <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            
             <a href="add_recipe.html">
                 <div class="admin-add-btn-container">
                     <button class="admin-add-btn">Add new recipe</button>
@@ -41,5 +165,33 @@
             </a>
         </main>
     </div>
+
+    <script>
+        // Add event listeners for the edit and remove buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Edit buttons
+            const editButtons = document.querySelectorAll('.button-2');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const recipeName = this.closest('.overlap-2').querySelector('.text-wrapper-5').textContent;
+                    // Redirect to edit page with recipe name as parameter
+                    window.location.href = `edit_recipe.html?recipe=${encodeURIComponent(recipeName)}`;
+                });
+            });
+            
+            // Remove buttons
+            const removeButtons = document.querySelectorAll('.button-3');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const recipeName = this.closest('.overlap-2').querySelector('.text-wrapper-5').textContent;
+                    if (confirm(`Are you sure you want to delete "${recipeName}"?`)) {
+                        // Here you would typically make an API call to delete the recipe
+                        // For now, we'll just remove the item from the DOM
+                        this.closest('.recipe-item').remove();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

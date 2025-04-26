@@ -1,0 +1,693 @@
+.admin-page-done {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .admin-page-done .overlap-wrapper {
+    background-color: #ffffff;
+    overflow: hidden;
+    width: 1440px;
+    height: 1672px;
+  }
+  
+  .admin-page-done .overlap {
+    position: relative;
+    width: 2410px;
+    height: 2990px;
+    top: -203px;
+    left: -295px;
+  }
+  
+  .admin-page-done .ellipse {
+    top: 1813px;
+    left: 32px;
+    position: absolute;
+    width: 1082px;
+    height: 1177px;
+    background-color: #ff7600bd;
+    border-radius: 541px / 588.5px;
+    filter: blur(400px);
+  }
+  
+  .admin-page-done .overlap-group {
+    position: absolute;
+    width: 2410px;
+    height: 1925px;
+    top: 0;
+    left: 0;
+  }
+  
+  .admin-page-done .div {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 1082px;
+    height: 1177px;
+    background-color: #ff7600bd;
+    border-radius: 541px / 588.5px;
+    filter: blur(400px);
+  }
+  
+  .admin-page-done .ellipse-2 {
+    top: 748px;
+    left: 1328px;
+    position: absolute;
+    width: 1082px;
+    height: 1177px;
+    background-color: #ff7600bd;
+    border-radius: 541px / 588.5px;
+    filter: blur(400px);
+  }
+  
+  .admin-page-done .navigation {
+    display: flex;
+    width: 1440px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 37px 80px;
+    position: absolute;
+    top: 203px;
+    left: 295px;
+  }
+  
+  .admin-page-done .text-wrapper {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 96px;
+    letter-spacing: 0;
+    line-height: 144px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .text-wrapper-2 {
+    position: relative;
+    width: 500px;
+    height: 88px;
+    font-family: "Inter", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 48px;
+  }
+  
+  .admin-page-done .button {
+    width: 674px;
+    height: 124px;
+    position: absolute;
+    top: 1660px;
+    left: 678px;
+    background-color: #ff7600bd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: 30px;
+    box-shadow: 8px 8px 15px #0000000d;
+  }
+  
+  .admin-page-done .text-wrapper-3 {
+    position: relative;
+    width: fit-content;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 48px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .group {
+    position: absolute;
+    width: 1261px;
+    height: 1028px;
+    top: 489px;
+    left: 384px;
+  }
+  
+  .admin-page-done .recent-activity {
+    position: absolute;
+    width: 1261px;
+    height: 524px;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 8px 8px 15px #00000040;
+  }
+  
+  .admin-page-done .text-wrapper-4 {
+    position: absolute;
+    width: 1217px;
+    top: 36px;
+    left: 22px;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: 72px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .frame {
+    position: absolute;
+    width: 1186px;
+    height: 328px;
+    top: 139px;
+    left: 38px;
+    background-color: #e2e2e2;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+  
+  .admin-page-done .user-johndoe {
+    position: absolute;
+    width: 1217px;
+    top: 69px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 48px;
+  }
+  
+  .admin-page-done .recent-activity-2 {
+    position: absolute;
+    width: 1261px;
+    height: 440px;
+    top: 588px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 8px 8px 15px #00000040;
+  }
+  
+  .admin-page-done .recent-activity-3 {
+    position: absolute;
+    width: 1217px;
+    top: 35px;
+    left: 22px;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: 72px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .overlap-group-wrapper {
+    position: absolute;
+    width: 1186px;
+    height: 68px;
+    top: 142px;
+    left: 38px;
+  }
+  
+  .admin-page-done .overlap-2 {
+    position: relative;
+    width: 1188px;
+    height: 68px;
+  }
+  
+  .admin-page-done .div-wrapper {
+    position: absolute;
+    width: 1188px;
+    height: 68px;
+    top: 0;
+    left: 0;
+  }
+  
+  .admin-page-done .overlap-group-2 {
+    position: relative;
+    width: 1186px;
+    height: 68px;
+    background-color: #d9d9d9;
+    border-radius: 30px;
+  }
+  
+  .admin-page-done .text-wrapper-5 {
+    position: absolute;
+    width: 200px;
+    top: 13px;
+    left: 25px;
+    font-family: "Inter", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 48px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .button-2 {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 129px;
+    height: 47px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    position: absolute;
+    top: 10px;
+    left: 875px;
+    background-color: #ff7600bd;
+    border-radius: 30px;
+    border: 5px solid;
+    border-color: #000000;
+    box-shadow: 8px 8px 15px #0000000d;
+  }
+  
+  .admin-page-done .text-wrapper-6 {
+    position: relative;
+    width: fit-content;
+    margin-top: -19.5px;
+    margin-bottom: -9.5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 48px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .button-wrapper {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 47px;
+    align-items: flex-start;
+    gap: 10px;
+    position: absolute;
+    top: 10px;
+    left: 1014px;
+  }
+  
+  .admin-page-done .button-3 {
+    all: unset;
+    box-sizing: border-box;
+    height: 45px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    background-color: #e50000;
+    border: 5px solid;
+    border-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: 30px;
+    box-shadow: 8px 8px 15px #0000000d;
+  }
+  
+  .admin-page-done .text-wrapper-7 {
+    position: relative;
+    width: fit-content;
+    margin-top: -20.5px;
+    margin-bottom: -10.5px;
+    margin-left: -12px;
+    margin-right: -12px;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 48px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .group-2 {
+    position: absolute;
+    width: 1186px;
+    height: 68px;
+    top: 229px;
+    left: 38px;
+  }
+  
+  .admin-page-done .group-3 {
+    position: absolute;
+    width: 1186px;
+    height: 68px;
+    top: 316px;
+    left: 38px;
+  }
+  /* Original CSS code should be injected here */
+  
+  .admin-page-done {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .admin-page-done .overlap-wrapper {
+    background-color: #ffffff;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1440px;
+    height: 1672px;
+    margin: 0 auto;
+  }
+  
+  .admin-page-done .overlap {
+    position: relative;
+    width: 2410px;
+    height: 2990px;
+    top: -203px;
+    left: -295px;
+  }
+  
+  .admin-page-done .ellipse,
+  .admin-page-done .div,
+  .admin-page-done .ellipse-2 {
+    position: absolute;
+    width: 1082px;
+    height: 1177px;
+    background-color: #ff7600bd;
+    border-radius: 541px / 588.5px;
+    filter: blur(400px);
+  }
+  
+  .admin-page-done .ellipse {
+    top: 1813px;
+    left: 32px;
+  }
+  
+  .admin-page-done .div {
+    top: 0;
+    left: 0;
+  }
+  
+  .admin-page-done .ellipse-2 {
+    top: 748px;
+    left: 1328px;
+  }
+  
+  .admin-page-done .navigation {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 37px 80px;
+    position: absolute;
+    top: 203px;
+    left: 295px;
+  }
+  
+  .admin-page-done .text-wrapper {
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    color: #000000;
+    font-size: 96px;
+    line-height: 144px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .text-wrapper-2 {
+    width: 500px;
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    text-align: center;
+    line-height: 48px;
+  }
+  
+  .admin-page-done .button {
+    width: 674px;
+    height: 124px;
+    position: absolute;
+    top: 1660px;
+    left: 678px;
+    background-color: #ff7600bd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    border-radius: 30px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.05);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-page-done .button:hover {
+    background-color: #ff8c33;
+  }
+  
+  .admin-page-done .text-wrapper-3 {
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    color: #000000;
+    font-size: 32px;
+    line-height: 48px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .group {
+    position: absolute;
+    width: 1261px;
+    height: 1028px;
+    top: 489px;
+    left: 384px;
+  }
+  
+  .admin-page-done .recent-activity,
+  .admin-page-done .recent-activity-2 {
+    position: absolute;
+    width: 1261px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.25);
+  }
+  
+  .admin-page-done .recent-activity {
+    height: 524px;
+    top: 0;
+    left: 0;
+  }
+  
+  .admin-page-done .text-wrapper-4,
+  .admin-page-done .recent-activity-3 {
+    position: absolute;
+    width: 1217px;
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    color: #000000;
+    font-size: 48px;
+    line-height: 72px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .text-wrapper-4 {
+    top: 36px;
+    left: 22px;
+  }
+  
+  .admin-page-done .frame {
+    position: absolute;
+    width: 1186px;
+    height: 328px;
+    top: 139px;
+    left: 38px;
+    background-color: #e2e2e2;
+    border-radius: 30px;
+    overflow: hidden;
+    padding: 20px;
+  }
+  
+  .admin-page-done .user-johndoe {
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    line-height: 48px;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .admin-page-done .user-johndoe li {
+    margin-bottom: 20px;
+  }
+  
+  .admin-page-done .recent-activity-2 {
+    height: 440px;
+    top: 588px;
+    left: 0;
+  }
+  
+  .admin-page-done .recent-activity-3 {
+    top: 35px;
+    left: 22px;
+  }
+  
+  .admin-page-done .recipe-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .admin-page-done .recipe-item {
+    margin-bottom: 19px;
+  }
+  
+  .admin-page-done .overlap-2 {
+    position: relative;
+    width: 1188px;
+    height: 68px;
+  }
+  
+  .admin-page-done .div-wrapper {
+    position: absolute;
+    width: 1188px;
+    height: 68px;
+    top: 0;
+    left: 0;
+  }
+  
+  .admin-page-done .overlap-group-2 {
+    position: relative;
+    width: 1186px;
+    height: 68px;
+    background-color: #d9d9d9;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .admin-page-done .text-wrapper-5 {
+    margin-left: 25px;
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    color: #000000;
+    font-size: 32px;
+    line-height: 48px;
+    white-space: nowrap;
+  }
+  
+  .admin-page-done .button-2,
+  .admin-page-done .button-3 {
+    position: absolute;
+    top: 10px;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    border-radius: 30px;
+    border: 5px solid #000000;
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    color: #000000;
+    font-size: 32px;
+    line-height: 48px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-page-done .button-2 {
+    width: 129px;
+    left: 875px;
+    background-color: #ff7600bd;
+  }
+  
+  .admin-page-done .button-2:hover {
+    background-color: #ff8c33;
+  }
+  
+  .admin-page-done .button-3 {
+    width: 150px;
+    left: 1014px;
+    background-color: #e50000;
+  }
+  
+  .admin-page-done .button-3:hover {
+    background-color: #ff3333;
+  }
+  
+  @media (max-width: 1440px) {
+    .admin-page-done .overlap-wrapper,
+    .admin-page-done .navigation {
+      width: 100%;
+    }
+  
+    .admin-page-done .overlap {
+      left: 0;
+      width: 100%;
+    }
+  
+    .admin-page-done .group,
+    .admin-page-done .recent-activity,
+    .admin-page-done .recent-activity-2 {
+      width: 90%;
+      left: 5%;
+    }
+  
+    .admin-page-done .button {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .admin-page-done .text-wrapper {
+      font-size: 64px;
+      line-height: 96px;
+    }
+  
+    .admin-page-done .text-wrapper-2 {
+      font-size: 24px;
+      line-height: 36px;
+    }
+  
+    .admin-page-done .button {
+      width: 90%;
+      max-width: 674px;
+    }
+  
+    .admin-page-done .text-wrapper-3 {
+      font-size: 24px;
+      line-height: 36px;
+    }
+  
+    .admin-page-done .text-wrapper-4,
+    .admin-page-done .recent-activity-3 {
+      font-size: 36px;
+      line-height: 54px;
+    }
+  
+    .admin-page-done .user-johndoe,
+    .admin-page-done .text-wrapper-5,
+    .admin-page-done .text-wrapper-6,
+    .admin-page-done .text-wrapper-7 {
+      font-size: 24px;
+      line-height: 36px;
+    }
+  }
+  
