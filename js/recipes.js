@@ -12,10 +12,18 @@ const recipes = [
     rating: 4.8,
     ratingCount: 124,
     tags: ["Asian", "Seafood"],
-    ingredients: ["broth", "soy sauce", "sesame oil", "ginger", "garlic", "noodles", "shrimp", "mushrooms", "bok choy", "green onions"]
+    ingredients: ["broth", "soy sauce", "sesame oil", "ginger", "garlic", "noodles", "shrimp", "mushrooms", "bok choy", "green onions"],
+    instructions: [
+      "Prepare the broth with ginger and garlic.",
+      "Cook the noodles according to package directions.",
+      "Sauté shrimp and mushrooms.",
+      "Combine broth, noodles, shrimp, mushrooms, and bok choy.",
+      "Garnish with green onions and serve."
+    ]
   },
   {
     name: "Healthy Rice Bowl",
+    slug: "healthy-rice",
     image: "Healthy Rice.jpg",
     description: "Brown rice bowl with roasted vegetables, soft-boiled egg, and tahini dressing.",
     time: "20 min",
@@ -27,7 +35,14 @@ const recipes = [
     rating: 4.5,
     ratingCount: 98,
     tags: ["Mediterranean", "Vegetarian"],
-    ingredients: ["rice", "chickpeas", "spinach", "avocado", "tomatoes", "cucumber", "carrots", "tahini"]
+    ingredients: ["rice", "chickpeas", "spinach", "avocado", "tomatoes", "cucumber", "carrots", "tahini"],
+    instructions: [
+      "Cook brown rice.",
+      "Roast vegetables (chickpeas, carrots).",
+      "Prepare soft-boiled eggs.",
+      "Assemble the bowl with rice, spinach, roasted veggies, avocado, tomatoes, cucumber, and egg.",
+      "Drizzle with tahini dressing."
+    ]
   },
   {
     name: "Cheese Cake",
@@ -42,7 +57,14 @@ const recipes = [
     rating: 4.9,
     ratingCount: 200,
     tags: ["Dessert", "Cheesecake"],
-    ingredients: ["graham crackers", "butter", "sugar", "cream cheese", "sour cream", "vanilla", "eggs"]
+    ingredients: ["graham crackers", "butter", "sugar", "cream cheese", "sour cream", "vanilla", "eggs"],
+    instructions: [
+      "Make the graham cracker crust and press into pan.",
+      "Beat cream cheese, sugar, and vanilla until smooth.",
+      "Mix in sour cream and eggs.",
+      "Pour filling over crust.",
+      "Bake until set, then chill completely."
+    ]
   },
   {
     name: "Shish Tawook",
@@ -57,7 +79,12 @@ const recipes = [
     rating: 4.7,
     ratingCount: 150,
     tags: ["Mediterranean", "Chicken"],
-    ingredients: ["yogurt", "lemon", "olive oil", "garlic", "tomato paste", "paprika", "cumin", "coriander", "chicken", "onion", "bell peppers"]
+    ingredients: ["yogurt", "lemon", "olive oil", "garlic", "tomato paste", "paprika", "cumin", "coriander", "chicken", "onion", "bell peppers"],
+    instructions: [
+      "Marinate chicken in yogurt, lemon, and spices.",
+      "Grill chicken until cooked through.",
+      "Serve with garlic sauce."
+    ]
   },
   {
     name: "Macarons",
@@ -72,7 +99,14 @@ const recipes = [
     rating: 4.6,
     ratingCount: 80,
     tags: ["Dessert", "French"],
-    ingredients: ["almond flour", "powdered sugar", "egg whites", "cream of tartar", "butter", "vanilla"]
+    ingredients: ["almond flour", "powdered sugar", "egg whites", "cream of tartar", "butter", "vanilla"],
+    instructions: [
+      "Sift almond flour and powdered sugar.",
+      "Beat egg whites and cream of tartar until stiff peaks.",
+      "Fold in almond flour mixture.",
+      "Pipe onto baking sheet.",
+      "Bake until set, then chill."
+    ]
   },
   {
     name: "Salmon",
@@ -87,7 +121,12 @@ const recipes = [
     rating: 4.8,
     ratingCount: 110,
     tags: ["Seafood", "Healthy"],
-    ingredients: ["salmon", "lemon", "garlic", "dill", "olive oil"]
+    ingredients: ["salmon", "lemon", "garlic", "dill", "olive oil"],
+    instructions: [
+      "Season salmon with dill and lemon.",
+      "Bake in oven until cooked through.",
+      "Serve with lemon and herbs."
+    ]
   },
   {
     name: "Fried Rice",
@@ -102,7 +141,14 @@ const recipes = [
     rating: 4.3,
     ratingCount: 90,
     tags: ["Asian", "Vegetarian"],
-    ingredients: ["rice", "eggs", "soy sauce", "garlic", "vegetables"]
+    ingredients: ["rice", "eggs", "soy sauce", "garlic", "vegetables"],
+    instructions: [
+      "Cook rice.",
+      "Sauté garlic and vegetables.",
+      "Add eggs and soy sauce.",
+      "Mix with cooked rice.",
+      "Serve."
+    ]
   },
   {
     name: "Chicken Wings",
@@ -117,7 +163,12 @@ const recipes = [
     rating: 4.6,
     ratingCount: 140,
     tags: ["Snacks", "Chicken"],
-    ingredients: ["chicken wings", "baking powder", "garlic powder", "salt", "pepper"]
+    ingredients: ["chicken wings", "baking powder", "garlic powder", "salt", "pepper"],
+    instructions: [
+      "Season chicken wings with baking powder, garlic powder, salt, and pepper.",
+      "Bake until crispy.",
+      "Serve with buffalo sauce."
+    ]
   },
   {
     name: "Chocolate Cake",
@@ -132,7 +183,14 @@ const recipes = [
     rating: 4.9,
     ratingCount: 220,
     tags: ["Dessert", "Chocolate"],
-    ingredients: ["flour", "sugar", "cocoa powder", "baking soda", "vanilla", "vinegar"]
+    ingredients: ["flour", "sugar", "cocoa powder", "baking soda", "vanilla", "vinegar"],
+    instructions: [
+      "Preheat oven to 350°F (175°C).",
+      "Mix flour, sugar, cocoa powder, baking soda, and vinegar.",
+      "Add eggs and vanilla.",
+      "Bake until set, then cool.",
+      "Frost and serve."
+    ]
   },
   {
     name: "Green Salad",
@@ -147,7 +205,12 @@ const recipes = [
     rating: 4.4,
     ratingCount: 60,
     tags: ["Healthy", "Vegetarian"],
-    ingredients: ["lettuce", "tomatoes", "cucumber", "avocado", "onion", "feta cheese"]
+    ingredients: ["lettuce", "tomatoes", "cucumber", "avocado", "onion", "feta cheese"],
+    instructions: [
+      "Wash and dry greens.",
+      "Toss with vinaigrette.",
+      "Add tomatoes, cucumber, avocado, and feta cheese."
+    ]
   },
   {
     name: "Ramen",
@@ -162,7 +225,14 @@ const recipes = [
     rating: 4.7,
     ratingCount: 130,
     tags: ["Asian", "Soup"],
-    ingredients: ["pork bones", "chicken", "noodles", "soy sauce", "garlic", "ginger"]
+    ingredients: ["pork bones", "chicken", "noodles", "soy sauce", "garlic", "ginger"],
+    instructions: [
+      "Boil pork bones and chicken for broth.",
+      "Cook noodles according to package directions.",
+      "Add soy sauce, garlic, and ginger to broth.",
+      "Add noodles and chicken.",
+      "Serve with toppings."
+    ]
   },
   {
     name: "Caesar Salad",
@@ -177,7 +247,12 @@ const recipes = [
     rating: 4.5,
     ratingCount: 70,
     tags: ["Salad", "Vegetarian"],
-    ingredients: ["romaine", "parmesan", "croutons", "anchovies", "garlic", "mustard"]
+    ingredients: ["romaine", "parmesan", "croutons", "anchovies", "garlic", "mustard"],
+    instructions: [
+      "Toss romaine with anchovies, garlic, and parmesan.",
+      "Add croutons and anchovies.",
+      "Dress with Caesar dressing."
+    ]
   },
   {
     name: "Burrito",
@@ -192,7 +267,13 @@ const recipes = [
     rating: 4.6,
     ratingCount: 100,
     tags: ["Mexican", "Wrap"],
-    ingredients: ["beef", "beans", "rice", "tortillas", "cheese"]
+    ingredients: ["beef", "beans", "rice", "tortillas", "cheese"],
+    instructions: [
+      "Cook beef and beans.",
+      "Cook rice.",
+      "Assemble burrito with beef, beans, rice, and cheese.",
+      "Roll up and serve."
+    ]
   },
   {
     name: "Steak",
@@ -207,7 +288,13 @@ const recipes = [
     rating: 4.8,
     ratingCount: 90,
     tags: ["Beef", "Grilled"],
-    ingredients: ["steak", "garlic", "rosemary", "thyme", "butter"]
+    ingredients: ["steak", "garlic", "rosemary", "thyme", "butter"],
+    instructions: [
+      "Season steak with garlic, rosemary, thyme, and salt.",
+      "Grill steak to desired doneness.",
+      "Melt butter and baste steak.",
+      "Serve with garlic butter."
+    ]
   },
   {
     name: "Red Sauce Pasta",
@@ -222,7 +309,13 @@ const recipes = [
     rating: 4.5,
     ratingCount: 80,
     tags: ["Italian", "Pasta"],
-    ingredients: ["pasta", "tomatoes", "garlic", "basil"]
+    ingredients: ["pasta", "tomatoes", "garlic", "basil"],
+    instructions: [
+      "Cook pasta.",
+      "Sauté garlic and tomatoes.",
+      "Add basil to pasta.",
+      "Serve with tomato sauce."
+    ]
   },
   {
     name: "Fettuccine",
@@ -237,7 +330,12 @@ const recipes = [
     rating: 4.7,
     ratingCount: 110,
     tags: ["Italian", "Pasta"],
-    ingredients: ["pasta", "cream", "parmesan", "butter"]
+    ingredients: ["pasta", "cream", "parmesan", "butter"],
+    instructions: [
+      "Cook pasta.",
+      "Melt butter and add parmesan.",
+      "Mix with pasta and cream."
+    ]
   },
   {
     name: "Spaghetti",
@@ -252,7 +350,12 @@ const recipes = [
     rating: 4.6,
     ratingCount: 120,
     tags: ["Italian", "Pasta"],
-    ingredients: ["pasta", "marinara sauce", "meatballs"]
+    ingredients: ["pasta", "marinara sauce", "meatballs"],
+    instructions: [
+      "Cook pasta.",
+      "Cook meatballs.",
+      "Add marinara sauce to pasta and meatballs."
+    ]
   },
   {
     name: "Shrimp Pasta",
@@ -267,7 +370,12 @@ const recipes = [
     rating: 4.8,
     ratingCount: 140,
     tags: ["Seafood", "Pasta"],
-    ingredients: ["shrimp", "pasta", "garlic", "butter"]
+    ingredients: ["shrimp", "pasta", "garlic", "butter"],
+    instructions: [
+      "Cook pasta.",
+      "Sauté shrimp and garlic.",
+      "Add shrimp to pasta and butter."
+    ]
   },
   {
     name: "Cherry Tomato Pasta",
@@ -282,7 +390,11 @@ const recipes = [
     rating: 4.5,
     ratingCount: 70,
     tags: ["Vegetarian", "Pasta"],
-    ingredients: ["pasta", "cherry tomatoes", "basil"]
+    ingredients: ["pasta", "cherry tomatoes", "basil"],
+    instructions: [
+      "Cook pasta.",
+      "Add cherry tomatoes and basil to pasta."
+    ]
   },
   {
     name: "Truffle Parmesan Pasta",
@@ -297,7 +409,12 @@ const recipes = [
     rating: 4.7,
     ratingCount: 90,
     tags: ["Italian", "Truffle"],
-    ingredients: ["pasta", "truffle", "parmesan", "mushrooms"]
+    ingredients: ["pasta", "truffle", "parmesan", "mushrooms"],
+    instructions: [
+      "Cook pasta.",
+      "Add truffle oil to pasta.",
+      "Add parmesan and mushrooms."
+    ]
   },
   {
     name: "Burger",
@@ -312,11 +429,61 @@ const recipes = [
     rating: 4.6,
     ratingCount: 150,
     tags: ["American", "Fast Food"],
-    ingredients: ["beef", "cheese", "lettuce", "tomato"]
+    ingredients: ["beef", "cheese", "lettuce", "tomato"],
+    instructions: [
+      "Form beef patty.",
+      "Grill or pan-fry patty to desired doneness.",
+      "Melt cheese on patty during last minute of cooking.",
+      "Toast burger bun.",
+      "Assemble burger with patty, lettuce, and tomato."
+    ]
+  },
+  {
+    name: "Summer Salad",
+    image: "Summer Salad.jpg",
+    description: "A light and refreshing salad perfect for warm weather.",
+    time: "15 min",
+    servings: 4,
+    categories: ["lunch", "salad"],
+    cuisine: "mediterranean",
+    diet: ["vegetarian", "gluten-free"],
+    badge: "",
+    rating: 4.6,
+    ratingCount: 55,
+    tags: ["Salad", "Summer", "Healthy", "Vegetarian"],
+    ingredients: ["mixed greens", "cherry tomatoes", "cucumber", "red onion", "bell pepper", "feta cheese", "olives", "lemon vinaigrette"],
+    instructions: [
+      "Wash and chop all vegetables.",
+      "Combine greens, tomatoes, cucumber, onion, and bell pepper in a large bowl.",
+      "Add feta cheese and olives.",
+      "Drizzle with lemon vinaigrette and toss gently.",
+      "Serve immediately."
+    ]
+  },
+  {
+    name: "Classic Pasta Dish",
+    image: "Classic Pasta Dish.jpg",
+    description: "A timeless and comforting pasta dish for any occasion.",
+    time: "30 min",
+    servings: 4,
+    categories: ["dinner", "pasta"],
+    cuisine: "italian",
+    diet: [],
+    badge: "",
+    rating: 4.5,
+    ratingCount: 90,
+    tags: ["Pasta", "Italian", "Classic"],
+    ingredients: ["pasta", "olive oil", "garlic", "tomatoes", "basil", "parmesan cheese"],
+    instructions: [
+      "Cook pasta according to package directions.",
+      "While pasta cooks, heat olive oil and sauté garlic.",
+      "Add tomatoes and simmer briefly.",
+      "Drain pasta and toss with sauce.",
+      "Stir in fresh basil and top with Parmesan cheese.",
+      "Serve immediately."
+    ]
   }
 ];
-
-
 
 window.print = () => {}
 
@@ -326,8 +493,6 @@ document.addEventListener("keydown", (event) => {
     search() ;
   }
 })
-
-
 
 function search() 
 {
@@ -344,25 +509,90 @@ function search()
   } 
 }
 
-
 function renderRecipes(recipes) 
 {
   const recipesCardsGrid = document.querySelector(".recipe-grid")
   recipesCardsGrid.innerHTML = generateRecipesGrid(recipes)
 }
 
-
 function generateRecipesGrid(recipes) {
+  // Get current favorites to check which recipes are already favorited
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  
   return recipes.map(recipe => {
-    const anchorHref = `all-recipes.html#${recipe.name.toLowerCase().replace(/\s+/g, "-")}`;
+    const recipeId = recipe.slug || recipe.name.toLowerCase().replace(/\s+/g, "-");
+    const recipeLink = `all-recipes.html#${recipeId}`;
+    const isFavorited = favorites.includes(recipe.name);
+    const heartIcon = isFavorited ? 'fas fa-heart favorited' : 'far fa-heart';
+    
     return `
-      <a href="${anchorHref}" class="recipe-link">
-        <div class="recipe-card">
+      <div class="recipe-card">
+        <a href="${recipeLink}" class="recipe-link" data-recipe-id="${recipeId}">
           <img src="../images/${recipe.image}" alt="${recipe.name}" class="recipe-image">
           <div class="recipe-title">${recipe.name}</div>
           <div class="recipe-desc">${recipe.description}</div>
-        </div>
-      </a>
+        </a>
+        <i class="${heartIcon} favorite-icon" data-recipe-name="${recipe.name}"></i>
+      </div>
     `;
   }).join("");
 }
+
+// Initialize the page when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Initial render of all recipes
+  renderRecipes(recipes);
+
+  // Add click handler for favorite icons
+  const recipesCardsGrid = document.querySelector(".recipe-grid");
+  recipesCardsGrid.addEventListener('click', (event) => {
+    if (event.target.classList.contains('favorite-icon')) {
+      // Check if user is logged in
+      if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const icon = event.target;
+      const recipeName = icon.getAttribute('data-recipe-name');
+      let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+      if (icon.classList.contains('favorited')) {
+        // Remove from favorites
+        favorites = favorites.filter(name => name !== recipeName);
+        icon.classList.remove('fas', 'favorited');
+        icon.classList.add('far');
+      } else {
+        // Add to favorites
+        favorites.push(recipeName);
+        icon.classList.remove('far');
+        icon.classList.add('fas', 'favorited');
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+  });
+
+  // Add search functionality
+  const searchBarInput = document.getElementById("recipes-search-input");
+  if (searchBarInput) {
+    searchBarInput.addEventListener('input', () => {
+      const query = searchBarInput.value.toLowerCase();
+      let filteredRecipes = recipes;
+
+      if (query) {
+        filteredRecipes = recipes.filter(
+          recipe => recipe.name.toLowerCase().includes(query) ||
+                   recipe.ingredients.some(ing => ing.toLowerCase().includes(query))
+        );
+      }
+
+      if (filteredRecipes.length > 0) {
+        renderRecipes(filteredRecipes);
+      } else {
+        const recipesGrid = document.querySelector(".recipe-grid");
+        recipesGrid.innerHTML = '<p style="text-align: center; margin-top: 20px;">No matching recipes found.</p>';
+      }
+    });
+  }
+});

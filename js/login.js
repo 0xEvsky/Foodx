@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const user = userArray.find(u => u.email === email && u.password === password);
         
         if (user) {
-            // Store login status in sessionStorage
-            sessionStorage.setItem('loggedIn', 'true');
+            // Store login status in localStorage
+            localStorage.setItem('isLoggedIn', 'true');
             sessionStorage.setItem('userEmail', email);
             if (user.name) {
                 sessionStorage.setItem('userName', user.name);

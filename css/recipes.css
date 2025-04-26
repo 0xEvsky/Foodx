@@ -107,6 +107,7 @@ header {
 }
 
 .recipe-card {
+    position: relative;
     margin-bottom: 20px;
     background-color: #fff; /* Add a white background to the card */
     border-radius: 10px; /* Match image border radius */
@@ -135,53 +136,70 @@ header {
     margin: 0 15px; /* Adjusted margins */
 }
 
-/* Footer */
-footer {
-    background-color: #fff;
-    padding: 30px 0;
-    margin-top: 40px;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 20px;
-    padding: 0 20px;
-}
-
-.footer-logo {
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
-.footer-links {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.footer-column h3 {
-    margin-top: 0;
-    font-size: 1rem;
-}
-
-.footer-column p {
-    margin: 5px 0;
-    font-size: 0.9rem;
+.favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
     color: #666;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
-.social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
+.favorite-icon:hover {
+    transform: scale(1.1);
 }
 
-.social-icon {
-    width: 24px;
-    height: 24px;
-    opacity: 0.7;
+.favorite-icon.favorited {
+    color: #ff4444;
+}
+
+.login-message, .no-favorites {
+    text-align: center;
+    padding: 50px 30px; /* Increased padding */
+    background: #ffffff; /* White background for better contrast */
+    border-radius: 12px; /* Slightly more rounded corners */
+    margin: 40px auto; /* More top/bottom margin */
+    max-width: 500px; /* Slightly narrower */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* Softer shadow */
+    border: 1px solid #eee; /* Subtle border */
+}
+
+.login-icon {
+    font-size: 2.5em; /* Larger icon */
+    color: #fa9000; /* Theme color */
+    margin-bottom: 20px; /* Space below icon */
+    display: block; /* Ensure it's centered */
+}
+
+.login-message p, .no-favorites p {
+    font-size: 1.1em; /* Slightly smaller than before */
+    color: #555; /* Softer text color */
+    margin-bottom: 25px; /* More space before button */
+    line-height: 1.6;
+}
+
+.login-button, .no-favorites a.btn {
+    display: inline-block;
+    padding: 12px 30px; /* Larger button padding */
+    background-color: #e91e63; /* Theme color pink/red */
+    color: white;
+    text-decoration: none;
+    border-radius: 25px; /* Pill shape */
+    font-weight: 500;
+    font-size: 1em;
+    margin-top: 15px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover, .no-favorites a.btn:hover {
+    background-color: #c2185b; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 @media (max-width: 768px) {

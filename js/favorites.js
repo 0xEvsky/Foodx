@@ -354,17 +354,19 @@ const recipes = [
   
   function generateRecipesGrid(recipes) {
     return recipes.map(recipe => {
-      const anchorHref = `all-recipes.html#${recipe.name.toLowerCase().replace(/\s+/g, "-")}`;
-      return `
-        <div class="recipe-card">
-          <a href="${anchorHref}" class="recipe-link">
-            <img src="../images/${recipe.image}" alt="${recipe.name}" class="recipe-image">
-            <div class="recipe-title">${recipe.name}</div>
-            <div class="recipe-desc">${recipe.description}</div>
-          </a>
-          <i class="fas fa-heart favorite-icon favorited" data-recipe-name="${recipe.name}"></i>
-        </div>
-      `;
+        const recipeId = recipe.slug || recipe.name.toLowerCase().replace(/\s+/g, "-");
+        const recipeLink = `all-recipes.html#${recipeId}`;
+        
+        return `
+            <div class="recipe-card">
+                <a href="${recipeLink}" class="recipe-link" data-recipe-id="${recipeId}">
+                    <img src="../images/${recipe.image}" alt="${recipe.name}" class="recipe-image">
+                    <div class="recipe-title">${recipe.name}</div>
+                    <div class="recipe-desc">${recipe.description}</div>
+                </a>
+                <i class="fas fa-heart favorite-icon favorited" data-recipe-name="${recipe.name}"></i>
+            </div>
+        `;
     }).join("");
   }
 
@@ -377,9 +379,10 @@ const recipes = [
     if (localStorage.getItem('isLoggedIn') !== 'true') {
         // User is not logged in - show login message
         recipesCardsGrid.innerHTML = `
-            <div class="login-message" style="text-align: center; padding: 20px; width: 100%;">
-                <p style="font-size: 1.2em; margin-bottom: 15px;">Please log in to view your favorite recipes</p>
-                <a href="login.html" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Login</a>
+            <div class="login-message">
+                <i class="fas fa-lock login-icon"></i>
+                <p>Please log in to view your favorite recipes</p>
+                <a href="login.html" class="btn login-button">Login</a>
             </div>
         `;
         // Hide search bar when not logged in
