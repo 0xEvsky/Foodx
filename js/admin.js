@@ -524,6 +524,135 @@ function renderManageRecipes() {
 
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    renderManageRecipes();
+document.addEventListener('DOMContentLoaded', function() {
+    displayRecipes();
+    
+    // Add event listener for the manage recipes section
+    const recipeList = document.getElementById('recipe-list');
+    if (recipeList) {
+        recipeList.addEventListener('click', function(e) {
+            if (e.target.classList.contains('delete-btn')) {
+                deleteRecipe(e.target.dataset.recipe);
+            } else if (e.target.classList.contains('edit-btn')) {
+                editRecipe(e.target.dataset.recipe);
+            }
+        });
+    }
 });
+
+function displayRecipes() {
+    const recipeList = document.getElementById('recipe-list');
+    if (!recipeList) return;
+    
+    // Clear the list
+    recipeList.innerHTML = '';
+    
+    // Get recipes from localStorage or use the default recipes array
+    let recipes = JSON.parse(localStorage.getItem('recipes')) || window.recipes || [];
+    
+    // Display each recipe
+    recipes.forEach(recipe => {
+        const recipeItem = document.createElement('div');
+        recipeItem.className = 'recipe-item';
+        recipeItem.innerHTML = `
+            <div class="recipe-info">
+                <img src="../images/${recipe.image}" alt="${recipe.name}" class="recipe-thumbnail">
+                <h3>${recipe.name}</h3>
+            </div>
+            <div class="recipe-actions">
+                <button class="edit-btn" data-recipe="${recipe.name}">Edit</button>
+                <button class="delete-btn" data-recipe="${recipe.name}">Delete</button>
+            </div>
+        `;
+        recipeList.appendChild(recipeItem);
+    });
+}
+
+function deleteRecipe(recipeName) {
+    if (confirm(`Are you sure you want to delete ${recipeName}?`)) {
+        // Get recipes from localStorage
+        let recipes = JSON.parse(localStorage.getItem('recipes')) || window.recipes || [];
+        
+        // Find the recipe index
+        const recipeIndex = recipes.findIndex(recipe => recipe.name === recipeName);
+        
+        if (recipeIndex !== -1) {
+            // Remove the recipe from the array
+            recipes.splice(recipeIndex, 1);
+            
+            // Update localStorage
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+            
+            // Refresh the display
+            displayRecipes();
+            
+            alert(`${recipeName} has been deleted.`);
+        }
+    }
+}
+
+function editRecipe(recipeName) {
+    // Store the recipe name to edit in localStorage
+    localStorage.setItem('editRecipe', recipeName);
+    
+    // Redirect to edit page
+    window.location.href = 'edit_recipe.html';
+}
+
+
+function renderManageRecipes() {
+    const manageRecipesList = document.getElementById("admin-manage-recipes-list");
+    const currentRecipes = loadRecipes();
+
+    manageRecipesList.innerHTML = "";
+    currentRecipes.forEach(recipe => {
+        const listItem = document.createElement("li")
+        listItem.classList.add("manage-recipe-item")
+
+        listItem.innerHTML = `
+            <div class="overLap-2">
+                <div class="div-wrapper">
+                    <div class="overlap-group-2"><span class="text-wrapper-5">${recipe.name}</span></div>
+                </div>
+                <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
+                <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
+            </div>
+            `;
+        
+        manageRecipesList.appendChild(listItem);
+    })
+
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderManageRecipes();
+    
+    // Handle edit and delete button clicks using event delegation
+    document.getElementById('admin-manage-recipes-list').addEventListener('click', function(e) {
+        if (e.target.closest('.button-2')) {
+            const recipeName = e.target.closest('.overLap-2').querySelector('.text-wrapper-5').textContent;
+            editRecipe(recipeName);
+        } else if (e.target.closest('.button-3')) {
+            const recipeName = e.target.closest('.overLap-2').querySelector('.text-wrapper-5').textContent;
+            deleteRecipe(recipeName);
+        }
+    });
+});
+
+function deleteRecipe(recipeName) {
+    if (confirm(`Are you sure you want to delete "${recipeName}"?`)) {
+        let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+        const index = recipes.findIndex(r => r.name === recipeName);
+        
+        if (index !== -1) {
+            recipes.splice(index, 1);
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+            renderManageRecipes(); // Refresh the list
+        }
+    }
+}
+
+function editRecipe(recipeName) {
+    localStorage.setItem('editRecipe', recipeName);
+    window.location.href = 'edit_recipe.html';
+}

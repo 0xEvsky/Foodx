@@ -166,33 +166,5 @@
             </a>
         </main>
     </div>
-
-    <script>
-        // Add event listeners for the edit and remove buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            // Edit buttons
-            const editButtons = document.querySelectorAll('.button-2');
-            editButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const recipeName = this.closest('.overlap-2').querySelector('.text-wrapper-5').textContent;
-                    // Redirect to edit page with recipe name as parameter
-                    window.location.href = `edit_recipe.html?recipe=${encodeURIComponent(recipeName)}`;
-                });
-            });
-            
-            // Remove buttons
-            const removeButtons = document.querySelectorAll('.button-3');
-            removeButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const recipeName = this.closest('.overlap-2').querySelector('.text-wrapper-5').textContent;
-                    if (confirm(`Are you sure you want to delete "${recipeName}"?`)) {
-                        // Here you would typically make an API call to delete the recipe
-                        // For now, we'll just remove the item from the DOM
-                        this.closest('.recipe-item').remove();
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

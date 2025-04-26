@@ -32,33 +32,31 @@
             <form action="#" method="POST">
                 <div class="form-group">
                     <label for="recipe_name">Recipe Name:</label>
-                    <input type="text" id="recipe_name" name="recipe_name" value="Sample Recipe Title" required>
+                    <input type="text" id="recipe_name" name="recipe_name" required>
                 </div>
                  <div class="form-group">
                     <label for="course">Course:</label>
                     <select id="course" name="course" required>
                         <option value="appetizers">Appetizers</option>
-                        <option value="main course" selected>Main Course</option>
+                        <option value="main course">Main Course</option>
                         <option value="dessert">Dessert</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="snacks">Snacks</option>
                     </select>
                 </div>
                 <div class="form-group" id="ingredients-group">
                     <label>Ingredients:</label>
                      <div class="ingredient-item">
-                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="Ingredient 1" required>
-                         <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" value="Quantity 1" required>
+                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" required>
+                         <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)">
                      </div>
-                     <div class="ingredient-item">
-                         <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="Ingredient 2" required>
-                         <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)" value="Quantity 2" required>
-                     </div>
-                     <p>(Adjust or add/remove ingredients as needed)</p>
                 </div>
                  <div class="form-group">
-                    <label for="description">Description / Instructions:</label>
-                    <textarea id="description" name="description" required>Existing detailed step-by-step instructions...</textarea>
+                    <label for="description">Instructions (one step per line):</label>
+                    <textarea id="description" name="description" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-block">Update Recipe</button>
+                <button type="submit" class="btn btn-block">Save Recipe</button>
             </form>
         </section>
     </main>
@@ -104,5 +102,7 @@
             <p>&copy; 2024 FoodX. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script src="../js/edit_recipe.js"></script>
 </body>
 </html>
