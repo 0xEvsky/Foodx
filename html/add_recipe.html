@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/add_recipe.css">
+    <script src="../js/add_recipe.js"></script>
     <style>
-        /* Additional styles for the enhanced form */
         .form-row {
             display: flex;
             gap: 20px;
@@ -143,18 +143,18 @@
     <main class="container">
         <section id="add-recipe-form" class="form-container">
             <h2 class="text-center">Recipe Details</h2>
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form>
                 <!-- Basic Recipe Information -->
                 <div class="form-row">
                     <div class="form-col">
                         <div class="form-group">
-                            <label for="recipe-name">Recipe Name:</label>
-                            <input type="text" id="recipe-name" name="recipe-name" class="form-control" required>
+                            <label for="add-recipe-name">Recipe Name:</label>
+                            <input type="text" id="add-recipe-name" name="recipe-name" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="category">Category:</label>
-                            <select id="category" name="category" class="form-control" required>
+                            <select id="add-recipe-category" name="category" class="form-control" required>
                                 <option value="">Select a category</option>
                                 <option value="breakfast">Breakfast</option>
                                 <option value="lunch">Lunch</option>
@@ -168,7 +168,7 @@
                         
                         <div class="form-group">
                             <label for="cuisine">Cuisine:</label>
-                            <select id="cuisine" name="cuisine" class="form-control">
+                            <select id="add-recipe-cuisine" name="cuisine" class="form-control">
                                 <option value="">Select a cuisine</option>
                                 <option value="american">American</option>
                                 <option value="italian">Italian</option>
@@ -190,15 +190,15 @@
                             </div>
                             <div class="form-col">
                                 <div class="form-group">
-                                    <label for="cook-time">Cook Time (mins):</label>
-                                    <input type="number" id="cook-time" name="cook-time" class="form-control" min="0">
+                                    <label for="add-cook-time">Cook Time (mins):</label>
+                                    <input type="number" id="add-cook-time" name="cook-time" class="form-control" min="0">
                                 </div>
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="servings">Servings:</label>
-                            <input type="number" id="servings" name="servings" class="form-control" min="1">
+                            <input type="number" id="add-recipe-servings" name="servings" class="form-control" min="1">
                         </div>
                         
                         <div class="form-group">
@@ -217,12 +217,12 @@
                             <div class="img-preview">
                                 <i class="fas fa-image"></i>
                             </div>
-                            <input type="file" id="recipe-image" name="recipe-image" class="img-upload-btn" accept="image/*">
+                            <input type="file" id="add-recipe-image" name="recipe-image" class="img-upload-btn" accept="image/*">
                         </div>
                         
                         <div class="form-group">
                             <label for="short-description">Short Description:</label>
-                            <textarea id="short-description" name="short-description" class="form-control" rows="4"></textarea>
+                            <textarea id="add-recipe-description" name="short-description" class="form-control" rows="4"></textarea>
                         </div>
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                         
                         <div class="form-control">
                             <label for="ingredient-name-1">Ingredient:</label>
-                            <input type="text" id="ingredient-name-1" name="ingredient-name[]" class="form-control" placeholder="e.g. Flour">
+                            <input type="text" id="ingredient-name-1" class="ingredient-name-input" name="ingredient-name[]" class="form-control" placeholder="e.g. Flour">
                         </div>
                         
                         <div class="img-upload">
@@ -298,7 +298,7 @@
                         
                         <div class="form-control">
                             <label for="ingredient-name-2">Ingredient:</label>
-                            <input type="text" id="ingredient-name-2" name="ingredient-name[]" class="form-control" placeholder="e.g. Sugar">
+                            <input type="text" id="ingredient-name-2" class="ingredient-name-input" name="ingredient-name[]" class="form-control" placeholder="e.g. Sugar">
                         </div>
                         
                         <div class="img-upload">
@@ -319,7 +319,7 @@
                 
                 <div class="form-group">
                     <label for="instructions">Cooking Instructions:</label>
-                    <textarea id="instructions" name="instructions" class="form-control" rows="8" placeholder="Enter step-by-step instructions..."></textarea>
+                    <textarea id="add-recipe-instructions" name="instructions" class="form-control" rows="8" placeholder="Enter step-by-step instructions..."></textarea>
                     <small class="form-text text-muted">Tip: Number your steps for clarity (e.g., 1. Preheat oven...)</small>
                 </div>
                 
@@ -339,7 +339,7 @@
                     <div class="form-col">
                         <div class="form-group">
                             <label for="tags">Tags (comma separated):</label>
-                            <input type="text" id="tags" name="tags" class="form-control tag-input" placeholder="e.g. healthy, quick, vegan">
+                            <input type="text" id="add-recipe-tags" name="tags" class="form-control tag-input" placeholder="e.g. healthy, quick, vegan">
                         </div>
                         
                         <div class="form-group">
@@ -383,7 +383,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-block">Add Recipe</button>
+                <button type="submit" class="btn btn-block" onclick="addRecipe()" >Add Recipe</button>
             </form>
         </section>
     </main>
