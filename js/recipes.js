@@ -485,29 +485,24 @@ const recipes = [
   }
 ];
 
+
+function initializeRecipesLocalStorage() {
+  if (!localStorage.getItem("recipes")) {
+    localStorage.setItem("recipes", JSON.stringify(recipes))
+  }
+}
+
+initializeRecipesLocalStorage();
+
+
+function loadRecipes() {
+  const recipesData = localStorage.getItem('recipes')
+  return recipesData ? JSON.parse(recipesData) : [];
+}
+
+
 window.print = () => {}
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    search() ;
-  }
-})
-
-function search() 
-{
-  const searchBarInput = document.getElementById("recipes-search-input")
-  const query = searchBarInput.value.toLowerCase()
-
-  if (!(query === "")) {
-
-    filterdResults = recipes.filter(
-      recipe => recipe.name.toLowerCase().includes(query) || recipe.ingredients.includes(query)
-    )
-  
-    renderRecipes(filterdResults)
-  } 
-}
 
 function renderRecipes(recipes) 
 {
@@ -540,10 +535,10 @@ function generateRecipesGrid(recipes) {
 
 // Initialize the page when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Initial render of all recipes
-  renderRecipes(recipes);
+  
+  initialRecipes = loadRecipes();
+  renderRecipes(initialRecipes);
 
-  // Add click handler for favorite icons
   const recipesCardsGrid = document.querySelector(".recipe-grid");
   recipesCardsGrid.addEventListener('click', (event) => {
     if (event.target.classList.contains('favorite-icon')) {
@@ -573,15 +568,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Add search functionality
   const searchBarInput = document.getElementById("recipes-search-input");
   if (searchBarInput) {
     searchBarInput.addEventListener('input', () => {
       const query = searchBarInput.value.toLowerCase();
-      let filteredRecipes = recipes;
-
+      
       if (query) {
-        filteredRecipes = recipes.filter(
+        filteredRecipes = loadRecipes().filter(
           recipe => recipe.name.toLowerCase().includes(query) ||
                    recipe.ingredients.some(ing => ing.toLowerCase().includes(query))
         );
