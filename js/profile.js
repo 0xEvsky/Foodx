@@ -35,11 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const isAdmin = sessionStorage.getItem('isAdmin') === 'true'; // Keep admin check in sessionStorage if needed
     
+    // Commented out the admin redirection block
+    /*
     if (isLoggedIn && isAdmin) {
         console.log('Admin detected, redirecting to admin.html');
         window.location.href = 'admin.html'; 
-    } else if (isLoggedIn) {
-        console.log('Regular user detected, loading profile page.');
+    } else*/ if (isLoggedIn) {
+        console.log('Regular user or admin detected, loading profile page.');
         const userName = sessionStorage.getItem('userName');
         const userEmail = sessionStorage.getItem('userEmail');
         
