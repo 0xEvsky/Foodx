@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/recipe.css">
     <style>
-        /* General Body & Font */
         body {
             font-family: 'Inter', sans-serif;
             color: #333;
             line-height: 1.6;
         }
         .container {
-            max-width: 960px; /* Slightly wider for better recipe layout */
+            max-width: 960px;
             margin: 20px auto;
             margin-top: 100px;
             padding: 0 15px;
@@ -37,15 +36,13 @@
             margin-bottom: 40px;
         }
 
-        /* Add padding to main content to prevent overlap with fixed/sticky main nav */
         main.container {
-            padding-top: 100px; /* Increased padding */
+            padding-top: 100px;
         }
 
-        /* Recipe Navigation (Sticky) */
         .recipe-navigation {
             position: sticky;
-            top: 80px; /* Adjusted top position */
+            top: 80px;
             background: #f9f9f9;
             padding: 20px;
             border-radius: 12px;
@@ -83,29 +80,27 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Individual Recipe Card Styling */
         .recipe-card {
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
             margin-bottom: 60px;
-            padding: 30px; /* Add padding inside the card */
-            display: none; /* Hide all recipes by default - controlled by JS */
+            padding: 30px;
+            display: none;
         }
         .recipe-card:last-child {
             border-bottom: none;
         }
 
-        /* Recipe Header Enhancements */
         .recipe-header {
             display: flex;
-            flex-direction: column; /* Stack image above text */
+            flex-direction: column;
             gap: 25px;
             margin-bottom: 30px;
         }
         .recipe-image-large {
             width: 100%;
-            max-height: 450px; /* Limit image height */
+            max-height: 450px;
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -113,12 +108,12 @@
         .recipe-title-section .section-title {
             font-size: 2.2em;
             margin-bottom: 15px;
-            color: #e91e63; /* Highlight title */
+            color: #e91e63;
         }
         .recipe-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px 20px; /* Row and column gap */
+            gap: 10px 20px;
             color: #555;
             font-size: 0.95em;
             margin-bottom: 20px;
@@ -148,11 +143,10 @@
             background-color: #e0e0e0;
         }
 
-        /* Section Styling */
         .recipe-overview, .recipe-ingredients, .recipe-instructions, .recipe-tips, .recipe-actions, .recipe-reviews {
             margin-bottom: 35px;
             padding-bottom: 25px;
-            border-bottom: 1px dashed #eee; /* Dashed separator */
+            border-bottom: 1px dashed #eee;
         }
         .recipe-card > section:last-of-type {
              border-bottom: none;
@@ -172,7 +166,6 @@
             line-height: 1.7;
         }
 
-        /* Ingredients Styling */
         .ingredients-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -216,7 +209,6 @@
             text-align: right;
         }
 
-        /* Instructions Styling */
         .instructions-list {
             list-style: none;
             padding: 0;
@@ -256,7 +248,6 @@
             line-height: 1.6;
         }
 
-        /* Tips Styling */
         .tips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -286,7 +277,6 @@
             margin: 0;
         }
 
-        /* Actions & Reviews Styling */
         .recipe-actions {
              display: flex;
              gap: 15px;
@@ -294,7 +284,7 @@
         }
         .recipe-actions .btn {
             padding: 10px 20px;
-            border-radius: 20px; /* Pill shape */
+            border-radius: 20px;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
@@ -307,7 +297,7 @@
             background: #f9f9f9;
             padding: 15px;
             border-radius: 8px;
-            display: inline-block; /* Fit content */
+            display: inline-block;
         }
         .rating-average {
             display: flex;
@@ -320,7 +310,7 @@
             color: #e91e63;
         }
         .stars i {
-            color: #f5c518; /* Gold color for stars */
+            color: #f5c518;
             font-size: 1.1em;
         }
         .rating-count {
@@ -328,7 +318,6 @@
             color: #666;
         }
 
-        /* Jump to Top Button */
         .jump-to-top {
             position: fixed;
             bottom: 30px;
@@ -350,9 +339,8 @@
             transform: translateY(-3px);
         }
 
-        /* Single Recipe View Navigation */
         #single-recipe-view {
-            margin-bottom: 30px; /* Add space below buttons */
+            margin-bottom: 30px;
         }
         .recipe-navigation-buttons {
             display: flex;
@@ -379,12 +367,11 @@
             cursor: not-allowed;
         }
         .back-to-all {
-            display: inline-flex; /* Align icon better */
+            display: inline-flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* Add styles for the favorite button */
         .favorite-btn {
             display: inline-flex;
             align-items: center;
@@ -437,11 +424,9 @@
     </header>
 
     <main class="container">
-        <!-- Recipe cards will be dynamically inserted here -->
         <div id="recipe-grid" class="recipe-grid"></div>
     </main>
 
-    <!-- Include the recipes data and functionality -->
     <script src="../js/recipes.js"></script>
     <script src="../js/all-recipes.js"></script>
 </body>

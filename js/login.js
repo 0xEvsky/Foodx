@@ -1,38 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Configuration (Replace with secure method in real app!) ---
-    const CORRECT_ADMIN_CODE = "Admin2025#"; // IMPORTANT: Demo only, validate server-side!
-    // ---------------------------------------------------------------
+    const CORRECT_ADMIN_CODE = "Admin2025#"; 
 
     const authContainer = document.getElementById('auth-container');
     const loginForm = document.getElementById('login-form');
     const signupForm = document.getElementById('signup-form');
     const showSignupBtn = document.getElementById('show-signup');
     const showLoginBtn = document.getElementById('show-login');
-    const adminCheckbox = document.getElementById('signup-is-admin-check'); // New Checkbox
-    const adminCodeWrapper = document.getElementById('admin-code-wrapper'); // New Wrapper
+    const adminCheckbox = document.getElementById('signup-is-admin-check'); 
+    const adminCodeWrapper = document.getElementById('admin-code-wrapper'); 
 
-    // --- Form Switching ---
     showSignupBtn?.addEventListener('click', () => {
         authContainer?.classList.remove('show-login');
         authContainer?.classList.add('show-signup');
-        clearAllErrors(); // Clear errors when switching
-        adminCheckbox.checked = false; // Uncheck admin on switch
-        adminCodeWrapper?.classList.remove('active'); // Hide admin code field
+        clearAllErrors(); 
+        adminCheckbox.checked = false; 
+        adminCodeWrapper?.classList.remove('active'); 
     });
 
     showLoginBtn?.addEventListener('click', () => {
         authContainer?.classList.remove('show-signup');
         authContainer?.classList.add('show-login');
-        clearAllErrors(); // Clear errors when switching
+        clearAllErrors(); 
     });
 
-    // --- Toggle Admin Code Field --- 
     adminCheckbox?.addEventListener('change', () => {
         if (adminCheckbox.checked) {
             adminCodeWrapper?.classList.add('active');
         } else {
             adminCodeWrapper?.classList.remove('active');
-            // Clear admin code input and error if unchecked
             const adminCodeInput = document.getElementById('signup-admin-code');
             if(adminCodeInput) {
                 adminCodeInput.value = '';
@@ -41,20 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Input Validation Styling (Real-time feedback could be added here) ---
     const inputs = document.querySelectorAll('.auth-form-container input[required]');
     inputs.forEach(input => {
         input.addEventListener('blur', () => validateInput(input));
-        input.addEventListener('input', () => clearError(input)); // Clear error on typing
+        input.addEventListener('input', () => clearError(input)); 
     });
 
-    // --- Login Form Submission (AJAX) ---
     loginForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitButton = loginForm.querySelector('button[type="submit"]');
         const serverErrorDiv = document.getElementById('login-server-error');
 
-        // Basic frontend validation
         if (!validateForm(loginForm)) return;
 
         setLoading(submitButton, true);
@@ -63,36 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
 
-        // --- Simulate Server Interaction (Replace with actual fetch) ---
         try {
-            // --- Replace this block with actual fetch() call ---
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 1000)); 
             const users = localStorage.getItem('users');
             const userArray = users ? JSON.parse(users) : [];
             const user = userArray.find(u => u.email === email && u.password === password);
 
             if (user) {
-                // Login successful
                 localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('isAdmin', user.isAdmin || 'false'); // Store admin status
+                localStorage.setItem('isAdmin', user.isAdmin || 'false'); 
                 sessionStorage.setItem('userEmail', email);
                 if (user.name) {
                     sessionStorage.setItem('userName', user.name);
                 }
                 
-                // Redirect after success (maybe add a success animation/message first)
                 window.location.href = 'index.html'; 
-                // setLoading(submitButton, false); // Not strictly needed if redirecting
 
             } else {
-                // Login failed
                 showServerError(serverErrorDiv, 'Invalid email or password.');
                 setLoading(submitButton, false);
             }
-            // --- End of fetch() replacement block ---
 
             /* 
-            // Example using actual fetch:
+            
             const response = await fetch('/api/login', { // Your actual API endpoint
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -102,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Login successful (handle session/token storage)
+                
                 localStorage.setItem('isLoggedIn', 'true'); 
-                // ... store other user data (token, name, isAdmin)
+                
                 window.location.href = 'index.html'; 
             } else {
-                // Login failed - show server error message
+                
                 showServerError(serverErrorDiv, data.message || 'Login failed. Please try again.');
                 setLoading(submitButton, false);
             } 
@@ -118,10 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
             showServerError(serverErrorDiv, 'An unexpected error occurred. Please try again.');
             setLoading(submitButton, false);
         }
-        // --- End of Simulation ---
     });
 
-    // --- Signup Form Submission (AJAX) ---
     signupForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitButton = signupForm.querySelector('button[type="submit"]');
@@ -129,10 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const passwordInput = document.getElementById('signup-password');
         const confirmPasswordInput = document.getElementById('signup-confirm-password');
         const adminCodeInput = document.getElementById('signup-admin-code');
-        const isAdminCheckboxChecked = adminCheckbox.checked; // Checkbox state
-        let isAdminUser = false; // Assume not admin initially
+        const isAdminCheckboxChecked = adminCheckbox.checked; 
+        let isAdminUser = false; 
 
-        // Basic frontend validation (excluding admin code for now)
         let isFormValid = true;
         signupForm.querySelectorAll('input[required]:not(#signup-admin-code)').forEach(input => {
              if (!validateInput(input)) {
@@ -141,31 +123,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
          if (!isFormValid) return;
 
-        // Password match validation
         if (passwordInput.value !== confirmPasswordInput.value) {
             showError(confirmPasswordInput, 'Passwords do not match.');
             return;
         } else {
-            clearError(confirmPasswordInput); // Clear error if they now match
+            clearError(confirmPasswordInput); 
         }
 
-        // Admin Code Validation (only if checkbox is checked)
         if (isAdminCheckboxChecked) {
             const adminCode = adminCodeInput.value;
             if (!adminCode) {
                 showError(adminCodeInput, 'Admin code is required.');
-                return; // Stop if admin checkbox checked but code is empty
+                return; 
             } else if (adminCode === CORRECT_ADMIN_CODE) {
-                isAdminUser = true; // Set admin status
+                isAdminUser = true; 
                 clearError(adminCodeInput);
             } else {
                 showError(adminCodeInput, 'Invalid Admin Code.');
-                return; // Stop if code is incorrect
+                return; 
             }
         } else {
-             // Ensure admin status is false if checkbox not checked
              isAdminUser = false; 
-             clearError(adminCodeInput); // Clear any previous error just in case
+             clearError(adminCodeInput); 
         }
 
         setLoading(submitButton, true);
@@ -175,10 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('signup-email').value;
         const password = passwordInput.value;
 
-        // --- Simulate Server Interaction (Replace with actual fetch) ---
         try {
-             // --- Replace this block with actual fetch() call ---
-             await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
+             await new Promise(resolve => setTimeout(resolve, 1500)); 
              const users = localStorage.getItem('users');
              const userArray = users ? JSON.parse(users) : [];
              
@@ -186,28 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
              if (existingUser) {
                  showServerError(serverErrorDiv, 'An account with this email already exists.');
                  setLoading(submitButton, false);
-                 return; // Stop execution
+                 return; 
              }
 
-             // Add new user (assuming success)
-             const newUser = { name, email, password, isAdmin: isAdminUser }; // Use determined admin status
+             const newUser = { name, email, password, isAdmin: isAdminUser }; 
              userArray.push(newUser);
              localStorage.setItem('users', JSON.stringify(userArray));
 
-             // Optional: Automatically log in the user after signup
              localStorage.setItem('isLoggedIn', 'true');
-             localStorage.setItem('isAdmin', isAdminUser.toString()); // Store as string
+             localStorage.setItem('isAdmin', isAdminUser.toString()); 
              sessionStorage.setItem('userEmail', email);
              sessionStorage.setItem('userName', name);
 
-            // Redirect after success
             window.location.href = 'index.html'; 
-             // setLoading(submitButton, false); // Not strictly needed if redirecting
-
-            // --- End of fetch() replacement block ---
 
             /*
-             // Example using actual fetch:
+            
             const response = await fetch('/api/signup', { // Your actual API endpoint
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -217,12 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Signup successful (handle session/token storage, maybe auto-login)
+                
                 localStorage.setItem('isLoggedIn', 'true'); 
-                // ... store other user data
+                
                 window.location.href = 'index.html'; // Or show a success message and switch to login
             } else {
-                // Signup failed - show server error message
+                
                 showServerError(serverErrorDiv, data.message || 'Signup failed. Please try again.');
                 setLoading(submitButton, false);
             }
@@ -233,10 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showServerError(serverErrorDiv, 'An unexpected error occurred. Please try again.');
             setLoading(submitButton, false);
         }
-        // --- End of Simulation ---
     });
-
-    // --- Helper Functions ---
 
     function setLoading(button, isLoading) {
         if (!button) return;
@@ -250,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function validateInput(input) {
-        const errorSpan = input.nextElementSibling; // Assuming error span is right after input
+        const errorSpan = input.nextElementSibling; 
         if (!input.checkValidity()) {
             input.classList.add('input-error');
             if (errorSpan && errorSpan.classList.contains('error-message')) {

@@ -1,168 +1,148 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Common.js: DOMContentLoaded fired.'); // DEBUG
+    console.log('Common.js: DOMContentLoaded fired.');
     updateHeaderNav();
     addSmoothScrolling();
 });
 
 function updateHeaderNav() {
-    console.log('Common.js: updateHeaderNav started.'); // DEBUG
+    console.log('Common.js: updateHeaderNav started.');
     const navUl = document.querySelector('.main-nav .nav-container ul');
     if (!navUl) {
-        console.error('Common.js: Navigation list (.main-nav .nav-container ul) not found!'); // DEBUG
+        console.error('Common.js: Navigation list (.main-nav .nav-container ul) not found!');
         return; 
     }
 
     const loginLi = navUl.querySelector('a[href="login.html"]')?.closest('li');
     const profileLi = navUl.querySelector('a[href="profile.html"]')?.closest('li');
-    console.log('Common.js: Found loginLi:', loginLi); // DEBUG
-    console.log('Common.js: Found profileLi:', profileLi); // DEBUG
+    console.log('Common.js: Found loginLi:', loginLi);
+    console.log('Common.js: Found profileLi:', profileLi);
 
-    // Remove existing logout link and admin link if present to prevent duplicates
     const existingLogoutLi = navUl.querySelector('#logout-link')?.closest('li');
     if (existingLogoutLi) {
-        console.log('Common.js: Removing existing logout link.'); // DEBUG
+        console.log('Common.js: Removing existing logout link.');
         navUl.removeChild(existingLogoutLi);
     }
     const existingAdminLi = navUl.querySelector('#admin-link')?.closest('li');
     if (existingAdminLi) {
-        console.log('Common.js: Removing existing admin link.'); // DEBUG
+        console.log('Common.js: Removing existing admin link.');
         navUl.removeChild(existingAdminLi);
     }
 
 
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Read admin status from localStorage
-    console.log('Common.js: isLoggedIn:', isLoggedIn, 'isAdmin:', isAdmin); // DEBUG
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    console.log('Common.js: isLoggedIn:', isLoggedIn, 'isAdmin:', isAdmin);
 
     if (isLoggedIn) {
-        // --- User is Logged In ---
-        console.log('Common.js: User IS logged in.'); // DEBUG
+        console.log('Common.js: User IS logged in.');
         if (loginLi) {
-            loginLi.style.display = 'none'; // Hide Login link
+            loginLi.style.display = 'none';
         } else {
-            console.warn('Common.js: Login link <li> not found to hide.'); // DEBUG
+            console.warn('Common.js: Login link <li> not found to hide.');
         }
 
-        let referenceNodeForLogout = null; // Node before which logout should be inserted
+        let referenceNodeForLogout = null;
 
         if (isAdmin) {
-            // --- Admin User ---
-            console.log('Common.js: User is ADMIN. Hiding profile, adding admin link.'); // DEBUG
+            console.log('Common.js: User is ADMIN. Hiding profile, adding admin link.');
             if (profileLi) {
-                profileLi.style.display = 'none'; // Hide Profile icon
+                profileLi.style.display = 'none';
             } else {
-                 console.warn('Common.js: Profile link <li> not found to hide for admin.'); // DEBUG
+                 console.warn('Common.js: Profile link <li> not found to hide for admin.');
             }
 
-            // Create and add Admin Panel link
             const adminLi = document.createElement('li');
-            adminLi.innerHTML = '<a href="admin.html" id="admin-link" class="nav-link">Admin Panel</a>'; // Added class for potential styling
+            adminLi.innerHTML = '<a href="admin.html" id="admin-link" class="nav-link">Admin Panel</a>';
             
-            // Insert Admin link where profile link was, or before login if profile missing
-            const targetNodeForAdmin = profileLi || loginLi; 
+            const targetNodeForAdmin = profileLi || loginLi;
             if (targetNodeForAdmin) {
                 navUl.insertBefore(adminLi, targetNodeForAdmin);
-                referenceNodeForLogout = targetNodeForAdmin; // Logout goes after admin link
+                referenceNodeForLogout = targetNodeForAdmin;
             } else {
-                navUl.appendChild(adminLi); // Append if neither profile nor login found (fallback)
-                referenceNodeForLogout = null; // Logout will be appended
-                 console.warn('Common.js: Neither profile nor login link found, appending admin link.'); // DEBUG
+                navUl.appendChild(adminLi);
+                referenceNodeForLogout = null;
+                 console.warn('Common.js: Neither profile nor login link found, appending admin link.');
             }
 
         } else {
-            // --- Regular User ---
-            console.log('Common.js: User is REGULAR. Showing profile.'); // DEBUG
+            console.log('Common.js: User is REGULAR. Showing profile.');
             if (profileLi) {
-                profileLi.style.display = ''; // Ensure Profile icon is visible
-                referenceNodeForLogout = profileLi.nextSibling; // Logout goes after profile link
+                profileLi.style.display = '';
+                referenceNodeForLogout = profileLi.nextSibling;
             } else {
-                console.warn('Common.js: Profile link <li> not found to show for regular user.'); // DEBUG
-                referenceNodeForLogout = loginLi; // Fallback: insert logout before login link if profile missing
+                console.warn('Common.js: Profile link <li> not found to show for regular user.');
+                referenceNodeForLogout = loginLi;
             }
         }
 
-        // Create and add Logout link (common for both admin and regular logged-in users)
         const logoutLi = document.createElement('li');
-        logoutLi.innerHTML = '<a href="#" id="logout-link" class="nav-link">Logout</a>'; // Added class
+        logoutLi.innerHTML = '<a href="#" id="logout-link" class="nav-link">Logout</a>';
         
         if (referenceNodeForLogout) {
              navUl.insertBefore(logoutLi, referenceNodeForLogout);
         } else {
-            navUl.appendChild(logoutLi); // Append if no reference node determined
+            navUl.appendChild(logoutLi);
         }
 
-        // Add logout functionality
         const logoutLink = document.getElementById('logout-link');
         if (logoutLink) {
             logoutLink.addEventListener('click', handleLogout);
         } else {
-            console.error('Common.js: Could not find logout link element after adding it!'); // DEBUG
+            console.error('Common.js: Could not find logout link element after adding it!');
         }
 
     } else {
-        // --- User is Not Logged In ---
-        console.log('Common.js: User is NOT logged in. Ensuring login visible, profile hidden.'); // DEBUG
+        console.log('Common.js: User is NOT logged in. Ensuring login visible, profile hidden.');
         if (loginLi) {
-            loginLi.style.display = ''; // Ensure Login link is visible
+            loginLi.style.display = '';
         } else {
-            console.warn('Common.js: Login link <li> not found to ensure visible.'); // DEBUG
+            console.warn('Common.js: Login link <li> not found to ensure visible.');
         }
         if (profileLi) {
-             profileLi.style.display = 'none'; // Explicitly hide profile icon when logged out
+             profileLi.style.display = 'none';
         } else {
-             console.warn('Common.js: Profile link <li> not found to hide when logged out.'); // DEBUG
+             console.warn('Common.js: Profile link <li> not found to hide when logged out.');
         }
-        // Logout and Admin links were already removed or weren't there
     }
-    console.log('Common.js: updateHeaderNav finished.'); // DEBUG
+    console.log('Common.js: updateHeaderNav finished.');
 }
 
 function handleLogout(event) {
-    console.log('Common.js: handleLogout called.'); // DEBUG
+    console.log('Common.js: handleLogout called.');
     event.preventDefault();
     
-    // Clear login status and related info from both localStorage and sessionStorage
     localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('isAdmin'); // Remove isAdmin from localStorage
-    localStorage.removeItem('favorites'); // Assuming favorites are in localStorage
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('favorites');
     sessionStorage.removeItem('userEmail');
     sessionStorage.removeItem('userName');
-    // Clear any other relevant session/local storage items if necessary
     
-    console.log('Common.js: User logged out, redirecting...'); // DEBUG
+    console.log('Common.js: User logged out, redirecting...');
     
-    // Redirect to login page
     window.location.href = 'login.html'; 
 }
 
-// --- Smooth Scrolling --- 
 function addSmoothScrolling() {
-    console.log('Common.js: Initializing smooth scroll.'); // DEBUG
+    console.log('Common.js: Initializing smooth scroll.');
     document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const hrefAttribute = this.getAttribute('href');
-            // Check if it links to an element on the *current* page
-            // Simple check: Does an element with this ID exist?
+            
             const targetElement = document.querySelector(hrefAttribute);
             
             if (targetElement) {
-                 console.log(`Common.js: Smooth scrolling to ${hrefAttribute}`); // DEBUG
-                e.preventDefault(); // Prevent default jump
+                 console.log(`Common.js: Smooth scrolling to ${hrefAttribute}`);
+                e.preventDefault();
                 targetElement.scrollIntoView({
                     behavior: 'smooth'
                 });
-                // Optional: Update URL hash without jumping
-                // history.pushState(null, null, hrefAttribute);
             } else {
-                 console.log(`Common.js: Target ${hrefAttribute} not found on this page, default behavior.`); // DEBUG
-                 // Allow default behavior if the target isn't on the current page
+                 console.log(`Common.js: Target ${hrefAttribute} not found on this page, default behavior.`);
             }
         });
     });
 }
 
-// Ensure smooth scroll initialization also happens if DOMContentLoaded already fired
-// (e.g., if script is loaded async without defer)
 if (document.readyState !== 'loading') {
     addSmoothScrolling();
 } else {

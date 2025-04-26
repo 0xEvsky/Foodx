@@ -3,16 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminSignupCheckbox = document.getElementById('admin_signup');
     const adminPasscodeGroup = document.getElementById('admin_passcode_group');
     const adminPasscode = document.getElementById('admin_passcode');
-    const loginLink = document.querySelector('.auth-switch a'); // Get the login link
+    const loginLink = document.querySelector('.auth-switch a'); 
 
-    // Show/hide admin passcode field based on checkbox
     adminSignupCheckbox.addEventListener('change', () => {
         adminPasscodeGroup.style.display = adminSignupCheckbox.checked ? 'block' : 'none';
         if (adminSignupCheckbox.checked) {
-            adminPasscode.required = true; // Make passcode required only if checkbox is checked
+            adminPasscode.required = true; 
         } else {
             adminPasscode.required = false;
-            adminPasscode.value = ''; // Clear passcode if checkbox is unchecked
+            adminPasscode.value = ''; 
         }
     });
 
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const confirmPassword = document.getElementById('confirm_password').value;
         const isAdminSignup = adminSignupCheckbox.checked;
         const enteredPasscode = adminPasscode.value;
-        const adminRequiredPasscode = "Admin2025#"; // Define the required admin passcode
+        const adminRequiredPasscode = "Admin2025#"; 
         
         
         if (password !== confirmPassword) {
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        // Admin signup validation
         if (isAdminSignup) {
             if (enteredPasscode !== adminRequiredPasscode) {
                 alert('Incorrect Admin Passcode!');
@@ -57,30 +55,26 @@ document.addEventListener('DOMContentLoaded', () => {
         
         localStorage.setItem('users', JSON.stringify(existingUsers));
         
-        // Set basic login status immediately for redirection purposes 
-        // Note: login.js now handles the persistent isLoggedIn and isAdmin in localStorage
-        localStorage.setItem('isLoggedIn', 'true'); // Set persistent login flag
-        localStorage.setItem('isAdmin', isAdminSignup); // Set persistent admin flag
-        sessionStorage.setItem('userEmail', email); // Session storage for email/name is fine
+        localStorage.setItem('isLoggedIn', 'true'); 
+        localStorage.setItem('isAdmin', isAdminSignup); 
+        sessionStorage.setItem('userEmail', email); 
         sessionStorage.setItem('userName', name);
         
         alert('Account created successfully!');
-        // Apply slide-out before redirecting
         document.body.classList.add('slide-out');
         setTimeout(() => {
-             window.location.href = 'index.html'; // Redirect after animation
-        }, 600); // Match animation duration
+             window.location.href = 'index.html'; 
+        }, 600); 
     });
     
-    // Handle slide-out for login link
     if (loginLink) {
         loginLink.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent immediate navigation
+            e.preventDefault(); 
             const targetUrl = loginLink.href;
             document.body.classList.add('slide-out');
             setTimeout(() => {
-                window.location.href = targetUrl; // Navigate after animation
-            }, 600); // Match animation duration
+                window.location.href = targetUrl; 
+            }, 600); 
         });
     }
 

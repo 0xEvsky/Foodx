@@ -1,14 +1,12 @@
 // Use the 'recipes' array loaded from recipes.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Get the recipe ID from the URL hash
-    let recipeId = window.location.hash.substring(1); // Remove the # from the hash
+    let recipeId = window.location.hash.substring(1); 
 
     if (recipeId) {
         showRecipe(recipeId);
     }
 
-    // Listen for hash changes (when user clicks different recipe links)
     window.addEventListener('hashchange', () => {
         recipeId = window.location.hash.substring(1);
         showRecipe(recipeId);
@@ -16,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showRecipe(recipeIdFromHash) {
-    // Find the recipe that matches the ID (slug first, then generated from name)
     const recipe = recipes.find(r => r.slug === recipeIdFromHash || 
                                    (!r.slug && r.name.toLowerCase().replace(/\s+/g, "-") === recipeIdFromHash));
     
@@ -25,28 +22,23 @@ function showRecipe(recipeIdFromHash) {
         return;
     }
 
-    // Hide all recipe cards first
     document.querySelectorAll('.recipe-card').forEach(card => {
         card.style.display = 'none';
     });
 
-    // Create or update the recipe card
     const recipeCard = document.getElementById(recipe.name.toLowerCase().replace(/\s+/g, "-")) || createRecipeCard(recipe);
     recipeCard.style.display = 'block';
 
-    // Scroll to the recipe card
     recipeCard.scrollIntoView({ behavior: 'smooth' });
 }
 
 function createRecipeCard(recipe) {
     const recipeId = recipe.slug || recipe.name.toLowerCase().replace(/\s+/g, "-");
     
-    // Create the recipe card element
     const card = document.createElement('div');
     card.className = 'recipe-card';
     card.id = recipeId;
 
-    // Generate the recipe content
     card.innerHTML = `
         <div class="back-navigation">
             <a href="recipes.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Recipes</a>
@@ -108,7 +100,6 @@ function createRecipeCard(recipe) {
         </section>
     `;
 
-    // Add the card to the container
     const container = document.querySelector('.container');
     container.appendChild(card);
 
@@ -121,7 +112,6 @@ function isFavorite(recipeName) {
 }
 
 function toggleFavorite(recipeName) {
-    // Check if user is logged in
     if (localStorage.getItem('isLoggedIn') !== 'true') {
         window.location.href = 'login.html';
         return;
@@ -138,7 +128,6 @@ function toggleFavorite(recipeName) {
     
     localStorage.setItem('favorites', JSON.stringify(favorites));
     
-    // Update the button
     const btn = document.querySelector(`button.favorite-btn`);
     btn.innerHTML = `
         <i class="fa${!isFav ? 's' : 'r'} fa-heart"></i>

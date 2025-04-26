@@ -12,12 +12,11 @@
     margin-top: 5px;
 }
 
-/* Edit Recipe Page Styles */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    padding-top: 100px; /* Add padding to prevent navbar overlap */
+    padding-top: 100px;
 }
 
 .form-container {
@@ -85,7 +84,6 @@
     text-align: center;
 }
 
-/* Add button for ingredients */
 .add-ingredient-btn {
     background-color: #4caf50;
     color: white;
@@ -100,7 +98,6 @@
     background-color: #45a049;
 }
 
-/* Remove button for ingredients */
 .remove-ingredient-btn {
     background-color: #f44336;
     color: white;

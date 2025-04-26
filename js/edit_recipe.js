@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the recipe name to edit from localStorage
     const recipeName = localStorage.getItem('editRecipe');
     
     if (!recipeName) {
@@ -8,10 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Get recipes from localStorage
     let recipes = JSON.parse(localStorage.getItem('recipes')) || window.recipes || [];
     
-    // Find the recipe to edit
     const recipe = recipes.find(r => r.name === recipeName);
     
     if (!recipe) {
@@ -20,17 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Fill the form with recipe data
     fillFormWithRecipeData(recipe);
     
-    // Add event listener for form submission
     const form = document.querySelector('form');
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         saveRecipe(recipe, recipes);
     });
     
-    // Add event listener for adding ingredients
     const addIngredientBtn = document.createElement('button');
     addIngredientBtn.textContent = 'Add Ingredient';
     addIngredientBtn.className = 'add-ingredient-btn';
@@ -40,15 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const ingredientsGroup = document.getElementById('ingredients-group');
     ingredientsGroup.appendChild(addIngredientBtn);
     
-    // Add remove buttons to existing ingredient fields
     addRemoveButtonsToIngredients();
 });
 
 function fillFormWithRecipeData(recipe) {
-    // Set recipe name
     document.getElementById('recipe_name').value = recipe.name;
     
-    // Set course (if applicable)
     const courseSelect = document.getElementById('course');
     if (courseSelect && recipe.categories && recipe.categories.length > 0) {
         const category = recipe.categories[0];
@@ -60,27 +51,22 @@ function fillFormWithRecipeData(recipe) {
         }
     }
     
-    // Clear existing ingredient fields
     const ingredientsGroup = document.getElementById('ingredients-group');
     const ingredientItems = ingredientsGroup.querySelectorAll('.ingredient-item');
     for (let i = 1; i < ingredientItems.length; i++) {
         ingredientItems[i].remove();
     }
     
-    // Add ingredient fields for each ingredient
     if (recipe.ingredients && recipe.ingredients.length > 0) {
-        // Set first ingredient
         const firstIngredientItem = ingredientsGroup.querySelector('.ingredient-item');
         const firstIngredientInputs = firstIngredientItem.querySelectorAll('input');
         firstIngredientInputs[0].value = recipe.ingredients[0];
         
-        // Add remaining ingredients
         for (let i = 1; i < recipe.ingredients.length; i++) {
             addIngredientField(recipe.ingredients[i]);
         }
     }
     
-    // Set description/instructions
     const descriptionTextarea = document.getElementById('description');
     if (descriptionTextarea && recipe.instructions) {
         descriptionTextarea.value = recipe.instructions.join('\n');
@@ -117,7 +103,6 @@ function addIngredientField(ingredientValue = '') {
     ingredientItem.appendChild(quantityInput);
     ingredientItem.appendChild(removeBtn);
     
-    // Insert before the add button
     const addButton = ingredientsGroup.querySelector('.add-ingredient-btn');
     ingredientsGroup.insertBefore(ingredientItem, addButton);
 }
@@ -139,20 +124,16 @@ function addRemoveButtonsToIngredients() {
 }
 
 function saveRecipe(recipe, recipes) {
-    // Get updated values from form
     const name = document.getElementById('recipe_name').value;
     const courseSelect = document.getElementById('course');
     const course = courseSelect ? courseSelect.value : '';
     
-    // Get ingredients
     const ingredientInputs = document.querySelectorAll('input[name="ingredient_name[]"]');
     const ingredients = Array.from(ingredientInputs).map(input => input.value);
     
-    // Get instructions
     const descriptionTextarea = document.getElementById('description');
     const instructions = descriptionTextarea.value.split('\n').filter(line => line.trim() !== '');
     
-    // Update recipe object
     recipe.name = name;
     
     if (recipe.categories) {
@@ -168,10 +149,8 @@ function saveRecipe(recipe, recipes) {
     recipe.ingredients = ingredients;
     recipe.instructions = instructions;
     
-    // Update localStorage
     localStorage.setItem('recipes', JSON.stringify(recipes));
     
-    // Redirect back to admin page
     alert('Recipe updated successfully!');
     window.location.href = 'admin.html';
 }

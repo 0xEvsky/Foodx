@@ -56,7 +56,6 @@ function addRecipe() {
 
 
 
-// A function to validate
 function validateRecipeForm() {
     
     const requiredFields = [

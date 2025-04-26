@@ -144,8 +144,7 @@
     <main class="container">
         <section id="add-recipe-form" class="form-container">
             <h2 class="text-center">Recipe Details</h2>
-            <form>
-                <!-- Basic Recipe Information -->
+            <form onsubmit="addRecipe()">
                 <div class="form-row">
                     <div class="form-col">
                         <div class="form-group">
@@ -228,13 +227,11 @@
                     </div>
                 </div>
                 
-                <!-- Ingredients Section -->
                 <div class="section-divider">
                     <span>Ingredients</span>
                 </div>
                 
                 <div id="ingredients-container">
-                    <!-- First ingredient row (template) -->
                     <div class="ingredient-row">
                         <div class="quantity-control">
                             <label for="ingredient-quantity-1">Quantity:</label>
@@ -249,142 +246,79 @@
                                 <option value="tbsp">tbsp</option>
                                 <option value="tsp">tsp</option>
                                 <option value="oz">oz</option>
+                                <option value="lb">lb</option>
                                 <option value="g">g</option>
                                 <option value="kg">kg</option>
-                                <option value="lb">lb</option>
                                 <option value="ml">ml</option>
-                                <option value="l">l</option>
-                                <option value="piece">piece</option>
-                                <option value="slice">slice</option>
-                                <option value="pinch">pinch</option>
+                                <option value="L">L</option>
+                                <option value="piece">piece(s)</option>
                             </select>
                         </div>
                         
                         <div class="form-control">
-                            <label for="ingredient-name-1">Ingredient:</label>
-                            <input type="text" id="ingredient-name-1" class="ingredient-name-input" name="ingredient-name[]" class="form-control" placeholder="e.g. Flour">
+                            <label for="ingredient-name-1">Ingredient Name:</label>
+                            <input type="text" id="ingredient-name-1" name="ingredient-name[]" class="form-control ingredient-name-input" required>
                         </div>
                         
-                        <div class="img-upload">
-                            <label for="ingredient-image-1">Image:</label>
-                            <input type="file" id="ingredient-image-1" name="ingredient-image[]" class="form-control" accept="image/*">
-                        </div>
-                    </div>
-                    
-                    <!-- Second ingredient row -->
-                    <div class="ingredient-row">
-                        <div class="quantity-control">
-                            <label for="ingredient-quantity-2">Quantity:</label>
-                            <input type="text" id="ingredient-quantity-2" name="ingredient-quantity[]" class="form-control" placeholder="e.g. 1">
-                        </div>
-                        
-                        <div class="unit-control">
-                            <label for="ingredient-unit-2">Unit:</label>
-                            <select id="ingredient-unit-2" name="ingredient-unit[]" class="form-control">
-                                <option value="">Select</option>
-                                <option value="cup">cup</option>
-                                <option value="tbsp">tbsp</option>
-                                <option value="tsp">tsp</option>
-                                <option value="oz">oz</option>
-                                <option value="g">g</option>
-                                <option value="kg">kg</option>
-                                <option value="lb">lb</option>
-                                <option value="ml">ml</option>
-                                <option value="l">l</option>
-                                <option value="piece">piece</option>
-                                <option value="slice">slice</option>
-                                <option value="pinch">pinch</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-control">
-                            <label for="ingredient-name-2">Ingredient:</label>
-                            <input type="text" id="ingredient-name-2" class="ingredient-name-input" name="ingredient-name[]" class="form-control" placeholder="e.g. Sugar">
-                        </div>
-                        
-                        <div class="img-upload">
-                            <label for="ingredient-image-2">Image:</label>
-                            <input type="file" id="ingredient-image-2" name="ingredient-image[]" class="form-control" accept="image/*">
-                        </div>
+                        <button type="button" class="remove-ingredient-btn"><i class="fas fa-minus-circle"></i></button>
                     </div>
                 </div>
-                
-                <button type="button" class="add-more-btn" id="add-ingredient-btn">
-                    <i class="fas fa-plus"></i> Add More Ingredients
-                </button>
-                
-                <!-- Instructions Section -->
+                <button type="button" class="add-more-btn" onclick="addIngredientRow()"><i class="fas fa-plus"></i> Add Ingredient</button>
+
                 <div class="section-divider">
                     <span>Instructions</span>
                 </div>
-                
                 <div class="form-group">
-                    <label for="instructions">Cooking Instructions:</label>
-                    <textarea id="add-recipe-instructions" name="instructions" class="form-control" rows="8" placeholder="Enter step-by-step instructions..."></textarea>
-                    <small class="form-text text-muted">Tip: Number your steps for clarity (e.g., 1. Preheat oven...)</small>
+                    <label for="recipe-instructions">Instructions:</label>
+                    <textarea id="add-recipe-instructions" name="recipe-instructions" class="form-control" rows="8" placeholder="Enter each step on a new line." required></textarea>
                 </div>
                 
-                <!-- Additional Information -->
                 <div class="section-divider">
-                    <span>Additional Information</span>
+                    <span>Nutrition (Optional)</span>
                 </div>
-                
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="tips">Tips & Notes:</label>
-                            <textarea id="tips" name="tips" class="form-control" rows="4" placeholder="Any helpful tips or notes about this recipe..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="tags">Tags (comma separated):</label>
-                            <input type="text" id="add-recipe-tags" name="tags" class="form-control tag-input" placeholder="e.g. healthy, quick, vegan">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="allergens">Allergens:</label>
-                            <div class="checkbox-group">
-                                <label><input type="checkbox" name="allergens[]" value="gluten"> Gluten</label>
-                                <label><input type="checkbox" name="allergens[]" value="dairy"> Dairy</label>
-                                <label><input type="checkbox" name="allergens[]" value="nuts"> Nuts</label>
-                                <label><input type="checkbox" name="allergens[]" value="eggs"> Eggs</label>
-                                <label><input type="checkbox" name="allergens[]" value="soy"> Soy</label>
-                                <label><input type="checkbox" name="allergens[]" value="seafood"> Seafood</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Nutrition Information -->
-                <div class="section-divider">
-                    <span>Nutrition Information (per serving)</span>
-                </div>
-                
                 <div class="nutrition-row">
-                    <div class="form-control">
+                    <div class="form-group">
                         <label for="calories">Calories:</label>
-                        <input type="number" id="calories" name="calories" class="form-control" placeholder="kcal">
+                        <input type="number" id="calories" name="calories" class="form-control" min="0">
                     </div>
-                    
-                    <div class="form-control">
-                        <label for="protein">Protein:</label>
-                        <input type="number" id="protein" name="protein" class="form-control" placeholder="g">
+                    <div class="form-group">
+                        <label for="protein">Protein (g):</label>
+                        <input type="number" id="protein" name="protein" class="form-control" min="0">
                     </div>
-                    
-                    <div class="form-control">
-                        <label for="carbs">Carbs:</label>
-                        <input type="number" id="carbs" name="carbs" class="form-control" placeholder="g">
+                    <div class="form-group">
+                        <label for="carbs">Carbs (g):</label>
+                        <input type="number" id="carbs" name="carbs" class="form-control" min="0">
                     </div>
-                    
-                    <div class="form-control">
-                        <label for="fat">Fat:</label>
-                        <input type="number" id="fat" name="fat" class="form-control" placeholder="g">
+                    <div class="form-group">
+                        <label for="fat">Fat (g):</label>
+                        <input type="number" id="fat" name="fat" class="form-control" min="0">
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-block" onclick="addRecipe()" >Add Recipe</button>
+                <div class="section-divider">
+                    <span>Tags & Dietary Info</span>
+                </div>
+                <div class="form-group tag-input">
+                    <label for="recipe-tags">Tags (comma-separated):</label>
+                    <input type="text" id="add-recipe-tags" name="recipe-tags" class="form-control" placeholder="e.g. vegan, gluten-free, quick">
+                </div>
+                <div class="form-group">
+                    <label>Dietary Considerations:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="vegetarian" name="diet[]" value="vegetarian">
+                        <label for="vegetarian">Vegetarian</label>
+                        <input type="checkbox" id="vegan" name="diet[]" value="vegan">
+                        <label for="vegan">Vegan</label>
+                        <input type="checkbox" id="gluten-free" name="diet[]" value="gluten-free">
+                        <label for="gluten-free">Gluten-Free</label>
+                        <input type="checkbox" id="dairy-free" name="diet[]" value="dairy-free">
+                        <label for="dairy-free">Dairy-Free</label>
+                        <input type="checkbox" id="keto" name="diet[]" value="keto">
+                        <label for="keto">Keto</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block" onclick="addRecipe()">Add Recipe</button>
             </form>
         </section>
     </main>
@@ -414,21 +348,79 @@
                 <ul>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Terms of Use</a></li>
                 </ul>
             </div>
-            <div class="footer-newsletter">
-                <h4>Newsletter</h4>
-                <p>Subscribe for new recipes and updates.</p>
-                <form action="#" method="POST">
-                    <input type="email" placeholder="Your email address" required>
-                    <button type="submit">Subscribe</button>
-                </form>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
             </div>
         </div>
-        <div class="copyright">
-            <p>&copy; 2023 FoodX. All rights reserved.</p>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script>
+        let ingredientCount = 1;
+
+        function addIngredientRow() {
+            ingredientCount++;
+            const container = document.getElementById('ingredients-container');
+            const newRow = document.createElement('div');
+            newRow.className = 'ingredient-row';
+            newRow.innerHTML = `
+                <div class="quantity-control">
+                    <label for="ingredient-quantity-${ingredientCount}">Quantity:</label>
+                    <input type="text" id="ingredient-quantity-${ingredientCount}" name="ingredient-quantity[]" class="form-control" placeholder="e.g. 1/2">
+                </div>
+                <div class="unit-control">
+                    <label for="ingredient-unit-${ingredientCount}">Unit:</label>
+                    <select id="ingredient-unit-${ingredientCount}" name="ingredient-unit[]" class="form-control">
+                        <option value="">Select</option>
+                        <option value="cup">cup</option>
+                        <option value="tbsp">tbsp</option>
+                        <option value="tsp">tsp</option>
+                        <option value="oz">oz</option>
+                        <option value="lb">lb</option>
+                        <option value="g">g</option>
+                        <option value="kg">kg</option>
+                        <option value="ml">ml</option>
+                        <option value="L">L</option>
+                        <option value="piece">piece(s)</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="ingredient-name-${ingredientCount}">Ingredient Name:</label>
+                    <input type="text" id="ingredient-name-${ingredientCount}" name="ingredient-name[]" class="form-control ingredient-name-input" required>
+                </div>
+                <button type="button" class="remove-ingredient-btn" onclick="removeIngredientRow(this)"><i class="fas fa-minus-circle"></i></button>
+            `;
+            container.appendChild(newRow);
+        }
+
+        function removeIngredientRow(button) {
+            const row = button.closest('.ingredient-row');
+            row.remove();
+        }
+
+        
+        document.getElementById('add-recipe-image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.querySelector('.img-preview');
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Image Preview" style="max-width: 100%; max-height: 100%; object-fit: contain;">`;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
 </body>
 </html>
