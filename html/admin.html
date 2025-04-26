@@ -6,6 +6,7 @@
     <title>FoodX Admin Dashboard</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <script src="../js/admin.js"></script>
     <style>
         /* Recipe Management Section Styles */
         .recent-activity-2 {
@@ -23,6 +24,34 @@
             margin-bottom: 15px;
         }
         
+        /* Scrollable container for recipe list */
+        .recipe-list-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 5px;
+        }
+        
+        /* Scrollbar styling with orange theme */
+        .recipe-list-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .recipe-list-container::-webkit-scrollbar-track {
+            background: #fff5ee;
+            border-radius: 4px;
+        }
+        
+        .recipe-list-container::-webkit-scrollbar-thumb {
+            background: #ff8c42;
+            border-radius: 4px;
+        }
+        
+        .recipe-list-container::-webkit-scrollbar-thumb:hover {
+            background: #e67e22;
+        }
+        
         .recipe-list {
             list-style: none;
             padding: 0;
@@ -31,6 +60,10 @@
         
         .recipe-item {
             margin-bottom: 10px;
+        }
+        
+        .recipe-item:last-child {
+            margin-bottom: 0;
         }
         
         .overlap-2 {
@@ -118,44 +151,12 @@
             <!-- New Recipe Management Section -->
             <section class="recent-activity-2">
                 <h3 class="recent-activity-3">Manage Recipes</h3>
-                <ul class="recipe-list">
-                    <li class="recipe-item">
-                        <div class="overlap-2">
-                            <div class="div-wrapper">
-                                <div class="overlap-group-2"><span class="text-wrapper-5">Spaghetti Carbonara</span></div>
-                            </div>
-                            <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
-                            <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
-                        </div>
-                    </li>
-                    <li class="recipe-item">
-                        <div class="overlap-2">
-                            <div class="div-wrapper">
-                                <div class="overlap-group-2"><span class="text-wrapper-5">Vegan Tacos</span></div>
-                            </div>
-                            <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
-                            <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
-                        </div>
-                    </li>
-                    <li class="recipe-item">
-                        <div class="overlap-2">
-                            <div class="div-wrapper">
-                                <div class="overlap-group-2"><span class="text-wrapper-5">Grilled Chicken Salad</span></div>
-                            </div>
-                            <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
-                            <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
-                        </div>
-                    </li>
-                    <li class="recipe-item">
-                        <div class="overlap-2">
-                            <div class="div-wrapper">
-                                <div class="overlap-group-2"><span class="text-wrapper-5">Classic Pasta Dish</span></div>
-                            </div>
-                            <button class="button-2"><span class="text-wrapper-6">Edit</span></button>
-                            <button class="button-3"><span class="text-wrapper-7">Remove</span></button>
-                        </div>
-                    </li>
-                </ul>
+                <!-- Added scrollable container -->
+                <div class="recipe-list-container">
+                    <ul class="recipe-list" id="admin-manage-recipes-list">
+                        <!-- Recipes will be dynamically added here -->
+                    </ul>
+                </div>
             </section>
             
             <a href="add_recipe.html">
