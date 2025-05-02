@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
     <script src="../js/common.js" defer></script>
+    <script src="../js/index_script.js" defer></script>
 </head>
 
 <body>
@@ -16,12 +17,11 @@
                 <img src="../images/foodx_logo.png" alt="FoodX Logo">
             </a>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="recipes.html">Recipes</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="profile.html" class="profile-icon"><i class="fas fa-user"></i></a></li>
-                <li><a href="login.html">Login</a></li>
             </ul>
         </div>
     </nav>
@@ -29,24 +29,25 @@
     <header class="hero-section">
         <div class="hero-content">
             <h1>Welcome to FoodX</h1>
-            <p>Discover, Cook, and Enjoy Delicious Recipes from Around the World!</p>
+            <p>Your go-to resource for delicious, easy to make recipes</p>
+            
         </div>
     </header>
 
     <main>
-        <section class="feature-section container-flex alt-bg">
+        <section class="find-recipe-section container-flex">
             <div class="feature-text">
                 <h2>Find Your Perfect Recipe</h2>
-                <p>Search by ingredients, cuisine, or meal type to find the best dish for any occasion.</p>
+                <p>Browse our extensive collection to find exactly what you're looking for. From quick meals to dinner party showstoppers, we've got you covered.</p>
             </div>
             <div class="feature-image">
-                <img src="../images/Perfect_Recipe.png" alt="Person searching for recipes on a tablet">
+                <img src="../images/Perfect_Recipe.png" alt="People searching for recipes">
             </div>
         </section>
 
-        <section class="feature-section container-flex">
-             <div class="feature-image">
-                <img src="../images/Cook_with_Confidence.png" alt="Person cooking in a kitchen">
+        <section class="cook-confidence-section container-flex">
+            <div class="feature-image">
+                <img src="../images/Cook_with_Confidence.png" alt="Person cooking in kitchen">
             </div>
             <div class="feature-text">
                 <h2>Cook with Confidence</h2>
@@ -54,140 +55,121 @@
             </div>
         </section>
 
-        <section id="recipes" class="trending-recipes alt-bg">
+        <section class="trending-recipes">
             <div class="container">
-                <h2 class="text-center section-title">Explore Our Recipes</h2>
-                <p class="text-center section-subtitle">Find inspiration for your next meal.</p>
-                <div id="recipe-list" class="trending-grid">
-                    <article class="recipe-card-trending">
-                        <img src="../images/Shrimp Noodle Soup.jpg" alt="Shrimp Noodle Soup">
-                        <div class="recipe-info">
-                             <h3>Shrimp Noodle Soup</h3>
-                             <p>A vibrant bowl of Vietnamese Shrimp Noodle Soup...</p> 
-                             <a href="all-recipes.html#shrimp-noodle-soup" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                <h2>Trending Recipes</h2>
+                <p class="section-subtitle">See what's popular and try the latest food recipes</p>
+                
+                <div class="trending-grid-layout">
+                    <div class="featured-recipe">
+                        <div class="recipe-card">
+                            <div class="recipe-image">
+                                <img src="../images/Shrimp Noodle Soup.jpg" alt="Shrimp Noodle Soup">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Shrimp Noodle Soup</h3>
+                                <p>A vibrant bowl of Vietnamese soup with rice noodles, shrimp, fresh herbs, green onions, vibrant herbs, and tasty broth.</p>
+                            </div>
                         </div>
-                    </article>
-                    <article class="recipe-card-trending small-card">
-                         <img src="../images/Healthy Rice.jpg" alt="Healthy Rice Bowl">
-                         <div class="recipe-info">
-                             <h3>Healthy Rice</h3>
-                             <p>Rice With Zucchini, Soft Boiled Egg, and Parsley...</p>
-                             <a href="all-recipes.html#healthy-rice" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
-                     <article class="recipe-card-trending small-card">
-                         <img src="../images/Burger.jpg" alt="Burger">
-                         <div class="recipe-info">
-                            <h3>Burger</h3>
-                             <p>A juicy patty nestled in a toasted bun...</p>
-                             <a href="all-recipes.html#burger" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
-                     <article class="recipe-card-trending">
-                        <img src="../images/Classic Pasta Dish.jpg" alt="Classic Pasta Dish">
-                        <div class="recipe-info">
-                             <h3>Classic Pasta Dish</h3>
-                             <p>A simple yet elegant pasta with fresh tomatoes and basil.</p>
-                             <a href="all-recipes.html#classic-pasta-dish" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="secondary-recipes">
+                        <div class="recipe-card">
+                            <div class="recipe-image">
+                                <img src="../images/Healthy Rice.jpg" alt="Healthy Rice">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Healthy Rice</h3>
+                                <p>Green healthy rice with soft boiled eggs and parsley in wooden plate.</p>
+                            </div>
                         </div>
-                    </article>
-                    <article class="recipe-card-trending small-card">
-                         <img src="../images/Summer Salad.jpg" alt="Fresh Summer Salad">
-                         <div class="recipe-info">
-                             <h3>Summer Salad</h3>
-                             <p>A light and refreshing salad perfect for warm days.</p>
-                             <a href="all-recipes.html#summer-salad" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
-                     <article class="recipe-card-trending small-card">
-                         <img src="../images/Chocolate Cake.jpg" alt="Chocolate Cake">
-                         <div class="recipe-info">
-                            <h3>Chocolate Cake</h3>
-                             <p>Decadent and rich chocolate cake for dessert lovers.</p>
-                             <a href="all-recipes.html#chocolate-cake" class="recipe-link">View Recipe <i class="fas fa-arrow-right"></i></a>
-                         </div>
-                    </article>
+                        <div class="recipe-card">
+                            <div class="recipe-image">
+                                <img src="../images/Burger.jpg" alt="Burger">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Burger</h3>
+                                <p>A juicy patty nestled in a toasted bun with lettuce, tomato, cheese, and special sauce.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="what-is-new">
+        <section class="new-features">
             <div class="container">
-                <h2 class="text-center section-title">What is new</h2>
-                 <div class="new-features-grid">
+                <h2>What is new</h2>
+                
+                <div class="features-grid">
                     <div class="feature-item">
                         <i class="fas fa-users"></i>
                         <h3>FoodX Community</h3>
-                        <p>Join other food lovers—share your recipes, reviews, and kitchen experiences.</p>
+                        <p>Connect with food lovers, share recipes, and get inspired.</p>
                     </div>
-                     <div class="feature-item">
-                        <i class="fas fa-book-open-reader"></i>
+                    
+                    <div class="feature-item">
+                        <i class="fas fa-utensils"></i>
                         <h3>Start Your Cooking Journey Today!</h3>
                         <p>Sign up now and unlock a world of delicious possibilities.</p>
                     </div>
-                     <div class="feature-item">
+                    
+                    <div class="feature-item">
                         <i class="fas fa-leaf"></i>
+                        <h3>Seasonal & Festive Recipes</h3>
+                        <p>Discover recipes based on the current season and upcoming holidays.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <i class="fas fa-carrot"></i>
                         <h3>Healthy & Nutritious Choices</h3>
                         <p>Explore recipes that are not just tasty but also good for your health.</p>
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h3>Seasonal & Festive Recipes</h3>
-                        <p>Celebrate every occasion with the perfect dish.</p>
-                    </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="about" class="about-section container">
-            <h2 class="text-center section-title">About FoodX</h2>
-            <p class="text-center section-subtitle">Learn more about our passion for food.</p>
-            <div class="about-content">
-                <p>FoodX is your ultimate destination for discovering, cooking, and sharing delicious recipes from all corners of the globe. Whether you're a seasoned chef or just starting your culinary journey, we provide the tools, inspiration, and community support you need to create amazing meals.</p>
-                <p>Our mission is to make cooking accessible and enjoyable for everyone. We believe that food brings people together, and we're excited to be a part of your kitchen adventures.</p>
             </div>
         </section>
     </main>
 
     <footer class="main-footer">
-        <div class="container footer-grid">
-            <div class="footer-about">
-                <a href="index.html" class="logo">FOODX</a>
-                <p>Discover, Cook, and Enjoy.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="index.html" class="logo">FOODX</a>
+                    <p>Discover, Cook, and Enjoy.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="recipes.html">Recipes</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="recipes.html">Recipes</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+            <div class="footer-bottom text-center">
+                <p>&copy; 2025 FoodX. All Rights Reserved.</p>
             </div>
-            <div class="footer-links">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Use</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Follow Us</h4>
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Pinterest</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom text-center">
-            <p>&copy; 2024 FoodX. All Rights Reserved.</p>
         </div>
     </footer>
 </body>
