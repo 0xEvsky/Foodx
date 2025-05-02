@@ -147,4 +147,17 @@ if (document.readyState !== 'loading') {
     addSmoothScrolling();
 } else {
     document.addEventListener('DOMContentLoaded', addSmoothScrolling);
-} 
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+    
+    var navLinks = document.querySelectorAll('.main-nav ul li a');
+    navLinks.forEach(function(link) {
+        var linkHref = link.getAttribute('href');
+        if (linkHref === page || (page === '' && linkHref === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+});
