@@ -26,6 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const enteredPasscode = adminPasscode.value;
         const adminRequiredPasscode = "Admin2025#"; 
         
+        // --- Security Questions ---
+        const sq1 = document.getElementById('security_question_1').value;
+        const sa1 = document.getElementById('security_answer_1').value.trim();
+        const sq2 = document.getElementById('security_question_2').value;
+        const sa2 = document.getElementById('security_answer_2').value.trim();
+        const sq3 = document.getElementById('security_question_3').value;
+        const sa3 = document.getElementById('security_answer_3').value.trim();
+
+        if (!sq1 || !sa1 || !sq2 || !sa2 || !sq3 || !sa3) {
+            alert('Please select and answer all three security questions.');
+            return;
+        }
+
+        const selectedQuestions = [sq1, sq2, sq3];
+        if (new Set(selectedQuestions).size !== 3) {
+            alert('Please select three different security questions.');
+            return;
+        }
+        // --- End Security Questions ---
         
         if (password !== confirmPassword) {
             alert('Passwords do not match!');
@@ -49,7 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         
-        const newUser = { name, email, password, isAdmin: isAdminSignup };
+        // Store security questions and answers (store answers lowercased for case-insensitive comparison later)
+        const newUser = {
+            name,
+            email,
+            password, // WARNING: Storing plaintext password in localStorage is insecure! Hash in real apps.
+            isAdmin: isAdminSignup,
+            security: [
+                { question: sq1, answer: sa1.toLowerCase() },
+                { question: sq2, answer: sa2.toLowerCase() },
+                { question: sq3, answer: sa3.toLowerCase() }
+            ]
+        };
         
         existingUsers.push(newUser);
         
