@@ -76,27 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setLoading(submitButton, false);
             }
 
-            /* 
             
-            const response = await fetch('/api/login', { // Your actual API endpoint
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                
-                localStorage.setItem('isLoggedIn', 'true'); 
-                
-                window.location.href = 'index.html'; 
-            } else {
-                
-                showServerError(serverErrorDiv, data.message || 'Login failed. Please try again.');
-                setLoading(submitButton, false);
-            } 
-            */
 
         } catch (error) {
             console.error("Login Error:", error);
@@ -177,27 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             window.location.href = 'index.html'; 
 
-            /*
             
-            const response = await fetch('/api/signup', { // Your actual API endpoint
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                
-                localStorage.setItem('isLoggedIn', 'true'); 
-                
-                window.location.href = 'index.html'; // Or show a success message and switch to login
-            } else {
-                
-                showServerError(serverErrorDiv, data.message || 'Signup failed. Please try again.');
-                setLoading(submitButton, false);
-            }
-            */
             
         } catch (error) {
             console.error("Signup Error:", error);
@@ -285,4 +245,4 @@ document.addEventListener('DOMContentLoaded', () => {
         div.classList.remove('show');
     }
 
-}); // End DOMContentLoaded
+});
