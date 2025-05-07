@@ -1,34 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // WE ARE NOT USING THIS POP FOR NOW
-    // const allergyButtons = document.querySelectorAll('.allergy-btn');
-    // console.log("Found allergy buttons:", allergyButtons.length);
-    
-    // allergyButtons.forEach(btn => {
-    //     btn.addEventListener('click', function() {
-    //         console.log("Allergy button clicked:", this.textContent);
-    //         this.classList.toggle('selected');
-    //     });
-    // });
-    
-    // // Set up modal close functionality
-    // const modal = document.getElementById('allergyModal');
-    // if (modal) {
-    //     // Close when clicking outside the modal content
-    //     window.addEventListener('click', (event) => {
-    //         if (event.target === modal) {
-    //             modal.style.display = 'none';
-    //         }
-    //     });
-        
-    //     // Close when clicking the add button
-    //     const addBtn = modal.querySelector('.add-btn');
-    //     if (addBtn) {
-    //         addBtn.addEventListener('click', () => {
-    //             modal.style.display = 'none';
-    //         });
-    //     }
-    // }
 
     
     // Check localStorage for login status (FIXED)
@@ -55,13 +25,3 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'login.html';
     }
 });
-
-
-// WE DECIDED TO NOT USE THIS POP UP FOR NOW
-// function allergyPopup() {
-//     console.log("Allergy Popup Triggered");
-//     const modal = document.getElementById('allergyModal');
-//     if (modal) {
-//         modal.style.display = 'flex';
-//     }
-// }

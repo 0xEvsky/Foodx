@@ -203,6 +203,13 @@ img {
 .main-nav ul li a.active,
 .main-nav ul li a:active {
     color: var(--primary-color); /* Use primary orange for hover/active */
+    font-weight: 600;
+}
+
+/* Ensure home link also highlights when it's the active page */
+.main-nav ul li a[href="index.html"].active {
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 .nav-cta-button {
@@ -223,7 +230,6 @@ img {
     transform: translateY(-1px);
 }
 
-/* Recipe Cards */
 .recipe-card {
     background-color: var(--white);
     border-radius: 8px;
