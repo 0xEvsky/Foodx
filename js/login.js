@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
         } catch (error) {
-            console.error("Signup Error:", error);
+            console.error("Signup Error:", error)
             showServerError(serverErrorDiv, 'An unexpected error occurred. Please try again.');
             setLoading(submitButton, false);
         }
