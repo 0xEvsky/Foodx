@@ -527,7 +527,7 @@ function renderManageRecipes() {
 document.addEventListener('DOMContentLoaded', function() {
     displayRecipes();
     
-    // Add event listener for the manage recipes section
+
     const recipeList = document.getElementById('recipe-list');
     if (recipeList) {
         recipeList.addEventListener('click', function(e) {
@@ -544,13 +544,12 @@ function displayRecipes() {
     const recipeList = document.getElementById('recipe-list');
     if (!recipeList) return;
     
-    // Clear the list
+
     recipeList.innerHTML = '';
-    
-    // Get recipes from localStorage or use the default recipes array
+
     let recipes = JSON.parse(localStorage.getItem('recipes')) || window.recipes || [];
     
-    // Display each recipe
+
     recipes.forEach(recipe => {
         const recipeItem = document.createElement('div');
         recipeItem.className = 'recipe-item';
@@ -570,20 +569,20 @@ function displayRecipes() {
 
 function deleteRecipe(recipeName) {
     if (confirm(`Are you sure you want to delete ${recipeName}?`)) {
-        // Get recipes from localStorage
+
         let recipes = JSON.parse(localStorage.getItem('recipes')) || window.recipes || [];
         
-        // Find the recipe index
+
         const recipeIndex = recipes.findIndex(recipe => recipe.name === recipeName);
         
         if (recipeIndex !== -1) {
-            // Remove the recipe from the array
+
             recipes.splice(recipeIndex, 1);
             
-            // Update localStorage
+
             localStorage.setItem('recipes', JSON.stringify(recipes));
             
-            // Refresh the display
+
             displayRecipes();
             
             alert(`${recipeName} has been deleted.`);
@@ -592,10 +591,10 @@ function deleteRecipe(recipeName) {
 }
 
 function editRecipe(recipeName) {
-    // Store the recipe name to edit in localStorage
+
     localStorage.setItem('editRecipe', recipeName);
     
-    // Redirect to edit page
+
     window.location.href = 'edit_recipe.html';
 }
 
@@ -627,7 +626,6 @@ function renderManageRecipes() {
 document.addEventListener('DOMContentLoaded', function() {
     renderManageRecipes();
     
-    // Handle edit and delete button clicks using event delegation
     document.getElementById('admin-manage-recipes-list').addEventListener('click', function(e) {
         if (e.target.closest('.button-2')) {
             const recipeName = e.target.closest('.overLap-2').querySelector('.text-wrapper-5').textContent;
@@ -647,7 +645,7 @@ function deleteRecipe(recipeName) {
         if (index !== -1) {
             recipes.splice(index, 1);
             localStorage.setItem('recipes', JSON.stringify(recipes));
-            renderManageRecipes(); // Refresh the list
+            renderManageRecipes();
         }
     }
 }

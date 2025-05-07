@@ -1,4 +1,4 @@
-// Use the 'recipes' array loaded from recipes.js
+
 
 document.addEventListener('DOMContentLoaded', () => {
     let recipeId = window.location.hash.substring(1); 

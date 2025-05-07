@@ -496,7 +496,7 @@ initializeRecipesLocalStorage();
 
 
 function loadRecipes() {
-  const recipesData = localStorage.getItem('recipes')
+  const recipesData = localStorage.getItem('recipes');
   return recipesData ? JSON.parse(recipesData) : [];
 }
 
@@ -533,7 +533,7 @@ function generateRecipesGrid(recipes) {
   }).join("");
 }
 
-// Initialize the page when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', () => {
   
   initialRecipes = loadRecipes();
@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const recipesCardsGrid = document.querySelector(".recipe-grid");
   recipesCardsGrid.addEventListener('click', (event) => {
     if (event.target.classList.contains('favorite-icon')) {
-      // Check if user is logged in
+
       if (localStorage.getItem('isLoggedIn') !== 'true') {
         window.location.href = 'login.html';
         return;
@@ -553,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
       if (icon.classList.contains('favorited')) {
-        // Remove from favorites
+
         favorites = favorites.filter(name => name !== recipeName);
         icon.classList.remove('fas', 'favorited');
         icon.classList.add('far');

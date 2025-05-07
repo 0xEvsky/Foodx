@@ -31,14 +31,14 @@ function generateRecipesGrid(recipes) {
   }).join("");
 }
 
-// Main initialization when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', () => {
   const recipesCardsGrid = document.querySelector(".recipe-grid");
   const searchBar = document.getElementById("recipes-search-input");
 
-  // Check if user is logged in
+
   if (localStorage.getItem('isLoggedIn') !== 'true') {
-      // User is not logged in - show login message
+
       recipesCardsGrid.innerHTML = `
           <div class="login-message">
               <i class="fas fa-lock login-icon"></i>
@@ -46,18 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
               <a href="login.html" class="btn login-button">Login</a>
           </div>
       `;
-      // Hide search bar when not logged in
+
       if (searchBar) {
           searchBar.style.display = 'none';
       }
       return;
   }
 
-  // User is logged in - get their favorites
+
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
   
   if (favorites.length === 0) {
-      // No favorites yet
+
       recipesCardsGrid.innerHTML = `
           <div class="no-favorites" style="text-align: center; padding: 20px; width: 100%;">
               <p style="font-size: 1.2em;">You haven't added any favorite recipes yet</p>
@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
   }
 
-  // Filter recipes to show only favorites
+
   const favoriteRecipes = loadRecipes().filter(recipe => favorites.includes(recipe.name));
   renderRecipes(favoriteRecipes);
 
-  // Add event listener for the search bar
+
   if (searchBar) {
       searchBar.addEventListener('input', () => {
           const query = searchBar.value.toLowerCase();
@@ -95,17 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Add event listener for removing favorites
+
   recipesCardsGrid.addEventListener('click', (event) => {
       if (event.target.classList.contains('favorite-icon')) {
           const recipeName = event.target.getAttribute('data-recipe-name');
           let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
           
-          // Remove from favorites
+
           favorites = favorites.filter(name => name !== recipeName);
           localStorage.setItem('favorites', JSON.stringify(favorites));
 
-          // If no favorites left, show the "no favorites" message
+
           if (favorites.length === 0) {
               recipesCardsGrid.innerHTML = `
                   <div class="no-favorites" style="text-align: center; padding: 20px; width: 100%;">
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   searchBar.style.display = 'none';
               }
           } else {
-              // Re-render the remaining favorites
+
               const favoriteRecipes = loadRecipes().filter(recipe => favorites.includes(recipe.name));
               renderRecipes(favoriteRecipes);
           }
