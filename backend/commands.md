@@ -1,14 +1,14 @@
 create virtual enviroment: 
-    python -m venv django
+    python -m venv env
 
 activate enviroment: 
     Scripts\activate.bat
 
 create a project in the enviroment: 
-    django-admin startproject my_tennis_club
+    django-admin startproject rf_backend
 
 create an app in the project:
-    python manage.py startapp members
+    python manage.py startapp <app-name>
 
 run server: 
     python manage.py runserver
