@@ -15,4 +15,4 @@ run server:
 
 migrate: 
     python manage.py migrate
-    python manage.py makemigrations members
+    python manage.py makemigrations <app-name>
