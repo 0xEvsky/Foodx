@@ -1,18 +1,31 @@
-create virtual enviroment: 
+# create virtual enviroment: 
     python -m venv env
 
-activate enviroment: 
+# activate enviroment: 
     Scripts\activate.bat
 
-create a project in the enviroment: 
+
+# Install dependencies:
+    -- cd -> repo/backend -- first
+    pip install -r requirements.txt
+
+
+# generate local dependencies:
+    pip freeze > requirements.txt
+
+
+# create a project in the enviroment: 
     django-admin startproject rf_backend
 
-create an app in the project:
+
+# create an app in the project:
     python manage.py startapp <app-name>
 
-run server: 
+
+# run server: 
     python manage.py runserver
 
-migrate: 
+
+# migrate: 
     python manage.py migrate
     python manage.py makemigrations <app-name>
