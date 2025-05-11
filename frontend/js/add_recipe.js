@@ -12,7 +12,6 @@ function addRecipe() {
         servings: document.getElementById("add-recipe-servings").value,
         categories: [document.getElementById("add-recipe-category").value],
         cuisine: document.getElementById("add-recipe-cuisine").value,
-        diet: [],
         badge: "new",
         rating: 0,
         ratingCount: 0,
