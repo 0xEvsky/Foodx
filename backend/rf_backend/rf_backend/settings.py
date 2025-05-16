@@ -26,11 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recipes',
-    'corsheaders'
+    'users'
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -40,28 +39,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-]
-
-from corsheaders.defaults import default_headers
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'content-type',
-]
-
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
 
 
 ROOT_URLCONF = 'rf_backend.urls'
