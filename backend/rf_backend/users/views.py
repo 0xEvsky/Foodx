@@ -59,3 +59,27 @@ def user_by_id(request: HttpRequest, id: int):
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+def add_favorite_recipe(request, user_id, recipe_id):
+    if request.method == 'POST':
+        user = get_object_or_404(User, id=user_id)
+        recipe = get_object_or_404(Recipe, id=recipe_id)
+        user.favorite_recipes.add(recipe)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+def remove_favorite_recipe(request, user_id, recipe_id):
+    if request.method == 'POST':
+        user = get_object_or_404(User, id=user_id)
+        recipe = get_object_or_404(Recipe, id=recipe_id)
+        user.favorite_recipes.remove(recipe)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+def get_favorite_recipes(request, user_id):
+    if request.method == 'GET':
+        user = get_object_or_404(User, id=user_id)
+        favorite_recipes = user.favorite_recipes.all()
+        recipes_data = serialize('json', favorite_recipes)
+        return HttpResponse(recipes_data, content_type='application/json')
+    return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
