@@ -1,41 +1,40 @@
+import { loadRecipes } from './getRecipes.js';
 window.print = () => {}
 
 const recipesData = [];
 
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadRecipes(recipesData)
+  renderRecipes(recipesData);
 
-async function getInitialRecipesData() {
-  const endpoint = "http://127.0.0.1:8000/recipes";
-  try {
-    const response = await fetch(endpoint);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+ // favourite recipes
+  const recipesCardsGrid = document.querySelector(".recipe-grid");
+  recipesCardsGrid.addEventListener('click', handleFavoriteClick);
 
-    const RecipesData = await response.json();
-    console.log("Recipes data loaded successfully:");
-    return RecipesData;
-  } 
-  catch (error) {
-    console.error(error.message);
+
+
+  const searchBarInput = document.getElementById("recipes-search-input");
+  if (searchBarInput) {
+    searchBarInput.addEventListener('input', () => {
+      const query = searchBarInput.value.toLowerCase();
+      
+      if (query) {
+        filteredRecipes = recipesData.filter(
+          recipe => recipe.name.toLowerCase().includes(query) ||
+            recipe.ingredients.some(ing => typeof ing === 'string' && ing.toLowerCase().includes(query))
+        );
+      }
+
+      if (filteredRecipes.length > 0) {
+        renderRecipes(filteredRecipes);
+      } else {
+        const recipesGrid = document.querySelector(".recipe-grid");
+        recipesGrid.innerHTML = '<p style="text-align: center; margin-top: 20px;">No matching recipes found.</p>';
+      }
+    });
   }
-}
+});
 
-
-async function loadRecipes() {
-  try {
-    const initialRecipes = await getInitialRecipesData();
-
-    for (let i = 0; i < initialRecipes.length; ++i) 
-    {
-      recipesData.push(initialRecipes[i]["fields"])
-    }
-
-    console.log(recipesData)
-  } 
-  catch (error) {
-    console.error("Failed to load initial recipes: ", error);
-  }
-}
 
 
 
@@ -68,7 +67,6 @@ function generateRecipesGrid(recipes) {
   }).join("");
 }
 
-
 function handleFavoriteClick(event) {
   if (event.target.classList.contains('favorite-icon')) {
 
@@ -96,35 +94,3 @@ function handleFavoriteClick(event) {
   }
 }
 
-
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadRecipes()
-  renderRecipes(recipesData);
-
- // favourite recipes
-  const recipesCardsGrid = document.querySelector(".recipe-grid");
-  recipesCardsGrid.addEventListener('click', handleFavoriteClick);
-
-
-
-  const searchBarInput = document.getElementById("recipes-search-input");
-  if (searchBarInput) {
-    searchBarInput.addEventListener('input', () => {
-      const query = searchBarInput.value.toLowerCase();
-      
-      if (query) {
-        filteredRecipes = recipesData.filter(
-          recipe => recipe.name.toLowerCase().includes(query) ||
-            recipe.ingredients.some(ing => typeof ing === 'string' && ing.toLowerCase().includes(query))
-        );
-      }
-
-      if (filteredRecipes.length > 0) {
-        renderRecipes(filteredRecipes);
-      } else {
-        const recipesGrid = document.querySelector(".recipe-grid");
-        recipesGrid.innerHTML = '<p style="text-align: center; margin-top: 20px;">No matching recipes found.</p>';
-      }
-    });
-  }
-});
