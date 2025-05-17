@@ -29,3 +29,7 @@
 # migrate: 
     python manage.py migrate
     python manage.py makemigrations <app-name>
+
+
+# fake rollback migration:
+    python manage.py migrate recipes <prev migration number> --fake
