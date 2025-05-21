@@ -86,7 +86,7 @@ function handleImageUpload(event) {
 function fillFormWithRecipeData(recipe) {
     // Basic recipe details
     const nameInput = document.getElementById('recipe_name');
-    nameInput.value = recipe.name;
+    nameInput.value = recipe.name || '';
     nameInput.addEventListener('change', () => {
         if (nameInput.value !== recipe.name) {
             changedFields.name = nameInput.value;
@@ -97,8 +97,8 @@ function fillFormWithRecipeData(recipe) {
 
     // Description
     const descInput = document.getElementById('recipe_description');
-    if (descInput && recipe.description) {
-        descInput.value = recipe.description;
+    if (descInput) {
+        descInput.value = recipe.description || '';
         descInput.addEventListener('change', () => {
             if (descInput.value !== recipe.description) {
                 changedFields.description = descInput.value;
@@ -107,13 +107,18 @@ function fillFormWithRecipeData(recipe) {
             }
         });
     }
-      // Cook time
+
+    // Cook time
     const cookTimeInput = document.getElementById('cook_time');
-    if (cookTimeInput && recipe.time) {
-        cookTimeInput.value = parseInt(recipe.time);
+    if (cookTimeInput) {
+        // Extract just the number from strings like "30 min"
+        const timeValue = recipe.time ? parseInt(recipe.time.replace(/[^0-9]/g, '')) : '';
+        cookTimeInput.value = timeValue;
         cookTimeInput.addEventListener('change', () => {
-            if (parseInt(cookTimeInput.value) !== parseInt(recipe.time)) {
-                changedFields.time = parseInt(cookTimeInput.value);
+            const currentTime = parseInt(cookTimeInput.value);
+            const originalTime = parseInt(recipe.time.replace(/[^0-9]/g, ''));
+            if (currentTime !== originalTime) {
+                changedFields.time = currentTime;
             } else {
                 delete changedFields.time;
             }
@@ -122,8 +127,8 @@ function fillFormWithRecipeData(recipe) {
     
     // Servings
     const servingsInput = document.getElementById('recipe_servings');
-    if (servingsInput && recipe.servings) {
-        servingsInput.value = recipe.servings;
+    if (servingsInput) {
+        servingsInput.value = recipe.servings || '';
         servingsInput.addEventListener('change', () => {
             if (parseInt(servingsInput.value) !== parseInt(recipe.servings)) {
                 changedFields.servings = parseInt(servingsInput.value);
@@ -144,21 +149,24 @@ function fillFormWithRecipeData(recipe) {
             }
         }
         courseSelect.addEventListener('change', () => {
-            if (courseSelect.value !== category) {
+            if (courseSelect.value.toLowerCase() !== category.toLowerCase()) {
                 changedFields.categories = [courseSelect.value];
             } else {
                 delete changedFields.categories;
             }
         });
     }
-      const cuisineSelect = document.getElementById('cuisine');
+    
+    // Cuisine
+    const cuisineSelect = document.getElementById('cuisine');
     if (cuisineSelect && recipe.cuisine) {
         for (let i = 0; i < cuisineSelect.options.length; i++) {
-            if (cuisineSelect.options[i].value.toLowerCase() === recipe.cuisine) {
+            if (cuisineSelect.options[i].value.toLowerCase() === recipe.cuisine.toLowerCase()) {
                 cuisineSelect.selectedIndex = i;
                 break;
             }
         }
+        
         cuisineSelect.addEventListener('change', () => {
             if (cuisineSelect.value.toLowerCase() !== recipe.cuisine.toLowerCase()) {
                 changedFields.cuisine = cuisineSelect.value.toLowerCase();
@@ -167,11 +175,15 @@ function fillFormWithRecipeData(recipe) {
             }
         });
     }
-      // Tags
+
+    // Tags
     const tagsInput = document.getElementById('recipe_tags');
     if (tagsInput && recipe.tags) {
-        const initialTags = tags.filter(tag => recipe.tags.includes(tag.pk)).map(tag => tag.name).join(', ');
-        tagsInput.value = initialTags;
+        const recipeTags = recipe.tags || [];
+        const tagNames = tags.filter(tag => recipeTags.includes(tag.pk)).map(tag => tag.name);
+        tagsInput.value = tagNames.join(', ');
+        
+        const initialTags = tagsInput.value;
         tagsInput.addEventListener('change', () => {
             const currentTags = tagsInput.value.split(',').map(t => t.trim()).filter(t => t);
             if (JSON.stringify(currentTags) !== JSON.stringify(initialTags.split(',').map(t => t.trim()).filter(t => t))) {
@@ -196,7 +208,7 @@ function fillFormWithRecipeData(recipe) {
         const initialIngredients = recipe.ingredients.map(id => {
             const ingredient = ingredients.find(ing => ing.pk == id);
             return ingredient ? ingredient.name : '';
-        });
+        }).filter(name => name);
         
         // Setup ingredients change tracking
         const trackIngredientsChange = () => {
@@ -211,12 +223,13 @@ function fillFormWithRecipeData(recipe) {
             }
         };
         
-        // Populate the first ingredient field
-        if (existingIngredientItems.length > 0) {
+        // Populate the first ingredient field if it exists
+        if (existingIngredientItems.length > 0 && recipe.ingredients[0]) {
             let ingredient = ingredients.find(ing => ing.pk == recipe.ingredients[0]);
+            console.log(recipe.ingredients[0])
             const firstIngredientInput = existingIngredientItems[0].querySelector('input[name="ingredient_name[]"]');
-            if (firstIngredientInput) {
-                firstIngredientInput.value = ingredient.name || '';
+            if (firstIngredientInput && ingredient) {
+                firstIngredientInput.value = ingredient.name;
                 firstIngredientInput.addEventListener('change', trackIngredientsChange);
             }
         }
@@ -224,7 +237,9 @@ function fillFormWithRecipeData(recipe) {
         // Add additional ingredient fields for the rest
         for (let i = 1; i < recipe.ingredients.length; i++) {
             let ingredient = ingredients.find(ing => ing.pk == recipe.ingredients[i]);
-            addIngredientField(ingredient.name);
+            if (ingredient) {
+                addIngredientField(ingredient.name);
+            }
         }
         
         // Add change tracking to the addIngredientField function
@@ -241,14 +256,14 @@ function fillFormWithRecipeData(recipe) {
     
     // Instructions
     const descriptionTextarea = document.getElementById('description');
-    if (descriptionTextarea && recipe.instructions) {
+    if (descriptionTextarea) {
         let initialInstructions;
         if (Array.isArray(recipe.instructions)) {
             initialInstructions = recipe.instructions.join('\n');
         } else if (typeof recipe.instructions === 'string') {
             initialInstructions = recipe.instructions;
         } else {
-            initialInstructions = String(recipe.instructions);
+            initialInstructions = recipe.instructions ? String(recipe.instructions) : '';
         }
         
         descriptionTextarea.value = initialInstructions;
@@ -389,7 +404,8 @@ function saveRecipe(recipe, recipes) {
     if (tagsInput && tagsInput.value) {
         tags = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
     }
-
+    
+    console.log(changedFields)
     // Update the recipe object
     recipe.name = name;
     recipe.image = image;
@@ -415,7 +431,6 @@ function saveRecipe(recipe, recipes) {
     localStorage.setItem('recipes', JSON.stringify(recipes));
 
     // Return the tracked changes for the API call
-    console.log(changedFields)
     
     // Note: You should handle the alert and navigation after your API call succeeds
 }
