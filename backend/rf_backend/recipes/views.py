@@ -76,8 +76,33 @@ def recipe_by_id(request: HttpRequest, id: int):
                 return JsonResponse({'message': 'Recipe deleted'}, status=204)
             else:
                 return JsonResponse({'error': 'deletion failed'}, status=400)
-        
             
             
+            
+def ingredients(request: HttpRequest) -> HttpResponse:
+    if request.method == 'GET':
+        ingredientsSet = Ingredient.objects.all()
+        ingredientssData = serialize('json', ingredientsSet)
+        response = HttpResponse(ingredientssData, content_type='application/json')
+        return response
+
+
+def categories(request: HttpRequest) -> HttpResponse:
+    if request.method == 'GET':
+        categories_set = Category.objects.all()
+        categories_data = serialize('json', categories_set)
+        response = HttpResponse(categories_data, content_type='application/json')
+        return response
+
+
+def tags(request: HttpRequest) -> HttpResponse:
+    if request.method == 'GET':
+        tags_set = Tag.objects.all()
+        tags_data = serialize('json', tags_set)
+        response = HttpResponse(tags_data, content_type='application/json')
+        return response
+
+
+
 
 

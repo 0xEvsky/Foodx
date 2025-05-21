@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/add_recipe.css">
     <script src="../js/common.js" defer></script>
-    <script src="../js/add_recipe.js"></script>
+    <script type="module" src="../js/add_recipe.js"></script>
     <style>
         .form-row {
             display: flex;
@@ -144,7 +144,7 @@
     <main class="container">
         <section id="add-recipe-form" class="form-container">
             <h2 class="text-center">Recipe Details</h2>
-            <form onsubmit="addRecipe()">
+            <form id="recipe-form">
                 <div class="form-row">
                     <div class="form-col">
                         <div class="form-group">
@@ -318,7 +318,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-block" onclick="addRecipe()">Add Recipe</button>
+                <button class="btn btn-primary btn-block">Add Recipe</button>
             </form>
         </section>
     </main>

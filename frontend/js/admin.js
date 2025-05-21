@@ -1,4 +1,5 @@
-import { loadRecipes } from './getRecipes.js';
+import { loadRecipes } from './loadData.js'
+import { getCookie } from './getCookie.js';
 window.print = () => {}
 
 const recipes = [];
@@ -82,50 +83,57 @@ function displayRecipes() {
 }
 
 
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-
 async function deleteRecipe(recipeName) {
     if (confirm(`Are you sure you want to delete "${recipeName}"?`)) {
-        const recipe = recipes.find(r => r.name === recipeName);
+
+        let recipe = null;
+        const index = recipes.findIndex(r => r.name === recipeName);
+        if (index !== -1) {
+            recipe = recipes[index];
+        }
         
         if (recipe) {
           const id = recipe.pk  
           const endpoint = "http://127.0.0.1:8000/recipes/" + id
           
-          try {
-            const response = await fetch(endpoint, {
-              method: 'DELETE',
-              credentials: 'include',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-              }
-            });
-          } catch(error) {
-            console.error(`couldn't request server: `, error)
-          }
+            try {
+                const response = await fetch(endpoint, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+                });
 
-          // renderManageRecipes();
+                if (response.status === 204) {
+                    recipes.splice(index, 1)
+                    localStorage.setItem("recipes", JSON.stringify(recipes))
+                    renderManageRecipes();
+                }
+                else {
+                    console.error(`Failed to delete recipe "${recipeName}". Server returned status: ${response.status}`);
+                    alert(`Failed to delete recipe. Server error: ${response.status}`);
+                }
+
+            } 
+            catch(error) {
+                console.error(`Network error while deleting recipe "${recipeName}":`, error.message);
+                alert(`Failed to connect to server. Please check your internet connection and try again.\nError: ${error.message}`);
+            }
+
         }
     }
 }
 
 function editRecipe(recipeName) {
-    localStorage.setItem('editRecipe', recipeName);
-    window.location.href = 'edit_recipe.html';
+    const recipe = recipes.find(r => r.name === recipeName);
+    if (recipe && recipe.pk) {
+        // Store both name and ID
+        localStorage.setItem('editRecipe', recipeName);
+        localStorage.setItem('editRecipeId', recipe.pk);
+        window.location.href = 'edit_recipe.html?id=' + recipe.pk;
+    } else {
+        alert('Cannot edit recipe: Missing recipe ID');
+    }
 }

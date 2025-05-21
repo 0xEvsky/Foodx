@@ -1,3 +1,7 @@
+# check django:
+    django-admin --version
+
+
 # create virtual enviroment: 
     python -m venv env
 

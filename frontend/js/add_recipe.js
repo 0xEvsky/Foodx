@@ -1,4 +1,29 @@
-function addRecipe() {
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('recipe-form');
+    form.addEventListener('submit', addRecipe);
+});
+
+
+
+async function addRecipe(event) {
     event.preventDefault();
     if (!validateRecipeForm()) {
         return;
@@ -23,7 +48,7 @@ function addRecipe() {
     function getTags() {
         const tags = [];
     
-        tagsString = document.getElementById("add-recipe-tags").value;
+        let tagsString = document.getElementById("add-recipe-tags").value;
         tagsString = tagsString.replace(/\s/g, '');
         tagsString = tagsString.split(",");
     
@@ -37,19 +62,46 @@ function addRecipe() {
     function getIngredients() {
         const ingredients = [];
 
-        ingredientsInputs = document.querySelectorAll(".ingredient-name-input");
+        let ingredientsInputs = document.querySelectorAll(".ingredient-name-input");
         for (let i = 0; i < ingredientsInputs.length; i++) {
             ingredients.push(ingredientsInputs[i].value);
         }
         return ingredients;
     }
 
-    const allRecipes = JSON.parse(localStorage.getItem("recipes"))
-    allRecipes.push(newRecipe);
 
-    localStorage.setItem("recipes", JSON.stringify(allRecipes));
-    alert("Recipe added successfully!");
-    console.log("added");
+    const endpoint = "http://127.0.0.1:8000/recipes/";
+    const requestBody = JSON.stringify(newRecipe);
+
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            credentials: 'include',
+            body: requestBody
+        })
+
+        if (response.status === 201) {
+            const responseBody = await response.json()
+            console.log(responseBody)
+            newRecipe.pk = responseBody.id
+            const allRecipes = JSON.parse(localStorage.getItem("recipes"));
+            allRecipes.push(newRecipe);
+            localStorage.setItem("recipes", JSON.stringify(allRecipes));
+            alert("Recipe added successfully!");
+            console.log("added");
+        } else {
+            console.error("Couldn't add recipe")
+        }
+
+    } catch (error) {
+        console.error("Couldn't request server: ", error)
+    }
+
+
 }
 
 

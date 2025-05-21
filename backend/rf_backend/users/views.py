@@ -3,6 +3,7 @@ from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.core.serializers import serialize
 import json
 from .models import User
+from recipes.models import Recipe
 
 def users(request: HttpRequest):
     if request.method == 'GET':
@@ -24,6 +25,8 @@ def users(request: HttpRequest):
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+
 
 def user_by_id(request: HttpRequest, id: int):
     if request.method == 'GET':
@@ -60,6 +63,8 @@ def user_by_id(request: HttpRequest, id: int):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
 
+
+
 def add_favorite_recipe(request, user_id, recipe_id):
     if request.method == 'POST':
         user = get_object_or_404(User, id=user_id)
@@ -68,6 +73,8 @@ def add_favorite_recipe(request, user_id, recipe_id):
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
 
+
+
 def remove_favorite_recipe(request, user_id, recipe_id):
     if request.method == 'POST':
         user = get_object_or_404(User, id=user_id)
@@ -75,6 +82,8 @@ def remove_favorite_recipe(request, user_id, recipe_id):
         user.favorite_recipes.remove(recipe)
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+
 
 def get_favorite_recipes(request, user_id):
     if request.method == 'GET':
