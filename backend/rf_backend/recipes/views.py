@@ -2,9 +2,21 @@ from django.shortcuts import render, get_object_or_404
 from .models import Recipe, Category, Tag, Ingredient
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.core.serializers import serialize
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 import json
 
 
+@ensure_csrf_cookie
+def get_csrf_token(request):
+    from django.middleware.csrf import get_token
+    token = get_token(request)
+    return JsonResponse({
+        'csrfToken': token,
+        'detail': 'CSRF cookie set'
+    }, status=200)
+
+
+@csrf_exempt
 def recipes(request: HttpRequest):    
     if request.method == 'GET':
         recipesSet = Recipe.objects.all()
@@ -59,7 +71,7 @@ def recipes(request: HttpRequest):
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON data'}, status=400)
 
-
+@csrf_exempt
 def recipe_by_id(request: HttpRequest, id: int):
     recipe_obj = get_object_or_404(Recipe, id=id)
     match request.method:
@@ -67,8 +79,56 @@ def recipe_by_id(request: HttpRequest, id: int):
             recipe_json = serialize('json', [recipe_obj])
             response = HttpResponse(recipe_json, content_type='application/json')
             return response
-        case 'PUT':
-            pass
+        
+        case 'PATCH':
+            try:
+                if not request.body:
+                    return JsonResponse({'error': 'Request body is empty'}, status=400)
+                
+                changedFields = json.loads(request.body)
+                if not isinstance(changedFields, dict):
+                    return JsonResponse({'error': 'Invalid JSON format. Expected an object'}, status=400)
+                
+                m2m_payload = {}
+                for field in changedFields:
+                    if field != "id":
+                        if field in ['ingredient', 'categories', 'tags']:
+                            if field == 'ingredient':
+                                ingredient = Ingredient.objects.get_or_create(name=changedFields[field])
+                                if field in m2m_payload:
+                                    m2m_payload[field].append(ingredient.pk)
+                                else:
+                                    m2m_payload[field] = [ingredient.pk]
+                                    
+                            elif field = 'categories':
+                                category = Category.objects.get_or_create(name=changedFields[field])
+                                m2m_payload[field] = category.pk
+                                
+                            else:
+                                tag = Tag.objects.get_or_create(name=changedFields[field])
+                                m2m_payload[field] = tag.pk
+
+                        setattr(recipe_obj, field, changedFields[field])
+                recipe_obj.save()
+                if m2m_payload:
+                    m2m_payload['id'] = id
+                    return JsonResponse(m2m_payload, status=200)
+                else:
+                    return HttpResponse(status=204)
+                
+            except json.JSONDecodeError as e:
+                return JsonResponse({
+                    'error': 'Invalid JSON format',
+                    'detail': str(e)
+                }, status=400)
+                
+            except Exception as e:
+                return JsonResponse({
+                    'error': 'An error occurred while processing the request',
+                    'detail': str(e)
+                }, status=500)
+            
+            
         case 'DELETE':
             deleted_count, _ = recipe_obj.delete()
             

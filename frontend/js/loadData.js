@@ -19,7 +19,7 @@ export async function loadRecipes(recipesData) {
             recipesData.length = 0
             for (let i = 0; i < InitialRecipesData.length; ++i) 
             {
-                InitialRecipesData[i].fields.pk = InitialRecipesData[i].pk  // add id or pk field to recipe
+                InitialRecipesData[i].fields.id = InitialRecipesData[i].pk  
                 recipesData.push(InitialRecipesData[i].fields)
             }
         }
@@ -48,7 +48,7 @@ export async function loadIngredients(ingredientsData) {
         if (data) {
             ingredientsData.length = 0
             for (let i = 0; i < data.length; ++i) {
-                data[i].fields.pk = data[i].pk        // add id or pk field to recipe
+                data[i].fields.id = data[i].pk        
                 ingredientsData.push(data[i].fields)
             }
         }
@@ -77,7 +77,7 @@ export async function loadTags(tagsData) {
         if (data) {
             tagsData.length = 0 
             for (let i = 0; i < data.length; ++i) {
-                data[i].fields.pk = data[i].pk        // add id or pk field to tag
+                data[i].fields.id = data[i].pk        
                 tagsData.push(data[i].fields)
             }
         }
@@ -105,7 +105,7 @@ export async function loadCategories(categoriesData) {
         if (data) {
             categoriesData.length = 0 
             for (let i = 0; i < data.length; ++i) {
-                data[i].fields.pk = data[i].pk        // add id or pk field to category
+                data[i].fields.id = data[i].pk        
                 categoriesData.push(data[i].fields)
             }
         }

@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     
-    // Check localStorage for login status (FIXED)
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const isAdmin = sessionStorage.getItem('isAdmin') === 'true'; // Keep admin check in sessionStorage if needed
     
-    // Commented out the admin redirection block
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const isAdmin = sessionStorage.getItem('isAdmin') === 'true'; 
+    
+
     /*
     if (isLoggedIn && isAdmin) {
         console.log('Admin detected, redirecting to admin.html');

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let userEmailForRecovery = null;
     let userSecurityQuestions = null;
 
-    // --- Email Form Submission ---
+
     emailForm.addEventListener('submit', (e) => {
         e.preventDefault();
         serverErrorEmail.textContent = '';
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             userEmailForRecovery = user.email;
             userSecurityQuestions = user.security;
             displaySecurityQuestions(user.security);
-            // Toggle visibility using CSS classes
+
             authContainer.classList.remove('show-login');
             authContainer.classList.add('show-signup');
         } else {
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Display Security Questions Dynamically ---
+
     function displaySecurityQuestions(securityInfo) {
         const questionsList = document.getElementById('questions-list');
         questionsList.innerHTML = '';
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Security Questions Form Submission ---
+
     if (questionsForm) {
         questionsForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -102,13 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Recover Via Email Button ---
+
     if (recoverViaEmailBtn) {
         recoverViaEmailBtn.addEventListener('click', () => {
             if (!userEmailForRecovery) return;
 
             const resetToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            const expiryTime = Date.now() + 15 * 60 * 1000; // 15 minutes
+            const expiryTime = Date.now() + 15 * 60 * 1000; 
 
             let recoveryData = JSON.parse(localStorage.getItem('passwordRecovery')) || {};
             recoveryData[userEmailForRecovery] = { token: resetToken, expiry: expiryTime };

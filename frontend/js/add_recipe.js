@@ -87,7 +87,7 @@ async function addRecipe(event) {
         if (response.status === 201) {
             const responseBody = await response.json()
             console.log(responseBody)
-            newRecipe.pk = responseBody.id
+            newRecipe.id = responseBody.id
             const allRecipes = JSON.parse(localStorage.getItem("recipes"));
             allRecipes.push(newRecipe);
             localStorage.setItem("recipes", JSON.stringify(allRecipes));

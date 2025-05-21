@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please select three different security questions.');
             return;
         }
-        // --- End Security Questions ---
+
         
         if (password !== confirmPassword) {
             alert('Passwords do not match!');
@@ -68,11 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         
-        // Store security questions and answers (store answers lowercased for case-insensitive comparison later)
+        
         const newUser = {
             name,
             email,
-            password, // WARNING: Storing plaintext password in localStorage is insecure! Hash in real apps.
+            password, 
             isAdmin: isAdminSignup,
             security: [
                 { question: sq1, answer: sa1.toLowerCase() },

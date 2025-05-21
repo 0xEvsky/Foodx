@@ -93,7 +93,7 @@ async function deleteRecipe(recipeName) {
         }
         
         if (recipe) {
-          const id = recipe.pk  
+          const id = recipe.id 
           const endpoint = "http://127.0.0.1:8000/recipes/" + id
           
             try {
@@ -128,11 +128,11 @@ async function deleteRecipe(recipeName) {
 
 function editRecipe(recipeName) {
     const recipe = recipes.find(r => r.name === recipeName);
-    if (recipe && recipe.pk) {
-        // Store both name and ID
+    if (recipe && recipe.id) {
+
         localStorage.setItem('editRecipe', recipeName);
-        localStorage.setItem('editRecipeId', recipe.pk);
-        window.location.href = 'edit_recipe.html?id=' + recipe.pk;
+        localStorage.setItem('editRecipeId', recipe.id);
+        window.location.href = 'edit_recipe.html?id=' + recipe.id;
     } else {
         alert('Cannot edit recipe: Missing recipe ID');
     }
