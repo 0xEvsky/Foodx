@@ -9,15 +9,14 @@ def users(request: HttpRequest):
     if request.method == 'GET':
         users_set = User.objects.all()
         users_data = serialize('json', users_set)
-        return HttpResponse(users_data, content_type='application/json')
+        return HttpResponse(users_data, content_type='application/json', status=200)
     elif request.method == 'POST':
         try:
             data = json.loads(request.body)
             new_user = User(
                 username=data.get('username'),
                 email=data.get('email'),
-                first_name=data.get('first_name'),
-                last_name=data.get('last_name'),
+                password=data.get('password'),
                 is_admin=data.get('is_admin', False)
             )
             new_user.save()

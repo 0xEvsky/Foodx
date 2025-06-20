@@ -1,4 +1,28 @@
-document.addEventListener('DOMContentLoaded', () => {
+import { loadUsers } from "./loadData.js";
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    let usersData = []
+    await loadUsers(usersData)
+
+    console.log('users data in login.js:', usersData)    
     const CORRECT_ADMIN_CODE = "Admin2025#"; 
 
     const authContainer = document.getElementById('auth-container');
@@ -57,13 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             await new Promise(resolve => setTimeout(resolve, 1000)); 
-            const users = localStorage.getItem('users');
-            const userArray = users ? JSON.parse(users) : [];
-            const user = userArray.find(u => u.email === email && u.password === password);
+            const user = usersData.find(u => u.email === email && u.password === password);
 
+            console.log('user', user)
             if (user) {
                 localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('isAdmin', user.isAdmin || 'false'); 
+                localStorage.setItem('isAdmin', user.is_admin || 'false'); 
                 sessionStorage.setItem('userEmail', email);
                 if (user.name) {
                     sessionStorage.setItem('userName', user.name);
@@ -123,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return; 
             }
         } else {
-             isAdminUser = false; 
-             clearError(adminCodeInput); 
+            isAdminUser = false; 
+            clearError(adminCodeInput); 
         }
 
         setLoading(submitButton, true);
@@ -135,27 +158,49 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = passwordInput.value;
 
         try {
-             await new Promise(resolve => setTimeout(resolve, 1500)); 
-             const users = localStorage.getItem('users');
-             const userArray = users ? JSON.parse(users) : [];
+            await new Promise(resolve => setTimeout(resolve, 1500)); 
              
-             const existingUser = userArray.find(u => u.email === email);
-             if (existingUser) {
-                 showServerError(serverErrorDiv, 'An account with this email already exists.');
-                 setLoading(submitButton, false);
-                 return; 
-             }
+            const existingUser = usersData.find(u => u.email === email);
+            if (existingUser) {
+                showServerError(serverErrorDiv, 'An account with this email already exists.');
+                setLoading(submitButton, false);
+                return; 
+            }
 
-             const newUser = { name, email, password, isAdmin: isAdminUser }; 
-             userArray.push(newUser);
-             localStorage.setItem('users', JSON.stringify(userArray));
+            const newUser = {
+                username: name,
+                email: email,
+                password: password,
+                is_admin: isAdminUser
+            }
 
-             localStorage.setItem('isLoggedIn', 'true');
-             localStorage.setItem('isAdmin', isAdminUser.toString()); 
-             sessionStorage.setItem('userEmail', email);
-             sessionStorage.setItem('userName', name);
+            console.log(newUser)
+            const endpoint = "http://127.0.0.1:8000/users/";
+            const requestBody = JSON.stringify(newUser);
 
-            window.location.href = 'index.html'; 
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                credentials: 'include',
+                body: requestBody
+            })
+
+            if (response.status === 201) {
+                const responseBody = await response.json()
+                console.log(responseBody)
+                newUser.id = responseBody.id
+                const allUsers = JSON.parse(localStorage.getItem("users"))
+                allUsers.push(newUser)
+                localStorage.setItem("users", JSON.stringify(allUsers))
+                console.log("Signed up successfully!");
+            } else {
+                console.error(`bad response: ${response.status}`)
+            }
+
+            // window.location.href = 'index.html'; 
 
             
             

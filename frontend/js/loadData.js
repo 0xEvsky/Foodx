@@ -1,4 +1,4 @@
-import { getIngredientsAPI, getRecipesAPI, getTagsAPI, getCategoriesAPI } from "./API_call.js"
+import { getIngredientsAPI, getRecipesAPI, getTagsAPI, getCategoriesAPI, getUsersAPI } from "./API_call.js"
 
 
 export async function loadRecipes(recipesData) {
@@ -115,6 +115,35 @@ export async function loadCategories(categoriesData) {
     }
     catch (error) {
         console.error('error occurred:', error)
+    }
+}
+
+
+export async function loadUsers(usersData) {
+    const cachedUsers = localStorage.getItem("users")
+    if (cachedUsers) {
+        const parsed = JSON.parse(cachedUsers)
+        usersData.push(...parsed)
+        console.log('Users loaded from cache: ', usersData)
+        return
+    }
+
+    try {
+        const data = await getUsersAPI()
+
+        if (data) {
+            usersData.length = 0
+            for (let i = 0; i < data.length; ++i) {
+                data[i].fields.id = data[i].pk        
+                usersData.push(data[i].fields)
+            }
+        }
+
+        localStorage.setItem("users", JSON.stringify(usersData))
+        console.log("Users loaded from server:", usersData)
+    }
+    catch (error) {
+        console.error(`error occurred: ${error}` )
     }
 }
 

@@ -147,10 +147,7 @@ function fillFormWithRecipeData(recipe) {
         }
         courseSelect.addEventListener('change', () => {
             if (courseSelect.value !== categoryId) {
-                changedFields.categories = [{
-                    id: categoryId,
-                    name: courseSelect.value
-                }];
+                changedFields.categories = courseSelect.value
             } else {
                 delete changedFields.categories;
             }
@@ -174,36 +171,34 @@ function fillFormWithRecipeData(recipe) {
                 delete changedFields.cuisine;
             }
         });
-    }    
+    }
+
     const tagsInput = document.getElementById('recipe_tags');
     if (tagsInput && recipe.tags) {
         const recipeTags = recipe.tags || [];
         const tagNames = recipeTags.map(tagId => {
-            const tag = tags.find(t => t.pk === tagId);
+            const tag = tags.find(t => t.id === tagId);
             return tag ? tag.name : '';
         }).filter(name => name);
         tagsInput.value = tagNames.join(', ');
         
         const initialTagsMap = new Map(recipeTags.map(tagId => {
-            const tag = tags.find(t => t.pk === tagId);
-            return tag ? [tag.name.toLowerCase(), tagId] : [null, tagId];
+            const tag = tags.find(t => t.id === tagId);
+            return tag ? [tag.name.toLowerCase(), tag] : [null, null];
         }).filter(([name]) => name !== null));
 
         tagsInput.addEventListener('change', () => {
             const currentTagNames = tagsInput.value.split(',').map(t => t.trim()).filter(t => t);
             const changedTags = [];
 
-            currentTagNames.forEach(tagName => {
-                const initialId = initialTagsMap.get(tagName.toLowerCase());
-                if (!initialId) {
-                    // This is a new tag name
-                    const existingTag = tags.find(t => t.name.toLowerCase() === tagName.toLowerCase());
-                    if (existingTag) {
-                        changedTags.push({
-                            id: existingTag.pk,
-                            name: tagName
-                        });
-                    }
+
+            currentTagNames.forEach((currentTagName, index) => {
+                const originalTag = Array.from(initialTagsMap.values())[index];
+                if (originalTag && originalTag.name.toLowerCase() !== currentTagName.toLowerCase()) {
+                    changedTags.push({
+                        oldName: originalTag.name,
+                        newName: currentTagName
+                    });
                 }
             });
 
@@ -212,10 +207,11 @@ function fillFormWithRecipeData(recipe) {
             } else {
                 delete changedFields.tags;
             }
+            console.log(changedFields);
         });
     }
     
-    
+    // ingredients
     if (recipe.ingredients && recipe.ingredients.length > 0) {
         const ingredientsGroup = document.getElementById('ingredients-group');
         const existingIngredientItems = ingredientsGroup.querySelectorAll('.ingredient-item');
@@ -237,44 +233,39 @@ function fillFormWithRecipeData(recipe) {
                     const originalIngredientId = recipe.ingredients[index];
                     
                     if (ingredientName) {
-                        const originalIngredient = ingredients.find(ing => ing.pk === originalIngredientId);
+                        const originalIngredient = ingredients.find(ing => ing.id === originalIngredientId);
                         if (originalIngredient && originalIngredient.name !== ingredientName) {
                             return {
-                                id: originalIngredientId,
-                                name: ingredientName
-                            };
+                                oldName: originalIngredient.name,
+                                newName: ingredientName 
+                            }
                         }
                     }
                     return null;
                 })
                 .filter(ing => ing !== null);
             
-            if (currentIngredients.length > 0) {
-                changedFields.ingredients = currentIngredients;
-            } else {
-                delete changedFields.ingredients;
-            }
+                if (currentIngredients.length > 0) {
+                    changedFields.ingredients = currentIngredients;
+                } else {
+                    delete changedFields.ingredients;
+                }
+                console.log(changedFields)
         };
         
 
-        if (existingIngredientItems.length > 0 && recipe.ingredients[0]) {
-            let ingredient = ingredients.find(ing => ing.id == recipe.ingredients[0]);
-            const firstIngredientInput = existingIngredientItems[0].querySelector('input[name="ingredient_name[]"]');
-            if (firstIngredientInput && ingredient) {
-                firstIngredientInput.value = ingredient.name;
-                firstIngredientInput.addEventListener('change', trackIngredientsChange);
-            }
-        }
         
-    
+        
+        
         for (let i = 1; i < recipe.ingredients.length; i++) {
             let ingredient = ingredients.find(ing => ing.id == recipe.ingredients[i]);
             if (ingredient) {
                 addIngredientField(ingredient.name);
             }
         }
+
         
-  
+        
         const originalAddIngredient = addIngredientField;
         addIngredientField = (ingredientValue = '') => {
             const field = originalAddIngredient(ingredientValue);
@@ -284,8 +275,24 @@ function fillFormWithRecipeData(recipe) {
             }
             return field;
         };
-    }
 
+        if (existingIngredientItems.length > 0 && recipe.ingredients[0]) {
+            let ingredient = ingredients.find(ing => ing.id == recipe.ingredients[0]);
+            const firstIngredientInput = existingIngredientItems[0].querySelector('input[name="ingredient_name[]"]');
+            if (firstIngredientInput && ingredient) {
+                firstIngredientInput.value = ingredient.name;
+                firstIngredientInput.addEventListener('change', trackIngredientsChange);
+            }
+        }
+
+        let existingIngredientsFields = document.querySelectorAll('input[name="ingredient_name[]"]')
+
+        existingIngredientsFields.forEach(inputField => {
+            inputField.addEventListener('change', trackIngredientsChange)
+        })
+    }
+    
+    // description
     const descriptionTextarea = document.getElementById('description');
     if (descriptionTextarea) {
         let initialInstructions;
@@ -434,63 +441,52 @@ async function saveRecipe(recipe, recipes) {
     console.log('changed fieldss: ', changedFields)
 
 
-    // const endpoint = "http://127.0.0.1:8000/recipes/" + recipe.id;
-    // const requestBody = JSON.stringify(changedFields);
+    const endpoint = "http://127.0.0.1:8000/recipes/" + recipe.id;
+    const requestBody = JSON.stringify(changedFields);
     
-    // try {
-    //     const response = await fetch(endpoint, {
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         credentials: 'include',
-    //         body: requestBody
-    //     })
+    try {
+        const response = await fetch(endpoint, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: requestBody
+        })
 
-    //     responseBody = await response.json()
+        let responseBody = await response.json()
 
-    //     if (response.status === 400) {
-    //         console.error(`bad request:  ${responseBody.error}`)
-    //         return
-    //     }
-    //     else if (response.status === 500) {
-    //         console.error(`server-end error: ${responseBody.error}`)
-    //         return
-    //     }
+        if (response.status === 400) {
+            console.error(`bad request:  ${responseBody.error}`)
+            return
+        }
+        else if (response.status === 500) {
+            console.error(`server-end error: ${responseBody.error}`)
+            return
+        }
         
-    //     if (response.status === 200) {
+        console.log(responseBody)
 
-    //     }
+        
+        if (response.status === 200) {
+            for (let field in responseBody) {
+                recipe[field] = responseBody[field]
+            }
+        }
+
+        recipe.name = name;
+        recipe.image = image;
+        recipe.description = description;
+        recipe.time = time;
+        recipe.servings = servings;
+        recipe.cuisine = cuisine;
         
         
-        // recipe.name = name;
-        // recipe.image = image;
-        // recipe.description = description;
-        // recipe.time = time;
-        // recipe.servings = servings;
-        // recipe.cuisine = cuisine;
-        // recipe.tags = tags;
-    // } catch (error) {
-    //     console.error('Could not request server:', error)
-    // }
+
+    } catch (error) {
+        console.error('Could not request server.', error)
+    }
     
-
-    
-
-
-    // if (recipe.categories) {
-    //     if (recipe.categories.length > 0) {
-    //         recipe.categories[0] = course;
-    //     } else {
-    //         recipe.categories.push(course);
-    //     }
-    // } else {
-    //     recipe.categories = [course];
-    // }
-
- 
-    // recipe.ingredients = ingredients;
-    // recipe.instructions = instructions;
-    // localStorage.setItem('recipes', JSON.stringify(recipes));
+    localStorage.setItem('recipes', JSON.stringify(recipes));
 
 }

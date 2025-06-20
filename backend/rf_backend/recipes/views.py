@@ -3,6 +3,7 @@ from .models import Recipe, Category, Tag, Ingredient
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.core.serializers import serialize
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.db.models.fields.related import ManyToManyField
 import json
 
 
@@ -89,30 +90,52 @@ def recipe_by_id(request: HttpRequest, id: int):
                 if not isinstance(changedFields, dict):
                     return JsonResponse({'error': 'Invalid JSON format. Expected an object'}, status=400)
                 
-                m2m_payload = {}
-                for field in changedFields:
-                    if field != "id":
-                        if field in ['ingredient', 'categories', 'tags']:
-                            if field == 'ingredient':
-                                ingredient = Ingredient.objects.get_or_create(name=changedFields[field])
-                                if field in m2m_payload:
-                                    m2m_payload[field].append(ingredient.pk)
-                                else:
-                                    m2m_payload[field] = [ingredient.pk]
+                m2mFields = [field.name 
+                             for field in recipe_obj._meta.get_fields() 
+                             if isinstance(field, ManyToManyField)]
+                
+                m2mPayload = {}
+                
+                
+                for field, value in changedFields.items():
+                    if field in m2mFields:
+                        match field:
+                            case 'ingredients':
+                                for ing in value:
+                                    try:
+                                        toRemove = Ingredient.objects.filter(name__iexact=ing.get("oldName")).first()
+                                        recipe_obj.ingredients.remove(toRemove)
+                                    except Ingredient.DoesNotExist:
+                                        pass
                                     
-                            elif field = 'categories':
-                                category = Category.objects.get_or_create(name=changedFields[field])
-                                m2m_payload[field] = category.pk
-                                
-                            else:
-                                tag = Tag.objects.get_or_create(name=changedFields[field])
-                                m2m_payload[field] = tag.pk
-
-                        setattr(recipe_obj, field, changedFields[field])
+                                    newIng, _ = Ingredient.objects.get_or_create(name=ing.get("newName"))
+                                    recipe_obj.ingredients.add(newIng)
+                                    
+                                    if 'ingredients' not in m2mPayload:
+                                        m2mPayload['ingredients'] = []
+                                    m2mPayload['ingredients'].append(newIng.pk)
+                                        
+                            case 'tags':
+                                for tag in value:
+                                    try:
+                                        toRemove = Tag.objects.filter(name__iexact=tag.get("oldName")).first()
+                                        recipe_obj.tags.remove(toRemove)
+                                    except Tag.DoesNotExist:
+                                        pass
+                                    
+                                    newTag, _ = Tag.objects.get_or_create(name=tag.get("newName"))
+                                    recipe_obj.tags.add(newTag)
+                                    
+                                    if 'tags' not in m2mPayload:
+                                        m2mPayload['tags'] = []
+                                    m2mPayload['tags'].append(newTag.pk)
+                                    
+                    else:
+                        setattr(recipe_obj, field, value)
                 recipe_obj.save()
-                if m2m_payload:
-                    m2m_payload['id'] = id
-                    return JsonResponse(m2m_payload, status=200)
+                
+                if m2mPayload:
+                    return JsonResponse(m2mPayload, status=200)
                 else:
                     return HttpResponse(status=204)
                 
