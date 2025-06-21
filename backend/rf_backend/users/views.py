@@ -4,6 +4,7 @@ from django.core.serializers import serialize
 import json
 from .models import User
 from recipes.models import Recipe
+from django.views.decorators.csrf import csrf_exempt
 
 def users(request: HttpRequest):
     if request.method == 'GET':
@@ -90,4 +91,41 @@ def get_favorite_recipes(request, user_id):
         favorite_recipes = user.favorite_recipes.all()
         recipes_data = serialize('json', favorite_recipes)
         return HttpResponse(recipes_data, content_type='application/json')
+    return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+
+@csrf_exempt
+def reset_password(request: HttpRequest):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            email = data.get('email')
+
+            try:
+                user = User.objects.get(email=email)
+                return JsonResponse({'status': 'success', 'exists': True}, status=200)
+            except User.DoesNotExist:
+                return JsonResponse({'status': 'error', 'exists': False, 'message': 'Email not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+
+@csrf_exempt
+def update_password(request: HttpRequest):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            email = data.get('email')
+            new_password = data.get('password')
+            
+            try:
+                user = User.objects.get(email=email)
+                user.password = new_password
+                user.save()
+                return JsonResponse({'status': 'success', 'message': 'Password updated successfully'}, status=200)
+            except User.DoesNotExist:
+                return JsonResponse({'status': 'error', 'message': 'User not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)

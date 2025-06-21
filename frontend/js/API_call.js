@@ -4,6 +4,8 @@ const ingredientsEndpoint =     "http://127.0.0.1:8000/ingredients"
 const tagsEndpoint        =     "http://127.0.0.1:8000/tags/";
 const categoriesEndpoint  =     "http://127.0.0.1:8000/categories/";
 const usersEndpoint       =     "http://127.0.0.1:8000/users/"
+const resetPasswordEndpoint =   "http://127.0.0.1:8000/users/reset-password/"
+const updatePasswordEndpoint =  "http://127.0.0.1:8000/users/update-password/"
 //#endregion
 
 
@@ -86,5 +88,56 @@ export async function getUsersAPI() {
   } 
   catch (error) {
     console.error(`Error fetching users:`, error)
+  }
+}
+
+
+export async function checkEmailExistsAPI(email) {
+  console.log("Checking email:", email);
+  try {
+    console.log(JSON.stringify({email}))
+    const response = await fetch(resetPasswordEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+    
+    const data = await response.json();
+    console.log("Email check response:", data);
+    return {
+      status: response.ok ? 'success' : 'error',
+      exists: data.exists,
+      message: data.message
+    };
+  } 
+  catch (error) {
+    console.error(`Error checking email:`, error);
+    return { status: 'error', message: error.message };
+  }
+}
+
+export async function updatePasswordAPI(email, password) {
+  try {
+    const response = await fetch(updatePasswordEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Bad response. Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log("Password update response:", data);
+    return { status: 'success', message: data.message };
+  } 
+  catch (error) {
+    console.error(`Error updating password:`, error);
+    return { status: 'error', message: error.message };
   }
 }

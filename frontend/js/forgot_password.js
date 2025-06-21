@@ -1,131 +1,93 @@
+import { checkEmailExistsAPI } from './API_call.js';
+
 document.addEventListener('DOMContentLoaded', () => {
-    const emailForm = document.getElementById('forgot-password-email-form');
-    const questionsContainer = document.getElementById('security-questions-container');
-    const authContainer = document.getElementById('auth-container');
-    const questionsForm = document.getElementById('security-questions-form');
-    const serverErrorEmail = document.getElementById('forgot-email-server-error');
-    const serverErrorQuestions = document.getElementById('forgot-questions-server-error');
+    const forgotForm = document.getElementById('forgot-password-email-form');
+    
+    // Exit early if the form doesn't exist on this page
+    if (!forgotForm) {
+        console.log('Forgot password form not found on this page');
+        return;
+    }
+    
+    const emailInput = document.getElementById('recovery-email');
+    const securityQuestionsContainer = document.getElementById('security-questions-container');
+    const securityAnswerContainer = document.getElementById('security-answer-container');
+    const securityQuestionSelect = document.getElementById('security-question');
+    const securityAnswerInput = document.getElementById('security-answer');
+    const serverError = document.getElementById('forgot-email-server-error');
+    const submitButton = forgotForm.querySelector('button[type="submit"]');
+    const spinner = submitButton ? submitButton.querySelector('.spinner') : null;
+    const buttonText = submitButton ? submitButton.querySelector('.btn-text') : null;
     const recoverViaEmailBtn = document.getElementById('recover-via-email');
 
-    let userEmailForRecovery = null;
-    let userSecurityQuestions = null;
+    
+    if (securityQuestionsContainer) {
+        securityQuestionsContainer.style.display = 'none';
+    }
+    
+    if (securityAnswerContainer) {
+        securityAnswerContainer.style.display = 'none';
+    }
 
-
-    emailForm.addEventListener('submit', (e) => {
+    forgotForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        serverErrorEmail.textContent = '';
-        const emailInput = document.getElementById('recovery-email');
-        const email = emailInput.value.trim();
 
+        const email = emailInput.value.trim();
         if (!email) {
-            serverErrorEmail.textContent = 'Please enter your email address.';
+            emailInput.nextElementSibling.textContent = 'Email is required';
             return;
         }
 
-        const users = getUsersFromLocalStorage();
-        const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+        if (!isValidEmail(email)) {
+            emailInput.nextElementSibling.textContent = 'Please enter a valid email address';
+            return;
+        }
 
-        if (user && user.security && user.security.length === 3) {
-            userEmailForRecovery = user.email;
-            userSecurityQuestions = user.security;
-            displaySecurityQuestions(user.security);
+        // Show loading state
+        submitButton.disabled = true;
+        spinner.style.display = 'inline-block';
+        buttonText.textContent = 'Checking...';
 
-            authContainer.classList.remove('show-login');
-            authContainer.classList.add('show-signup');
-        } else {
-            serverErrorEmail.textContent = 'Email not found or security questions not set up for this account.';
+        try {
+            // Check if email exists using the API
+            const result = await checkEmailExistsAPI(email);
+
+            console.log("Email check response:", result);
+            
+            if (result.status === 'success' && result.exists) {
+                // Email exists, redirect to reset password page
+                window.location.href = `reset_password.html?email=${encodeURIComponent(email)}`;
+            } else {
+                // Email doesn't exist
+                serverError.textContent = 'No account found with that email address.';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            serverError.textContent = 'An error occurred. Please try again later.';
+        } finally {
+            // Reset button state
+            submitButton.disabled = false;
+            spinner.style.display = 'none';
+            buttonText.textContent = 'Reset Password';
         }
     });
 
-
-    function displaySecurityQuestions(securityInfo) {
-        const questionsList = document.getElementById('questions-list');
-        questionsList.innerHTML = '';
-
-        const questionMap = {
-            "mother_maiden_name": "What is your mother's maiden name?",
-            "first_pet_name": "What was the name of your first pet?",
-            "birth_city": "In what city were you born?",
-            "childhood_nickname": "What was your childhood nickname?",
-            "favorite_teacher": "What is the name of your favorite teacher?"
-        };
-
-        securityInfo.forEach((item, index) => {
-            const questionText = questionMap[item.question] || item.question;
-            const li = document.createElement('div');
-            li.classList.add('form-group');
-            li.innerHTML = `
-                <label for="security_answer_${index}">${questionText}</label>
-                <input type="text" id="security_answer_${index}" name="security_answer_${index}" placeholder="Your answer" required>
-                <span class="error-message"></span>
-            `;
-            questionsList.appendChild(li);
-        });
-    }
-
-
-    if (questionsForm) {
-        questionsForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            serverErrorQuestions.textContent = '';
-
-            let allCorrect = true;
-            const submittedAnswers = [];
-
-            userSecurityQuestions.forEach((item, index) => {
-                const answerInput = document.getElementById(`security_answer_${index}`);
-                const answer = answerInput ? answerInput.value.trim().toLowerCase() : '';
-                submittedAnswers.push(answer);
-                if (answer !== item.answer) {
-                    allCorrect = false;
-                    const errorSpan = answerInput.nextElementSibling;
-                    if (errorSpan && errorSpan.classList.contains('error-message')) {
-                        errorSpan.textContent = 'Incorrect answer.';
-                    }
-                } else {
-                    const errorSpan = answerInput.nextElementSibling;
-                    if (errorSpan && errorSpan.classList.contains('error-message')) {
-                        errorSpan.textContent = '';
-                    }
-                }
-            });
-
-            if (allCorrect) {
-                alert('Security questions answered correctly! Redirecting to reset password...');
-                const emailToPass = userEmailForRecovery;
-                userEmailForRecovery = null;
-                userSecurityQuestions = null;
-                window.location.href = `reset_password.html?email=${encodeURIComponent(emailToPass)}`;
-            } else {
-                serverErrorQuestions.textContent = 'One or more answers are incorrect. Please try again.';
-            }
-        });
-    }
-
-
+    // Handle "Recover via Email" button click
     if (recoverViaEmailBtn) {
         recoverViaEmailBtn.addEventListener('click', () => {
-            if (!userEmailForRecovery) return;
+            const email = emailInput.value.trim();
+            if (!email || !isValidEmail(email)) {
+                emailInput.nextElementSibling.textContent = 'Please enter a valid email address';
+                return;
+            }
 
-            const resetToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            const expiryTime = Date.now() + 15 * 60 * 1000; 
-
-            let recoveryData = JSON.parse(localStorage.getItem('passwordRecovery')) || {};
-            recoveryData[userEmailForRecovery] = { token: resetToken, expiry: expiryTime };
-            localStorage.setItem('passwordRecovery', JSON.stringify(recoveryData));
-
-            console.log(`Simulating email recovery for ${userEmailForRecovery}`);
-            console.log(`Reset Token (Valid for 15 mins): ${resetToken}`);
-            alert(`Simulating email recovery.\n\nNormally, an email would be sent with a reset link.\n\nFor this demo, the token is logged to the console and shown here:\n${resetToken}\n\nYou will be redirected to the reset page.`);
-
-            window.location.href = `reset_password.html?email=${encodeURIComponent(userEmailForRecovery)}&token=${resetToken}`;
-            userEmailForRecovery = null;
-            userSecurityQuestions = null;
+            // Redirect to reset password page directly
+            window.location.href = `reset_password.html?email=${encodeURIComponent(email)}`;
         });
     }
 
-    function getUsersFromLocalStorage() {
-        const users = localStorage.getItem('users');
-        return users ? JSON.parse(users) : [];
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
-}); 
+});
