@@ -2,8 +2,13 @@ asgiref==3.8.1
 Django==5.2
 django-cors-headers==4.7.0
 djangorestframework==3.16.0
+joblib==1.5.1
 mpmath==1.3.0
+numpy==2.3.0
 psycopg2-binary==2.9.10
+scikit-learn==1.7.0
+scipy==1.15.3
 sqlparse==0.5.3
 sympy==1.13.3
+threadpoolctl==3.6.0
 tzdata==2025.2
