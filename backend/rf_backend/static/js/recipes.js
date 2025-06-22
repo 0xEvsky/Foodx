@@ -1,69 +1,79 @@
-import { loadRecipes } from './loadData.js';
-const recipesData = [];
+// Recipe cards now rendered server-side via Django template
+// This file handles only dynamic interactions (search, favorites)
 
 document.addEventListener('DOMContentLoaded', async () => {
-
-    await loadRecipes(recipesData)
     if (localStorage.getItem('isLoggedIn') !== 'true') {
         localStorage.setItem('isLoggedIn', 'true');
     }
 
-    renderRecipes(recipesData);
+    // Initialize favorites display on server-rendered cards
+    updateFavoriteIcons();
 
     // Handle favorites
     const recipesCardsGrid = document.querySelector(".recipe-grid");
     recipesCardsGrid.addEventListener('click', handleFavoriteClick);
 
-    // Search functionality
+    // Search functionality - now works with server-rendered cards
     const searchBarInput = document.getElementById("recipes-search-input");
     if (searchBarInput) {
         searchBarInput.addEventListener('input', () => {
             const query = searchBarInput.value.toLowerCase();
-            let filteredRecipes = recipesData;
+            const recipeCards = document.querySelectorAll('.recipe-grid .recipe-link');
+            let visibleCount = 0;
             
-            if (query) {
-                filteredRecipes = recipesData.filter(
-                    recipe => recipe.name.toLowerCase().includes(query) ||
-                            recipe.ingredients.some(ing => typeof ing === 'string' && ing.toLowerCase().includes(query))
-                );
-            }
-
-            if (filteredRecipes.length > 0) {
-                renderRecipes(filteredRecipes);
+            recipeCards.forEach(card => {
+                const recipeName = card.querySelector('.recipe-title').textContent.toLowerCase();
+                const recipeDesc = card.querySelector('.recipe-desc').textContent.toLowerCase();
+                
+                if (query === '' || recipeName.includes(query) || recipeDesc.includes(query)) {
+                    card.parentElement.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            });
+            
+            // Show/hide no results message
+            let noResultsMsg = document.querySelector('.no-results-message');
+            if (visibleCount === 0 && query !== '') {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('p');
+                    noResultsMsg.className = 'no-results-message';
+                    noResultsMsg.style.cssText = 'text-align: center; margin-top: 20px; grid-column: 1 / -1;';
+                    noResultsMsg.textContent = 'No matching recipes found.';
+                    document.querySelector('.recipe-grid').appendChild(noResultsMsg);
+                }
+                noResultsMsg.style.display = 'block';
             } else {
-                const recipesGrid = document.querySelector(".recipe-grid");
-                recipesGrid.innerHTML = '<p style="text-align: center; margin-top: 20px;">No matching recipes found.</p>';
+                if (noResultsMsg) {
+                    noResultsMsg.style.display = 'none';
+                }
             }
         });
     }
 });
 
-function renderRecipes(recipes) {
-    const recipesCardsGrid = document.querySelector(".recipe-grid");
-    recipesCardsGrid.innerHTML = generateRecipesGrid(recipes);
-}
+// renderRecipes and generateRecipesGrid functions removed - now handled server-side by Django template
 
-function generateRecipesGrid(recipes) {
-    // Get current favorites to check which recipes are already favorited
+function updateFavoriteIcons() {
+    // Update favorite icons on server-rendered cards based on localStorage
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const favoriteIcons = document.querySelectorAll('.favorite-icon');
     
-    return recipes.map(recipe => {
-        const recipeId = recipe.slug || recipe.name.toLowerCase().replace(/\s+/g, "-");
-        const recipeLink = `all-recipes.html#${recipeId}`;
-        const isFavorited = favorites.includes(recipe.name);
-        const heartIcon = isFavorited ? 'fas fa-heart favorited' : 'far fa-heart';
+    favoriteIcons.forEach(icon => {
+        const recipeName = icon.getAttribute('data-recipe-name');
+        const isFavorited = favorites.includes(recipeName);
         
-        return `
-            <div class="recipe-card">
-                <a href="${recipeLink}" class="recipe-link" data-recipe-id="${recipeId}">
-                    <img src="/static/images/${recipe.image}" alt="${recipe.name}" class="recipe-image">
-                    <div class="recipe-title">${recipe.name}</div>
-                    <div class="recipe-desc">${recipe.description}</div>
-                </a>
-                <i class="${heartIcon} favorite-icon" data-recipe-name="${recipe.name}" style="cursor: pointer;" title="${isFavorited ? 'Remove from favorites' : 'Add to favorites'}"></i>
-            </div>
-        `;
-    }).join("");
+        if (isFavorited) {
+            icon.classList.remove('far');
+            icon.classList.add('fas', 'favorited');
+            icon.title = 'Remove from favorites';
+        } else {
+            icon.classList.remove('fas', 'favorited');
+            icon.classList.add('far');
+            icon.title = 'Add to favorites';
+        }
+    });
 }
 
 function handleFavoriteClick(event) {

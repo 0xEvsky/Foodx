@@ -130,10 +130,10 @@
                 <div class="admin-stats-card">
                     <h2 class="admin-section-title">Statistics Section</h2>
                     <div class="admin-stats-list">
-                        <div>Total Recipes: XX</div>
-                        <div>Total Users: XX</div>
-                        <div>New Submissions This Week: XX</div>
-                        <div>Pending Approvals: XX</div>
+                        <div>Total Recipes: {{ total_recipes }}</div>
+                        <div>Total Users: {{ total_users }}</div>
+                        <div>Total Categories: {{ total_categories }}</div>
+                        <div>Total Ingredients: {{ total_ingredients }}</div>
                     </div>
                 </div>
             </section>
@@ -151,7 +151,29 @@
                 
                 <div class="recipe-list-container">
                     <ul class="recipe-list" id="admin-manage-recipes-list">
-                        
+                        {% for recipe in recipes %}
+                            <li class="recipe-item manage-recipe-item">
+                                <div class="overlap-2">
+                                    <div class="div-wrapper">
+                                        <div class="overlap-group-2">
+                                            <span class="text-wrapper-5">{{ recipe.name }}</span>
+                                        </div>
+                                    </div>
+                                    <button class="button-2" data-recipe-id="{{ recipe.id }}">
+                                        <span class="text-wrapper-6">Edit</span>
+                                    </button>
+                                    <button class="button-3" data-recipe-id="{{ recipe.id }}" data-recipe-name="{{ recipe.name }}">
+                                        <span class="text-wrapper-7">Remove</span>
+                                    </button>
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li class="recipe-item">
+                                <div class="overlap-2">
+                                    <span class="text-wrapper-5">No recipes available</span>
+                                </div>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </section>

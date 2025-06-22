@@ -199,102 +199,123 @@
         .ingredient-group li:last-child {
             border-bottom: none;
         }
-        .ingredient-amount {
-            font-weight: 500;
-            color: #333;
-            margin-right: 10px;
-            flex-shrink: 0;
-        }
         .ingredient-name {
-            color: #555;
-            text-align: right;
+            flex-grow: 1;
+            color: #333;
+        }
+        .ingredient-amount {
+            color: #666;
+            font-weight: 500;
+            margin-left: 15px;
         }
 
         .instructions-list {
-            list-style: none;
-            padding: 0;
             counter-reset: step-counter;
+            padding: 0;
         }
         .instruction-step {
             display: flex;
-            align-items: flex-start;
             margin-bottom: 25px;
             counter-increment: step-counter;
         }
         .step-number {
-            background: #e91e63;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: #e91e63;
+            color: white;
+            border-radius: 50%;
             font-weight: 600;
             margin-right: 20px;
             flex-shrink: 0;
+            font-size: 0.9em;
         }
         .step-number::before {
             content: counter(step-counter);
         }
         .step-content {
-            flex: 1;
-            padding-top: 5px;
+            flex-grow: 1;
         }
         .step-content p {
             margin: 0;
+            color: #444;
             line-height: 1.6;
         }
 
         .recipe-actions {
             text-align: center;
-            padding: 30px 0;
         }
         .favorite-btn {
-            background: linear-gradient(135deg, #e91e63, #f06292);
+            background: #e91e63;
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 12px 30px;
             border-radius: 25px;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         .favorite-btn:hover {
+            background: #c2185b;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
         }
         .favorite-btn.favorited {
-            background: linear-gradient(135deg, #4caf50, #66bb6a);
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            background: #4caf50;
         }
-        .favorite-btn i {
-            margin-right: 8px;
+        .favorite-btn.favorited:hover {
+            background: #388e3c;
         }
 
         .back-navigation {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .back-button {
             display: inline-flex;
             align-items: center;
-            padding: 10px 20px;
-            background: #f5f5f5;
-            color: #666;
+            gap: 8px;
+            color: #e91e63;
             text-decoration: none;
-            border-radius: 20px;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
         .back-button:hover {
+            color: #c2185b;
+        }
+
+        .no-recipe-found {
+            text-align: center;
+            padding: 80px 20px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        .no-recipe-found h2 {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .no-recipe-found p {
+            color: #888;
+            margin-bottom: 25px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
             background: #e91e63;
             color: white;
-            transform: translateY(-1px);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.3s ease;
         }
-        .back-button i {
-            margin-right: 8px;
+        .btn:hover {
+            background: #c2185b;
         }
 
         @media (max-width: 768px) {
@@ -304,6 +325,14 @@
             }
             main.container {
                 padding-top: 80px;
+            }
+            .recipe-navigation {
+                position: static;
+                margin-bottom: 20px;
+            }
+            .recipe-navigation ul {
+                flex-direction: column;
+                gap: 8px;
             }
             .recipe-header {
                 flex-direction: column;
@@ -317,14 +346,12 @@
             }
             .ingredients-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
             }
             .instruction-step {
                 flex-direction: column;
-                align-items: flex-start;
-                margin-bottom: 20px;
             }
             .step-number {
+                align-self: flex-start;
                 margin-bottom: 10px;
                 margin-right: 0;
             }
@@ -332,184 +359,135 @@
     </style>
 
     <script>
-        const recipes = [
-            {
-                name: "Cheese Cake",
-                slug: "cheese-cake",
-                image: "Cheese Cake.jpg",
-                time: "3 hours",
-                servings: 8,
-                rating: "4.8",
-                ratingCount: 124,
-                tags: ["Dessert", "Baking", "Special Occasion"],
-                description: "A rich and creamy classic cheesecake with a graham cracker crust. Perfect for special occasions or when you want to treat yourself to something truly indulgent.",
-                ingredients: [
-                    "2 cups graham cracker crumbs",
-                    "1/4 cup melted butter",
-                    "32 oz cream cheese, softened",
-                    "1 cup granulated sugar",
-                    "4 large eggs",
-                    "1 tsp vanilla extract",
-                    "1/4 cup sour cream"
-                ],
-                instructions: [
-                    "Preheat oven to 325°F (165°C).",
-                    "Mix graham cracker crumbs with melted butter and press into springform pan.",
-                    "Beat cream cheese until smooth, gradually add sugar.",
-                    "Add eggs one at a time, then vanilla and sour cream.",
-                    "Pour over crust and bake for 50-60 minutes.",
-                    "Cool completely before refrigerating for at least 4 hours."
-                ]
-            },
-            {
-                name: "Shish Tawook",
-                slug: "shish-tawook",
-                image: "shishtawok.jpg",
-                time: "45 minutes",
-                servings: 4,
-                rating: "4.7",
-                ratingCount: 89,
-                tags: ["Middle Eastern", "Grilled", "Protein"],
-                description: "Tender and flavorful Lebanese grilled chicken skewers marinated in yogurt, lemon, and aromatic spices. A perfect dish for summer barbecues.",
-                ingredients: [
-                    "2 lbs chicken breast, cubed",
-                    "1/2 cup plain yogurt",
-                    "1/4 cup lemon juice",
-                    "3 cloves garlic, minced",
-                    "2 tsp paprika",
-                    "1 tsp cumin",
-                    "1/2 tsp cinnamon",
-                    "Salt and pepper to taste"
-                ],
-                instructions: [
-                    "Mix yogurt, lemon juice, garlic, and spices in a bowl.",
-                    "Add chicken cubes and marinate for at least 2 hours.",
-                    "Thread chicken onto skewers.",
-                    "Preheat grill to medium-high heat.",
-                    "Grill skewers for 12-15 minutes, turning occasionally.",
-                    "Serve with rice, vegetables, and garlic sauce."
-                ]
-            },
-            {
-                name: "Macarons",
-                slug: "macarons",
-                image: "macarons.jpg",
-                time: "3 hours",
-                servings: 24,
-                rating: "4.5",
-                ratingCount: 156,
-                tags: ["French", "Dessert", "Delicate", "Colorful"],
-                description: "Delicate French sandwich cookies with crispy shells and creamy fillings. These colorful treats require patience but are worth every effort.",
-                ingredients: [
-                    "100g almond flour",
-                    "200g powdered sugar",
-                    "75g egg whites (aged)",
-                    "50g granulated sugar",
-                    "Food coloring",
-                    "Buttercream or ganache for filling"
-                ],
-                instructions: [
-                    "Sift almond flour and powdered sugar together.",
-                    "Whip egg whites to soft peaks, gradually add granulated sugar.",
-                    "Add food coloring to meringue.",
-                    "Fold dry ingredients into meringue using macaronage technique.",
-                    "Pipe onto parchment-lined baking sheets.",
-                    "Let sit for 30-60 minutes until shells form.",
-                    "Bake at 300°F for 15-18 minutes.",
-                    "Cool completely before filling and sandwiching."
-                ]
-            },
-            {
-                name: "Grilled Salmon",
-                slug: "grilled-salmon",
-                image: "salamon.jpg",
-                time: "25 minutes",
-                servings: 4,
-                rating: "4.9",
-                ratingCount: 203,
-                tags: ["Seafood", "Healthy", "Quick", "Protein"],
-                description: "Perfectly grilled salmon fillet with a crispy skin and tender, flaky interior. Seasoned with herbs and lemon for a fresh, healthy meal.",
-                ingredients: [
-                    "4 salmon fillets (6 oz each)",
-                    "2 tbsp olive oil",
-                    "2 lemons (juiced and zested)",
-                    "3 cloves garlic, minced",
-                    "2 tbsp fresh dill",
-                    "Salt and black pepper",
-                    "Lemon wedges for serving"
-                ],
-                instructions: [
-                    "Preheat grill to medium-high heat.",
-                    "Mix olive oil, lemon juice, zest, garlic, and dill.",
-                    "Season salmon with salt and pepper.",
-                    "Brush salmon with herb mixture.",
-                    "Grill skin-side down for 4-5 minutes.",
-                    "Flip and grill for 3-4 minutes more.",
-                    "Serve immediately with lemon wedges."
-                ]
-            },
-            {
-                name: "Fried Rice",
-                slug: "fried-rice",
-                image: "fried rice.jpg",
-                time: "20 minutes",
-                servings: 4,
-                rating: "4.6",
-                ratingCount: 178,
-                tags: ["Asian", "Quick", "Comfort Food", "Vegetarian Option"],
-                description: "Classic fried rice with perfectly seasoned grains, mixed vegetables, and your choice of protein. A versatile dish that's perfect for using leftover rice.",
-                ingredients: [
-                    "4 cups cooked rice (preferably day-old)",
-                    "3 eggs, beaten",
-                    "2 tbsp vegetable oil",
-                    "1 cup mixed vegetables (peas, carrots, corn)",
-                    "3 green onions, chopped",
-                    "3 cloves garlic, minced",
-                    "3 tbsp soy sauce",
-                    "1 tbsp sesame oil",
-                    "Salt and pepper to taste"
-                ],
-                instructions: [
-                    "Heat oil in a large wok or skillet over high heat.",
-                    "Scramble eggs and set aside.",
-                    "Add garlic and mixed vegetables, stir-fry for 2 minutes.",
-                    "Add rice, breaking up any clumps.",
-                    "Stir in soy sauce and sesame oil.",
-                    "Add scrambled eggs back to the pan.",
-                    "Garnish with green onions and serve hot."
-                ]
-            },
-            {
-                name: "Chicken Wings",
-                slug: "chicken-wings",
-                image: "Chicken Wings.jpg",
-                time: "1 hour",
-                servings: 4,
-                rating: "4.8",
-                ratingCount: 267,
-                tags: ["American", "Spicy", "Comfort Food", "Party Food"],
-                description: "Crispy baked chicken wings tossed in a tangy buffalo sauce. Perfect for game day, parties, or whenever you're craving something deliciously messy.",
-                ingredients: [
-                    "2 lbs chicken wings",
-                    "1/2 cup hot sauce",
-                    "1/4 cup butter",
-                    "2 tbsp honey",
-                    "1 tsp garlic powder",
-                    "Salt and pepper",
-                    "Celery sticks",
-                    "Blue cheese dressing"
-                ],
-                instructions: [
-                    "Preheat oven to 425°F (220°C).",
-                    "Season wings with salt and pepper.",
-                    "Arrange on baking sheet lined with parchment.",
-                    "Bake for 45 minutes until crispy.",
-                    "Mix hot sauce, butter, honey, and garlic powder.",
-                    "Toss wings in sauce.",
-                    "Serve with celery and blue cheese."
-                ]
-            }
-        ];
+        // Recipe data from Django database or fallback data
+        let recipes = {{ recipes_json|safe }};
+        
+        // Fallback data if recipes is empty or undefined
+        if (!recipes || recipes.length === 0) {
+            console.warn('No recipe data found from Django, using fallback data');
+            recipes = [
+                {
+                    name: "Cheese Cake",
+                    slug: "cheese-cake",
+                    image: "Cheese Cake.jpg",
+                    description: "A rich and creamy cheesecake with a graham cracker crust.",
+                    time: "45 min",
+                    servings: 8,
+                    rating: 4.8,
+                    ratingCount: 124,
+                    tags: ["Dessert", "Baking"],
+                    ingredients: ["Cream cheese", "Sugar", "Eggs", "Graham crackers", "Butter", "Vanilla extract"],
+                    instructions: [
+                        "Preheat oven to 325°F (160°C).",
+                        "Mix graham crackers and butter for crust.",
+                        "Beat cream cheese until smooth.",
+                        "Add sugar and eggs one at a time.",
+                        "Pour over crust and bake for 45 minutes.",
+                        "Cool completely before serving."
+                    ]
+                },
+                {
+                    name: "Shish Tawook",
+                    slug: "shish-tawook",
+                    image: "shishtawok.jpg",
+                    description: "Traditional Middle Eastern grilled chicken skewers marinated in yogurt and spices.",
+                    time: "30 min",
+                    servings: 4,
+                    rating: 4.7,
+                    ratingCount: 89,
+                    tags: ["Main Course", "Grilled", "Middle Eastern"],
+                    ingredients: ["Chicken breast", "Yogurt", "Lemon juice", "Garlic", "Paprika", "Cumin", "Olive oil"],
+                    instructions: [
+                        "Cut chicken into cubes.",
+                        "Mix yogurt, lemon juice, garlic, and spices for marinade.",
+                        "Marinate chicken for at least 2 hours.",
+                        "Thread chicken onto skewers.",
+                        "Grill for 12-15 minutes, turning occasionally.",
+                        "Serve with rice or bread."
+                    ]
+                },
+                {
+                    name: "Macarons",
+                    slug: "macarons",
+                    image: "macarons.jpg",
+                    description: "Delicate French sandwich cookies with smooth shells and creamy filling.",
+                    time: "60 min",
+                    servings: 24,
+                    rating: 4.5,
+                    ratingCount: 203,
+                    tags: ["Dessert", "French", "Baking"],
+                    ingredients: ["Almond flour", "Powdered sugar", "Egg whites", "Food coloring", "Butter", "Ganache"],
+                    instructions: [
+                        "Sift almond flour and powdered sugar together.",
+                        "Whip egg whites to soft peaks.",
+                        "Gradually add sugar until stiff peaks form.",
+                        "Fold in almond flour mixture gently.",
+                        "Pipe onto baking sheets and let rest 30 minutes.",
+                        "Bake at 300°F for 15-18 minutes."
+                    ]
+                },
+                {
+                    name: "Grilled Salmon",
+                    slug: "grilled-salmon",
+                    image: "salamon.jpg",
+                    description: "Fresh salmon fillet grilled to perfection with herbs and lemon.",
+                    time: "20 min",
+                    servings: 4,
+                    rating: 4.6,
+                    ratingCount: 156,
+                    tags: ["Main Course", "Seafood", "Healthy"],
+                    ingredients: ["Salmon fillet", "Olive oil", "Lemon", "Dill", "Salt", "Black pepper", "Garlic"],
+                    instructions: [
+                        "Preheat grill to medium-high heat.",
+                        "Brush salmon with olive oil.",
+                        "Season with salt, pepper, and herbs.",
+                        "Grill for 6-8 minutes per side.",
+                        "Check internal temperature reaches 145°F.",
+                        "Serve with lemon wedges."
+                    ]
+                },
+                {
+                    name: "Fried Rice",
+                    slug: "fried-rice",
+                    image: "fried rice.jpg",
+                    description: "Classic Asian fried rice with vegetables and soy sauce.",
+                    time: "15 min",
+                    servings: 4,
+                    rating: 4.4,
+                    ratingCount: 87,
+                    tags: ["Main Course", "Asian", "Quick"],
+                    ingredients: ["Cooked rice", "Eggs", "Soy sauce", "Vegetables", "Green onions", "Sesame oil", "Garlic"],
+                    instructions: [
+                        "Heat oil in a large pan or wok.",
+                        "Scramble eggs and set aside.",
+                        "Stir-fry vegetables until tender.",
+                        "Add rice and break up clumps.",
+                        "Add soy sauce and scrambled eggs.",
+                        "Garnish with green onions and serve."
+                    ]
+                },
+                {
+                    name: "Chicken Wings",
+                    slug: "chicken-wings",
+                    image: "Chicken Wings.jpg",
+                    description: "Crispy baked chicken wings with your choice of sauce.",
+                    time: "45 min",
+                    servings: 6,
+                    rating: 4.7,
+                    ratingCount: 198,
+                    tags: ["Appetizer", "Comfort Food"],
+                    ingredients: ["Chicken wings", "Buffalo sauce", "Butter", "Garlic powder", "Paprika", "Salt", "Pepper"],
+                    instructions: [
+                        "Preheat oven to 425°F (220°C).",
+                        "Pat wings dry and season with spices.",
+                        "Arrange on baking sheet lined with parchment.",
+                        "Bake for 45-50 minutes until crispy.",
+                        "Toss with sauce while hot.",
+                        "Serve with celery and blue cheese dressing."
+                    ]
+                }
+            ];
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             let recipeId = window.location.hash.substring(1); 
@@ -532,17 +510,38 @@
         });
 
         function showAllRecipes() {
-            const container = document.getElementById('recipe-grid');
-            container.innerHTML = `
-                <div class="recipe-navigation">
-                    <h2>All Recipes</h2>
+            const recipeNavigation = document.querySelector('.recipe-navigation');
+            if (recipeNavigation) {
+                recipeNavigation.style.display = 'block';
+                recipeNavigation.innerHTML = `
+                    <h2>Available Recipes</h2>
                     <ul>
                         ${recipes.map(recipe => `
                             <li><a href="#${recipe.slug}">${recipe.name}</a></li>
                         `).join('')}
                     </ul>
-                </div>
-            `;
+                `;
+            }
+
+            // Hide recipe cards initially
+            document.querySelectorAll('.recipe-card').forEach(card => {
+                card.style.display = 'none';
+            });
+
+            // Show message to select a recipe
+            const container = document.querySelector('.container');
+            let messageEl = document.querySelector('.recipe-selection-message');
+            if (!messageEl) {
+                messageEl = document.createElement('div');
+                messageEl.className = 'no-recipe-found recipe-selection-message';
+                messageEl.innerHTML = `
+                    <h2>Select a Recipe</h2>
+                    <p>Choose a recipe from the navigation above to view its details.</p>
+                    <a href="{% url 'recipes' %}" class="btn btn-primary">Back to Recipes</a>
+                `;
+                container.appendChild(messageEl);
+            }
+            messageEl.style.display = 'block';
         }
 
         function showRecipe(recipeIdFromHash) {
@@ -551,28 +550,64 @@
             
             if (!recipe) {
                 console.error('Recipe not found:', recipeIdFromHash);
-                const container = document.getElementById('recipe-grid');
-                container.innerHTML = `
-                    <div class="recipe-card" style="display: block; text-align: center; padding: 40px;">
-                        <h2>Recipe Not Found</h2>
-                        <p>Sorry, we couldn't find the recipe you're looking for.</p>
-                        <a href="{% url 'recipes' %}" class="btn btn-primary">Back to Recipes</a>
-                    </div>
-                `;
+                showRecipeNotFound();
                 return;
+            }
+
+            // Hide the recipe navigation when showing a specific recipe
+            const recipeNavigation = document.querySelector('.recipe-navigation');
+            if (recipeNavigation) {
+                recipeNavigation.style.display = 'none';
+            }
+
+            // Hide selection message
+            const messageEl = document.querySelector('.recipe-selection-message');
+            if (messageEl) {
+                messageEl.style.display = 'none';
             }
 
             document.querySelectorAll('.recipe-card').forEach(card => {
                 card.style.display = 'none';
             });
 
-            const container = document.getElementById('recipe-grid');
-            const recipeCard = createRecipeCard(recipe);
-            container.innerHTML = '';
-            container.appendChild(recipeCard);
+            const recipeCard = document.getElementById(recipe.slug) || createRecipeCard(recipe);
             recipeCard.style.display = 'block';
 
             recipeCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showRecipeNotFound() {
+            // Hide the recipe navigation
+            const recipeNavigation = document.querySelector('.recipe-navigation');
+            if (recipeNavigation) {
+                recipeNavigation.style.display = 'none';
+            }
+
+            // Hide all recipe cards
+            document.querySelectorAll('.recipe-card').forEach(card => {
+                card.style.display = 'none';
+            });
+
+            // Hide selection message
+            const messageEl = document.querySelector('.recipe-selection-message');
+            if (messageEl) {
+                messageEl.style.display = 'none';
+            }
+
+            // Show not found message
+            const container = document.querySelector('.container');
+            let notFoundEl = document.querySelector('.recipe-not-found');
+            if (!notFoundEl) {
+                notFoundEl = document.createElement('div');
+                notFoundEl.className = 'no-recipe-found recipe-not-found';
+                notFoundEl.innerHTML = `
+                    <h2>Recipe Not Found</h2>
+                    <p>Sorry, we couldn't find the recipe you're looking for.</p>
+                    <a href="{% url 'recipes' %}" class="btn btn-primary">Back to Recipes</a>
+                `;
+                container.appendChild(notFoundEl);
+            }
+            notFoundEl.style.display = 'block';
         }
 
         function createRecipeCard(recipe) {
@@ -587,7 +622,7 @@
                     <a href="{% url 'recipes' %}" class="back-button"><i class="fas fa-arrow-left"></i> Back to Recipes</a>
                 </div>
                 <div class="recipe-header">
-                    <img src="{% static 'images/' %}${recipe.image}" alt="${recipe.name}" class="recipe-image-large">
+                    <img src="/static/images/${recipe.image}" alt="${recipe.name}" class="recipe-image-large">
                     <div class="recipe-title-section">
                         <h1 class="section-title">${recipe.name}</h1>
                         <div class="recipe-meta">
@@ -643,6 +678,9 @@
                 </section>
             `;
 
+            const container = document.querySelector('.container');
+            container.appendChild(card);
+
             return card;
         }
 
@@ -653,7 +691,7 @@
 
         function toggleFavorite(recipeName) {
             if (localStorage.getItem('isLoggedIn') !== 'true') {
-                window.location.href = '{% url "login" %}';
+                window.location.href = '/user-login/';
                 return;
             }
 
@@ -697,7 +735,8 @@
     </header>
 
     <main class="container">
-        <div id="recipe-grid" class="recipe-grid"></div>
+        <div class="recipe-navigation" style="display: none;">
+        </div>
     </main>
 
     <footer class="main-footer">
@@ -741,6 +780,5 @@
             <p>&copy; 2025 FoodX. All Rights Reserved.</p>
         </div>
     </footer>
-
 </body>
 </html>

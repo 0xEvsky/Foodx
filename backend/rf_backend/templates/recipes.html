@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/recipes.css' %}">
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
-    <script type="module" src="{% static 'js/recipes.js' %}?v=2" defer></script>
+    <script type="module" src="{% static 'js/recipes.js' %}?v=3" defer></script>
     <script src="{% static 'js/common.js' %}?v=2" defer></script>
 
 </head>
@@ -41,53 +41,18 @@
         <input type="text" class="search-bar" id="recipes-search-input" placeholder="Search for a recipe by name or ingredient...">
 
         <div class="recipe-grid">
-            <a href="{% url 'all_recipes' %}#cheese-cake" class="recipe-link">
+            {% for recipe in recipes %}
                 <div class="recipe-card">
-                    <img src="{% static 'images/Cheese Cake.jpg' %}" alt="Cheese Cake" class="recipe-image">
-                    <div class="recipe-title">Cheese Cake</div>
-                    <div class="recipe-desc">Creamy dessert with a graham cracker crust.</div>
+                    <a href="{% url 'all_recipes' %}#{{ recipe.name|slugify }}" class="recipe-link">
+                        <img src="{% static 'images/' %}{{ recipe.image }}" alt="{{ recipe.name }}" class="recipe-image">
+                        <div class="recipe-title">{{ recipe.name }}</div>
+                        <div class="recipe-desc">{{ recipe.description|truncatewords:8 }}</div>
+                    </a>
+                    <i class="far fa-heart favorite-icon" data-recipe-name="{{ recipe.name }}" style="cursor: pointer;" title="Add to favorites"></i>
                 </div>
-            </a>
-
-            <a href="{% url 'all_recipes' %}#shish-tawook" class="recipe-link">
-                <div class="recipe-card">
-                    <img src="{% static 'images/shishtawok.jpg' %}" alt="Shish Tawook" class="recipe-image">
-                    <div class="recipe-title">Shish Tawook</div>
-                    <div class="recipe-desc">Grilled marinated chicken skewers.</div>
-                </div>
-            </a>
-
-            <a href="{% url 'all_recipes' %}#macarons" class="recipe-link">
-                <div class="recipe-card">
-                    <img src="{% static 'images/macarons.jpg' %}" alt="Macarons" class="recipe-image">
-                    <div class="recipe-title">Macarons</div>
-                    <div class="recipe-desc">Sweet and colorful French sandwich cookies.</div>
-                </div>
-            </a>
-
-            <a href="{% url 'all_recipes' %}#grilled-salmon" class="recipe-link">
-                <div class="recipe-card">
-                    <img src="{% static 'images/salamon.jpg' %}" alt="Grilled Salmon" class="recipe-image">
-                    <div class="recipe-title">Grilled Salmon</div>
-                    <div class="recipe-desc">Grilled salmon fillet with lemon and herbs.</div>
-                </div>
-            </a>
-
-            <a href="{% url 'all_recipes' %}#fried-rice" class="recipe-link">
-                <div class="recipe-card">
-                    <img src="{% static 'images/fried rice.jpg' %}" alt="Fried Rice" class="recipe-image">
-                    <div class="recipe-title">Fried Rice</div>
-                    <div class="recipe-desc">Savory stir-fried rice with vegetables and meat.</div>
-                </div>
-            </a>
-
-            <a href="{% url 'all_recipes' %}#chicken-wings" class="recipe-link">
-                <div class="recipe-card">
-                    <img src="{% static 'images/Chicken Wings.jpg' %}" alt="Chicken Wings" class="recipe-image">
-                    <div class="recipe-title">Chicken Wings</div>
-                    <div class="recipe-desc">Crispy wings glazed with sauce.</div>
-                </div>
-            </a>
+            {% empty %}
+                <p>No recipes available.</p>
+            {% endfor %}
         </div>
     </div>
 
