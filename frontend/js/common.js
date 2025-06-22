@@ -12,8 +12,8 @@ function updateHeaderNav() {
         return; 
     }
 
-    const loginLi = navUl.querySelector('a[href="login.html"]')?.closest('li');
-    const profileLi = navUl.querySelector('a[href="profile.html"]')?.closest('li');
+    const loginLi = navUl.querySelector('a[href*="user-login"], a[href="login.html"]')?.closest('li');
+    const profileLi = navUl.querySelector('a[href*="my-profile"], a[href="profile.html"]')?.closest('li');
     console.log('Common.js: Found loginLi:', loginLi);
     console.log('Common.js: Found profileLi:', profileLi);
 
@@ -52,7 +52,7 @@ function updateHeaderNav() {
             }
 
             const adminLi = document.createElement('li');
-            adminLi.innerHTML = '<a href="admin.html" id="admin-link" class="nav-link">Admin Panel</a>';
+            adminLi.innerHTML = '<a href="http://127.0.0.1:8000/admin-panel/" id="admin-link" class="nav-link">Admin Panel</a>';
             
             const targetNodeForAdmin = profileLi || loginLi;
             if (targetNodeForAdmin) {
@@ -119,7 +119,7 @@ function handleLogout(event) {
     
     console.log('Common.js: User logged out, redirecting...');
     
-    window.location.href = 'login.html'; 
+    window.location.href = 'http://127.0.0.1:8000/user-login/'; 
 }
 
 function addSmoothScrolling() {

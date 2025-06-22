@@ -6,6 +6,7 @@ from .models import User
 from recipes.models import Recipe
 from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def users(request: HttpRequest):
     if request.method == 'GET':
         users_set = User.objects.all()
@@ -14,16 +15,54 @@ def users(request: HttpRequest):
     elif request.method == 'POST':
         try:
             data = json.loads(request.body)
+            
+            # Handle both 'name' and 'username' fields
+            username = data.get('username') or data.get('name')
+            email = data.get('email')
+            password = data.get('password')
+            is_admin = data.get('is_admin', False)
+            
+            if not username or not email or not password:
+                return JsonResponse({
+                    'status': 'error', 
+                    'message': 'Username, email, and password are required'
+                }, status=400)
+            
+            # Check if user already exists
+            if User.objects.filter(email=email).exists():
+                return JsonResponse({
+                    'status': 'error', 
+                    'message': 'Email already registered'
+                }, status=400)
+                
+            if User.objects.filter(username=username).exists():
+                return JsonResponse({
+                    'status': 'error', 
+                    'message': 'Username already taken'
+                }, status=400)
+            
             new_user = User(
-                username=data.get('username'),
-                email=data.get('email'),
-                password=data.get('password'),
-                is_admin=data.get('is_admin', False)
+                username=username,
+                email=email,
+                password=password,
+                is_admin=is_admin
             )
             new_user.save()
-            return JsonResponse({'status': 'success', 'id': new_user.id}, status=201)
+            return JsonResponse({
+                'status': 'success', 
+                'id': new_user.pk,
+                'message': 'User created successfully'
+            }, status=201)
+        except json.JSONDecodeError:
+            return JsonResponse({
+                'status': 'error', 
+                'message': 'Invalid JSON data'
+            }, status=400)
         except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+            return JsonResponse({
+                'status': 'error', 
+                'message': f'Error creating user: {str(e)}'
+            }, status=400)
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
 
 
@@ -103,9 +142,9 @@ def reset_password(request: HttpRequest):
 
             try:
                 user = User.objects.get(email=email)
-                return JsonResponse({'status': 'success', 'exists': True}, status=200)
+                return JsonResponse({'status': 'success', 'exists': True, 'message': 'Email found'}, status=200)
             except User.DoesNotExist:
-                return JsonResponse({'status': 'error', 'exists': False, 'message': 'Email not found'}, status=404)
+                return JsonResponse({'status': 'success', 'exists': False, 'message': 'Email not found'}, status=200)
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)

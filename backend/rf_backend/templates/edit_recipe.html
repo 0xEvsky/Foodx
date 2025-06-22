@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe - Recipe Finder</title>
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/edit_recipe.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'images/foodx_logo.png' %}" alt="FoodX Logo">
+            </a>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'recipes' %}">Recipes</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'profile' %}" class="profile-icon"><i class="fas fa-user"></i></a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Add hero section -->
+    <div class="hero-section-small">
+        <div class="container">
+            <h1>Edit Your Recipe</h1>
+            <p>Update your culinary masterpiece</p>
+        </div>
+    </div>
+     
+    <main class="container">
+        <section class="form-container">
+            <form id="edit-recipe-form">
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="recipe_name">Recipe Name:</label>
+                            <input type="text" id="recipe_name" name="recipe_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_image_file">Recipe Image:</label>
+                            <input type="file" id="recipe_image_file" name="recipe_image_file" accept="image/*">
+                            <div class="image-preview-container">
+                                <img id="image-preview" src="" alt="Recipe image preview" style="max-width: 100%; max-height: 200px; display: none;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_description">Description:</label>
+                            <textarea id="recipe_description" name="recipe_description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="cook_time">Cook Time (minutes):</label>
+                            <input type="number" id="cook_time" name="cook_time">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_servings">Servings:</label>
+                            <input type="number" id="recipe_servings" name="recipe_servings">
+                        </div>
+                        <div class="form-group">
+                            <label for="course">Course:</label>
+                            <select id="course" name="course" required>
+                                <option value="appetizers">Appetizers</option>
+                                <option value="main course">Main Course</option>
+                                <option value="dessert">Dessert</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="snacks">Snacks</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cuisine">Cuisine:</label>
+                            <select id="cuisine" name="cuisine" required>
+                                <option value="">Select a cuisine</option>
+                                <option value="American">American</option>
+                                <option value="Italian">Italian</option>
+                                <option value="Mexican">Mexican</option>
+                                <option value="Asian">Asian</option>
+                                <option value="Mediterranean">Mediterranean</option>
+                                <option value="Indian">Indian</option>
+                                <option value="French">French</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-divider">
+                    <span>Ingredients</span>
+                </div>
+                
+                <div class="form-group" id="ingredients-group">
+                    <label>Ingredients:</label>
+                    <div class="ingredient-item">
+                        <input type="text" name="ingredient_name[]" class="ingredient_input_field" placeholder="Ingredient Name" required>
+                        <input type="text" name="ingredient_quantity[]" placeholder="Quantity (e.g., 2 cups)">
+                        <button type="button" class="remove-ingredient-btn">Remove</button>
+                    </div>
+                </div>
+                
+                
+                <div class="section-divider">
+                    <span>Instructions</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Instructions (one step per line):</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                
+                <div class="form-group tag-input">
+                    <label for="recipe_tags">Tags (comma-separated):</label>
+                    <input type="text" id="recipe_tags" name="recipe_tags" placeholder="e.g. vegan, gluten-free, quick">
+                </div>
+                
+                <button type="submit" class="btn btn-block">Save Recipe</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="{% url 'home' %}" class="logo">FOODX</a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'recipes' %}">Recipes</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2025 FoodX. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script type="module" src="{% static 'js/edit_recipe.js' %}"></script>
+</body>
+</html>

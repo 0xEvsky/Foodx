@@ -1,0 +1,113 @@
+
+#ingredients-group .ingredient-item input[name="ingredient_name[]"] {
+    margin-bottom: 5px;
+}
+
+#ingredients-group p {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Add Recipe Page Styles */
+
+body {
+    background-color: #fff9f2;
+    color: #333;
+}
+
+/* Hero section styling */
+.hero-section-small {
+    background-color: #ff8c42;
+    color: white;
+    text-align: center;
+    padding: 60px 0 30px;
+    margin-bottom: 40px;
+}
+
+.hero-section-small h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero-section-small p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Form styling */
+.form-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.btn {
+    background-color: #ff8c42;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #e67e3a;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section-small {
+        padding: 80px 0 30px;
+    }
+    
+    .form-container {
+        padding: 20px;
+    }
+}
+
+
+/* Add this to your add_recipe.css file */
+.hero-section {
+    padding-top: 150px; /* Adjust based on your navbar height */
+}
+
+main.container {
+    margin-top: 20px; /* Adjust as needed */
+}

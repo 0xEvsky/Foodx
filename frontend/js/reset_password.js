@@ -1,5 +1,3 @@
-import { updatePasswordAPI } from './API_call.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     const resetForm = document.getElementById('reset-password-form');
     const newPasswordInput = document.getElementById('new-password');
@@ -51,8 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (buttonText) buttonText.textContent = 'Updating...';
 
         try {
-            // Update password using the API
-            const result = await updatePasswordAPI(email, newPassword);
+
+            const response = await fetch('http://127.0.0.1:8000/users/update-password/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    email: email,
+                    password: newPassword
+                })
+            });
+
+            const result = await response.json();
+            console.log("Password update response:", result);
             
             if (result.status === 'success') {
                 alert('Password reset successfully! You can now log in with your new password.');
@@ -62,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error:', error);
-            serverError.textContent = 'An error occurred. Please try again later.';
+            serverError.textContent = 'Network error. Please make sure the server is running and try again.';
         } finally {
             // Reset button state
             submitButton.disabled = false;

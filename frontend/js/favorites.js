@@ -1,4 +1,4 @@
-import { loadRecipes } from './getRecipes.js';
+import { loadRecipes } from './loadData.js';
 window.print = () => {}
 
 const recipes = []

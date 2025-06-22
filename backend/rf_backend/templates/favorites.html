@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodX - Favorite recipes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/recipes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <script type="module" src="{% static 'js/favorites.js' %}" defer></script>
+    <script src="{% static 'js/common.js' %}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="main-nav">
+                <div class="nav-container">
+                    <a href="{% url 'home' %}" class="logo">
+                        <img src="{% static 'images/foodx_logo.png' %}" alt="FoodX Logo">
+                    </a>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'recipes' %}">Recipes</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="{% url 'profile' %}" class="profile-icon"><i class="fas fa-user"></i></a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="tab-nav" style="margin-top: 70px;" >
+            <div class="tab" onclick=location.href="{% url 'recipes' %}">All recipe</div>
+            <div class="tab active" onclick=location.href="{% url 'favorites' %}">My favorite recipe</div>
+        </div>
+
+        <input type="text" class="search-bar" id="recipes-search-input" placeholder="Search for a recipe by name or ingredient...">
+
+        <div class="recipe-grid">
+            <div class="recipe-card">
+                <img src="{% static 'images/Cheese Cake.jpg' %}" alt="Cheese Cake" class="recipe-image">
+                <div class="recipe-title">Cheese Cake</div>
+                <div class="recipe-desc">Creamy dessert with a graham cracker crust.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/shishtawok.jpg' %}" alt="Shish Tawook" class="recipe-image">
+                <div class="recipe-title">Shish Tawook</div>
+                <div class="recipe-desc">Grilled marinated chicken skewers.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/macarons.jpg' %}" alt="Macarons" class="recipe-image">
+                <div class="recipe-title">Macarons</div>
+                <div class="recipe-desc">Sweet and colorful French sandwich cookies.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/salamon.jpg' %}" alt="Salamon" class="recipe-image">
+                <div class="recipe-title">Salamon</div>
+                <div class="recipe-desc">Grilled salmon fillet with lemon and herbs.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/fried rice.jpg' %}" alt="Fried Rice" class="recipe-image">
+                <div class="recipe-title">Fried Rice</div>
+                <div class="recipe-desc">Savory stir-fried rice with vegetables and meat.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/Chicken Wings.jpg' %}" alt="Chicken Wings" class="recipe-image">
+                <div class="recipe-title">Chicken Wings</div>
+                <div class="recipe-desc">Crispy wings glazed with sauce.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/Chocolate Cake.jpg' %}" alt="Chocolate Cake" class="recipe-image">
+                <div class="recipe-title">chocolate cake</div>
+                <div class="recipe-desc">Rich layered chocolate dessert.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/green salad.jpg' %}" alt="Green Salad" class="recipe-image">
+                <div class="recipe-title">Green Salad</div>
+                <div class="recipe-desc">Fresh mix of greens, tomatoes, and veggies.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/noodle.jpg' %}" alt="Ramen" class="recipe-image">
+                <div class="recipe-title">Ramen</div>
+                <div class="recipe-desc">Japanese noodle soup with broth and toppings.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/sezar salad.jpg' %}" alt="Sezar Salad" class="recipe-image">
+                <div class="recipe-title">Sezar Salad</div>
+                <div class="recipe-desc">Classic Caesar salad with chicken and dressing.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/borrito.jpg' %}" alt="Burrito" class="recipe-image">
+                <div class="recipe-title">Burrito</div>
+                <div class="recipe-desc">Tortilla wrapped around seasoned meat and veggies.</div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="{% static 'images/steak.jpg' %}" alt="Steak" class="recipe-image">
+                <div class="recipe-title">Steak</div>
+                <div class="recipe-desc">Juicy grilled steak with vegetables and potatoes.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="{% url 'home' %}" class="logo">FOODX</a>
+                <p>Discover, Cook, and Enjoy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'recipes' %}">Recipes</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2025 FoodX. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

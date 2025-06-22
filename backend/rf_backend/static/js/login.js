@@ -1,0 +1,293 @@
+import { loadUsers } from "./loadData.js";
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    let usersData = []
+    await loadUsers(usersData)
+
+    console.log('users data in login.js:', usersData)    
+    const CORRECT_ADMIN_CODE = "Admin2025#"; 
+
+    const authContainer = document.getElementById('auth-container');
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const showSignupBtn = document.getElementById('show-signup');
+    const showLoginBtn = document.getElementById('show-login');
+    const adminCheckbox = document.getElementById('signup-is-admin-check'); 
+    const adminCodeWrapper = document.getElementById('admin-code-wrapper'); 
+
+    showSignupBtn?.addEventListener('click', () => {
+        authContainer?.classList.remove('show-login');
+        authContainer?.classList.add('show-signup');
+        clearAllErrors(); 
+        adminCheckbox.checked = false; 
+        adminCodeWrapper?.classList.remove('active'); 
+    });
+
+    showLoginBtn?.addEventListener('click', () => {
+        authContainer?.classList.remove('show-signup');
+        authContainer?.classList.add('show-login');
+        clearAllErrors(); 
+    });
+
+    adminCheckbox?.addEventListener('change', () => {
+        if (adminCheckbox.checked) {
+            adminCodeWrapper?.classList.add('active');
+        } else {
+            adminCodeWrapper?.classList.remove('active');
+            const adminCodeInput = document.getElementById('signup-admin-code');
+            if(adminCodeInput) {
+                adminCodeInput.value = '';
+                clearError(adminCodeInput);
+            }
+        }
+    });
+
+    const inputs = document.querySelectorAll('.auth-form-container input[required]');
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => validateInput(input));
+        input.addEventListener('input', () => clearError(input)); 
+    });
+
+    loginForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitButton = loginForm.querySelector('button[type="submit"]');
+        const serverErrorDiv = document.getElementById('login-server-error');
+
+        if (!validateForm(loginForm)) return;
+
+        setLoading(submitButton, true);
+        hideServerError(serverErrorDiv);
+
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 1000)); 
+            const user = usersData.find(u => u.email === email && u.password === password);
+
+            console.log('user', user)
+            if (user) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('isAdmin', user.is_admin || 'false'); 
+                sessionStorage.setItem('userEmail', email);
+                if (user.name) {
+                    sessionStorage.setItem('userName', user.name);
+                }
+                
+                window.location.href = '/'; 
+
+            } else {
+                showServerError(serverErrorDiv, 'Invalid email or password.');
+                setLoading(submitButton, false);
+            }
+
+            
+
+        } catch (error) {
+            console.error("Login Error:", error);
+            showServerError(serverErrorDiv, 'An unexpected error occurred. Please try again.');
+            setLoading(submitButton, false);
+        }
+    });
+
+    signupForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitButton = signupForm.querySelector('button[type="submit"]');
+        const serverErrorDiv = document.getElementById('signup-server-error');
+        const passwordInput = document.getElementById('signup-password');
+        const confirmPasswordInput = document.getElementById('signup-confirm-password');
+        const adminCodeInput = document.getElementById('signup-admin-code');
+        const isAdminCheckboxChecked = adminCheckbox.checked; 
+        let isAdminUser = false; 
+
+        let isFormValid = true;
+        signupForm.querySelectorAll('input[required]:not(#signup-admin-code)').forEach(input => {
+             if (!validateInput(input)) {
+                isFormValid = false;
+             }
+        });
+         if (!isFormValid) return;
+
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            showError(confirmPasswordInput, 'Passwords do not match.');
+            return;
+        } else {
+            clearError(confirmPasswordInput); 
+        }
+
+        if (isAdminCheckboxChecked) {
+            const adminCode = adminCodeInput.value;
+            if (!adminCode) {
+                showError(adminCodeInput, 'Admin code is required.');
+                return; 
+            } else if (adminCode === CORRECT_ADMIN_CODE) {
+                isAdminUser = true; 
+                clearError(adminCodeInput);
+            } else {
+                showError(adminCodeInput, 'Invalid Admin Code.');
+                return; 
+            }
+        } else {
+            isAdminUser = false; 
+            clearError(adminCodeInput); 
+        }
+
+        setLoading(submitButton, true);
+        hideServerError(serverErrorDiv);
+
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = passwordInput.value;
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 1500)); 
+             
+            const existingUser = usersData.find(u => u.email === email);
+            if (existingUser) {
+                showServerError(serverErrorDiv, 'An account with this email already exists.');
+                setLoading(submitButton, false);
+                return; 
+            }
+
+            const newUser = {
+                username: name,
+                email: email,
+                password: password,
+                is_admin: isAdminUser
+            }
+
+            console.log(newUser)
+            const endpoint = "http://127.0.0.1:8000/users/";
+            const requestBody = JSON.stringify(newUser);
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                credentials: 'include',
+                body: requestBody
+            })
+            
+            if (response.status === 201) {
+                const responseBody = await response.json()
+                console.log(responseBody)
+                newUser.id = responseBody.id
+                const allUsers = JSON.parse(localStorage.getItem("users"))
+                allUsers.push(newUser)
+                localStorage.setItem("users", JSON.stringify(allUsers))
+                console.log("Signed up successfully!");
+            } else {
+                console.error(`bad response: ${response.status}`)
+            }
+
+            window.location.href = '/'; 
+
+            
+            
+        } catch (error) {
+            console.error("Signup Error:", error)
+            showServerError(serverErrorDiv, 'An unexpected error occurred. Please try again.');
+            setLoading(submitButton, false);
+        }
+    });
+
+    function setLoading(button, isLoading) {
+        if (!button) return;
+        if (isLoading) {
+            button.classList.add('loading');
+            button.disabled = true;
+        } else {
+            button.classList.remove('loading');
+            button.disabled = false;
+        }
+    }
+
+    function validateInput(input) {
+        const errorSpan = input.nextElementSibling; 
+        if (!input.checkValidity()) {
+            input.classList.add('input-error');
+            if (errorSpan && errorSpan.classList.contains('error-message')) {
+                errorSpan.textContent = input.validationMessage;
+                errorSpan.classList.add('show');
+            }
+            return false;
+        } else {
+            clearError(input);
+            return true;
+        }
+    }
+
+    function validateForm(form) {
+        let isValid = true;
+        const requiredInputs = form.querySelectorAll('input[required]');
+        requiredInputs.forEach(input => {
+            if (!validateInput(input)) {
+                isValid = false;
+            }
+        });
+        return isValid;
+    }
+
+    function showError(input, message) {
+        const errorSpan = input.nextElementSibling;
+        input.classList.add('input-error');
+         if (errorSpan && errorSpan.classList.contains('error-message')) {
+            errorSpan.textContent = message;
+            errorSpan.classList.add('show');
+        }
+    }
+
+    function clearError(input) {
+        const errorSpan = input.nextElementSibling;
+        input.classList.remove('input-error');
+         if (errorSpan && errorSpan.classList.contains('error-message')) {
+             errorSpan.textContent = '';
+             errorSpan.classList.remove('show');
+         }
+    }
+     function clearAllErrors() {
+        document.querySelectorAll('.error-message').forEach(span => {
+            span.textContent = '';
+            span.classList.remove('show');
+        });
+        document.querySelectorAll('.input-error').forEach(input => {
+            input.classList.remove('input-error');
+        });
+        hideServerError(document.getElementById('login-server-error'));
+        hideServerError(document.getElementById('signup-server-error'));
+    }
+
+
+    function showServerError(div, message) {
+        if (!div) return;
+        div.textContent = message;
+        div.classList.add('show');
+    }
+
+    function hideServerError(div) {
+        if (!div) return;
+        div.textContent = '';
+        div.classList.remove('show');
+    }
+
+});

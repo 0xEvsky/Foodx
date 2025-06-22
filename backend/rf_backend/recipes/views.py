@@ -1,21 +1,20 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Recipe, Category, Tag, Ingredient
-from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.core.serializers import serialize
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.middleware.csrf import get_token
 from django.db.models.fields.related import ManyToManyField
 import json
+from .models import Recipe, Ingredient, Tag, Category
 
 
-@ensure_csrf_cookie
+@csrf_exempt
 def get_csrf_token(request):
-    from django.middleware.csrf import get_token
     token = get_token(request)
     return JsonResponse({
         'csrfToken': token,
         'detail': 'CSRF cookie set'
     }, status=200)
-
 
 @csrf_exempt
 def recipes(request: HttpRequest):    
@@ -42,7 +41,7 @@ def recipes(request: HttpRequest):
             
             newRecipe.save()
             
-            # handling many to many fields
+            
             
             categoriesData = data.get('categories')
             if categoriesData:
@@ -159,9 +158,7 @@ def recipe_by_id(request: HttpRequest, id: int):
                 return JsonResponse({'message': 'Recipe deleted'}, status=204)
             else:
                 return JsonResponse({'error': 'deletion failed'}, status=400)
-            
-            
-            
+
 def ingredients(request: HttpRequest) -> HttpResponse:
     if request.method == 'GET':
         ingredientsSet = Ingredient.objects.all()
@@ -169,14 +166,12 @@ def ingredients(request: HttpRequest) -> HttpResponse:
         response = HttpResponse(ingredientssData, content_type='application/json')
         return response
 
-
 def categories(request: HttpRequest) -> HttpResponse:
     if request.method == 'GET':
         categories_set = Category.objects.all()
         categories_data = serialize('json', categories_set)
         response = HttpResponse(categories_data, content_type='application/json')
         return response
-
 
 def tags(request: HttpRequest) -> HttpResponse:
     if request.method == 'GET':

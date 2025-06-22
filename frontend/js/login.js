@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.error(`bad response: ${response.status}`)
             }
 
-            // window.location.href = 'index.html'; 
+            window.location.href = 'index.html'; 
 
             
             

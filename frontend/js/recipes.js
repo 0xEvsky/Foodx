@@ -1,4 +1,4 @@
-import { loadRecipes } from './getRecipes.js';
+import { loadRecipes } from './loadData.js';
 window.print = () => {}
 
 const recipesData = [];
@@ -93,4 +93,3 @@ function handleFavoriteClick(event) {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }
 }
-

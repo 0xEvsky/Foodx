@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodX Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <script type="module" src="{% static 'js/admin.js' %}?v=2"></script>
+    <style>
+        .recent-activity-2 {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .recent-activity-3 {
+            color: #333;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .recipe-list-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 5px;
+        }
+        
+        .recipe-list-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .recipe-list-container::-webkit-scrollbar-track {
+            background: #fff5ee;
+            border-radius: 4px;
+        }
+        
+        .recipe-list-container::-webkit-scrollbar-thumb {
+            background: #ff8c42;
+            border-radius: 4px;
+        }
+        
+        .recipe-list-container::-webkit-scrollbar-thumb:hover {
+            background: #e67e22;
+        }
+        
+        .recipe-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .recipe-item {
+            margin-bottom: 10px;
+        }
+        
+        .recipe-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .overlap-2 {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 15px;
+        }
+        
+        .div-wrapper {
+            flex-grow: 1;
+        }
+        
+        .overlap-group-2 {
+            padding: 5px 0;
+        }
+        
+        .text-wrapper-5 {
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .button-2, .button-3 {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .button-2 {
+            background-color: #4a90e2;
+            color: white;
+        }
+        
+        .button-2:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .button-3 {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .button-3:hover {
+            background-color: #c0392b;
+        }
+        
+        .text-wrapper-6, .text-wrapper-7 {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-dashboard-bg">
+        <header class="admin-header">
+            <h1 class="admin-logo">FoodX</h1>
+            <span class="admin-dashboard-title">Admin Dashboard</span>
+        </header>
+        <main class="admin-main">
+            <section class="admin-sections">
+                
+                <div class="admin-stats-card">
+                    <h2 class="admin-section-title">Statistics Section</h2>
+                    <div class="admin-stats-list">
+                        <div>Total Recipes: XX</div>
+                        <div>Total Users: XX</div>
+                        <div>New Submissions This Week: XX</div>
+                        <div>Pending Approvals: XX</div>
+                    </div>
+                </div>
+            </section>
+            <section class="admin-activity-card">
+                <h2 class="admin-section-title">Recent Activity</h2>
+                <div class="admin-activity-list">
+                    <div class="admin-activity-item"><span class="admin-activity-dot"></span>User JohnDoe submitted a new recipe: Spaghetti Carbonara – Pending Approval</div>
+                    <div class="admin-activity-item"><span class="admin-activity-dot"></span>User JaneCook updated the recipe: Vegan Tacos</div>
+                    <div class="admin-activity-item"><span class="admin-activity-dot"></span>User ChefMike left a review on Grilled Chicken Salad</div>
+                </div>
+            </section>
+            
+            <section class="recent-activity-2">
+                <h3 class="recent-activity-3">Manage Recipes</h3>
+                
+                <div class="recipe-list-container">
+                    <ul class="recipe-list" id="admin-manage-recipes-list">
+                        
+                    </ul>
+                </div>
+            </section>
+            
+            <a href="{% url 'add_recipe' %}">
+                <div class="admin-add-btn-container">
+                    <button class="admin-add-btn">Add new recipe</button>
+                </div>
+            </a>
+        </main>
+    </div>
+</body>
+</html>

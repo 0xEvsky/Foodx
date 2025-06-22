@@ -1,0 +1,1511 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Minimalist Palette & Base Styles */
+:root {
+    --primary-color: #FF7700; /* New primary orange */
+    --primary-light: #FFF0E0; /* Lighter shade for backgrounds/hovers */
+    --text-color: #222222; /* Dark grey for text */
+    --text-light: #666666; /* Lighter grey for secondary text */
+    --border-color: #eeeeee; /* Light grey for borders */
+    --background-light: #ffffff; /* White background */
+    --background-alt: #f9f9f9; /* Very light grey for alternate sections */
+    --white: #ffffff;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer shadow */
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Clean sans-serif */
+    line-height: 1.7; /* More spacing */
+    color: var(--text-color);
+    background-color: var(--background-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased; /* Smoother fonts */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    width: 90%;
+    max-width: 1140px; /* Slightly narrower max-width */
+    margin: 0 auto; /* Center container */
+    padding: 60px 15px; /* More vertical padding, some horizontal */
+}
+
+.container-flex {
+    width: 90%;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 2.5rem; /* Increased gap */
+    padding: 80px 15px; /* More vertical padding */
+}
+
+/* Simplified Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Modern heading font */
+    color: var(--text-color);
+    line-height: 1.3;
+    font-weight: 600; /* Slightly bolder headings */
+    margin-bottom: 1rem; /* Default bottom margin */
+}
+
+h1 {
+    font-size: 2.5rem; /* Adjusted sizes for better hierarchy */
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+a {
+    color: var(--primary-color); /* Links use primary color */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--text-color); /* Darken link on hover */
+}
+
+ul {
+    list-style: none;
+    padding-left: 0; /* Remove default padding */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px; /* Subtle rounding for images */
+}
+
+.alt-bg {
+     background-color: var(--background-alt); /* Use light grey variable */
+}
+
+/* Remove or Update Old Section Title Styles if no longer needed */
+/* Keep if needed, but consider simplifying */
+.section-title {
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif; /* Use new heading font */
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1.1rem; /* Example adjustment */
+    text-transform: uppercase; /* Example style */
+    letter-spacing: 0.5px;
+}
+
+.section-subtitle {
+    margin-bottom: 3rem; /* More space below subtitle */
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 600px; /* Limit width for readability */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Feature Sections --- */
+.feature-section .feature-text,
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: 1;
+}
+
+.main-nav {
+    position: sticky; /* Make nav sticky */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.8rem 0; /* Adjust padding */
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color); /* Use border instead of shadow for minimalism */
+    transition: padding 0.3s ease;
+}
+
+/* Optional: Add a subtle shadow on scroll */
+/* .main-nav.scrolled {
+    box-shadow: var(--shadow);
+    padding: 0.6rem 0;
+} */
+
+.nav-container {
+    width: 90%;
+    max-width: 1140px; /* Match container */
+    margin: 0 auto; /* Center container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-nav .logo {
+    font-family: 'Poppins', sans-serif; /* Use heading font */
+    font-size: 1.6rem; /* Adjusted size */
+    font-weight: 700;
+    color: var(--text-color); /* Darker logo text */
+    text-transform: uppercase; /* Optional: Style */
+    letter-spacing: 1px;
+}
+
+.main-nav .logo span { /* Optional: Highlight part of the logo */
+    color: var(--primary-color);
+}
+
+.main-nav ul {
+    display: flex;
+    align-items: center; /* Align links vertically */
+}
+
+.main-nav ul li {
+    margin-left: 2rem; /* Increased spacing */
+}
+
+.main-nav ul li:first-child {
+    margin-left: 0;
+}
+
+.main-nav ul li a {
+    color: var(--text-light); /* Lighter color for links */
+    padding: 0.5rem 0.2rem; /* Adjust padding */
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active { /* Style for active page link */
+    color: var(--primary-color);
+}
+
+/* Remove underline effect or simplify it */
+/* .main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; 
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after,
+.main-nav ul li a.active::after {
+    width: 100%;
+} */
+
+/* Consider adding a Login/Signup Button */
+.nav-cta-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-left: 2rem;
+    display: inline-block;
+}
+
+.nav-cta-button:hover {
+    background-color: var(--text-color); /* Darken on hover */
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+/* --- Simplified Hero Section --- */
+.hero-section {
+    background-color: var(--background-alt); /* Light grey background */
+    padding: 80px 0; /* Generous padding */
+    min-height: auto; /* Remove fixed height */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 700px; /* Control content width */
+    margin: 0 auto; /* Center horizontally */
+    padding: 0 15px; /* Horizontal padding */
+    position: relative; /* Keep if needed for other elements */
+    z-index: 2; /* Keep if needed */
+}
+
+.hero-content h1 {
+    font-family: 'Poppins', sans-serif; /* Ensure heading font */
+    font-size: 3rem; /* Slightly larger H1 */
+    font-weight: 700;
+    color: var(--primary-color); /* Use primary color for heading */
+    margin-bottom: 1rem; /* Space below heading */
+    text-shadow: none; /* Remove text shadow */
+}
+
+.hero-content p {
+    font-size: 1.15rem; /* Slightly larger paragraph */
+    color: var(--text-light); /* Use light text color */
+    max-width: 550px; /* Limit paragraph width */
+    margin: 0 auto 2rem auto; /* Center and add space below */
+    line-height: 1.8; /* Increase line height */
+    text-shadow: none; /* Remove text shadow */
+}
+
+/* Optional: Add a CTA button style if you add a button in HTML */
+.hero-cta-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+    text-transform: none; /* Ensure no accidental uppercase */
+}
+
+.hero-cta-button:hover {
+    background-color: var(--text-color); /* Darken on hover */
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Simplify or Remove Small Hero */
+.hero-section-small {
+    background-color: var(--background-alt); /* Consistent background */
+    padding: 60px 0; /* Adjust padding */
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Remove background image reference if any */
+}
+
+/* Reuse .hero-content styles, just override specifics */
+.hero-section-small .hero-content h1 {
+    font-size: 2.2rem; /* Smaller H1 for small hero */
+    color: var(--primary-color);
+    text-shadow: none;
+    margin-bottom: 0.8rem;
+}
+.hero-section-small .hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    text-shadow: none;
+    margin-bottom: 1.5rem;
+}
+
+.search-section {
+    padding: 40px 0; /* Reduced padding */
+    background-color: var(--background-light); /* Use standard background */
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#search-form {
+    display: flex;
+    width: 100%; /* Use more width */
+    max-width: 650px; /* Increase max width slightly */
+    background-color: var(--white);
+    border-radius: 8px; /* Less pronounced rounding */
+    border: 1px solid var(--border-color);
+    box-shadow: none; /* Remove shadow */
+    overflow: hidden;
+}
+
+#search-input {
+    flex-grow: 1;
+    border: none;
+    padding: 0.9rem 1.2rem; /* Adjust padding */
+    font-size: 1rem;
+    outline: none;
+    color: var(--text-color);
+    background-color: transparent;
+}
+
+#search-input::placeholder {
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+#search-form button {
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0 1.8rem; /* More horizontal padding */
+    cursor: pointer;
+    font-size: 1rem; /* Match input */
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    border-left: 1px solid var(--border-color); /* Subtle separator */
+}
+
+#search-form button:hover {
+    background-color: #e66900; /* Darker shade of primary */
+}
+
+/* --- Feature Sections --- */
+.feature-section .feature-text,
+.feature-section .feature-image {
+    flex-basis: 48%; /* Slightly less than 50% for gap */
+}
+
+/* Reverse order for alternating sections */
+.feature-section:nth-child(odd) .feature-image {
+     order: 1; 
+}
+.feature-section:nth-child(odd) .feature-text {
+     order: 2; 
+}
+
+.feature-section .feature-text h2 {
+    font-family: 'Merriweather', serif;
+    margin-bottom: 1rem;
+    color: #4f4a41;
+}
+
+.feature-section .feature-text p {
+    color: #666;
+    font-size: 1.05rem;
+}
+
+.feature-section .feature-image img {
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* --- Trending Recipes / Recipe Grid --- */
+.trending-recipes, /* Apply common padding if needed */
+.recipe-listing {  /* Apply common padding if needed */
+    padding: 60px 0;
+}
+
+.trending-grid,
+.recipe-grid { /* Style both grids similarly */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem; /* Consistent gap */
+    /* Remove specific trending grid layout rules */
+}
+
+/* Unified Recipe Card Style */
+.recipe-card {
+    background-color: var(--white);
+    border-radius: 8px; /* Match other border radius */
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* Remove underline if card is a link */
+    height: 100%; /* Ensure cards in a row have same height */
+}
+
+.recipe-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06); /* Slightly stronger shadow on hover */
+}
+
+/* Remove specific trending card styles like :nth-child(), .small-card */
+/* .recipe-card-trending { ... } */
+/* .recipe-card-trending:hover { ... } */
+/* .trending-grid { grid-template-columns: 2fr 1fr ... } */
+/* .recipe-card-trending:nth-child(1) { ... } */
+/* ... etc ... */
+
+.recipe-card .recipe-image {
+    width: 100%;
+    height: 200px; /* Standard image height */
+    overflow: hidden;
+    position: relative; /* For potential badges/icons */
+}
+
+.recipe-card .recipe-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the area */
+    transition: transform 0.3s ease;
+    border-radius: 0; /* Remove img radius if card has one */
+}
+
+.recipe-card:hover .recipe-image img {
+    transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.recipe-card .recipe-content { /* Renamed from recipe-info */
+    padding: 1rem 1.2rem; /* Adjust padding */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow content to fill space */
+}
+
+.recipe-card h3 {
+    font-family: 'Poppins', sans-serif; /* Heading font */
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem; /* Adjusted size */
+    color: var(--text-color);
+    line-height: 1.4;
+    /* Remove fixed height if any */
+}
+
+.recipe-card h3 a {
+    color: inherit; /* Make heading link inherit color */
+    text-decoration: none;
+}
+
+.recipe-card h3 a:hover {
+    color: var(--primary-color);
+}
+
+.recipe-card p { /* Style for short description */
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    flex-grow: 1; /* Push footer to bottom */
+}
+
+.recipe-card .recipe-meta { /* For things like time, difficulty */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: auto; /* Push to bottom */
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.recipe-card .recipe-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.recipe-card .recipe-meta i { /* Style for icons */
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+/* Remove old .recipe-link style */
+/* .recipe-link { ... } */
+/* .recipe-link i { ... } */
+/* .recipe-link:hover { ... } */
+
+/* --- What is New Section --- */
+.what-is-new {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.new-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.feature-item {
+    text-align: center;
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: #e67e22; /* Orange icon color */
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.feature-item h3 {
+    font-family: 'Merriweather', serif;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #4f4a41;
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* --- Footer --- */
+.main-footer {
+    background-color: var(--background-alt); /* Light grey background */
+    color: var(--text-light); /* Use light text color as base */
+    padding: 50px 0 30px; /* Adjusted padding */
+    border-top: 1px solid var(--border-color); /* Use main border color */
+    margin-top: auto; /* Push to bottom */
+    width: 100%;
+    /* Remove position relative/bottom if not needed */
+}
+
+.footer-container { /* Use a container for consistent width */
+    width: 90%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-grid {
+    display: grid;
+    /* Simple 4 column layout on large screens */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; /* Adjust gap */
+    margin-bottom: 3rem; /* Space before bottom text */
+    /* Remove max-width/margin/padding here, handled by .footer-container */
+}
+
+.footer-about .logo {
+    font-family: 'Poppins', sans-serif; /* Match nav logo */
+    font-size: 1.5rem; /* Adjusted size */
+    font-weight: 700;
+    color: var(--text-color); /* Darker text */
+    text-transform: uppercase; /* Match nav */
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.footer-about .logo span { /* Optional highlight */
+    color: var(--primary-color);
+}
+
+.footer-about p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.8rem; /* Slightly reduced gap */
+}
+
+.social-links a {
+    color: var(--text-light);
+    font-size: 1.2rem; /* Slightly smaller icons */
+    transition: color 0.2s ease;
+    /* Remove background/border/size - simpler look */
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+    /* Remove background/transform changes */
+}
+
+.footer-links h4 {
+    font-family: 'Poppins', sans-serif; /* Heading font */
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color); /* Darker heading */
+    font-size: 1rem;
+}
+
+.footer-links ul li {
+    margin-bottom: 0.6rem; /* Adjust spacing */
+}
+
+.footer-links ul li a {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+    color: var(--primary-color);
+    /* Remove transform */
+}
+
+.footer-bottom {
+    /* Max-width/margin/padding handled by .footer-container */
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/* Footer Responsive Adjustments (Simplified) */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr; /* 2 columns */
+        gap: 2.5rem;
+    }
+    .footer-about {
+        grid-column: 1 / -1; /* Span full width */
+        text-align: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* 1 column */
+        text-align: center;
+    }
+    .footer-links {
+        margin-top: 1.5rem;
+    }
+    .footer-links ul li a {
+        padding: 0.3rem 0; /* Adjust touch target */
+    }
+}
+
+/* Remove or update specific Phone link styles if needed */
+/* .footer-links a[href^="tel:"] { ... } */
+
+/* --- Utility Classes (Keep or adapt from previous) --- */
+.text-center {
+    text-align: center;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .container-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    .feature-section:nth-child(odd) .feature-image,
+    .feature-section:nth-child(odd) .feature-text {
+        order: 0; /* Reset order */
+    }
+    .feature-section .feature-image {
+        margin-bottom: 1.5rem;
+    }
+
+     .trending-grid {
+        grid-template-columns: 1fr; /* Stack trending recipes */
+    }
+    .recipe-card-trending:nth-child(1),
+    .recipe-card-trending:nth-child(2),
+    .recipe-card-trending:nth-child(3) {
+        grid-row: auto;
+        grid-column: auto;
+    }
+     .recipe-card-trending img,
+     .recipe-card-trending:nth-child(1) img,
+     .recipe-card-trending.small-card img {
+        height: 250px; /* Consistent height on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: 60vh;
+        min-height: 400px;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    .main-nav .logo {
+        font-size: 1.5rem;
+    }
+    .main-nav ul {
+        /* Consider a mobile menu toggle here */
+        display: none; /* Hide links for now, needs JS toggle */
+    }
+     #search-form {
+        width: 90%;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack footer columns */
+        text-align: center;
+    }
+    .footer-about .social-links {
+        justify-content: center;
+        display: flex; /* Center social links */
+    }
+    .footer-about .social-links a:last-child {
+        margin-right: 0;
+    }
+} 
+
+/* --- Enhanced Recipe Page Styles --- */
+.recipe-header {
+    margin-bottom: 2rem;
+}
+
+.recipe-title-section {
+    padding: 1.5rem 0;
+}
+
+.recipe-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.recipe-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+}
+
+.recipe-meta i {
+    color: #f39c12;
+}
+
+.recipe-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.tag {
+    background-color: var(--accent-color);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    border: 1px solid #eee;
+}
+
+/* Recipe Sections Common Styles */
+.recipe-overview,
+.recipe-ingredients,
+.recipe-instructions,
+.recipe-tips,
+.recipe-reviews {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.recipe-overview p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* Ingredients Grid */
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.ingredient-group h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.ingredient-group ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ingredient-group li {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.8rem;
+    color: #555;
+}
+
+.ingredient-amount {
+    font-weight: 500;
+    margin-right: 1rem;
+    color: #f39c12;
+    min-width: 60px;
+}
+
+/* Instructions List */
+.instructions-list {
+    counter-reset: step-counter;
+}
+
+.instruction-step {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.step-number {
+    background: #f39c12;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex-grow: 1;
+}
+
+.step-content h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.step-content p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Tips Grid */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.tip-item {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.tip-item:hover {
+    transform: translateY(-5px);
+}
+
+.tip-item i {
+    font-size: 2rem;
+    color: #f39c12;
+    margin-bottom: 1rem;
+}
+
+.tip-item h3 {
+    color: #333;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.tip-item p {
+    color: #666;
+}
+
+/* Recipe Actions */
+.recipe-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.recipe-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.recipe-actions .btn i {
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #45b8b0;
+}
+
+/* Reviews Section */
+.review-stats {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.rating-average {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.stars {
+    color: #f39c12;
+    font-size: 1.2rem;
+}
+
+.rating-count {
+    color: #666;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .recipe-meta {
+        gap: 1rem;
+    }
+
+    .recipe-meta span {
+        font-size: 0.9rem;
+    }
+
+    .ingredients-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .instruction-step {
+        gap: 1rem;
+    }
+
+    .recipe-actions {
+        flex-direction: column;
+    }
+
+    .recipe-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Enhanced Search and Filter Section */
+.search-and-filter-section {
+    background-color: var(--color-light);
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.enhanced-search {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.search-input-group {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.search-input-group input {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 8px 0 0 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.search-input-group button {
+    padding: 0 1.5rem;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 0 8px 8px 0;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-input-group button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.filter-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.filter-options select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Recipe Categories Section */
+.recipe-categories {
+    padding: 4rem 0;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.category-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.category-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.category-card h3 {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+}
+
+.recipe-count {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+/* Recipe Grid Layout */
+.recipe-listing {
+    padding: 4rem 0;
+    background-color: var(--color-background);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.results-count {
+    color: var(--color-text-light);
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Enhanced Recipe Card */
+.recipe-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-image {
+    position: relative;
+    padding-top: 66.67%; /* 3:2 aspect ratio */
+}
+
+.recipe-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recipe-badges {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.badge-new, .badge-trending {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-trending {
+    background-color: var(--accent-color);
+}
+
+.favorite-btn {
+    background-color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.favorite-btn:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.recipe-content {
+    padding: 1.5rem;
+}
+
+.recipe-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+.recipe-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.recipe-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: var(--color-text);
+}
+
+.recipe-card p {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.recipe-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.recipe-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.recipe-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+}
+
+.recipe-rating i {
+    color: #ffd700;
+}
+
+.view-recipe {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.view-recipe:hover {
+    color: var(--primary-dark);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+}
+
+.pagination-btn {
+    background-color: white;
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-btn.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: var(--color-light);
+    border-color: var(--primary-color);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-dots {
+    color: var(--color-text-light);
+    padding: 0 0.5rem;
+}
+
+main {
+    flex: 1;
+}
+
+/* === Buttons === */
+
+/* Base Button Style */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Center text/icon */
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem; /* Adjusted padding */
+    border-radius: 6px; /* Slightly rounded corners */
+    font-weight: 500;
+    font-size: 0.95rem; /* Slightly smaller font */
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    border: 1px solid transparent; /* Base border */
+    text-decoration: none; /* Ensure no underline */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* Subtle lift */
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #e66900; /* Darker primary */
+    border-color: #e66900;
+    color: var(--white);
+}
+
+/* Secondary Button (Outline Style) */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-light); /* Light primary background on hover */
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Optional: Tertiary/Link Button */
+.btn-link {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: transparent;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.btn-link:hover {
+    color: var(--text-color);
+    background-color: var(--background-alt); /* Subtle background */
+    transform: none; /* No lift for link buttons */
+}
+
+/* Adjustments for buttons inside specific contexts if needed */
+.recipe-actions .btn {
+    /* Keep existing flex properties if needed */
+    /* Adjust padding or size if necessary for this context */
+}
+
+.recipe-actions .btn i {
+    /* Keep icon style */
+    font-size: 1.1rem; /* Keep or adjust */
+}
+
+
+/* Remove old specific button styles if they conflict */
+/* e.g., remove old .recipe-actions .btn background/color */
+
+/* === Forms === */
+
+.form-group {
+    margin-bottom: 1.5rem; /* Space between form groups */
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="number"],
+textarea,
+select {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1rem; /* Standard padding */
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--white);
+    background-clip: padding-box;
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Match button radius */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none; /* Remove default mobile styling */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem var(--primary-light); /* Subtle focus ring */
+}
+
+textarea {
+    min-height: 120px; /* Default textarea height */
+    resize: vertical; /* Allow vertical resize */
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); /* Minimalist arrow */
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px 12px;
+    padding-right: 3rem; /* Space for arrow */
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-light);
+    opacity: 0.7;
+}
+
+/* Optional: Style for checkboxes/radio buttons */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.form-check input[type="checkbox"],
+.form-check input[type="radio"] {
+    width: auto;
+    margin-right: 0.5rem;
+    appearance: auto; /* Use default appearance for these */
+}
+
+.form-check label {
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+/* Error message styling */
+.error-message {
+    color: #dc3545; /* Standard error color */
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}

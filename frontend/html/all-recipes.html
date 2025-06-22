@@ -401,8 +401,360 @@
             text-align: center;
             padding: 20px 0;
         }
+
+        .back-navigation {
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #e91e63;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: #c2185b;
+        }
     </style>
     <script src="../js/common.js" defer></script>
+    <script>
+        // Recipe data - fallback when server is not available
+        const recipes = [
+            {
+                name: "Cheese Cake",
+                slug: "cheesecake",
+                image: "Cheese Cake.jpg",
+                description: "Creamy dessert with a graham cracker crust.",
+                time: "4 hours",
+                servings: "8",
+                rating: "4.8",
+                ratingCount: "127",
+                tags: ["Dessert", "Sweet", "Cream"],
+                ingredients: [
+                    "2 cups graham cracker crumbs",
+                    "1/2 cup melted butter",
+                    "32 oz cream cheese",
+                    "1 cup sugar",
+                    "4 large eggs",
+                    "1 tsp vanilla extract",
+                    "1/4 cup sour cream"
+                ],
+                instructions: [
+                    "Preheat oven to 325°F (165°C).",
+                    "Mix graham cracker crumbs with melted butter and press into bottom of springform pan.",
+                    "Beat cream cheese until smooth, gradually add sugar.",
+                    "Add eggs one at a time, then vanilla and sour cream.",
+                    "Pour over crust and bake for 50-60 minutes.",
+                    "Cool completely before serving."
+                ]
+            },
+            {
+                name: "Shish Tawook",
+                slug: "shish-tawook",
+                image: "shishtawok.jpg",
+                description: "Grilled marinated chicken skewers.",
+                time: "45 mins",
+                servings: "4",
+                rating: "4.6",
+                ratingCount: "89",
+                tags: ["Chicken", "Grilled", "Middle Eastern"],
+                ingredients: [
+                    "2 lbs chicken breast, cubed",
+                    "1/4 cup olive oil",
+                    "3 cloves garlic, minced",
+                    "2 tbsp lemon juice",
+                    "1 tsp paprika",
+                    "1/2 tsp cumin",
+                    "Salt and pepper to taste"
+                ],
+                instructions: [
+                    "Cut chicken into 1-inch cubes.",
+                    "Mix all marinade ingredients in a bowl.",
+                    "Marinate chicken for at least 30 minutes.",
+                    "Thread chicken onto skewers.",
+                    "Grill for 12-15 minutes, turning occasionally.",
+                    "Serve hot with rice or pita bread."
+                ]
+            },
+            {
+                name: "Macarons",
+                slug: "macarons",
+                image: "macarons.jpg",
+                description: "Sweet and colorful French sandwich cookies.",
+                time: "2 hours",
+                servings: "24",
+                rating: "4.9",
+                ratingCount: "156",
+                tags: ["Dessert", "French", "Sweet"],
+                ingredients: [
+                    "100g almond flour",
+                    "200g powdered sugar",
+                    "75g egg whites",
+                    "25g granulated sugar",
+                    "Food coloring",
+                    "Filling of choice"
+                ],
+                instructions: [
+                    "Sift almond flour and powdered sugar together.",
+                    "Whip egg whites to soft peaks, gradually add sugar.",
+                    "Fold dry ingredients into meringue.",
+                    "Pipe circles onto baking sheets.",
+                    "Let rest for 30 minutes until skin forms.",
+                    "Bake at 300°F for 15-18 minutes."
+                ]
+            },
+            {
+                name: "Grilled Salmon",
+                slug: "grilled-salmon",
+                image: "salamon.jpg",
+                description: "Grilled salmon fillet with lemon and herbs.",
+                time: "25 mins",
+                servings: "4",
+                rating: "4.7",
+                ratingCount: "203",
+                tags: ["Fish", "Healthy", "Grilled"],
+                ingredients: [
+                    "4 salmon fillets",
+                    "2 tbsp olive oil",
+                    "2 lemons, sliced",
+                    "Fresh dill",
+                    "Salt and pepper",
+                    "Garlic powder"
+                ],
+                instructions: [
+                    "Preheat grill to medium-high heat.",
+                    "Season salmon with salt, pepper, and garlic powder.",
+                    "Brush with olive oil.",
+                    "Grill for 4-6 minutes per side.",
+                    "Top with fresh dill and lemon slices.",
+                    "Serve immediately."
+                ]
+            },
+            {
+                name: "Fried Rice",
+                slug: "fried-rice",
+                image: "fried rice.jpg",
+                description: "Savory stir-fried rice with vegetables and meat.",
+                time: "20 mins",
+                servings: "4",
+                rating: "4.5",
+                ratingCount: "178",
+                tags: ["Rice", "Asian", "Quick"],
+                ingredients: [
+                    "3 cups cooked rice",
+                    "2 eggs, beaten",
+                    "1 cup mixed vegetables",
+                    "2 tbsp soy sauce",
+                    "1 tbsp sesame oil",
+                    "2 green onions, chopped"
+                ],
+                instructions: [
+                    "Heat oil in large wok or pan.",
+                    "Scramble eggs and set aside.",
+                    "Stir-fry vegetables until tender.",
+                    "Add rice and break up clumps.",
+                    "Add soy sauce and sesame oil.",
+                    "Stir in eggs and green onions."
+                ]
+            },
+            {
+                name: "Chicken Wings",
+                slug: "chicken-wings",
+                image: "Chicken Wings.jpg",
+                description: "Crispy wings glazed with sauce.",
+                time: "1 hour",
+                servings: "6",
+                rating: "4.8",
+                ratingCount: "245",
+                tags: ["Chicken", "Spicy", "Appetizer"],
+                ingredients: [
+                    "2 lbs chicken wings",
+                    "1/2 cup hot sauce",
+                    "1/4 cup butter",
+                    "1 tbsp honey",
+                    "1 tsp garlic powder",
+                    "Salt and pepper"
+                ],
+                instructions: [
+                    "Preheat oven to 425°F.",
+                    "Season wings with salt and pepper.",
+                    "Bake for 45 minutes until crispy.",
+                    "Mix hot sauce, butter, honey, and garlic powder.",
+                    "Toss wings in sauce.",
+                    "Serve with celery and blue cheese."
+                ]
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let recipeId = window.location.hash.substring(1); 
+
+            if (recipeId) {
+                showRecipe(recipeId);
+            } else {
+                // Show all recipes if no specific recipe is requested
+                showAllRecipes();
+            }
+
+            window.addEventListener('hashchange', () => {
+                recipeId = window.location.hash.substring(1);
+                if (recipeId) {
+                    showRecipe(recipeId);
+                } else {
+                    showAllRecipes();
+                }
+            });
+        });
+
+        function showAllRecipes() {
+            const container = document.getElementById('recipe-grid');
+            container.innerHTML = `
+                <div class="recipe-navigation">
+                    <h2>All Recipes</h2>
+                    <ul>
+                        ${recipes.map(recipe => `
+                            <li><a href="#${recipe.slug}">${recipe.name}</a></li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function showRecipe(recipeIdFromHash) {
+            const recipe = recipes.find(r => r.slug === recipeIdFromHash || 
+                                           (!r.slug && r.name.toLowerCase().replace(/\s+/g, "-") === recipeIdFromHash));
+            
+            if (!recipe) {
+                console.error('Recipe not found:', recipeIdFromHash);
+                const container = document.getElementById('recipe-grid');
+                container.innerHTML = `
+                    <div class="recipe-card" style="display: block; text-align: center; padding: 40px;">
+                        <h2>Recipe Not Found</h2>
+                        <p>Sorry, we couldn't find the recipe you're looking for.</p>
+                        <a href="recipes.html" class="btn btn-primary">Back to Recipes</a>
+                    </div>
+                `;
+                return;
+            }
+
+            document.querySelectorAll('.recipe-card').forEach(card => {
+                card.style.display = 'none';
+            });
+
+            const container = document.getElementById('recipe-grid');
+            const recipeCard = createRecipeCard(recipe);
+            container.innerHTML = '';
+            container.appendChild(recipeCard);
+            recipeCard.style.display = 'block';
+
+            recipeCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function createRecipeCard(recipe) {
+            const recipeId = recipe.slug || recipe.name.toLowerCase().replace(/\s+/g, "-");
+            
+            const card = document.createElement('div');
+            card.className = 'recipe-card';
+            card.id = recipeId;
+
+            card.innerHTML = `
+                <div class="back-navigation">
+                    <a href="recipes.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Recipes</a>
+                </div>
+                <div class="recipe-header">
+                    <img src="../images/${recipe.image}" alt="${recipe.name}" class="recipe-image-large">
+                    <div class="recipe-title-section">
+                        <h1 class="section-title">${recipe.name}</h1>
+                        <div class="recipe-meta">
+                            <span><i class="fas fa-clock"></i> ${recipe.time}</span>
+                            <span><i class="fas fa-user-friends"></i> Serves ${recipe.servings}</span>
+                            <span><i class="fas fa-star"></i> ${recipe.rating} (${recipe.ratingCount} reviews)</span>
+                        </div>
+                        <div class="recipe-tags">
+                            ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <section class="recipe-overview">
+                    <h2>Overview</h2>
+                    <p>${recipe.description}</p>
+                </section>
+
+                <section class="recipe-ingredients">
+                    <h2>Ingredients</h2>
+                    <div class="ingredients-grid">
+                        <div class="ingredient-group">
+                            <ul>
+                                ${recipe.ingredients.map(ingredient => `
+                                    <li>
+                                        <span class="ingredient-name">${ingredient}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="recipe-instructions">
+                    <h2>Instructions</h2>
+                    <ol class="instructions-list">
+                        ${recipe.instructions.map((step, index) => `
+                            <li class="instruction-step">
+                                <span class="step-number">${index + 1}</span>
+                                <div class="step-content">
+                                    <p>${step}</p>
+                                </div>
+                            </li>
+                        `).join('')}
+                    </ol>
+                </section>
+
+                <section class="recipe-actions">
+                    <button class="favorite-btn ${isFavorite(recipe.name) ? 'favorited' : ''}" onclick="toggleFavorite('${recipe.name}')">
+                        <i class="fa${isFavorite(recipe.name) ? 's' : 'r'} fa-heart"></i>
+                        ${isFavorite(recipe.name) ? 'Remove from Favorites' : 'Add to Favorites'}
+                    </button>
+                </section>
+            `;
+
+            return card;
+        }
+
+        function isFavorite(recipeName) {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            return favorites.includes(recipeName);
+        }
+
+        function toggleFavorite(recipeName) {
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.includes(recipeName);
+            
+            if (isFav) {
+                favorites = favorites.filter(name => name !== recipeName);
+            } else {
+                favorites.push(recipeName);
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            const btn = document.querySelector(`button.favorite-btn`);
+            btn.innerHTML = `
+                <i class="fa${!isFav ? 's' : 'r'} fa-heart"></i>
+                ${!isFav ? 'Remove from Favorites' : 'Add to Favorites'}
+            `;
+            btn.classList.toggle('favorited');
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -427,7 +779,6 @@
         <div id="recipe-grid" class="recipe-grid"></div>
     </main>
 
-    <script src="../js/recipes.js"></script>
-    <script src="../js/all-recipes.js"></script>
+
 </body>
 </html>

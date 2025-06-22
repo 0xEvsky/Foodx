@@ -15,37 +15,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    signupForm.addEventListener('submit', (e) => {
+    signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm_password').value;
         const isAdminSignup = adminSignupCheckbox.checked;
         const enteredPasscode = adminPasscode.value;
         const adminRequiredPasscode = "Admin2025#"; 
-        
-        // --- Security Questions ---
-        const sq1 = document.getElementById('security_question_1').value;
-        const sa1 = document.getElementById('security_answer_1').value.trim();
-        const sq2 = document.getElementById('security_question_2').value;
-        const sa2 = document.getElementById('security_answer_2').value.trim();
-        const sq3 = document.getElementById('security_question_3').value;
-        const sa3 = document.getElementById('security_answer_3').value.trim();
 
-        if (!sq1 || !sa1 || !sq2 || !sa2 || !sq3 || !sa3) {
-            alert('Please select and answer all three security questions.');
+        // Basic validation
+        if (!name) {
+            alert('Name is required');
             return;
         }
 
-        const selectedQuestions = [sq1, sq2, sq3];
-        if (new Set(selectedQuestions).size !== 3) {
-            alert('Please select three different security questions.');
+        if (!email) {
+            alert('Email is required');
             return;
         }
 
-        
+        if (!isValidEmail(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        if (!password) {
+            alert('Password is required');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('Password must be at least 6 characters long');
+            return;
+        }
+
         if (password !== confirmPassword) {
             alert('Passwords do not match!');
             return;
@@ -57,44 +63,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
         }
-        
-        
-        const existingUsers = getExistingUsers();
-        
-       
-        if (existingUsers.some(user => user.email === email)) {
-            alert('Email already registered! Please use a different email.');
-            return;
+
+        // Show loading state
+        const submitButton = signupForm.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Creating Account...';
+
+        try {
+            // Make API call to create user
+            const response = await fetch('http://127.0.0.1:8000/api/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password,
+                    is_admin: isAdminSignup
+                })
+            });
+
+            const result = await response.json();
+            console.log('Signup response:', result);
+
+            if (result.status === 'success') {
+                // Account created successfully
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('isAdmin', isAdminSignup.toString());
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', name);
+                
+                alert('Account created successfully!');
+                document.body.classList.add('slide-out');
+                setTimeout(() => {
+                    window.location.href = 'index.html'; 
+                }, 600); 
+            } else {
+                // Show server error
+                alert(result.message || 'An error occurred during signup');
+            }
+        } catch (error) {
+            console.error('Signup error:', error);
+            alert('Network error. Please make sure the server is running and try again.');
+        } finally {
+            // Reset button state
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
         }
-        
-        
-        
-        const newUser = {
-            name,
-            email,
-            password, 
-            isAdmin: isAdminSignup,
-            security: [
-                { question: sq1, answer: sa1.toLowerCase() },
-                { question: sq2, answer: sa2.toLowerCase() },
-                { question: sq3, answer: sa3.toLowerCase() }
-            ]
-        };
-        
-        existingUsers.push(newUser);
-        
-        localStorage.setItem('users', JSON.stringify(existingUsers));
-        
-        localStorage.setItem('isLoggedIn', 'true'); 
-        localStorage.setItem('isAdmin', isAdminSignup); 
-        sessionStorage.setItem('userEmail', email); 
-        sessionStorage.setItem('userName', name);
-        
-        alert('Account created successfully!');
-        document.body.classList.add('slide-out');
-        setTimeout(() => {
-             window.location.href = 'index.html'; 
-        }, 600); 
     });
     
     if (loginLink) {
@@ -108,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function getExistingUsers() {
-        const users = localStorage.getItem('users');
-        return users ? JSON.parse(users) : [];
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 });
