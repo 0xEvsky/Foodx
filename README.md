@@ -126,22 +126,6 @@ The Django server will be available at `http://127.0.0.1:8000`.
 - **Admin dashboard**: Navigate to `/admin-panel/` or click "Admin Panel" in the nav after logging in as admin
 - **Django built-in admin**: `http://127.0.0.1:8000/admin/`
 
----
-
-## Database Seeding
-
-Migration `0004.py` automatically seeds the database with 7 starter recipes when you run `python manage.py migrate`. No manual step is required.
-
-**Seeded recipes:**
-1. Shrimp Noodle Soup
-2. Healthy Rice Bowl
-3. Cheese Cake
-4. Shish Tawook
-5. Macarons
-6. Salmon
-7. Fried Rice
-
-Each recipe is created with its related categories, tags, and ingredients via `get_or_create` to avoid duplicates.
 
 ---
 
