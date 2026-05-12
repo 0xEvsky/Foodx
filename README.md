@@ -8,15 +8,8 @@ A full-stack recipe discovery and management web application built with **Django
 
 - [Project Overview](#project-overview)
 - [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
 - [Features](#features)
-- [Data Models](#data-models)
-- [API Reference](#api-reference)
-- [Frontend Pages](#frontend-pages)
-- [Authentication & Authorization](#authentication--authorization)
-- [Local Storage & Caching Strategy](#local-storage--caching-strategy)
 - [Getting Started](#getting-started)
-- [Database Seeding](#database-seeding)
 - [Known Limitations & Technical Debt](#known-limitations--technical-debt)
 
 ---
