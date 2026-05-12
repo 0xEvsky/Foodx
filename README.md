@@ -4,16 +4,6 @@ A full-stack recipe discovery and management web application built with **Django
 
 ---
 
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Tech Stack](#tech-stack)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Known Limitations & Technical Debt](#known-limitations--technical-debt)
-
----
-
 ## Project Overview
 
 FoodX is a recipe-finder platform where users can:
